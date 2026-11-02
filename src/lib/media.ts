@@ -16,8 +16,12 @@ export function cloudinaryParts(url: string) {
 type Size = { w: number; h?: number };
 const tr = ({ w, h }: Size) => `f_auto,q_auto,c_fill,${h ? `h_${h},` : ""}w_${w}`;
 
+// Demo stock photos (Unsplash, free licence) are resized and converted by Unsplash's own image CDN.
+const UNSPLASH = /^https:\/\/images\.unsplash\.com\/photo-[0-9a-z-]+$/i;
+
 /** Photo (or video) URL resized for display. */
 export function mediaSrc(url: string, size: Size) {
+  if (UNSPLASH.test(url)) return `${url}?auto=format&fit=crop&q=70&w=${size.w}${size.h ? `&h=${size.h}` : ""}`;
   const p = cloudinaryParts(url);
   if (!p) return url;
   return `https://res.cloudinary.com/${p.cloud}/${p.type}/upload/${tr(size)}/${p.rest}`;

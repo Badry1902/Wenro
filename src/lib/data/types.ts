@@ -54,6 +54,9 @@ export type ExperienceCard = {
   from_minor: number | null;
   booking_mode?: "instant" | "request";
   cover?: { path: string; alt: string | null; kind?: "image" | "video" } | null;
+  images?: string[];
+  pickup?: boolean;
+  free_cancel_hours?: number | null;
 };
 
 export type BookingView = {

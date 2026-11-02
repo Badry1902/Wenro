@@ -8,7 +8,13 @@
     "destinations": "Destinations",
     "myBookings": "My bookings",
     "signIn": "Sign in",
-    "language": "Language"
+    "language": "Language",
+    "home": "Home",
+    "allTrips": "All experiences",
+    "dashboard": "Dashboard",
+    "partners": "For partners",
+    "menu": "Menu",
+    "categories": "Categories"
   },
   "home": {
     "eyebrow": "Discover. Book. Explore.",
@@ -19,12 +25,48 @@
     "from": "From {price}",
     "empty": "No experiences published yet.",
     "more": "More",
-    "demoTag": "Demo"
+    "demoTag": "Demo",
+    "heroEyebrow": "Hurghada · Red Sea",
+    "heroTitle": "Experiences worth the trip, around the Red Sea.",
+    "heroSubtitle": "Reefs, dunes, temples and quiet evenings — clear prices, free cancellation windows and pay on the day.",
+    "searchLabel": "What would you like to do?",
+    "searchPlaceholder": "Snorkelling, quad, Luxor…",
+    "searchCategory": "Category",
+    "allCategories": "All categories",
+    "searchButton": "Search",
+    "topPicks": "Hand-picked around Hurghada",
+    "topPicksSub": "One standout trip from every category.",
+    "browseCategories": "Explore by category",
+    "tripsCount": "{n, plural, one {# experience} other {# experiences}}",
+    "seeAll": "See all",
+    "whyTitle": "Why book with WENRO",
+    "why1Title": "Pay on the day",
+    "why1Text": "Reserve your seat now and pay the operator in cash at the start — no card needed.",
+    "why2Title": "Free cancellation",
+    "why2Text": "Every trip shows how long you can cancel for free, before you book.",
+    "why3Title": "Local operators",
+    "why3Text": "Trips are run by licensed operators based in Hurghada.",
+    "why4Title": "Hotel pickup",
+    "why4Text": "Add a transfer from your hotel in the same booking.",
+    "partnerTitle": "Run trips, or send guests our way?",
+    "partnerText": "Operators, agencies, hotel desks and creators manage bookings and earnings in one dashboard.",
+    "partnerCta": "Partner sign-in",
+    "perPerson": "per person",
+    "freeCancel": "Free cancellation ({h} h)",
+    "pickup": "Hotel pickup",
+    "prev": "Previous",
+    "next": "Next"
   },
   "categories": {
     "sea": "Sea",
     "desert": "Desert",
-    "culture": "Culture"
+    "culture": "Culture",
+    "diving": "Diving",
+    "watersports": "Water sports",
+    "family": "Family fun",
+    "evening": "Evenings",
+    "daytrips": "Day trips",
+    "wellness": "Wellness"
   },
   "dev": {
     "badge": "Development build — demo data only"
@@ -875,5 +917,72 @@
       "note": "Sign in with this email address; no password needed.",
       "button": "Sign in"
     }
+  },
+  "catBlurb": {
+    "sea": "Boats, reefs and islands",
+    "desert": "Quads, camels and Bedouin camps",
+    "culture": "Markets, mosques and home cooking",
+    "diving": "First dives, reefs and wrecks",
+    "watersports": "Kites, jet skis and paddle boards",
+    "family": "Slides, horses and glass-bottom boats",
+    "evening": "Dinners, shows and starry nights",
+    "daytrips": "Luxor, Cairo and the Pyramids",
+    "wellness": "Hammam, massage and beach yoga"
+  },
+  "list": {
+    "title": "All experiences",
+    "subtitle": "Trips and activities around Hurghada",
+    "results": "{n, plural, =0 {No experiences} one {# experience} other {# experiences}}",
+    "filters": "Filters",
+    "category": "Category",
+    "duration": "Duration",
+    "dShort": "Up to 3 hours",
+    "dMid": "3 to 6 hours",
+    "dLong": "Full day",
+    "maxPrice": "Price up to",
+    "any": "Any",
+    "instantOnly": "Instant confirmation",
+    "pickupOnly": "Hotel pickup",
+    "sort": "Sort by",
+    "sortRecommended": "Recommended",
+    "sortPriceLow": "Price: low to high",
+    "sortPriceHigh": "Price: high to low",
+    "sortShort": "Duration: shortest",
+    "clear": "Clear filters",
+    "none": "No experiences match these filters.",
+    "search": "Search",
+    "showResults": "Show results"
+  },
+  "gallery": {
+    "label": "Photos",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "pause": "Pause slideshow",
+    "play": "Play slideshow",
+    "close": "Close",
+    "photoN": "Photo {n} of {total}",
+    "showAll": "Show all {n} photos"
+  },
+  "wish": {
+    "save": "Save to wishlist",
+    "saved": "Saved to wishlist"
+  },
+  "similar": {
+    "aside": "Similar experiences",
+    "rail": "You might also like"
+  },
+  "footer": {
+    "tagline": "Local experiences around Hurghada and the Red Sea, booked in minutes.",
+    "explore": "Explore",
+    "partners": "Partners",
+    "operators": "For operators",
+    "agencies": "For agencies and hotel desks",
+    "creators": "For creators",
+    "support": "Booking",
+    "pay": "Pay in cash on the day",
+    "cancel": "Free cancellation window on every trip",
+    "pickup": "Hotel pickup on most trips",
+    "rights": "© {year} WENRO. All rights reserved.",
+    "demoNote": "Test site: the trips shown are demo content and the photos are stock images."
   }
 }

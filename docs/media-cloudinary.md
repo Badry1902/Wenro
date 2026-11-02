@@ -38,3 +38,11 @@ Without these keys the app falls back to Supabase Storage (photos only, 4 MB). D
 
 `scripts/fake-cloudinary.js` imitates Cloudinary's upload and destroy APIs with the same signature rules;
 `scripts/e2e-media.js` runs the whole flow against it, including a forged upload result.
+
+## Demo trip photos
+
+The [DEMO] trips use free stock photos from Unsplash (https://unsplash.com/license: free to use, no permission
+needed). They are generic photos, not pictures of the demo operators' boats or camps, and they are served straight
+from Unsplash's image CDN at the size each page needs (`src/lib/media.ts`), so they use no Supabase or Cloudinary
+space. The list lives in `scripts/demo_catalog.py`. Real trips must use the operator's own photos, uploaded in the
+experience editor. `supabase/demo/remove_demo.sql` removes the demo trips and their photo rows.

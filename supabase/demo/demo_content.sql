@@ -7,6 +7,8 @@ insert into organizations (id, type, status, name, slug) values
   ('10000000-0000-0000-0000-000000000003', 'operator', 'active', '[DEMO] Desert Riders', 'demo-desert-riders'),
   ('10000000-0000-0000-0000-000000000006', 'operator', 'active', '[DEMO] Blue Depth Diving', 'demo-blue-depth'),
   ('10000000-0000-0000-0000-000000000007', 'operator', 'active', '[DEMO] Hurghada Heritage Tours', 'demo-heritage'),
+  ('10000000-0000-0000-0000-000000000010', 'operator', 'active', '[DEMO] Lagoon Water Sports', 'demo-lagoon-sports'),
+  ('10000000-0000-0000-0000-000000000011', 'operator', 'active', '[DEMO] Sahl Spa & Wellness', 'demo-sahl-spa'),
   ('10000000-0000-0000-0000-000000000004', 'marketer', 'active', '[DEMO] Travel Blogger', 'demo-blogger'),
   ('10000000-0000-0000-0000-000000000008', 'marketer', 'active', '[DEMO] Red Sea Insider', 'demo-insider'),
   ('10000000-0000-0000-0000-000000000005', 'agency', 'active', '[DEMO] Sun Agency', 'demo-sun-agency'),
@@ -17,6 +19,8 @@ insert into org_private_details (org_id, contact_phone, contact_email, instapay_
   ('10000000-0000-0000-0000-000000000003', '+20 100 000 0003', 'ops@desertriders.example', null),
   ('10000000-0000-0000-0000-000000000006', '+20 100 000 0006', 'ops@bluedepth.example', null),
   ('10000000-0000-0000-0000-000000000007', '+20 100 000 0007', 'ops@heritage.example', null),
+  ('10000000-0000-0000-0000-000000000010', '+20 100 000 0010', 'ops@lagoonsports.example', null),
+  ('10000000-0000-0000-0000-000000000011', '+20 100 000 0011', 'ops@sahlspa.example', null),
   ('10000000-0000-0000-0000-000000000004', '+20 100 000 0004', null, 'demo-blogger@instapay'),
   ('10000000-0000-0000-0000-000000000008', '+20 100 000 0008', null, 'insider@instapay'),
   ('10000000-0000-0000-0000-000000000005', '+20 100 000 0005', null, 'demo-sun@instapay'),
@@ -71,8 +75,8 @@ insert into extras (id, experience_id, net_minor, per, sort) values ('61000000-0
 delete from extra_translations where extra_id = '61000000-0000-0000-0000-000000000102'; insert into extra_translations (extra_id, locale, name) values ('61000000-0000-0000-0000-000000000102', 'en', 'Lunch upgrade: grilled fish'), ('61000000-0000-0000-0000-000000000102', 'ar', 'ترقية الغداء: سمك مشوي');
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000001';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000001', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000001' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000001', '/demo/island.svg', 'Illustration: sandy island', 0), ('50000000-0000-0000-0000-000000000001', '/demo/reef.svg', 'Illustration: coral reef', 1), ('50000000-0000-0000-0000-000000000001', '/demo/sea-boat.svg', 'Illustration: day boat at sea', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000001' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1722264219947-725d4e20ef23', 'Island and reefs seen from above', 0, 'image'), ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1777551881568-50b1beab7d91', 'Orange fish around a coral reef', 1, 'image'), ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1627760444890-663d4c563a15', 'White boat on a blue sea', 2, 'image'), ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1552674510-62c267e73ada', 'Turquoise water along a sandy shore', 3, 'image'), ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1777552771426-9ac9f515dc40', 'Yellow fish near the reef', 4, 'image'), ('50000000-0000-0000-0000-000000000001', 'https://images.unsplash.com/photo-1758548776659-37efc25aa505', 'Deck seating on a boat facing the sea', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000001', ((current_date + d) + tm) at time zone 'Africa/Cairo', 24
   from generate_series(0, 60) d, unnest(array[time '08:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -107,8 +111,8 @@ insert into extras (id, experience_id, net_minor, per, sort) values ('61000000-0
 delete from extra_translations where extra_id = '61000000-0000-0000-0000-000000000201'; insert into extra_translations (extra_id, locale, name) values ('61000000-0000-0000-0000-000000000201', 'en', 'Second rider on the same quad'), ('61000000-0000-0000-0000-000000000201', 'ar', 'راكب ثانٍ على نفس الموتوسيكل');
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000002';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000002', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000002' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000002', '/demo/quad.svg', 'Illustration: quad bike in the desert', 0), ('50000000-0000-0000-0000-000000000002', '/demo/tent.svg', 'Illustration: Bedouin tent', 1), ('50000000-0000-0000-0000-000000000002', '/demo/camel.svg', 'Illustration: camel in the dunes', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000002' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1624062999803-976e1adc8ea2', 'Quad bike on desert sand', 0, 'image'), ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1494674557684-c26be0f88950', 'Group riding quad bikes', 1, 'image'), ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1627760444690-59f0a5fccee6', 'Red quad bike in the desert', 2, 'image'), ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1624664929003-3da28050c0bf', 'Quad ride through the desert', 3, 'image'), ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1542762002-45279e010961', 'Four riders on quad bikes', 4, 'image'), ('50000000-0000-0000-0000-000000000002', 'https://images.unsplash.com/photo-1729004375267-483d8ab6fb6a', 'Quad bike among the dunes', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000002', ((current_date + d) + tm) at time zone 'Africa/Cairo', 12
   from generate_series(0, 60) d, unnest(array[time '08:30', time '13:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -144,8 +148,8 @@ insert into price_categories (experience_id, kind, net_minor, max_group) values 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000003';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000003';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000003', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000003' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000003', '/demo/dolphins.svg', 'Illustration: dolphins', 0), ('50000000-0000-0000-0000-000000000003', '/demo/reef.svg', 'Illustration: coral reef', 1), ('50000000-0000-0000-0000-000000000003', '/demo/sea-boat.svg', 'Illustration: day boat at sea', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000003' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1547382442-d17c21625a44', 'Dolphin jumping out of the sea', 0, 'image'), ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1532393950032-b666e39c29b3', 'Group of dolphins underwater', 1, 'image'), ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1440020143730-090579c4d53c', 'Three dolphins in deep blue water', 2, 'image'), ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1637308106043-f4d78ad9e0e0', 'Dolphins swimming over a coral reef', 3, 'image'), ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1575224639551-12afa3e701d9', 'Speedboat on the sea', 4, 'image'), ('50000000-0000-0000-0000-000000000003', 'https://images.unsplash.com/photo-1580072624564-1fe6b660b7e2', 'Two dolphins at the surface', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000003', ((current_date + d) + tm) at time zone 'Africa/Cairo', 20
   from generate_series(0, 60) d, unnest(array[time '08:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -180,13 +184,13 @@ insert into extras (id, experience_id, net_minor, per, sort) values ('61000000-0
 delete from extra_translations where extra_id = '61000000-0000-0000-0000-000000000401'; insert into extra_translations (extra_id, locale, name) values ('61000000-0000-0000-0000-000000000401', 'en', 'Sun lounger and umbrella on the beach'), ('61000000-0000-0000-0000-000000000401', 'ar', 'شيزلونج وشمسية على الشاطئ');
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000004';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000004', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000004' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000004', '/demo/island.svg', 'Illustration: sandy island', 0), ('50000000-0000-0000-0000-000000000004', '/demo/sea-boat.svg', 'Illustration: day boat at sea', 1), ('50000000-0000-0000-0000-000000000004', '/demo/reef.svg', 'Illustration: coral reef', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000004' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1600582910964-5b7c109e6868', 'Beach and turquoise bay from above', 0, 'image'), ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1586495985022-f5ce405887ee', 'White sand beach', 1, 'image'), ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1585130401366-fe05a8d813c4', 'Clear sea under a blue sky', 2, 'image'), ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1623876355063-15d1d5e5b89b', 'Soft sand and shallow water', 3, 'image'), ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1591056506252-cdba56c9284a', 'Boat anchored in a calm bay', 4, 'image'), ('50000000-0000-0000-0000-000000000004', 'https://images.unsplash.com/photo-1517379057398-cd0ea56a1f8c', 'Shoreline seen from above', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000004', ((current_date + d) + tm) at time zone 'Africa/Cairo', 30
   from generate_series(0, 60) d, unnest(array[time '09:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
 insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
-values ('50000000-0000-0000-0000-000000000005', '10000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000001', 'demo-discover-scuba', 'published', 'instant', 300, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
+values ('50000000-0000-0000-0000-000000000005', '10000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000004', 'demo-discover-scuba', 'published', 'instant', 300, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
 on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
   cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
 delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000005';
@@ -216,13 +220,13 @@ insert into extras (id, experience_id, net_minor, per, sort) values ('61000000-0
 delete from extra_translations where extra_id = '61000000-0000-0000-0000-000000000501'; insert into extra_translations (extra_id, locale, name) values ('61000000-0000-0000-0000-000000000501', 'en', 'Second guided dive'), ('61000000-0000-0000-0000-000000000501', 'ar', 'غطسة ثانية مع مدرب');
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000005';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000005', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000005' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000005', '/demo/diver.svg', 'Illustration: scuba diver', 0), ('50000000-0000-0000-0000-000000000005', '/demo/reef.svg', 'Illustration: coral reef', 1), ('50000000-0000-0000-0000-000000000005', '/demo/sea-boat.svg', 'Illustration: day boat at sea', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000005' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1682687981630-cefe9cd73072', 'Diver over a colourful coral reef', 0, 'image'), ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1586508577428-120d6b072945', 'Diver with a school of fish', 1, 'image'), ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1682687981907-170c006e3744', 'Scuba diver swimming over the reef', 2, 'image'), ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7', 'School of fish in blue water', 3, 'image'), ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1582967788606-a171c1080cb0', 'Small orange fish around coral', 4, 'image'), ('50000000-0000-0000-0000-000000000005', 'https://images.unsplash.com/photo-1514907283155-ea5f4094c70c', 'Blue fish near the corals', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000005', ((current_date + d) + tm) at time zone 'Africa/Cairo', 8
   from generate_series(0, 60) d, unnest(array[time '08:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
 insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
-values ('50000000-0000-0000-0000-000000000006', '10000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000001', 'demo-glass-boat', 'published', 'instant', 120, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+values ('50000000-0000-0000-0000-000000000006', '10000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000006', 'demo-glass-boat', 'published', 'instant', 120, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
 on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
   cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
 delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000006';
@@ -242,8 +246,8 @@ insert into price_categories (experience_id, kind, net_minor, age_min, age_max) 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000006';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000006';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000006', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000006' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000006', '/demo/glass-boat.svg', 'Illustration: glass-bottom boat', 0), ('50000000-0000-0000-0000-000000000006', '/demo/reef.svg', 'Illustration: coral reef', 1), ('50000000-0000-0000-0000-000000000006', '/demo/marina.svg', 'Illustration: marina', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000006' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1789745359623-62c974e3a560', 'Glass-bottom boat on calm blue water', 0, 'image'), ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1777552157135-f1e4b65865d5', 'Clownfish on the reef', 1, 'image'), ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1777552995899-b0c030a3ef92', 'Pufferfish near the coral', 2, 'image'), ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1597246576416-37fbaa0ceac8', 'Yellow and blue reef fish', 3, 'image'), ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1777552955794-77aa990a47df', 'Two clownfish in an anemone', 4, 'image'), ('50000000-0000-0000-0000-000000000006', 'https://images.unsplash.com/photo-1581088053806-9ea7682a41e8', 'Yellow and pink coral', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000006', ((current_date + d) + tm) at time zone 'Africa/Cairo', 40
   from generate_series(0, 60) d, unnest(array[time '10:00', time '14:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -269,13 +273,13 @@ insert into price_categories (experience_id, kind, net_minor, max_group) values 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000007';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000007';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000007', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000007' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000007', '/demo/sunset.svg', 'Illustration: sailboat at sunset', 0), ('50000000-0000-0000-0000-000000000007', '/demo/sea-boat.svg', 'Illustration: day boat at sea', 1), ('50000000-0000-0000-0000-000000000007', '/demo/marina.svg', 'Illustration: marina', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000007' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1526761122248-c31c93f8b2b9', 'Sailboat at sunset', 0, 'image'), ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1613895571415-90c5853c6e36', 'Sailboat on the sea at dusk', 1, 'image'), ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1569256205017-7522b07c82e4', 'Sails in the golden hour', 2, 'image'), ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1603625094339-c6d5f80e9cfa', 'White sailboat at sunset', 3, 'image'), ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1580537735250-fcbc85749acc', 'Sailing towards the sunset', 4, 'image'), ('50000000-0000-0000-0000-000000000007', 'https://images.unsplash.com/photo-1773434537544-c1c77fbd1891', 'Sailboat on the open sea at sunset', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000007', ((current_date + d) + tm) at time zone 'Africa/Cairo', 16
   from generate_series(0, 60) d, unnest(array[time '16:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
 insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
-values ('50000000-0000-0000-0000-000000000008', '10000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000002', 'demo-desert-stars', 'published', 'instant', 300, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
+values ('50000000-0000-0000-0000-000000000008', '10000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000007', 'demo-desert-stars', 'published', 'instant', 300, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
 on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
   cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
 delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000008';
@@ -299,8 +303,8 @@ insert into price_categories (experience_id, kind, net_minor, age_min, age_max) 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000008';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000008';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000008', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000008' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000008', '/demo/stars.svg', 'Illustration: desert camp at night', 0), ('50000000-0000-0000-0000-000000000008', '/demo/tent.svg', 'Illustration: Bedouin tent', 1), ('50000000-0000-0000-0000-000000000008', '/demo/camel.svg', 'Illustration: camel in the dunes', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000008' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1507917570388-d661984ea008', 'Milky Way over the desert', 0, 'image'), ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1581610186406-5f6e9f9edbc1', 'Sand dunes under a starry sky', 1, 'image'), ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1714159122764-9982083db2de', 'Campfire in the desert', 2, 'image'), ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1784749464984-9ec4decebc81', 'Desert camp at twilight', 3, 'image'), ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1654330352875-1f86a5b011cf', 'Night sky above the desert', 4, 'image'), ('50000000-0000-0000-0000-000000000008', 'https://images.unsplash.com/photo-1489493173507-6feea31f12ff', 'Desert at night', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000008', ((current_date + d) + tm) at time zone 'Africa/Cairo', 30
   from generate_series(0, 60) d, unnest(array[time '17:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -326,8 +330,8 @@ insert into price_categories (experience_id, kind, net_minor, age_min, age_max) 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000009';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000009';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000009', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000009', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000009', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000009', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000009' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000009', '/demo/sunrise.svg', 'Illustration: desert sunrise', 0), ('50000000-0000-0000-0000-000000000009', '/demo/camel.svg', 'Illustration: camel in the dunes', 1), ('50000000-0000-0000-0000-000000000009', '/demo/tent.svg', 'Illustration: Bedouin tent', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000009' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1709620220232-12ecd7ca33a8', 'Camel ride at sunrise', 0, 'image'), ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1760779887188-a49c256860d6', 'Camel caravan on the dunes', 1, 'image'), ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1645616672289-3681f160db22', 'Man and camel in the desert light', 2, 'image'), ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1706804010975-0dfc65e791ff', 'Group riding camels across the desert', 3, 'image'), ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1672096098880-d558f29ee549', 'Camel standing in the desert', 4, 'image'), ('50000000-0000-0000-0000-000000000009', 'https://images.unsplash.com/photo-1668689723080-c50f6e823de5', 'Camel and rider in the sand', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000009', ((current_date + d) + tm) at time zone 'Africa/Cairo', 10
   from generate_series(0, 60) d, unnest(array[time '05:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -355,8 +359,8 @@ insert into price_categories (experience_id, kind, net_minor, age_min, age_max) 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000010';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000010';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000010', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000010', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000010', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000010', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000010' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000010', '/demo/quad.svg', 'Illustration: quad bike in the desert', 0), ('50000000-0000-0000-0000-000000000010', '/demo/camel.svg', 'Illustration: camel in the dunes', 1), ('50000000-0000-0000-0000-000000000010', '/demo/stars.svg', 'Illustration: desert camp at night', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000010' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1763535544047-dbd8244b87a5', 'Jeep driving over sand dunes', 0, 'image'), ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1646199805006-30626c687037', 'Safari vehicle in the desert', 1, 'image'), ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1783696482957-d54a697fdcf7', 'Off-road vehicles crossing the desert', 2, 'image'), ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1701257868711-e9bbfb8b22fc', 'Quad bikes on a desert track', 3, 'image'), ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1640328504956-e6fb38ff8934', 'Camel ride in the desert', 4, 'image'), ('50000000-0000-0000-0000-000000000010', 'https://images.unsplash.com/photo-1763544376867-7ad4e9e366cc', 'Desert seating area over the dunes', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000010', ((current_date + d) + tm) at time zone 'Africa/Cairo', 20
   from generate_series(0, 60) d, unnest(array[time '13:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
@@ -385,13 +389,13 @@ insert into price_categories (experience_id, kind, net_minor, max_group) values 
 update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000011';
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000011';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000011', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000011', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000011', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000011', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000011' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000011', '/demo/oldtown.svg', 'Illustration: old town', 0), ('50000000-0000-0000-0000-000000000011', '/demo/market.svg', 'Illustration: market stalls', 1), ('50000000-0000-0000-0000-000000000011', '/demo/marina.svg', 'Illustration: marina', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000011' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1562972661-a704b05a8a05', 'White mosque under a cloudy sky', 0, 'image'), ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1569531955317-390fbbc73f17', 'People walking between market stalls', 1, 'image'), ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1710211288826-b7df3ab71588', 'Narrow market alley full of goods', 2, 'image'), ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1574936293035-134adffbeb6f', 'Hanging lanterns at night', 3, 'image'), ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1729956816147-92d4d2ef48ac', 'Walking through a busy market', 4, 'image'), ('50000000-0000-0000-0000-000000000011', 'https://images.unsplash.com/photo-1638501882499-0dff8183b363', 'Colourful goods on display', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000011', ((current_date + d) + tm) at time zone 'Africa/Cairo', 14
   from generate_series(0, 60) d, unnest(array[time '10:00', time '17:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
 insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
-values ('50000000-0000-0000-0000-000000000012', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000003', 'demo-luxor-day', 'published', 'request', 840, 'EUR', '40000000-0000-0000-0000-000000000003', false, null)
+values ('50000000-0000-0000-0000-000000000012', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000008', 'demo-luxor-day', 'published', 'request', 840, 'EUR', '40000000-0000-0000-0000-000000000003', false, null)
 on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
   cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
 delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000012';
@@ -427,10 +431,521 @@ insert into extras (id, experience_id, net_minor, per, sort) values ('61000000-0
 delete from extra_translations where extra_id = '61000000-0000-0000-0000-000000001201'; insert into extra_translations (extra_id, locale, name) values ('61000000-0000-0000-0000-000000001201', 'en', 'Hot-air balloon at sunrise (subject to weather)'), ('61000000-0000-0000-0000-000000001201', 'ar', 'منطاد وقت الشروق (حسب الطقس)');
 delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000012';
 insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000012', '30000000-0000-0000-0000-000000000001', 0, 'vehicle', 7), ('50000000-0000-0000-0000-000000000012', '30000000-0000-0000-0000-000000000002', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000012', '30000000-0000-0000-0000-000000000003', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000012', '30000000-0000-0000-0000-000000000004', 400, 'vehicle', 7);
-delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000012' and storage_path like '/demo/%';
-insert into experience_media (experience_id, storage_path, alt, sort) values ('50000000-0000-0000-0000-000000000012', '/demo/temple.svg', 'Illustration: temple columns', 0), ('50000000-0000-0000-0000-000000000012', '/demo/nile.svg', 'Illustration: felucca on the river', 1), ('50000000-0000-0000-0000-000000000012', '/demo/sunrise.svg', 'Illustration: desert sunrise', 2);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000012' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1587975844610-40f1ad10d07e', 'Temple columns with hieroglyphs', 0, 'image'), ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1761560673311-609d646f18a3', 'Palm tree in front of a temple', 1, 'image'), ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1762858279425-ed77c08d7a1c', 'Carved columns under a blue sky', 2, 'image'), ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1777672238816-afe7d0c2f8e4', 'Sunlight between temple columns', 3, 'image'), ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1629468855534-450d7c4c5f72', 'Ancient statue under the sky', 4, 'image'), ('50000000-0000-0000-0000-000000000012', 'https://images.unsplash.com/photo-1762858341012-3664a9b434c4', 'Walking through a great temple hall', 5, 'image');
 insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000012', ((current_date + d) + tm) at time zone 'Africa/Cairo', 16
   from generate_series(0, 60) d, unnest(array[time '05:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000013', '10000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000001', 'demo-fishing-trip', 'published', 'instant', 300, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000013';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000013', 'en', 'Red Sea fishing morning', 'Bottom fishing from a small boat with rods, bait and a grilled-fish lunch.', 'Head out with a local captain to the fishing grounds north of Hurghada. Rods, lines and bait are ready on board and the crew shows beginners how to drop and reel in.
+What you catch is cleaned and grilled on board for lunch.', '07:30 boat leaves the marina
+08:30 first fishing spot
+10:30 second spot
+12:00 grilled catch for lunch
+12:30 back to the marina', 'Boat, captain and crew
+Rods, lines and bait
+Lunch with your catch
+Water and tea', 'Hotel transfer (optional add-on)
+Tips', 'Calm-sea trip; still bring motion-sickness tablets if you need them.', 'Hurghada New Marina, gate 2, 20 minutes before departure.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000013', 'ar', 'صباح صيد في البحر الأحمر', 'صيد قاعي من مركب صغير مع السنارات والطُعم وغداء سمك مشوي.', 'اخرج مع ريّس محلي إلى أماكن الصيد شمال الغردقة. السنارات والخيوط والطُعم جاهزة على المركب، ويعلّم الطاقم المبتدئين طريقة الصيد.
+ما تصطاده يُنظّف ويُشوى على المركب للغداء.', '07:30 تحرك المركب من المارينا
+08:30 مكان الصيد الأول
+10:30 المكان الثاني
+12:00 غداء من صيدك
+12:30 العودة للمارينا', 'المركب والريّس والطاقم
+السنارات والخيوط والطُعم
+غداء من صيدك
+مياه وشاي', 'التوصيل من الفندق (إضافة اختيارية)
+الإكراميات', 'رحلة في بحر هادئ؛ أحضر أقراص دوار البحر إن احتجت.', 'مارينا الغردقة الجديدة، البوابة 2، قبل الموعد بـ 20 دقيقة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000013', 'adult', 2800, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000013', 'child', 1400, 6, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000013';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000013';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000013', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000013', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000013', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000013', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000013' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1515631604561-23e0be68ee06', 'Angler holding a fish on a boat', 0, 'image'), ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1761197379839-b5759e0146a0', 'Fishing from a boat at sunset', 1, 'image'), ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1707314175646-7f40247f36c0', 'Fishing rod on a boat at sea', 2, 'image'), ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1595886565824-b4f5c5a9c2d5', 'Rod and reel over blue water', 3, 'image'), ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1771809499055-281b7dc02c30', 'Small boat on the sea at sunset', 4, 'image'), ('50000000-0000-0000-0000-000000000013', 'https://images.unsplash.com/photo-1708748978230-510e06b24530', 'Fishing rods lined up on a boat', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000013', ((current_date + d) + tm) at time zone 'Africa/Cairo', 12
+  from generate_series(0, 60) d, unnest(array[time '07:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000014', '10000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000004', 'demo-two-tank-dive', 'published', 'instant', 360, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000014';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000014', 'en', 'Two-tank reef dive for certified divers', 'Two guided dives on Hurghada''s best reefs, with full equipment and lunch on board.', 'For divers who already hold a certificate. The dive guide picks two reefs that suit the day''s conditions and your level, with a surface interval and lunch between the dives.
+Bring your certification card and logbook.', '08:00 check-in at the dive centre
+09:00 boat leaves
+10:00 first dive (about 50 minutes)
+11:00 surface interval and lunch
+12:30 second dive
+14:00 back at the marina', 'Two guided dives
+Tank, weights and full equipment
+Lunch, water and tea', 'Hotel transfer (optional add-on)
+Nitrox (ask the centre)
+Marine park fee', 'Open Water certificate or equivalent required.
+No flying within 24 hours after diving.', 'Blue Depth dive centre, Sheraton Road. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000014', 'ar', 'غطستان على الشعاب للغواصين المعتمدين', 'غطستان مع مرشد على أجمل شعاب الغردقة، بالمعدات الكاملة وغداء على المركب.', 'للغواصين الحاصلين على شهادة. يختار المرشد شعبتين تناسبان ظروف اليوم ومستواك، مع استراحة وغداء بين الغطستين.
+أحضر بطاقة الشهادة ودفتر الغوص.', '08:00 التسجيل في مركز الغوص
+09:00 تحرك المركب
+10:00 الغطسة الأولى (حوالي 50 دقيقة)
+11:00 استراحة وغداء
+12:30 الغطسة الثانية
+14:00 العودة للمارينا', 'غطستان مع مرشد
+أسطوانة وأوزان ومعدات كاملة
+غداء ومياه وشاي', 'التوصيل من الفندق (إضافة اختيارية)
+النيتروكس (اسأل المركز)
+رسوم المحمية', 'مطلوب شهادة Open Water أو ما يعادلها.
+ممنوع الطيران خلال 24 ساعة بعد الغوص.', 'مركز Blue Depth للغوص، طريق الشيراتون. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000014', 'adult', 4800, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000014';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000014';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000014', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000014', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000014', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000014', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000014' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1682687982502-1529b3b33f85', 'Diver with a camera in the open sea', 0, 'image'), ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1708649290066-5f617003b93f', 'Colourful coral reef underwater', 1, 'image'), ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1682686581663-179efad3cd2f', 'Diver near a coral wall', 2, 'image'), ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1582623838120-455da222cdc7', 'School of fish over the reef', 3, 'image'), ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1576436445430-43d6d7c9aea5', 'Yellow fish over corals', 4, 'image'), ('50000000-0000-0000-0000-000000000014', 'https://images.unsplash.com/photo-1637308107080-82cf40953742', 'Corals and sponges on the reef', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000014', ((current_date + d) + tm) at time zone 'Africa/Cairo', 10
+  from generate_series(0, 60) d, unnest(array[time '08:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000015', '10000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000004', 'demo-wreck-dive', 'published', 'request', 420, 'EUR', '40000000-0000-0000-0000-000000000003', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000015';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000015', 'en', 'Wreck dive: a sunken ship near Hurghada', 'Dive a coral-covered wreck with an experienced guide; second dive on a reef.', 'A wreck dive for certified divers with some experience. After a detailed briefing you descend along the line and explore the outside of the ship, now home to corals and fish. Penetration is not part of this trip.
+The centre checks your logbook before confirming, so this trip is booked on request.', '07:00 check-in and briefing
+08:00 boat leaves
+09:30 wreck dive
+11:00 lunch on board
+12:30 reef dive
+14:30 back at the marina', 'Two guided dives (wreck and reef)
+Full equipment
+Lunch and drinks', 'Hotel transfer (optional add-on)
+Marine park fee', 'Advanced certificate or 20 logged dives.
+Minimum age 15.', 'Blue Depth dive centre, Sheraton Road. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000015', 'ar', 'غطسة حطام: سفينة غارقة قرب الغردقة', 'غطسة على حطام سفينة تغطيه الشعاب مع مرشد خبير، وغطسة ثانية على الشعاب.', 'غطسة حطام للغواصين المعتمدين أصحاب الخبرة. بعد شرح مفصل تنزل على الحبل وتستكشف السفينة من الخارج، وقد أصبحت بيتًا للشعاب والأسماك. الدخول إلى السفينة ليس ضمن الرحلة.
+يراجع المركز دفتر الغوص قبل التأكيد، لذلك الحجز بالطلب.', '07:00 التسجيل والشرح
+08:00 تحرك المركب
+09:30 غطسة الحطام
+11:00 الغداء على المركب
+12:30 غطسة الشعاب
+14:30 العودة للمارينا', 'غطستان مع مرشد (حطام وشعاب)
+معدات كاملة
+غداء ومشروبات', 'التوصيل من الفندق (إضافة اختيارية)
+رسوم المحمية', 'شهادة Advanced أو 20 غطسة مسجلة.
+الحد الأدنى للسن 15 عامًا.', 'مركز Blue Depth للغوص، طريق الشيراتون. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000015', 'adult', 6400, 15, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000015';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000015';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000015', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000015', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000015', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000015', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000015' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1561623211-a35ce8d8dd7b', 'Diver beside a sunken ship', 0, 'image'), ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1759676259175-5aac4be4f67a', 'Diver exploring a wreck', 1, 'image'), ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1784912997229-52e8909758a0', 'Wreck covered in coral', 2, 'image'), ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1769007168623-ba1a417c3114', 'Fish swimming around a sunken ship', 3, 'image'), ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1573553467420-b2a90be8d317', 'Sunken ship on the seabed', 4, 'image'), ('50000000-0000-0000-0000-000000000015', 'https://images.unsplash.com/photo-1766389592791-b814383e1609', 'Snorkellers above a shallow wreck', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000015', ((current_date + d) + tm) at time zone 'Africa/Cairo', 8
+  from generate_series(0, 60) d, unnest(array[time '07:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000016', '10000000-0000-0000-0000-000000000010', '20000000-0000-0000-0000-000000000005', 'demo-parasailing', 'published', 'instant', 60, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000016';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000016', 'en', 'Parasailing over the bay', 'About 10 minutes in the air above the sea, alone or in tandem, with the beach below.', 'Take off from the back of the boat and rise slowly above the bay. The flight is calm and quiet; you land back on the boat dry. Tandem flights are possible for two people up to the combined weight limit.', 'Short safety briefing on the beach
+Boat ride to the flight area
+About 10 minutes in the air
+Back to the beach', 'Flight with harness and life vest
+Boat ride', 'Hotel transfer (optional add-on)
+Photos and videos', 'Minimum age 8 (children fly in tandem with an adult).
+Cancelled in strong wind: you get another time or a full refund.', 'Lagoon Water Sports hut on the public beach, Sheraton Road.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000016', 'ar', 'باراشوت فوق الخليج', 'حوالي 10 دقائق في الهواء فوق البحر، بمفردك أو مع شخص آخر، والشاطئ تحتك.', 'تنطلق من مؤخرة المركب وترتفع ببطء فوق الخليج. الطيران هادئ وتهبط على المركب دون أن تبتل. الطيران الثنائي متاح لشخصين في حدود الوزن المسموح.', 'شرح قصير للسلامة على الشاطئ
+المركب إلى منطقة الطيران
+حوالي 10 دقائق في الهواء
+العودة للشاطئ', 'الطيران مع الحزام وسترة النجاة
+رحلة المركب', 'التوصيل من الفندق (إضافة اختيارية)
+الصور والفيديو', 'الحد الأدنى للسن 8 سنوات (الأطفال مع شخص بالغ).
+يُلغى عند اشتداد الرياح: موعد آخر أو استرداد كامل.', 'كشك Lagoon Water Sports على الشاطئ العام، طريق الشيراتون.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000016', 'adult', 2000, 8, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000016', 'child', 2000, 8, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000016';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000016';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000016', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000016', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000016', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000016', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000016' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1632904074880-b77f02b6d01e', 'Parasail above the sea with the boat below', 0, 'image'), ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1505738313577-5357ff512f16', 'Two people parasailing near the beach', 1, 'image'), ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1772065254806-5aa79d7f4123', 'Parasail against a clear sky', 2, 'image'), ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1778688326453-d95423517e40', 'Tandem parasailing over the sea', 3, 'image'), ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1758972574381-c46a6f0ac851', 'Parasailing behind a boat', 4, 'image'), ('50000000-0000-0000-0000-000000000016', 'https://images.unsplash.com/photo-1642391326087-b1cff0dd3b6f', 'Parasailing at sunset', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000016', ((current_date + d) + tm) at time zone 'Africa/Cairo', 12
+  from generate_series(0, 60) d, unnest(array[time '10:00', time '12:00', time '14:00', time '16:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000017', '10000000-0000-0000-0000-000000000010', '20000000-0000-0000-0000-000000000005', 'demo-kitesurf-lesson', 'published', 'request', 180, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000017';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000017', 'en', 'Kitesurfing taster lesson in El Gouna', 'Three hours with a certified instructor: kite control on land, then body-dragging in shallow water.', 'El Gouna''s flat, shallow lagoons are among the best places to learn. Your instructor starts with kite control on the beach, then takes you into knee-deep water to feel the pull of the kite. With good wind, some students stand on the board by the end.
+Lessons depend on the wind, so the school confirms your time on request.', 'Meet the instructor and safety talk
+Kite control on land
+Water session in the shallow lagoon
+Debrief and next steps', 'Certified instructor (1 for 2 students)
+Kite, board, harness, helmet, wetsuit', 'Hotel transfer (optional add-on)', 'Must be able to swim.
+Minimum age 12, minimum weight 40 kg.', 'Lagoon Water Sports kite station, Mangroovy beach, El Gouna.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000017', 'ar', 'درس تجريبي في الكايت سيرف بالجونة', 'ثلاث ساعات مع مدرب معتمد: التحكم في الطائرة على الشاطئ، ثم التدريب في المياه الضحلة.', 'بحيرات الجونة الضحلة والهادئة من أفضل أماكن التعلم. يبدأ المدرب بالتحكم في الطائرة على الشاطئ، ثم ينزل بك إلى مياه حتى الركبة لتشعر بسحب الطائرة. ومع رياح جيدة يقف بعض المتدربين على اللوح في نهاية الدرس.
+الدروس تعتمد على الرياح، لذلك تؤكد المدرسة الموعد بالطلب.', 'مقابلة المدرب وشرح السلامة
+التحكم في الطائرة على الشاطئ
+جلسة في المياه الضحلة
+مراجعة والخطوات التالية', 'مدرب معتمد (مدرب لكل متدربين)
+الطائرة واللوح والحزام والخوذة وبدلة السباحة', 'التوصيل من الفندق (إضافة اختيارية)', 'يجب إجادة السباحة.
+الحد الأدنى للسن 12 عامًا والوزن 40 كجم.', 'محطة Lagoon Water Sports للكايت، شاطئ مانجروفي، الجونة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000017', 'adult', 5600, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000017';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000017';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000017', '30000000-0000-0000-0000-000000000001', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000017', '30000000-0000-0000-0000-000000000002', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000017', '30000000-0000-0000-0000-000000000003', 3200, 'vehicle', 7), ('50000000-0000-0000-0000-000000000017', '30000000-0000-0000-0000-000000000004', 2800, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000017' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1778688326440-eb47d799998e', 'Kitesurfer at sunset', 0, 'image'), ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1758052005560-b0cd06ea63c9', 'Kitesurfers on a sunny day', 1, 'image'), ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1778883039534-39653f66f358', 'Two kitesurfers on turquoise water', 2, 'image'), ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1627068477565-3a66d5f76d5e', 'Rider on the water at sunset', 3, 'image'), ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1564499504739-bc4fc2ae8cba', 'Kites over the sea', 4, 'image'), ('50000000-0000-0000-0000-000000000017', 'https://images.unsplash.com/photo-1611517533081-a74f3d409ce9', 'Student with a board on the beach', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000017', ((current_date + d) + tm) at time zone 'Africa/Cairo', 6
+  from generate_series(0, 60) d, unnest(array[time '09:00', time '14:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000018', '10000000-0000-0000-0000-000000000010', '20000000-0000-0000-0000-000000000005', 'demo-watersports-pack', 'published', 'instant', 90, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000018';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000018', 'en', 'Water sports pack: jet ski, banana and tube', '15 minutes on a jet ski with an instructor, then a banana boat and a tube ride.', 'Three rides in one booking. You start with a 15-minute jet-ski ride (driving yourself, the instructor on board), then hold on tight on the banana boat and the tube pulled by a speedboat.', 'Safety briefing and life vests
+15 minutes jet ski
+Banana boat ride
+Tube ride', 'Jet ski (15 min) with instructor
+Banana boat and tube rides
+Life vests', 'Hotel transfer (optional add-on)', 'Children 8–11 ride the banana and tube only, with an adult.
+Not suitable during pregnancy.', 'Lagoon Water Sports hut on the public beach, Sheraton Road.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000018', 'ar', 'باقة الرياضات المائية: جت سكي وبنانا وتيوب', '15 دقيقة جت سكي مع مدرب، ثم البنانا بوت والتيوب.', 'ثلاث جولات في حجز واحد. تبدأ بـ 15 دقيقة على الجت سكي (تقود بنفسك والمدرب معك)، ثم تتمسك جيدًا على البنانا بوت والتيوب خلف المركب السريع.', 'شرح السلامة وسترات النجاة
+15 دقيقة جت سكي
+جولة البنانا بوت
+جولة التيوب', 'جت سكي (15 دقيقة) مع مدرب
+جولات البنانا والتيوب
+سترات النجاة', 'التوصيل من الفندق (إضافة اختيارية)', 'الأطفال من 8 إلى 11 سنة: البنانا والتيوب فقط مع شخص بالغ.
+غير مناسبة أثناء الحمل.', 'كشك Lagoon Water Sports على الشاطئ العام، طريق الشيراتون.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000018', 'adult', 2800, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000018', 'child', 1600, 8, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000018';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000018';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000018', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000018', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000018', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000018', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000018' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1505867798796-639ec7e8cdf5', 'Jet ski on the sea', 0, 'image'), ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1787142948486-e8022174270e', 'Jet ski on turquoise water', 1, 'image'), ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1768722688914-1954bbff0742', 'Banana boat towed by a speedboat', 2, 'image'), ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1755865984882-72738b754c39', 'Inflatable banana boats on clear water', 3, 'image'), ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1554132267-d06483b00adc', 'Two riders on a jet ski', 4, 'image'), ('50000000-0000-0000-0000-000000000018', 'https://images.unsplash.com/photo-1766207474098-03689bd2a8a2', 'Tubing on the open sea', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000018', ((current_date + d) + tm) at time zone 'Africa/Cairo', 16
+  from generate_series(0, 60) d, unnest(array[time '10:00', time '13:00', time '15:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000019', '10000000-0000-0000-0000-000000000010', '20000000-0000-0000-0000-000000000005', 'demo-sup-tour', 'published', 'instant', 120, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000019';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000019', 'en', 'Stand-up paddle at sunrise or sunset', 'A guided paddle along the coast in the calm hours, with a short swim stop.', 'The sea is flattest early in the morning and before sunset. After a few minutes of practice on the sand, your guide leads a slow paddle along the coast, with a stop to swim and look at the shallow reef.', 'Board fitting and practice on the beach
+Guided paddle along the coast
+Swim stop
+Back to the beach', 'Board, paddle and leash
+Guide
+Water', 'Hotel transfer (optional add-on)
+Waterproof phone case', 'Must be able to swim. Minimum age 10.', 'Lagoon Water Sports hut on the public beach, Sheraton Road.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000019', 'ar', 'تجديف واقفًا عند الشروق أو الغروب', 'جولة تجديف مع مرشد على طول الساحل في أهدأ ساعات اليوم، مع توقف للسباحة.', 'البحر في أهدأ حالاته صباحًا وقبل الغروب. بعد دقائق من التدريب على الرمل يقودك المرشد في جولة هادئة على طول الساحل، مع توقف للسباحة ومشاهدة الشعاب الضحلة.', 'تجهيز اللوح والتدريب على الشاطئ
+جولة تجديف مع مرشد
+توقف للسباحة
+العودة للشاطئ', 'اللوح والمجداف والحبل
+مرشد
+مياه', 'التوصيل من الفندق (إضافة اختيارية)
+جراب هاتف مضاد للماء', 'يجب إجادة السباحة. الحد الأدنى للسن 10 سنوات.', 'كشك Lagoon Water Sports على الشاطئ العام، طريق الشيراتون.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000019', 'adult', 2200, 10, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000019', 'child', 1200, 10, 15) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000019';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000019';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000019', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000019', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000019', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000019', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000019' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1557151498-af2467d6f7f4', 'Paddle boarders at sunrise', 0, 'image'), ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1526188717906-ab4a2f949f26', 'Two people on paddle boards', 1, 'image'), ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1548194016-6a2585490ea6', 'Paddle board at sunset', 2, 'image'), ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1506223064838-a9dff537fe98', 'Paddling in the golden hour', 3, 'image'), ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1670606409379-bd5185d95096', 'Woman on a paddle board', 4, 'image'), ('50000000-0000-0000-0000-000000000019', 'https://images.unsplash.com/photo-1527255343765-0aeff949250e', 'Group paddle on calm water', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000019', ((current_date + d) + tm) at time zone 'Africa/Cairo', 10
+  from generate_series(0, 60) d, unnest(array[time '07:00', time '16:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000020', '10000000-0000-0000-0000-000000000010', '20000000-0000-0000-0000-000000000006', 'demo-aqua-park', 'published', 'instant', 420, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000020';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000020', 'en', 'Aqua park day with slides and pools', 'A full day of slides, wave pool and lazy river, with lunch and soft drinks.', 'A day for the whole family: big slides for teenagers and adults, a splash area for small children, a lazy river and loungers in the shade. Lunch and soft drinks are included.', '10:00 entry
+Free time on the slides and pools
+13:00 lunch
+17:00 park closes', 'Day ticket
+Lunch and soft drinks
+Loungers and umbrellas', 'Hotel transfer (optional add-on)
+Lockers and towels', 'Children under 120 cm use the kids'' area.
+Some slides have height and weight limits.', 'Main entrance of the aqua park, Hurghada–Safaga road. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000020', 'ar', 'يوم في الأكوا بارك', 'يوم كامل من الزحاليق وحمام الأمواج والنهر الهادئ، مع غداء ومشروبات.', 'يوم للعائلة كلها: زحاليق كبيرة للمراهقين والكبار، ومنطقة ألعاب مائية للصغار، ونهر هادئ وشيزلونجات في الظل. الغداء والمشروبات الغازية مشمولة.', '10:00 الدخول
+وقت حر على الزحاليق والحمامات
+13:00 الغداء
+17:00 إغلاق الحديقة', 'تذكرة يوم كامل
+غداء ومشروبات غازية
+شيزلونجات وشماسي', 'التوصيل من الفندق (إضافة اختيارية)
+الخزائن والمناشف', 'الأطفال أقل من 120 سم يستخدمون منطقة الأطفال.
+بعض الزحاليق لها حدود للطول والوزن.', 'البوابة الرئيسية للأكوا بارك، طريق الغردقة–سفاجا. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000020', 'adult', 2000, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000020', 'child', 1400, 3, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000020', 'infant', 0, 0, 2) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000020';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000020';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000020', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000020', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000020', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000020', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000020' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1701361650313-9b20b1d76820', 'Water slide over a pool', 0, 'image'), ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1706843540963-ae52d784de62', 'Child on a water slide', 1, 'image'), ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1703167906241-03f513c604fb', 'Blue and white water slides', 2, 'image'), ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1706843540966-1a1685971dc0', 'Children playing in a water park', 3, 'image'), ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1708157730402-67cc5b19e335', 'Water park with slides and pool', 4, 'image'), ('50000000-0000-0000-0000-000000000020', 'https://images.unsplash.com/photo-1683806906116-99d37234b21c', 'Water slide against the sky', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000020', ((current_date + d) + tm) at time zone 'Africa/Cairo', 60
+  from generate_series(0, 60) d, unnest(array[time '10:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000021', '10000000-0000-0000-0000-000000000003', '20000000-0000-0000-0000-000000000006', 'demo-horse-ride', 'published', 'instant', 120, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000021';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000021', 'en', 'Horse ride on the beach and in the desert', 'Two hours on horseback from the desert edge to the sea, for beginners and riders.', 'Ride from the stables through the desert edge down to a quiet beach, where the horses walk in the shallow water. Calm horses for beginners, livelier ones for experienced riders.', 'Meet the horses and short lesson
+Ride through the desert edge
+Beach and sea walk
+Back to the stables, tea', 'Horse and guide
+Helmet
+Tea', 'Hotel transfer (optional add-on)', 'Minimum age 8. Maximum weight 100 kg.
+Long trousers recommended.', 'Desert Riders stables, behind Makadi Bay. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000021', 'ar', 'ركوب الخيل على الشاطئ وفي الصحراء', 'ساعتان على ظهر الخيل من حافة الصحراء إلى البحر، للمبتدئين وأصحاب الخبرة.', 'تنطلق من الإسطبل عبر حافة الصحراء نزولًا إلى شاطئ هادئ، حيث تمشي الخيول في المياه الضحلة. خيول هادئة للمبتدئين وأخرى أنشط لأصحاب الخبرة.', 'التعرف على الخيول ودرس قصير
+الركوب عبر حافة الصحراء
+المشي على الشاطئ وفي البحر
+العودة للإسطبل وشاي', 'الحصان والمرشد
+خوذة
+شاي', 'التوصيل من الفندق (إضافة اختيارية)', 'الحد الأدنى للسن 8 سنوات. الحد الأقصى للوزن 100 كجم.
+يُفضل بنطلون طويل.', 'إسطبل Desert Riders خلف مكادي باي. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000021', 'adult', 2000, 8, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000021', 'child', 1400, 8, 12) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000021';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000021';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000021', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000021', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000021', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000021', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000021' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1633767979501-6225d151ba70', 'Horse ride on the beach at sunset', 0, 'image'), ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1601563875044-2705bd767e31', 'Two riders on the beach', 1, 'image'), ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1700077769516-ce5bbcfa9d8f', 'Riding horses on the sand', 2, 'image'), ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1618066860703-56786b32971a', 'Rider on white sand', 3, 'image'), ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1554623034-cc2291cffcad', 'Horse ride by the sea', 4, 'image'), ('50000000-0000-0000-0000-000000000021', 'https://images.unsplash.com/photo-1640262653870-c3f1b394fef9', 'Horse and rider on the shore', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000021', ((current_date + d) + tm) at time zone 'Africa/Cairo', 10
+  from generate_series(0, 60) d, unnest(array[time '07:00', time '16:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000022', '10000000-0000-0000-0000-000000000002', '20000000-0000-0000-0000-000000000007', 'demo-dinner-cruise', 'published', 'instant', 180, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000022';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000022', 'en', 'Dinner cruise with music', 'Three hours on the evening sea: sunset, buffet dinner and live oriental music on deck.', 'Board at sunset and sail slowly along the coast as the lights of Hurghada come on. Dinner is a buffet of grills, salads and Egyptian dishes; a band plays on the upper deck.', '18:30 boarding
+19:00 sail away at sunset
+19:30 buffet dinner
+20:30 live music on deck
+21:30 back at the marina', 'Cruise
+Buffet dinner
+Water and soft drinks
+Live music', 'Hotel transfer (optional add-on)
+Alcoholic drinks', 'Smart-casual dress. Bring a light jacket: it is breezy at sea.', 'Hurghada New Marina, gate 1, 20 minutes before departure.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000022', 'ar', 'رحلة عشاء بحرية مع موسيقى', 'ثلاث ساعات في البحر مساءً: الغروب وعشاء بوفيه وموسيقى شرقية حية على السطح.', 'اصعد على المركب مع الغروب وأبحر ببطء على طول الساحل بينما تضيء أنوار الغردقة. العشاء بوفيه من المشويات والسلطات والأطباق المصرية، وفرقة تعزف على السطح العلوي.', '18:30 الصعود للمركب
+19:00 الإبحار مع الغروب
+19:30 عشاء بوفيه
+20:30 موسيقى حية على السطح
+21:30 العودة للمارينا', 'الرحلة البحرية
+عشاء بوفيه
+مياه ومشروبات غازية
+موسيقى حية', 'التوصيل من الفندق (إضافة اختيارية)
+المشروبات الكحولية', 'ملابس أنيقة مريحة. أحضر سترة خفيفة: الجو منعش في البحر.', 'مارينا الغردقة الجديدة، البوابة 1، قبل الموعد بـ 20 دقيقة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000022', 'adult', 3200, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000022', 'child', 1600, 4, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000022', 'infant', 0, 0, 3) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000022';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000022';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000022', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000022', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000022', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000022', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000022' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1766582931742-0ef627871f8d', 'Boat with lit windows at night', 0, 'image'), ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1778694276945-a3ee92331709', 'Dinner table facing the sunset sea', 1, 'image'), ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1778694276751-296f013ef89d', 'Sunset seen from the dining table', 2, 'image'), ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1683819469709-5efc50fec4ef', 'Guests on a boat at dusk', 3, 'image'), ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1768463852068-ffe4ba657840', 'White yacht at sunset', 4, 'image'), ('50000000-0000-0000-0000-000000000022', 'https://images.unsplash.com/photo-1562672753-5b77fb207643', 'Glasses on a dinner table', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000022', ((current_date + d) + tm) at time zone 'Africa/Cairo', 50
+  from generate_series(0, 60) d, unnest(array[time '18:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000023', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000007', 'demo-oriental-night', 'published', 'instant', 210, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000023';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000023', 'en', 'Oriental night: dinner and tanoura show', 'Egyptian dinner, a tanoura dancer, folk music and a stroll through a lantern-lit bazaar.', 'An evening of Egyptian music and food. After a walk through a small bazaar of lanterns and spices, dinner is served while a tanoura dancer spins with his coloured skirts and a folk band plays.', '19:00 arrival and bazaar stroll
+19:45 dinner
+20:30 tanoura show and folk music
+22:00 end of the evening', 'Dinner and soft drinks
+Show
+Tea and coffee', 'Hotel transfer (optional add-on)
+Shopping in the bazaar', 'Suitable for all ages.', 'Heritage Tours venue, El Dahar. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000023', 'ar', 'ليلة شرقية: عشاء وعرض تنورة', 'عشاء مصري وراقص تنورة وموسيقى شعبية وجولة في بازار مضاء بالفوانيس.', 'سهرة من الموسيقى والأكل المصري. بعد جولة في بازار صغير للفوانيس والتوابل، يُقدَّم العشاء بينما يدور راقص التنورة بتنانيره الملونة وتعزف فرقة شعبية.', '19:00 الوصول وجولة في البازار
+19:45 العشاء
+20:30 عرض التنورة والموسيقى الشعبية
+22:00 نهاية السهرة', 'عشاء ومشروبات غازية
+العرض
+شاي وقهوة', 'التوصيل من الفندق (إضافة اختيارية)
+المشتريات من البازار', 'مناسبة لكل الأعمار.', 'مكان Heritage Tours، الدهار. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000023', 'adult', 2400, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000023', 'child', 1200, 4, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000023', 'infant', 0, 0, 3) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000023';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000023';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000023', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000023', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000023', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000023', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000023' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1764099363412-b6b708d0b713', 'Whirling dancers in white robes', 0, 'image'), ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1763044939313-0cb814a4e69e', 'Traditional whirling dance', 1, 'image'), ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1764099362521-c693d0a59e0a', 'Musicians on stage', 2, 'image'), ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1765530398559-bea5415e1d42', 'Dancers performing on stage', 3, 'image'), ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1713021714373-cd2600cfb097', 'Shop full of lit lanterns', 4, 'image'), ('50000000-0000-0000-0000-000000000023', 'https://images.unsplash.com/photo-1682862279256-b2a9e4f3d22c', 'Table full of Egyptian dishes', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000023', ((current_date + d) + tm) at time zone 'Africa/Cairo', 80
+  from generate_series(0, 60) d, unnest(array[time '19:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000024', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000003', 'demo-cooking-class', 'published', 'request', 240, 'EUR', '40000000-0000-0000-0000-000000000002', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000024';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000024', 'en', 'Egyptian cooking class with a local family', 'Shop at the market, cook four classic dishes at home with a host family, then eat together.', 'Start at the local market to choose vegetables and spices, then cook in a family kitchen: stuffed vine leaves, koshari, baladi bread and a dessert. You eat what you cooked around the family table and take the recipes home.
+Small group; the family confirms your date on request.', 'Meet your host at the market
+Shopping for ingredients
+Cooking four dishes together
+Shared meal and recipes', 'Ingredients and cooking class
+Meal and drinks
+Recipe card', 'Hotel transfer (optional add-on)', 'Tell us about allergies or vegetarian needs when booking.', 'El Dahar vegetable market, main entrance. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000024', 'ar', 'درس طبخ مصري مع عائلة محلية', 'تسوّق من السوق، واطبخ أربعة أطباق مصرية مع عائلة مضيفة، ثم كُل معهم.', 'تبدأ من السوق المحلي لاختيار الخضار والتوابل، ثم تطبخ في مطبخ العائلة: محشي ورق عنب وكشري وعيش بلدي وحلو. تأكل ما طبخته على سفرة العائلة وتأخذ الوصفات معك.
+مجموعة صغيرة؛ تؤكد العائلة موعدك بالطلب.', 'مقابلة المضيف في السوق
+شراء المكونات
+طبخ أربعة أطباق معًا
+وجبة مشتركة والوصفات', 'المكونات ودرس الطبخ
+الوجبة والمشروبات
+بطاقة الوصفات', 'التوصيل من الفندق (إضافة اختيارية)', 'أخبرنا بأي حساسية أو نظام نباتي عند الحجز.', 'سوق الخضار بالدهار، المدخل الرئيسي. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000024', 'adult', 3600, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000024', 'child', 1800, 8, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000024';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000024';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000024', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000024', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000024', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000024', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000024' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1763951719000-661d3d50d763', 'Flatbread baked on a griddle', 0, 'image'), ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1783696211791-8357b0db7be9', 'Stuffed vine leaves and other dishes', 1, 'image'), ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1777716003985-68fed08d0c7e', 'Grilled meat with rice and bread', 2, 'image'), ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1661994215679-cde7c2c5c060', 'Table full of food', 3, 'image'), ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1748540459503-19efc015143b', 'Dishes ready to share', 4, 'image'), ('50000000-0000-0000-0000-000000000024', 'https://images.unsplash.com/photo-1720807740685-d9cdcb0836a7', 'Fruit and vegetable market', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000024', ((current_date + d) + tm) at time zone 'Africa/Cairo', 8
+  from generate_series(0, 60) d, unnest(array[time '10:00', time '16:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000025', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000008', 'demo-cairo-day', 'published', 'request', 1080, 'EUR', '40000000-0000-0000-0000-000000000003', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000025';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000025', 'en', 'Cairo and the Pyramids in one day', 'Early start by air-conditioned coach to the Pyramids of Giza, the Sphinx and the Egyptian Museum, with lunch.', 'A long but rewarding day. The coach leaves Hurghada before dawn and reaches Giza by late morning. Your Egyptologist guide takes you around the Pyramids and the Sphinx, then to the Egyptian Museum after lunch.
+The operator confirms each request because seats on the coach and museum tickets are booked ahead.', '03:00 hotel pickup
+09:30 Pyramids of Giza and the Sphinx
+12:30 lunch
+14:00 Egyptian Museum
+16:30 drive back
+23:00 back at your hotel', 'Coach with hotel pickup
+Egyptologist guide
+Entrance tickets
+Lunch and water', 'Entry inside the Great Pyramid
+Tips', 'Bring your passport. Comfortable shoes and a hat.
+About 12 hours on the road in total.', 'Pickup from your hotel reception; the time is confirmed the day before.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000025', 'ar', 'القاهرة والأهرامات في يوم واحد', 'انطلاق مبكر بأتوبيس مكيف إلى أهرامات الجيزة وأبو الهول والمتحف المصري، مع الغداء.', 'يوم طويل لكنه يستحق. يتحرك الأتوبيس من الغردقة قبل الفجر ويصل الجيزة قبل الظهر. يرافقك مرشد أثري حول الأهرامات وأبو الهول، ثم إلى المتحف المصري بعد الغداء.
+يؤكد المشغّل كل طلب لأن مقاعد الأتوبيس وتذاكر المتحف تُحجز مسبقًا.', '03:00 الاستلام من الفندق
+09:30 أهرامات الجيزة وأبو الهول
+12:30 الغداء
+14:00 المتحف المصري
+16:30 العودة
+23:00 الوصول للفندق', 'أتوبيس مع الاستلام من الفندق
+مرشد أثري
+تذاكر الدخول
+غداء ومياه', 'دخول الهرم الأكبر من الداخل
+الإكراميات', 'أحضر جواز السفر. حذاء مريح وقبعة.
+حوالي 12 ساعة طريق إجمالًا.', 'الاستلام من استقبال فندقك؛ يتأكد الموعد في اليوم السابق.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000025', 'adult', 9600, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000025', 'child', 6400, 4, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000025', 'infant', 0, 0, 3) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000025';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000025';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000025', '30000000-0000-0000-0000-000000000001', 0, 'vehicle', 7), ('50000000-0000-0000-0000-000000000025', '30000000-0000-0000-0000-000000000002', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000025', '30000000-0000-0000-0000-000000000003', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000025', '30000000-0000-0000-0000-000000000004', 400, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000025' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1600520611035-84157ad4084d', 'Pyramid under a blue sky', 0, 'image'), ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368', 'Pyramid of Khafre', 1, 'image'), ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1705628080778-f86b2f90a114', 'Camel riders in front of the pyramids', 2, 'image'), ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1541769740-098e80269166', 'Pyramids of Giza from above', 3, 'image'), ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a', 'Historic mosques in Cairo', 4, 'image'), ('50000000-0000-0000-0000-000000000025', 'https://images.unsplash.com/photo-1539650116574-8efeb43e2750', 'Pyramid of Giza', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000025', ((current_date + d) + tm) at time zone 'Africa/Cairo', 16
+  from generate_series(0, 60) d, unnest(array[time '03:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000026', '10000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000008', 'demo-luxor-balloon', 'published', 'request', 1200, 'EUR', '40000000-0000-0000-0000-000000000003', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000026';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000026', 'en', 'Luxor hot-air balloon at sunrise and the West Bank', 'Float over the Valley of the Kings at dawn, then visit the tombs and Hatshepsut''s temple.', 'Leave Hurghada in the night to reach Luxor before dawn. As the sun rises your balloon drifts over the Nile, the fields and the West Bank temples. After landing, your guide takes you to the Valley of the Kings and the Temple of Hatshepsut, with lunch by the Nile.
+Balloon flights depend on the wind and are confirmed by the operator.', '01:00 hotel pickup
+05:30 balloon take-off (about 45 minutes)
+08:00 Valley of the Kings
+10:30 Temple of Hatshepsut
+12:30 lunch
+13:30 drive back
+18:30 back at your hotel', 'Coach with hotel pickup
+Balloon flight
+Guide and entrance tickets
+Lunch', 'Special tombs (extra ticket)
+Tips', 'Minimum age 7.
+If the balloon cannot fly, you get the balloon part refunded.', 'Pickup from your hotel reception; the time is confirmed the day before.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000026', 'ar', 'منطاد الأقصر عند الشروق والبر الغربي', 'حلّق فوق وادي الملوك عند الفجر، ثم زُر المقابر ومعبد حتشبسوت.', 'تتحرك من الغردقة ليلًا لتصل الأقصر قبل الفجر. ومع شروق الشمس يطفو المنطاد فوق النيل والحقول ومعابد البر الغربي. وبعد الهبوط يأخذك المرشد إلى وادي الملوك ومعبد حتشبسوت، مع غداء على النيل.
+رحلات المنطاد تعتمد على الرياح ويؤكدها المشغّل.', '01:00 الاستلام من الفندق
+05:30 إقلاع المنطاد (حوالي 45 دقيقة)
+08:00 وادي الملوك
+10:30 معبد حتشبسوت
+12:30 الغداء
+13:30 العودة
+18:30 الوصول للفندق', 'أتوبيس مع الاستلام من الفندق
+رحلة المنطاد
+المرشد وتذاكر الدخول
+الغداء', 'المقابر الخاصة (تذكرة إضافية)
+الإكراميات', 'الحد الأدنى للسن 7 سنوات.
+إذا لم يطر المنطاد يُسترد ثمن جزء المنطاد.', 'الاستلام من استقبال فندقك؛ يتأكد الموعد في اليوم السابق.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000026', 'adult', 14400, 7, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000026', 'child', 10400, 7, 11) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000026';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000026';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000026', '30000000-0000-0000-0000-000000000001', 0, 'vehicle', 7), ('50000000-0000-0000-0000-000000000026', '30000000-0000-0000-0000-000000000002', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000026', '30000000-0000-0000-0000-000000000003', 800, 'vehicle', 7), ('50000000-0000-0000-0000-000000000026', '30000000-0000-0000-0000-000000000004', 400, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000026' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1648139210607-7b30b1034830', 'Hot-air balloon over the desert', 0, 'image'), ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1696269061408-9e8572651ca3', 'Many balloons in the sky', 1, 'image'), ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1777672351237-48a2a105c150', 'Balloons rising over the desert at dawn', 2, 'image'), ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1648139210454-23c95b91409f', 'Balloon above the landscape', 3, 'image'), ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1761496921386-81d399db4df9', 'Balloons over a river valley at sunrise', 4, 'image'), ('50000000-0000-0000-0000-000000000026', 'https://images.unsplash.com/photo-1648139210186-c319f51ccdea', 'Balloons being inflated before dawn', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000026', ((current_date + d) + tm) at time zone 'Africa/Cairo', 12
+  from generate_series(0, 60) d, unnest(array[time '01:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000027', '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000009', 'demo-hammam-spa', 'published', 'instant', 120, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000027';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000027', 'en', 'Hammam and massage ritual', 'Steam, black-soap scrub, foam wash and a 45-minute oil massage, then mint tea.', 'Two hours of slow time. You start in the steam room, then a therapist scrubs and washes you with foam on the warm marble, followed by a 45-minute massage with argan oil. Finish with mint tea in the rest room.', 'Steam room
+Black-soap scrub and foam wash
+45-minute oil massage
+Rest with mint tea', 'Hammam and massage
+Towels, robe and slippers
+Mint tea', 'Hotel transfer (optional add-on)', 'Minimum age 16. Tell us about pregnancy or health conditions.', 'Sahl Spa & Wellness, Sahl Hasheesh old town. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000027', 'ar', 'طقوس الحمام الشرقي والمساج', 'بخار، وتقشير بالصابون الأسود، وغسيل بالرغوة، ومساج بالزيت 45 دقيقة، ثم شاي بالنعناع.', 'ساعتان من الهدوء. تبدأ في غرفة البخار، ثم يقشّرك المعالج ويغسلك بالرغوة على الرخام الدافئ، يليه مساج 45 دقيقة بزيت الأرجان. وتختم بشاي النعناع في غرفة الاسترخاء.', 'غرفة البخار
+تقشير بالصابون الأسود وغسيل بالرغوة
+مساج بالزيت 45 دقيقة
+استرخاء مع شاي النعناع', 'الحمام والمساج
+مناشف وروب وشبشب
+شاي بالنعناع', 'التوصيل من الفندق (إضافة اختيارية)', 'الحد الأدنى للسن 16 عامًا. أخبرنا عن الحمل أو أي حالة صحية.', 'Sahl Spa & Wellness، المدينة القديمة بسهل حشيش. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000027', 'adult', 3200, 16, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000027';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000027';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000027', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000027', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000027', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000027', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000027' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2', 'Massage table with warm stones', 0, 'image'), ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1761470575018-135c213340eb', 'Steam room with candlelight', 1, 'image'), ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5', 'Back massage', 2, 'image'), ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1696841212541-449ca29397cc', 'Hot stone treatment', 3, 'image'), ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1515377905703-c4788e51af15', 'Massage oil bottle', 4, 'image'), ('50000000-0000-0000-0000-000000000027', 'https://images.unsplash.com/photo-1772915022472-ffc1df2d6051', 'Candle on a wooden table', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000027', ((current_date + d) + tm) at time zone 'Africa/Cairo', 6
+  from generate_series(0, 60) d, unnest(array[time '11:00', time '14:00', time '17:00']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
+on conflict (experience_id, starts_at) do nothing;
+insert into experiences (id, operator_id, category_id, slug, status, booking_mode, duration_minutes, collection_currency, cancellation_policy_id, private_available, private_max_group)
+values ('50000000-0000-0000-0000-000000000028', '10000000-0000-0000-0000-000000000011', '20000000-0000-0000-0000-000000000009', 'demo-beach-yoga', 'published', 'instant', 75, 'EUR', '40000000-0000-0000-0000-000000000001', false, null)
+on conflict (id) do update set category_id = excluded.category_id, status = 'published', booking_mode = excluded.booking_mode, duration_minutes = excluded.duration_minutes,
+  cancellation_policy_id = excluded.cancellation_policy_id, private_available = excluded.private_available, private_max_group = excluded.private_max_group;
+delete from experience_translations where experience_id = '50000000-0000-0000-0000-000000000028';
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000028', 'en', 'Beach yoga at sunrise or sunset', 'A 75-minute gentle yoga class on the sand, for all levels, followed by fresh juice.', 'A calm class led by a certified teacher on a quiet beach in Sahl Hasheesh. Breathing, gentle flow and a long relaxation to the sound of the sea. Mats are provided.', 'Welcome and breathing
+Gentle flow
+Relaxation
+Fresh juice', 'Yoga class with certified teacher
+Mat and towel
+Fresh juice', 'Hotel transfer (optional add-on)', 'All levels welcome. Tell the teacher about injuries.', 'Sahl Spa & Wellness beach deck, Sahl Hasheesh. Pin on your voucher.', false);
+insert into experience_translations (experience_id, locale, title, summary, description, itinerary, included, excluded, requirements, meeting_info, reviewed) values ('50000000-0000-0000-0000-000000000028', 'ar', 'يوجا على الشاطئ عند الشروق أو الغروب', 'حصة يوجا هادئة 75 دقيقة على الرمل لكل المستويات، يليها عصير طازج.', 'حصة هادئة مع مدربة معتمدة على شاطئ هادئ في سهل حشيش. تنفّس وحركات لطيفة واسترخاء طويل على صوت البحر. الحصائر متوفرة.', 'ترحيب وتمارين تنفس
+حركات لطيفة
+استرخاء
+عصير طازج', 'حصة يوجا مع مدربة معتمدة
+حصيرة ومنشفة
+عصير طازج', 'التوصيل من الفندق (إضافة اختيارية)', 'مناسبة لكل المستويات. أخبر المدربة بأي إصابة.', 'منصة Sahl Spa & Wellness على الشاطئ، سهل حشيش. الموقع في القسيمة.', false);
+insert into price_categories (experience_id, kind, net_minor, age_min, age_max) values ('50000000-0000-0000-0000-000000000028', 'adult', 1200, 12, null) on conflict (experience_id, kind) do update set net_minor = excluded.net_minor, age_min = excluded.age_min, age_max = excluded.age_max, active = true;
+update extras set active = false where experience_id = '50000000-0000-0000-0000-000000000028';
+delete from transport_prices where experience_id = '50000000-0000-0000-0000-000000000028';
+insert into transport_prices (experience_id, zone_id, net_minor, per, vehicle_capacity) values ('50000000-0000-0000-0000-000000000028', '30000000-0000-0000-0000-000000000001', 1600, 'vehicle', 7), ('50000000-0000-0000-0000-000000000028', '30000000-0000-0000-0000-000000000002', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000028', '30000000-0000-0000-0000-000000000003', 2400, 'vehicle', 7), ('50000000-0000-0000-0000-000000000028', '30000000-0000-0000-0000-000000000004', 2000, 'vehicle', 7);
+delete from experience_media where experience_id = '50000000-0000-0000-0000-000000000028' and (storage_path like '/demo/%' or storage_path like 'https://images.unsplash.com/photo-%');
+insert into experience_media (experience_id, storage_path, alt, sort, kind) values ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1760774714285-61ff516f86c5', 'Yoga on the beach at sunset', 0, 'image'), ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1775451719573-ffe902316c68', 'Group yoga by the sea', 1, 'image'), ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1698778755372-351969bfaa49', 'Two women doing yoga on the sand', 2, 'image'), ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1775169726139-82f78b87b8a4', 'Meditation on a beach mat', 3, 'image'), ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1654000711330-caa1e07f60bb', 'Yoga pose by the water', 4, 'image'), ('50000000-0000-0000-0000-000000000028', 'https://images.unsplash.com/photo-1767358270353-f4863614f206', 'Balanced stones on the beach at sunset', 5, 'image');
+insert into slots (experience_id, starts_at, capacity) select '50000000-0000-0000-0000-000000000028', ((current_date + d) + tm) at time zone 'Africa/Cairo', 14
+  from generate_series(0, 60) d, unnest(array[time '06:30', time '17:30']) tm where ((current_date + d) + tm) at time zone 'Africa/Cairo' > now() + interval '2 hours'
 on conflict (experience_id, starts_at) do nothing;
 -- ---------------------------------------------------------------------------
 -- [DEMO] booking history: ~8 weeks back and 2 weeks ahead, made through the real booking engine

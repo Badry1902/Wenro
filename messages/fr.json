@@ -8,7 +8,11 @@
     "destinations": "Destinations",
     "myBookings": "Mes réservations",
     "signIn": "Se connecter",
-    "language": "Langue"
+    "language": "Langue",
+    "home": "Accueil",
+    "allTrips": "Toutes les expériences",
+    "dashboard": "Tableau de bord",
+    "partners": "Partenaires"
   },
   "home": {
     "eyebrow": "Découvrir. Réserver. Explorer.",
@@ -19,12 +23,24 @@
     "from": "À partir de {price}",
     "empty": "Aucune expérience publiée pour le moment.",
     "more": "Plus",
-    "demoTag": "Démo"
+    "demoTag": "Démo",
+    "heroTitle": "Des expériences qui valent le voyage, au bord de la mer Rouge.",
+    "searchButton": "Rechercher",
+    "topPicks": "Notre sélection autour d'Hurghada",
+    "browseCategories": "Explorer par catégorie",
+    "seeAll": "Tout voir",
+    "perPerson": "par personne"
   },
   "categories": {
     "sea": "Mer",
     "desert": "Désert",
-    "culture": "Culture"
+    "culture": "Culture",
+    "diving": "Plongée",
+    "watersports": "Sports nautiques",
+    "family": "En famille",
+    "evening": "Soirées",
+    "daytrips": "Excursions à la journée",
+    "wellness": "Bien-être"
   },
   "dev": {
     "badge": "Version de développement — données de démonstration"
@@ -269,5 +285,9 @@
       "reconfirm": "Bonjour {name}, ici WENRO pour votre sortie {title} demain ({time}). Merci de confirmer avant 22 h : {link}",
       "hello": "Bonjour {name}, ici WENRO au sujet de votre réservation {ref} ({title}, {time})."
     }
+  },
+  "similar": {
+    "aside": "Expériences similaires",
+    "rail": "Vous aimerez aussi"
   }
 }

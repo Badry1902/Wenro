@@ -3,11 +3,18 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
-import type { ExperiencePage } from "@/lib/data/types";
+import type { ExperienceCard, ExperiencePage } from "@/lib/data/types";
+import { Link } from "@/i18n/navigation";
+import { mediaSrc } from "@/lib/media";
+import { cardImages, similarTo } from "@/lib/catalog";
 import { SiteHeader } from "@/components/SiteHeader";
-import { FoldGallery } from "@/components/FoldGallery";
+import { SiteFooter } from "@/components/SiteFooter";
+import { Gallery } from "@/components/site/Gallery";
+import { Rail, RailItem } from "@/components/site/Rail";
+import { TripCard } from "@/components/site/TripCard";
+import { WishButton } from "@/components/site/WishButton";
 import { BookingWidget } from "@/components/BookingWidget";
-import { IconCar, IconCheck, IconClock, IconClose, IconSea } from "@/components/Icons";
+import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconClock, IconClose, IconPin } from "@/components/Icons";
 
 export const dynamic = "force-dynamic"; // seats and prices change; always read fresh
 
@@ -32,8 +39,12 @@ export default async function ExperiencePageView({ params, searchParams }: Param
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  const page = await load(slug, locale);
+  const [page, all] = await Promise.all([
+    load(slug, locale),
+    rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]),
+  ]);
   if (!page) notFound();
+  const similar = similarTo(all, page, 8);
   // Count a partner-link visit (no personal data). Never blocks or breaks the page.
   if (q.ref && REF.test(q.ref)) await rpc("record_click", { p_code: q.ref, p_experience: page.id }, "service").catch(() => undefined);
   const agency = q.ag && GUID.test(q.ag) ? q.ag : undefined; // checked again on the booking page and in the database
@@ -46,6 +57,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
   const hours = page.duration_minutes ? page.duration_minutes / 60 : null;
   const isDemo = page.slug.startsWith("demo-"); // demo content is marked by its address, see supabase/demo
   const adult = page.prices.find((p) => p.kind === "adult");
+  const catName = page.category ? t(`categories.${page.category}` as "categories.sea") : "";
   const fromPrice = adult ? formatMoney({ minor: adult.price_minor, currency: page.currency }, locale) : null;
 
   const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
@@ -59,24 +71,49 @@ export default async function ExperiencePageView({ params, searchParams }: Param
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-6xl px-4 pb-16 pt-5">
-        <nav aria-label={t("experience.breadcrumb")} className="text-small text-ink-muted">
-          {t("experience.hurghada")} {page.category ? <>· {t(`categories.${page.category}` as "categories.sea")}</> : null}
+      <main className="mx-auto max-w-7xl px-4 pb-16 pt-5">
+        <nav aria-label={t("experience.breadcrumb")} className="flex flex-wrap items-center gap-1 text-small text-ink-muted">
+          <Link href="/" className="hover:text-discovery">{t("nav.home")}</Link>
+          <IconChevron size={14} />
+          <Link href="/experiences" className="hover:text-discovery">{t("experience.hurghada")}</Link>
+          {page.category && (<><IconChevron size={14} /><Link href={{ pathname: "/experiences", query: { cat: page.category } }} className="hover:text-discovery">{catName}</Link></>)}
         </nav>
-        <h1 className="mt-2 font-display text-[32px] leading-tight md:text-[44px] rtl:font-sans rtl:font-bold">{page.title}</h1>
-        {isDemo && <p className="mt-1 text-small font-semibold text-warning">{t("common.demo")}</p>}
+        <div className="mt-3 flex items-start justify-between gap-4">
+          <div>
+            <h1 className="font-display text-[32px] leading-tight md:text-[44px] rtl:font-sans rtl:font-extrabold">{page.title}</h1>
+            {isDemo && <p className="mt-1 text-small font-semibold text-warning">{t("common.demo")}</p>}
+          </div>
+          <WishButton id={page.id} variant="plain" className="mt-1 shrink-0" />
+        </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-ink-muted">
+          {page.category && <span className="inline-flex items-center gap-1.5"><IconCategory name={page.category} size={18} className="text-discovery" />{catName}</span>}
           {hours && <span className="inline-flex items-center gap-1.5"><IconClock size={18} className="text-discovery" />{Number.isInteger(hours) ? t("experience.hours", { n: hours }) : t("experience.minutes", { n: page.duration_minutes! })}</span>}
-          {page.category === "sea" && <span className="inline-flex items-center gap-1.5"><IconSea size={18} className="text-discovery" />{t("categories.sea")}</span>}
           {hasTransfer && <span className="inline-flex items-center gap-1.5"><IconCar size={18} className="text-discovery" />{t("experience.hotelPickup")}</span>}
-          <span className="inline-flex items-center gap-1.5 font-semibold text-success"><IconCheck size={18} />{page.booking_mode === "instant" ? t("experience.instant") : t("experience.onRequest")}</span>
+          <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-discovery" />{t("experience.hurghada")}</span>
           <span className="rounded-full bg-discovery-tint px-3 py-0.5 text-small font-semibold text-discovery">{t("experience.newNoReviews")}</span>
         </div>
 
         <div className="mt-6">
-          <FoldGallery images={page.media.map((m) => ({ src: m.path, alt: m.alt ?? page.title ?? "", kind: m.kind }))} placeholder={t("experience.photo")} />
+          <Gallery items={page.media.map((m) => ({ src: m.path, alt: m.alt ?? page.title ?? "", kind: m.kind }))} placeholder={t("experience.photo")} />
         </div>
+
+        <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+          {page.policy && (
+            <li className="flex items-start gap-3 rounded-card bg-success-tint p-4">
+              <IconCheck size={22} className="mt-0.5 shrink-0 text-success" />
+              <span><span className="block font-bold">{t("home.why2Title")}</span><span className="text-small text-ink-muted">{t("home.freeCancel", { h: page.policy.free_cancel_hours })}</span></span>
+            </li>
+          )}
+          <li className="flex items-start gap-3 rounded-card bg-discovery-tint p-4">
+            <IconClock size={22} className="mt-0.5 shrink-0 text-discovery" />
+            <span className="font-bold">{page.booking_mode === "instant" ? t("experience.instant") : t("experience.onRequest")}</span>
+          </li>
+          <li className="flex items-start gap-3 rounded-card bg-apricot-tint p-4">
+            <IconCash size={22} className="mt-0.5 shrink-0 text-ink" />
+            <span><span className="block font-bold">{t("home.why1Title")}</span><span className="text-small text-ink-muted">{t("footer.pay")}</span></span>
+          </li>
+        </ul>
 
         <div className="mt-8 flex flex-wrap items-start gap-10">
           <div className="min-w-0 flex-[999_1_560px]">
@@ -91,7 +128,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
                   </ul>
                   <ul className="flex flex-col gap-2 text-ink-muted">
                     {excluded.map((l) => <li key={l} className="flex gap-2.5"><IconClose size={20} className="mt-0.5 shrink-0" />{l}</li>)}
-                    {hasTransfer && <li className="flex gap-2.5"><IconClose size={20} className="mt-0.5 shrink-0" />{t("experience.transferAddon")}</li>}
+                    {hasTransfer && !excluded.some((l) => /transfer|توصيل/i.test(l)) && <li className="flex gap-2.5"><IconClose size={20} className="mt-0.5 shrink-0" />{t("experience.transferAddon")}</li>}
                   </ul>
                 </div>
               ) : <Pending />}
@@ -127,11 +164,47 @@ export default async function ExperiencePageView({ params, searchParams }: Param
             </Section>
           </div>
 
-          <div className="w-full flex-[1_1_360px] md:max-w-[400px]">
+          <div className="flex w-full flex-[1_1_360px] flex-col gap-8 md:max-w-[400px]">
             <BookingWidget page={page} agency={agency} />
+            {similar.length > 0 && (
+              <aside aria-labelledby="similar-aside" className="rounded-card border border-line bg-surface p-4">
+                <h2 id="similar-aside" className="mb-3 text-h3 font-bold">{t("similar.aside")}</h2>
+                <ul className="flex flex-col">
+                  {similar.slice(0, 4).map((c) => {
+                    const img = cardImages(c)[0];
+                    return (
+                      <li key={c.id}>
+                        <Link href={`/experiences/${c.slug}`} className="group flex items-center gap-3 rounded-control p-2 transition-colors hover:bg-discovery-tint">
+                          <span className="relative size-20 shrink-0 overflow-hidden rounded-[12px] bg-discovery-tint">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            {img && <img src={mediaSrc(img, { w: 160, h: 160 })} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />}
+                          </span>
+                          <span className="min-w-0 flex-1">
+                            <span className="line-clamp-2 font-bold leading-snug group-hover:text-discovery">{c.title}</span>
+                            {c.from_minor != null && (
+                              <span className="mt-1 block text-small text-ink-muted">{t("home.from", { price: formatMoney({ minor: c.from_minor, currency: c.currency }, locale) })}</span>
+                            )}
+                          </span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </aside>
+            )}
           </div>
         </div>
+
+        {similar.length > 4 && (
+          <section aria-labelledby="similar-rail" className="mt-16 border-t border-line pt-10">
+            <h2 id="similar-rail" className="mb-5 text-[26px] font-extrabold">{t("similar.rail")}</h2>
+            <Rail labels={{ prev: t("home.prev"), next: t("home.next") }}>
+              {similar.map((c) => <RailItem key={c.id}><TripCard c={c} /></RailItem>)}
+            </Rail>
+          </section>
+        )}
       </main>
+      <SiteFooter />
       {/* Phone: the booking card sits below the details, so keep the price and a shortcut in reach */}
       <div className="sticky bottom-0 z-10 flex items-center justify-between gap-3 border-t border-line bg-surface px-4 py-3 md:hidden">
         {fromPrice && (

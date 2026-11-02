@@ -8,7 +8,11 @@
     "destinations": "Reiseziele",
     "myBookings": "Meine Buchungen",
     "signIn": "Anmelden",
-    "language": "Sprache"
+    "language": "Sprache",
+    "home": "Start",
+    "allTrips": "Alle Erlebnisse",
+    "dashboard": "Dashboard",
+    "partners": "Für Partner"
   },
   "home": {
     "eyebrow": "Entdecken. Buchen. Erleben.",
@@ -19,12 +23,24 @@
     "from": "Ab {price}",
     "empty": "Noch keine Erlebnisse veröffentlicht.",
     "more": "Mehr",
-    "demoTag": "Demo"
+    "demoTag": "Demo",
+    "heroTitle": "Erlebnisse am Roten Meer, die sich lohnen.",
+    "searchButton": "Suchen",
+    "topPicks": "Unsere Auswahl rund um Hurghada",
+    "browseCategories": "Nach Kategorie entdecken",
+    "seeAll": "Alle ansehen",
+    "perPerson": "pro Person"
   },
   "categories": {
     "sea": "Meer",
     "desert": "Wüste",
-    "culture": "Kultur"
+    "culture": "Kultur",
+    "diving": "Tauchen",
+    "watersports": "Wassersport",
+    "family": "Familienspaß",
+    "evening": "Abende",
+    "daytrips": "Tagesausflüge",
+    "wellness": "Wellness"
   },
   "dev": {
     "badge": "Entwicklungsversion – nur Demodaten"
@@ -269,5 +285,9 @@
       "reconfirm": "Hallo {name}, hier ist WENRO zu Ihrem Ausflug {title} morgen ({time}). Bitte bestätigen Sie bis 22:00 Uhr: {link}",
       "hello": "Hallo {name}, hier ist WENRO zu Ihrer Buchung {ref} ({title}, {time})."
     }
+  },
+  "similar": {
+    "aside": "Ähnliche Erlebnisse",
+    "rail": "Das könnte dir auch gefallen"
   }
 }

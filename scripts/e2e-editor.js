@@ -137,10 +137,10 @@ fs.writeFileSync('/tmp/claude-0/not-a-photo.jpg', 'just text pretending to be a 
   check(`owner can switch to the demo dashboards (${switches.length})`, switches.some((s) => s.includes('Desert Riders')) && switches.some((s) => s.includes('Sun Agency')));
   await ad.screenshot({ path: `${SHOTS}/e3-admin-overview.png`, fullPage: true });
 
-  // 8. Home page shows illustrated demo cards
+  // 8. Home page shows the demo trip cards with photos
   const home = await b.newPage({ viewport: { width: 1280, height: 900 } });
   await home.goto(`${B}/en`);
-  check('home lists the demo experiences with cover images', (await home.locator('main ul img').count()) >= 10);
+  check('home lists the demo experiences with cover images', (await home.locator('main .trip-card img').count()) >= 10);
   await home.waitForTimeout(600);
   await home.screenshot({ path: `${SHOTS}/e4-home.png`, fullPage: true });
   const reduce = await b.newContext({ reducedMotion: 'reduce' });
