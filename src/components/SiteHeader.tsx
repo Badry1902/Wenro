@@ -5,6 +5,8 @@ import { Link } from "@/i18n/navigation";
 import { CATEGORIES } from "@/lib/catalog";
 import { HeaderMenus } from "./site/HeaderMenus";
 import { AccountButton } from "./site/AccountButton";
+import { WishCount } from "./site/Recent";
+import { IconHeart } from "./Icons";
 
 /**
  * Site header: logo, catalogue links, language and the account button. Signed-in people see a
@@ -34,6 +36,10 @@ export async function SiteHeader() {
           />
         </Suspense>
 
+        <Link href="/wishlist" aria-label={t("wishlist.title")} title={t("wishlist.title")}
+          className="btn-press relative grid size-11 shrink-0 place-items-center rounded-full hover:bg-discovery-tint">
+          <IconHeart size={21} /><WishCount />
+        </Link>
         <AccountButton labels={{ signIn: t("nav.signIn"), dashboard: t("nav.dashboard") }} className="hidden sm:inline-flex" />
       </div>
     </header>

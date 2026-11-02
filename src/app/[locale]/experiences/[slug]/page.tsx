@@ -7,6 +7,10 @@ import type { ExperienceCard, ExperiencePage } from "@/lib/data/types";
 import { Link } from "@/i18n/navigation";
 import { mediaSrc } from "@/lib/media";
 import { cardImages, similarTo } from "@/lib/catalog";
+import { siteUrl } from "@/lib/env";
+import { routing } from "@/i18n/routing";
+import { ShareButton } from "@/components/site/ShareButton";
+import { RecentTracker } from "@/components/site/Recent";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Gallery } from "@/components/site/Gallery";
@@ -32,7 +36,16 @@ async function load(slug: string, locale: string) {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { locale, slug } = await params;
   const page = await load(slug, locale);
-  return page ? { title: `${page.title} · WENRO`, description: page.summary ?? undefined } : {};
+  if (!page) return {};
+  const cover = page.media.find((m) => m.kind !== "video");
+  const image = cover ? mediaSrc(cover.path, { w: 1200, h: 630 }) : undefined;
+  return {
+    title: `${page.title} · WENRO`,
+    description: page.summary ?? undefined,
+    alternates: { canonical: `${siteUrl()}/${locale}/experiences/${slug}`, languages: Object.fromEntries(routing.locales.map((l) => [l, `${siteUrl()}/${l}/experiences/${slug}`])) },
+    openGraph: { type: "website", title: page.title ?? "WENRO", description: page.summary ?? undefined, images: image ? [{ url: image, width: 1200, height: 630 }] : undefined, siteName: "WENRO", locale },
+    twitter: { card: "summary_large_image", title: page.title ?? "WENRO", description: page.summary ?? undefined, images: image ? [image] : undefined },
+  };
 }
 
 const lines = (text: string | null) => (text ?? "").split("\n").map((l) => l.trim()).filter(Boolean);
@@ -81,7 +94,10 @@ export default async function ExperiencePageView({ params }: Params) {
             <h1 className="font-display text-[32px] leading-tight md:text-[44px] rtl:font-sans rtl:font-extrabold">{page.title}</h1>
             {isDemo && <p className="mt-1 text-small font-semibold text-warning">{t("common.demo")}</p>}
           </div>
-          <WishButton id={page.id} variant="plain" className="mt-1 shrink-0" />
+          <div className="mt-1 flex shrink-0 gap-2">
+            <ShareButton title={page.title ?? "WENRO"} />
+            <WishButton id={page.id} variant="plain" />
+          </div>
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-ink-muted">
@@ -203,6 +219,16 @@ export default async function ExperiencePageView({ params }: Params) {
         )}
       </main>
       <RefBeacon experienceId={page.id} />
+      <RecentTracker id={page.id} />
+      {/* Structured data for search engines: a bookable trip with its starting price */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org", "@type": "TouristTrip", name: page.title, description: page.summary,
+        url: `${siteUrl()}/${locale}/experiences/${page.slug}`,
+        image: page.media.filter((m) => m.kind !== "video").slice(0, 4).map((m) => mediaSrc(m.path, { w: 1200, h: 800 })),
+        touristType: page.category ?? undefined,
+        provider: { "@type": "Organization", name: "WENRO", url: siteUrl() },
+        offers: adult ? { "@type": "Offer", price: (adult.price_minor / 100).toFixed(2), priceCurrency: page.currency, availability: page.slots.length ? "https://schema.org/InStock" : "https://schema.org/SoldOut", url: `${siteUrl()}/${locale}/experiences/${page.slug}` } : undefined,
+      }).replace(/</g, "\\u003c") }} />
       <SiteFooter />
       {/* Phone: the booking card sits below the details, so keep the price and a shortcut in reach */}
       <div className="sticky bottom-0 z-10 flex items-center justify-between gap-3 border-t border-line bg-surface px-4 py-3 md:hidden">

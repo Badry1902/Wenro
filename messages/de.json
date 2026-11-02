@@ -173,7 +173,8 @@
       "customer_details_required": "Bitte prüfe deine Angaben.",
       "transport_not_available_for_zone": "Kein Transfer in das Gebiet deines Hotels für diesen Ausflug.",
       "unexpected_error": "Etwas ist schiefgelaufen, die Buchung wurde nicht erstellt. Bitte versuche es erneut.",
-      "accept_required": "Bitte akzeptiere die Bedingungen, um fortzufahren"
+      "accept_required": "Bitte akzeptiere die Bedingungen, um fortzufahren",
+      "too_many_attempts": "Zu viele Versuche in kurzer Zeit. Bitte warte ein paar Minuten."
     }
   },
   "voucher": {
@@ -212,7 +213,8 @@
     "reconfirmButton": "Ich komme",
     "reconfirmed": "Danke — du bist bestätigt.",
     "qr": "QR-Code des Vouchers",
-    "notFound": "Wir finden diese Buchung nicht. Bitte prüfe den Link in deiner Bestätigung."
+    "notFound": "Wir finden diese Buchung nicht. Bitte prüfe den Link in deiner Bestätigung.",
+    "calendar": "Zum Kalender hinzufügen"
   },
   "email": {
     "greeting": "Hallo {name},",
@@ -299,6 +301,30 @@
       "operator": "Ausflugsanbieter",
       "marketer": "Marketing-Partner",
       "agency": "Agentur / Hotelschalter"
+    },
+    "flash": {
+      "err": {
+        "too_many_attempts": "Zu viele Versuche in kurzer Zeit. Bitte warte ein paar Minuten."
+      }
+    },
+    "dep": {
+      "exportCsv": "Excel (CSV) herunterladen"
+    },
+    "partnerBookings": {
+      "exportCsv": "Excel (CSV) herunterladen"
+    },
+    "adminBookings": {
+      "exportCsv": "Excel (CSV) herunterladen"
     }
+  },
+  "share": {
+    "label": "Teilen",
+    "copied": "Link kopiert"
+  },
+  "recent": {
+    "title": "Zuletzt angesehen"
+  },
+  "wishlist": {
+    "title": "Merkliste"
   }
 }

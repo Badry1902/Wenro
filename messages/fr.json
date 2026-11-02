@@ -173,7 +173,8 @@
       "customer_details_required": "Vérifiez vos coordonnées.",
       "transport_not_available_for_zone": "Pas de transfert vers la zone de votre hôtel pour cette excursion.",
       "unexpected_error": "Une erreur est survenue, la réservation n'a pas été créée. Réessayez.",
-      "accept_required": "Veuillez accepter les conditions pour continuer"
+      "accept_required": "Veuillez accepter les conditions pour continuer",
+      "too_many_attempts": "Trop de tentatives. Patientez quelques minutes."
     }
   },
   "voucher": {
@@ -212,7 +213,8 @@
     "reconfirmButton": "Je viens",
     "reconfirmed": "Merci — c'est confirmé.",
     "qr": "QR code du voucher",
-    "notFound": "Réservation introuvable. Vérifiez le lien de votre confirmation."
+    "notFound": "Réservation introuvable. Vérifiez le lien de votre confirmation.",
+    "calendar": "Ajouter au calendrier"
   },
   "email": {
     "greeting": "Bonjour {name},",
@@ -299,6 +301,30 @@
       "operator": "Prestataire",
       "marketer": "Partenaire marketing",
       "agency": "Agence / comptoir d'hôtel"
+    },
+    "flash": {
+      "err": {
+        "too_many_attempts": "Trop de tentatives. Patientez quelques minutes."
+      }
+    },
+    "dep": {
+      "exportCsv": "Télécharger Excel (CSV)"
+    },
+    "partnerBookings": {
+      "exportCsv": "Télécharger Excel (CSV)"
+    },
+    "adminBookings": {
+      "exportCsv": "Télécharger Excel (CSV)"
     }
+  },
+  "share": {
+    "label": "Partager",
+    "copied": "Lien copié"
+  },
+  "recent": {
+    "title": "Vus récemment"
+  },
+  "wishlist": {
+    "title": "Mes favoris"
   }
 }

@@ -61,6 +61,7 @@ export default async function Departures({ params, searchParams }: Props) {
           <nav aria-label={t("range")} className="flex gap-2">
             {week > 0 && <Link href={{ pathname: back, query: week > 1 ? { w: week - 1 } : {} }} className={btn.quiet}>{t("earlier")}</Link>}
             {week < 12 && <Link href={{ pathname: back, query: { w: week + 1 } }} className={btn.quiet}>{t("later")}</Link>}
+            <a href={`/api/export/operator?org=${org}&from=${firstDay}&to=${lastDay}`} className={btn.quiet} download>{t("exportCsv")}</a>
           </nav>
         }
       />

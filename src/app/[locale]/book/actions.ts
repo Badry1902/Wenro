@@ -5,6 +5,7 @@ import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { seal } from "@/lib/messaging/seal";
+import { allow, clientKey } from "@/lib/ratelimit";
 
 export type PlaceBookingState = { error?: string } | undefined;
 
@@ -48,7 +49,10 @@ export async function placeBooking(_: PlaceBookingState, form: FormData): Promis
   const d = parsed.data;
 
   const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (tooMany(ip)) return { error: "unexpected_error" };
+  if (tooMany(ip)) return { error: "too_many_attempts" };
+  // Shared across all server instances: 12 booking attempts per visitor per 10 minutes, 40 per day
+  const who = await clientKey();
+  if (!(await allow(`book:${who}`, 12, 600)) || !(await allow(`bookday:${who}`, 40, 86400))) return { error: "too_many_attempts" };
 
   const ref = (await cookies()).get("wenro_ref")?.value;
   let token: string;

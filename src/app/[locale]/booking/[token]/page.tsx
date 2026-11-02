@@ -9,6 +9,8 @@ import { Steps } from "@/components/Steps";
 import { IconCheck } from "@/components/Icons";
 import { cancelBooking, reconfirmBooking } from "../actions";
 import { PrintButton } from "./PrintButton";
+import { CalendarButton } from "./CalendarButton";
+import { siteUrl } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -122,7 +124,11 @@ export default async function BookingPage({ params, searchParams }: Props) {
 
         {active && (
           <div className="mt-4 grid gap-3 print:hidden">
-            <PrintButton label={t("voucher.save")} />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <PrintButton label={t("voucher.save")} />
+              <CalendarButton label={t("voucher.calendar")} title={b.experience.title ?? "WENRO"} start={b.starts_at} reference={b.ref}
+                location={(b.transport ? b.hotel : b.experience.meeting_info) ?? "Hurghada"} url={`${siteUrl()}/${locale}/booking/${token}`} />
+            </div>
             {cancellable && (
               <details className="rounded-card border border-line bg-surface p-4">
                 <summary className="min-h-11 cursor-pointer content-center font-bold text-critical">{t("voucher.cancel")}</summary>

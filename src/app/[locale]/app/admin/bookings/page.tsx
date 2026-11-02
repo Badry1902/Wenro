@@ -61,7 +61,8 @@ export default async function AdminBookings({ params, searchParams }: Props) {
 
   return (
     <>
-      <PageTitle title={t("title")} sub={t("count", { n: rows.length })} />
+      <PageTitle title={t("title")} sub={t("count", { n: rows.length })}
+        actions={<a href={`/api/export/admin?from=${from.toISOString().slice(0, 10)}&to=${to.toISOString().slice(0, 10)}`} download className={btn.quiet}>{t("exportCsv")}</a>} />
       <Flash ok={q.ok} err={q.err} />
       <form className="mb-6 flex flex-wrap items-end gap-3 rounded-card border border-line p-4">
         <label className="flex flex-col gap-1 text-small font-bold">{t("day")}<input type="date" name="d" defaultValue={day ?? ""} className={field} /></label>

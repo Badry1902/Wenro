@@ -10,6 +10,7 @@ import { Hero } from "@/components/site/Hero";
 import { Rail, RailItem } from "@/components/site/Rail";
 import { Reveal } from "@/components/site/Reveal";
 import { TripCard } from "@/components/site/TripCard";
+import { RecentRail } from "@/components/site/Recent";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconShield } from "@/components/Icons";
 
 export const revalidate = 300;
@@ -89,6 +90,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               </Rail>
             </Reveal>
           )}
+
+          <RecentRail cards={cards} />
 
           {picks.length > 0 && (
             <Reveal as="section" className="mt-16">

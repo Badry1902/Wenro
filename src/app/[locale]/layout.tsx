@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { siteUrl } from "@/lib/env";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -18,12 +19,22 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export const viewport: Viewport = { themeColor: "#3046d9" };
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   // Test sites (NEXT_PUBLIC_SITE_MODE=preview) are hidden from search engines.
   const preview = process.env.NEXT_PUBLIC_SITE_MODE === "preview";
-  return { title: t("title"), description: t("description"), ...(preview ? { robots: { index: false, follow: false } } : {}) };
+  return {
+    title: t("title"),
+    description: t("description"),
+    metadataBase: new URL(siteUrl()),
+    applicationName: "WENRO",
+    icons: { apple: "/icons/apple-touch-icon.png" },
+    openGraph: { siteName: "WENRO", type: "website", locale },
+    ...(preview ? { robots: { index: false, follow: false } } : {}),
+  };
 }
 
 export default async function LocaleLayout({

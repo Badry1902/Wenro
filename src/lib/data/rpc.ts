@@ -34,7 +34,7 @@ const ALLOWED = new Set([
   // editor, team, money, coupons, support, demo
   "experience_editor", "editor_options", "save_experience", "add_experience_media", "remove_experience_media",
   "move_experience_media", "invite_member", "cancel_invite", "accept_invites", "org_team", "set_member_active",
-  "operator_finance", "admin_coupons", "save_coupon", "admin_cancel_booking", "demo_status", "demo_join_all",
+  "operator_finance", "hit_rate_limit", "admin_coupons", "save_coupon", "admin_cancel_booking", "demo_status", "demo_join_all",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

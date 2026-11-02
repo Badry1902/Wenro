@@ -30,7 +30,8 @@ export default async function PartnerBookings({ params }: Props) {
 
   return (
     <>
-      <PageTitle title={t("title")} sub={t(ws.type === "agency" ? "subAgency" : "subMarketer")} />
+      <PageTitle title={t("title")} sub={t(ws.type === "agency" ? "subAgency" : "subMarketer")}
+        actions={<a href={`/api/export/partner?org=${org}`} download className="btn-press inline-flex min-h-11 items-center rounded-control border border-line px-4 font-bold hover:border-discovery hover:text-discovery">{t("exportCsv")}</a>} />
       {rows.length === 0 ? <Empty>{t("none")}</Empty> : (
         <ul className="flex flex-col gap-2">
           {rows.map((r) => (

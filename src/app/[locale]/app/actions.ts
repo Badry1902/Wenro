@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
+import { allow, clientKey } from "@/lib/ratelimit";
 
 /**
  * Dashboard actions. Each one calls a database function AS THE SIGNED-IN USER;
@@ -37,6 +38,9 @@ export async function claimOwner(form: FormData) {
 }
 export async function applyOrganization(form: FormData) {
   const type = z.enum(["operator", "marketer", "agency"]).parse(v(form, "type"));
+  if (!(await allow(`apply:${await clientKey()}`, 5, 86400))) {
+    redirect({ href: "/app/join?err=too_many_attempts", locale: locale.parse(form.get("locale")) });
+  }
   await run(form, "applied", "apply_organization", {
     p_type: type, p_name: v(form, "name").slice(0, 120), p_phone: v(form, "phone").slice(0, 30), p_email: v(form, "email").slice(0, 200),
   });

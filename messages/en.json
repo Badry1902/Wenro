@@ -200,7 +200,8 @@
       "transport_not_available_for_zone": "No transfer to your hotel's area for this trip.",
       "unexpected_error": "Something went wrong and the booking was not created. Please try again.",
       "accept_required": "Please accept the terms to continue",
-      "not_agency_member": "Your account cannot book for this agency."
+      "not_agency_member": "Your account cannot book for this agency.",
+      "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again."
     },
     "agencyBanner": "Booking for a client of {name}. Enter the client's own name and WhatsApp."
   },
@@ -240,7 +241,8 @@
     "reconfirmButton": "I'm coming",
     "reconfirmed": "Thanks — you're confirmed.",
     "qr": "Voucher QR code",
-    "notFound": "We couldn't find this booking. Check the link in your confirmation message."
+    "notFound": "We couldn't find this booking. Check the link in your confirmation message.",
+    "calendar": "Add to calendar"
   },
   "app": {
     "menu": "Workspace menu",
@@ -364,7 +366,8 @@
         "invalid_code": "Codes are 3–20 letters or numbers.",
         "discount_too_big": "That discount is above the maximum.",
         "booking_not_cancellable": "This booking can no longer be cancelled.",
-        "too_many_videos": "Up to 3 videos per experience."
+        "too_many_videos": "Up to 3 videos per experience.",
+        "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again."
       }
     },
     "signin": {
@@ -481,7 +484,8 @@
       "state": "Open for booking",
       "save": "Save",
       "weatherHint": "To cancel for weather, use the Today page on the day.",
-      "capacityFor": "Seats at {time}"
+      "capacityFor": "Seats at {time}",
+      "exportCsv": "Download Excel (CSV)"
     },
     "exp": {
       "title": "Experiences",
@@ -547,7 +551,8 @@
       "waMessage": "WhatsApp the guest",
       "cancel": "Cancel booking",
       "cancelConfirm": "Cancel {ref} for the guest? They get an email. Nothing is charged.",
-      "cancelYes": "Yes, cancel it"
+      "cancelYes": "Yes, cancel it",
+      "exportCsv": "Download Excel (CSV)"
     },
     "partners": {
       "title": "Partners",
@@ -669,7 +674,8 @@
       "subAgency": "Bookings made by your team or through your link.",
       "none": "No bookings yet.",
       "paid": "Guest pays",
-      "privacy": "To protect guests, marketers do not see names or contact details."
+      "privacy": "To protect guests, marketers do not see names or contact details.",
+      "exportCsv": "Download Excel (CSV)"
     },
     "agency": {
       "title": "Book for a client",
@@ -1033,5 +1039,17 @@
     "pickup": "Hotel pickup on most trips",
     "rights": "© {year} WENRO. All rights reserved.",
     "demoNote": "Test site: the trips shown are demo content and the photos are stock images."
+  },
+  "share": {
+    "label": "Share",
+    "copied": "Link copied"
+  },
+  "recent": {
+    "title": "Recently viewed"
+  },
+  "wishlist": {
+    "title": "Your wishlist",
+    "sub": "Trips you saved with the heart. Saved on this device.",
+    "empty": "No saved trips yet. Tap the heart on any trip to keep it here."
   }
 }

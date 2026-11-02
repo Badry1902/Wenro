@@ -6,6 +6,7 @@ import { redirect } from "@/i18n/navigation";
 import { DEV_USER_COOKIE } from "@/lib/auth";
 import { dataMode, siteUrl } from "@/lib/env";
 import { createUserClient } from "@/lib/supabase/server";
+import { allow, clientKey } from "@/lib/ratelimit";
 
 const locales = z.enum(["en", "de", "ru", "fr", "ar"]);
 
@@ -26,6 +27,11 @@ export async function sendSignInLink(form: FormData) {
   const locale = locales.catch("en").parse(form.get("locale"));
   const email = z.string().trim().email().safeParse(form.get("email"));
   if (!email.success) redirect({ href: "/signin?error=email", locale });
+  // Protect the sign-in email quota: 5 links per visitor and 3 per address per hour
+  const who = await clientKey();
+  if (!(await allow(`signin:${who}`, 5, 3600)) || !(await allow(`signin-mail:${email.data!.toLowerCase()}`, 3, 3600))) {
+    redirect({ href: "/signin?error=rate", locale });
+  }
   const supabase = await createUserClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: email.data!,
