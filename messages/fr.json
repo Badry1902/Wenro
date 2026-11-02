@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "title": "WENRO — Expériences locales à Hurghada",
+    "description": "Découvrez et réservez des excursions et expériences locales à Hurghada."
+  },
+  "nav": {
+    "explore": "Explorer",
+    "destinations": "Destinations",
+    "myBookings": "Mes réservations",
+    "signIn": "Se connecter",
+    "language": "Langue"
+  },
+  "home": {
+    "eyebrow": "Découvrir. Réserver. Explorer.",
+    "title": "Trouvez votre prochaine expérience.",
+    "subtitle": "Mer, désert et culture autour de Hurghada — des prix clairs, une réservation simple.",
+    "cta": "Explorer les expériences",
+    "listTitle": "Expériences autour de Hurghada",
+    "from": "À partir de {price}",
+    "empty": "Aucune expérience publiée pour le moment."
+  },
+  "categories": {
+    "sea": "Mer",
+    "desert": "Désert",
+    "culture": "Culture"
+  },
+  "dev": {
+    "badge": "Version de développement — données de démonstration"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "ru": "Русский",
+    "fr": "Français",
+    "ar": "العربية"
+  },
+  "common": {
+    "back": "Retour",
+    "edit": "Modifier",
+    "total": "Total",
+    "approx": "≈ {amount} · approximatif",
+    "hurghadaTime": "heure de Hurghada",
+    "adults": "Adultes",
+    "children": "Enfants",
+    "infants": "Bébés",
+    "transfer": "Transfert hôtel",
+    "free": "gratuit",
+    "optional": "(facultatif)",
+    "demo": "Contenu de démonstration — pas une offre réelle",
+    "adultsCount": "{n, plural, one {# adulte} other {# adultes}}",
+    "childrenCount": "{n, plural, one {# enfant} other {# enfants}}",
+    "infantsCount": "{n, plural, one {# bébé} other {# bébés}}",
+    "previewBanner": "Version de test : les réservations ici ne sont pas réelles, aucune sortie n’aura lieu."
+  },
+  "experience": {
+    "hours": "{n, plural, one {# heure} other {# heures}}",
+    "minutes": "{n} min",
+    "hotelPickup": "Prise en charge à l'hôtel possible",
+    "instant": "Confirmation immédiate",
+    "onRequest": "Confirmée par l'organisateur sous 12 heures",
+    "newNoReviews": "Nouveau sur WENRO · pas encore d'avis",
+    "included": "Inclus",
+    "notIncluded": "Non inclus",
+    "transferAddon": "Transfert hôtel (option)",
+    "itinerary": "Programme",
+    "meeting": "Point de rendez-vous & prise en charge",
+    "meetingTransfer": "Avec transfert, le chauffeur vous attend à la réception de l'hôtel. L'heure exacte arrive par message la veille.",
+    "goodToKnow": "Bon à savoir",
+    "cancellation": "Conditions d'annulation",
+    "cancellationText": "Annulation gratuite jusqu'à {hours} heures avant le départ. Si l'excursion est annulée pour météo ou fermeture du port, une autre date vous est proposée sans frais.",
+    "operatedBy": "Organisateur",
+    "operatorGeneric": "Un organisateur local agréé à Hurghada. Son nom et son contact accompagnent votre voucher.",
+    "photo": "Photos bientôt",
+    "map": "Carte bientôt",
+    "pending": "Détails à venir de l'organisateur.",
+    "breadcrumb": "Fil d'Ariane",
+    "hurghada": "Hurghada"
+  },
+  "widget": {
+    "label": "Réserver cette expérience",
+    "from": "À partir de",
+    "perAdult": "par adulte",
+    "payIn": "paiement en {currency}",
+    "date": "Date",
+    "departure": "Départ · heure de Hurghada",
+    "full": "Complet",
+    "travelers": "Voyageurs",
+    "ageFrom": "{min}+",
+    "ageRange": "{min}–{max}",
+    "fewer": "Moins : {label}",
+    "more": "Plus : {label}",
+    "addTransfer": "Ajouter le transfert hôtel",
+    "yourHotel": "Votre hôtel",
+    "chooseHotel": "Choisissez votre hôtel",
+    "perCar": "{zone} · {price} par voiture (jusqu'à {cap} personnes)",
+    "perPersonZone": "{zone} · {price} par personne",
+    "noTransfer": "Pas de transfert vers cette zone pour cette excursion",
+    "extras": "Options",
+    "perPerson": "par personne",
+    "perBooking": "par réservation",
+    "continue": "Continuer",
+    "noDates": "Aucun départ dans les 90 prochains jours.",
+    "notEnough": "Plus que {n} places sur ce départ",
+    "freeCancel": "Annulation gratuite jusqu'à {hours} heures avant",
+    "cash": "Pas de carte — paiement en espèces à l'organisateur lors de la prise en charge",
+    "showIn": "Afficher les prix approximatifs en",
+    "chooseDeparture": "Choisissez un départ"
+  },
+  "booking": {
+    "steps": "Étapes de réservation",
+    "stepSelect": "Choix",
+    "stepDetails": "Coordonnées",
+    "stepReview": "Vérification",
+    "stepConfirmed": "Confirmé",
+    "detailsTitle": "Vos coordonnées",
+    "fullName": "Nom complet",
+    "fullNameHelp": "Comme sur votre passeport — l'équipage vérifie les noms à l'embarquement.",
+    "nameError": "Indiquez votre nom complet",
+    "email": "E-mail",
+    "emailError": "Indiquez une adresse complète, par ex. name@example.com",
+    "whatsapp": "Numéro WhatsApp",
+    "countryCode": "Indicatif",
+    "whatsappHelp": "Nous y envoyons votre voucher et l'heure de prise en charge. Partagé avec l'organisateur seulement 24 heures avant.",
+    "phoneError": "Saisissez votre numéro sans l'indicatif",
+    "room": "Numéro de chambre",
+    "roomHelp": "Aide le chauffeur à vous trouver au {hotel}.",
+    "reviewBooking": "Vérifier la réservation",
+    "reviewTitle": "Vérifier & réserver",
+    "trip": "Excursion",
+    "price": "Prix",
+    "payTitle": "Vous payez {amount} en espèces à la prise en charge",
+    "payBody": "Aucune carte maintenant. Le montant dû est celui en {currency}.",
+    "payApprox": "Environ {approx} au taux du jour.",
+    "cancellation": "Annulation",
+    "freeUntil": "Annulation gratuite jusqu'au {date}. Annulez à tout moment via le lien de votre confirmation.",
+    "reconfirmNote": "La veille à 18h00, nous vous demandons de confirmer. Les réservations non confirmées à 22h00 sont libérées.",
+    "promo": "Code promo",
+    "promoNote": "Vérifié et appliqué à la confirmation.",
+    "yourDetails": "Vos coordonnées",
+    "accept": "J'accepte les conditions de réservation et la politique de confidentialité.",
+    "termsLink": "Conditions de réservation",
+    "privacyLink": "Confidentialité",
+    "acceptError": "Veuillez accepter les conditions pour continuer",
+    "confirm": "Confirmer la réservation",
+    "confirming": "Réservation…",
+    "nothingCharged": "Rien n'est débité maintenant",
+    "requestNote": "L'organisateur confirme sous 12 heures. Vous recevez un message dans tous les cas.",
+    "pickup": "Prise en charge au {hotel}",
+    "noPickup": "Rendez-vous au point de rencontre",
+    "errors": {
+      "sold_out": "Ces places viennent d'être prises. Choisissez un autre départ.",
+      "slot_closed": "Ce départ n'est plus disponible.",
+      "slot_not_found": "Ce départ n'est plus disponible.",
+      "coupon_invalid": "Ce code promo n'est pas valide.",
+      "customer_details_required": "Vérifiez vos coordonnées.",
+      "transport_not_available_for_zone": "Pas de transfert vers la zone de votre hôtel pour cette excursion.",
+      "unexpected_error": "Une erreur est survenue, la réservation n'a pas été créée. Réessayez.",
+      "accept_required": "Veuillez accepter les conditions pour continuer"
+    }
+  },
+  "voucher": {
+    "title": "Votre réservation",
+    "confirmed": "Confirmée",
+    "pending_request": "En attente de l'organisateur",
+    "cancelled": "Annulée",
+    "expired": "Non confirmée",
+    "declined": "Indisponible",
+    "headline": "C'est parti, {name}.",
+    "headlinePending": "Demande envoyée, {name}.",
+    "headlineCancelled": "Cette réservation est annulée.",
+    "sentTo": "Les mises à jour seront envoyées à {email}.",
+    "keepLink": "Gardez cette page : son lien permet de gérer la réservation.",
+    "label": "Voucher WENRO",
+    "showAtPickup": "À présenter à la prise en charge",
+    "showAtPickupBody": "L'équipage le scanne pour vous enregistrer. Une capture d'écran fonctionne hors ligne.",
+    "date": "Date",
+    "departure": "Départ",
+    "pickup": "Prise en charge",
+    "meetingPoint": "Point de rendez-vous",
+    "pickupNote": "L'heure exacte arrive par message la veille.",
+    "travelers": "Voyageurs",
+    "operator": "Organisateur",
+    "payAtPickup": "Paiement en espèces à la prise en charge",
+    "exact": "Montant exact en {currency}, payé à l'organisateur",
+    "save": "Enregistrer en PDF",
+    "cancel": "Annuler la réservation",
+    "cancelTitle": "Annuler cette réservation ?",
+    "cancelFree": "L'annulation gratuite s'applique.",
+    "cancelLate": "La période d'annulation gratuite est terminée. Annulez quand même pour libérer les places.",
+    "keep": "Garder la réservation",
+    "yesCancel": "Oui, annuler",
+    "reconfirmTitle": "Merci de confirmer votre venue",
+    "reconfirmBody": "Confirmez avant 22h00 ce soir, sinon vos places sont libérées.",
+    "reconfirmButton": "Je viens",
+    "reconfirmed": "Merci — c'est confirmé.",
+    "qr": "QR code du voucher",
+    "notFound": "Réservation introuvable. Vérifiez le lien de votre confirmation."
+  },
+  "email": {
+    "greeting": "Bonjour {name},",
+    "greetingTeam": "Bonjour,",
+    "footer": "WENRO · expériences locales à Hurghada. Vous recevez cet e-mail suite à une réservation faite avec cette adresse.",
+    "labels": {
+      "experience": "Expérience",
+      "when": "Quand",
+      "hurghadaTime": "heure de Hurghada",
+      "guests": "Voyageurs",
+      "where": "Prise en charge / rendez-vous",
+      "pickupAt": "Prise en charge à {hotel}",
+      "meetingPointLater": "Le point de rendez-vous figure sur votre bon",
+      "reference": "Référence",
+      "pay": "À payer sur place",
+      "cash": "en espèces à l’opérateur local agréé"
+    },
+    "notes": {
+      "voucher": "Montrez le code QR de votre bon lors de la prise en charge.",
+      "freeCancel": "Annulation gratuite jusqu’à {hours} heures avant le départ, depuis le lien ci-dessous.",
+      "requestWindow": "L’opérateur local agréé répond sous 12 heures. Rien à payer maintenant.",
+      "keepRef": "Conservez votre référence {ref} ; elle vous sera demandée à la prise en charge.",
+      "nothingToPay": "Aucun montant n’est facturé."
+    },
+    "buttons": {
+      "view": "Voir ma réservation"
+    },
+    "booking_confirmed": {
+      "subject": "Réservation confirmée : {title}, {date}",
+      "intro": "Votre réservation est confirmée."
+    },
+    "request_received": {
+      "subject": "Demande reçue : {title}, {date}",
+      "intro": "Nous avons transmis votre demande à l’opérateur."
+    },
+    "request_accepted": {
+      "subject": "Confirmé : {title}, {date}",
+      "intro": "Bonne nouvelle : l’opérateur a confirmé votre réservation."
+    },
+    "request_declined": {
+      "subject": "Indisponible : {title}, {date}",
+      "intro": "Désolés, l’opérateur ne peut pas accepter cette réservation. Merci de choisir une autre date."
+    },
+    "request_expired": {
+      "subject": "Non confirmé à temps : {title}, {date}",
+      "intro": "L’opérateur n’a pas confirmé votre demande à temps, elle a donc été fermée. Merci de choisir une autre date."
+    },
+    "reconfirm": {
+      "subject": "Demain : merci de confirmer {title}",
+      "intro": "Votre sortie a lieu demain. Merci de confirmer votre venue avant 22 h (heure de Hurghada), sinon vos places seront libérées.",
+      "button": "Je confirme ma venue"
+    },
+    "cancelled_by_guest": {
+      "subject": "Annulé : {title}, {date}",
+      "intro": "Votre réservation est annulée, comme demandé."
+    },
+    "weather_cancelled": {
+      "subject": "Annulé pour cause de météo : {title}, {date}",
+      "intro": "La mer et la météo ne permettent pas la sortie en sécurité. Répondez à cet e-mail et nous vous proposerons une autre date."
+    },
+    "auto_cancelled": {
+      "subject": "Annulé : pas de réponse ({title})",
+      "intro": "Nous vous avions demandé de confirmer avant 22 h et n’avons pas eu de réponse ; vos places ont été libérées. Vous pouvez réserver à nouveau."
+    },
+    "cancelled": {
+      "subject": "Annulé : {title}, {date}",
+      "intro": "Cette réservation est annulée."
+    },
+    "whatsapp": {
+      "reconfirm": "Bonjour {name}, ici WENRO pour votre sortie {title} demain ({time}). Merci de confirmer avant 22 h : {link}",
+      "hello": "Bonjour {name}, ici WENRO au sujet de votre réservation {ref} ({title}, {time})."
+    }
+  }
+}

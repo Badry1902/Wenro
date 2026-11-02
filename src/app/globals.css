@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+ * WENRO design tokens — from the WENRO Visual Design System v1.0.
+ * Exact hex values from the guide are authoritative. Logo artwork keeps its own colours.
+ * Light surfaces dominate; orange (apricot) is an accent, never body-text background.
+ */
+@theme {
+  --color-discovery: #3046d9;        /* Discovery Blue: primary actions, links */
+  --color-discovery-hover: #2a3cc0;
+  --color-discovery-pressed: #1f2d96;
+  --color-discovery-tint: #eef0fd;
+  --color-apricot: #f59a6b;          /* Sunlit Apricot: accent; ink text on it, never white body text */
+  --color-apricot-tint: #fdeee5;
+  --color-ivory: #fff9f1;            /* Warm Ivory: page background */
+  --color-ink: #232b45;              /* Deep Ink: text, admin sidebar */
+  --color-ink-muted: #5b627a;
+  --color-line: #e2e4ec;
+  --color-surface: #ffffff;
+  --color-success: #1d7a4d;
+  --color-success-tint: #eaf6ef;
+  --color-warning: #8a5a00;
+  --color-warning-tint: #fff4d6;
+  --color-critical: #b42318;
+  --color-critical-tint: #fdecea;
+
+  --font-display: "DM Serif Display", "Times New Roman", serif;
+  --font-sans: "Manrope Variable", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-arabic: "IBM Plex Sans Arabic", "Manrope Variable", system-ui, sans-serif;
+
+  /* Type scale 64 / 40 / 28 / 20 / 16 / 13 */
+  --text-display: 4rem;
+  --text-h1: 2.5rem;
+  --text-h2: 1.75rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-small: 0.8125rem;
+
+  /* Radii: controls 10, cards 16, images 20 */
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-image: 20px;
+}
+
+html {
+  background: #ffffff; /* owner's choice (Nov 2026): white page background */
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Arabic: switch to the Arabic UI font; Latin brand words still render in Manrope */
+html[dir="rtl"] body {
+  font-family: var(--font-arabic);
+}
+
+/* Visible 2px focus ring everywhere (keyboard users) */
+:focus-visible {
+  outline: 2px solid var(--color-discovery);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
