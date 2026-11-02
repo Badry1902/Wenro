@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { routing } from "./i18n/routing";
@@ -10,6 +10,18 @@ const intl = createMiddleware(routing);
 const REF = /^[A-Za-z0-9]{4,20}$/;
 
 export default async function middleware(req: NextRequest) {
+  // A sign-in link that landed on a page instead of /api/auth/callback (Supabase falls back to the
+  // "Site URL" when the return address is not on its list): finish the sign-in here.
+  const code = req.nextUrl.searchParams.get("code");
+  if (code && /^[0-9a-f-]{20,64}$/i.test(code)) {
+    const loc = req.nextUrl.pathname.split("/")[1];
+    const locale = (routing.locales as readonly string[]).includes(loc) ? loc : routing.defaultLocale;
+    const to = new URL("/api/auth/callback", req.url);
+    to.searchParams.set("code", code);
+    to.searchParams.set("next", `/${locale}/app`);
+    return NextResponse.redirect(to);
+  }
+
   const res = intl(req);
 
   const ref = req.nextUrl.searchParams.get("ref");

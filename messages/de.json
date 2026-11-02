@@ -289,5 +289,10 @@
   "similar": {
     "aside": "Ähnliche Erlebnisse",
     "rail": "Das könnte dir auch gefallen"
+  },
+  "app": {
+    "signin": {
+      "rateError": "Zu viele Anmelde-E-Mails in kurzer Zeit. Bitte warte ein paar Minuten und fordere dann einen neuen Link an."
+    }
   }
 }

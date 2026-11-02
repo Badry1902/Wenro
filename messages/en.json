@@ -376,7 +376,8 @@
       "sendError": "We could not send the link. Check the address and try again.",
       "linkError": "That link has expired or was already used. Ask for a new one.",
       "devTitle": "Developer mode: sign in as a test person",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "rateError": "Too many sign-in emails in a short time. Wait a few minutes, then ask for a new link (use the newest email only)."
     },
     "join": {
       "title": "Your workspaces",

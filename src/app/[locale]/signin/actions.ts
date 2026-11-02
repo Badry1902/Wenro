@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { DEV_USER_COOKIE } from "@/lib/auth";
@@ -9,6 +9,19 @@ import { createUserClient } from "@/lib/supabase/server";
 
 const locales = z.enum(["en", "de", "ru", "fr", "ar"]);
 
+/**
+ * The link in the email must come back to the same address the person signed in from: the browser keeps
+ * a one-time secret for that site, and the callback needs it. Falls back to NEXT_PUBLIC_SITE_URL.
+ * (Supabase only accepts return addresses listed under Authentication → URL Configuration → Redirect URLs.)
+ */
+async function returnOrigin() {
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  if (host && /^[a-z0-9.-]+(:\d+)?$/i.test(host)) return `${proto}://${host}`;
+  return siteUrl();
+}
+
 export async function sendSignInLink(form: FormData) {
   const locale = locales.catch("en").parse(form.get("locale"));
   const email = z.string().trim().email().safeParse(form.get("email"));
@@ -16,11 +29,11 @@ export async function sendSignInLink(form: FormData) {
   const supabase = await createUserClient();
   const { error } = await supabase.auth.signInWithOtp({
     email: email.data!,
-    options: { emailRedirectTo: `${siteUrl()}/api/auth/callback?next=/${locale}/app`, shouldCreateUser: true },
+    options: { emailRedirectTo: `${await returnOrigin()}/api/auth/callback?next=/${locale}/app`, shouldCreateUser: true },
   });
   if (error) {
-    console.error("signInWithOtp failed", error.message);
-    redirect({ href: "/signin?error=send", locale });
+    console.error("signInWithOtp failed", error.status, error.message);
+    redirect({ href: `/signin?error=${error.status === 429 ? "rate" : "send"}`, locale });
   }
   redirect({ href: `/signin?sent=${encodeURIComponent(email.data!)}`, locale });
 }

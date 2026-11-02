@@ -289,5 +289,10 @@
   "similar": {
     "aside": "Expériences similaires",
     "rail": "Vous aimerez aussi"
+  },
+  "app": {
+    "signin": {
+      "rateError": "Trop d'e-mails de connexion en peu de temps. Attendez quelques minutes puis demandez un nouveau lien."
+    }
   }
 }

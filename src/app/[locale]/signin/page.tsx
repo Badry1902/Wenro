@@ -32,7 +32,7 @@ export default async function SignIn({ params, searchParams }: Props) {
         <h1 className="text-h2 font-bold">{t("title")}</h1>
         <p className="text-ink-muted">{t("subtitle")}</p>
 
-        {error && <p role="alert" className="rounded-card bg-critical-tint p-3 font-semibold text-critical">{error === "link" ? t("linkError") : t("sendError")}</p>}
+        {error && <p role="alert" className="rounded-card bg-critical-tint p-3 font-semibold text-critical">{error === "link" ? t("linkError") : error === "rate" ? t("rateError") : t("sendError")}</p>}
 
         {dataMode() === "localpg" ? (
           <section className="flex flex-col gap-2 rounded-card border border-line p-4">
