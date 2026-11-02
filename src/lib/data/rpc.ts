@@ -31,6 +31,10 @@ const ALLOWED = new Set([
   // messaging and scheduled jobs
   "store_link_secret", "sealed_link_for", "outbox_claim", "outbox_result", "run_scheduled_jobs",
   "admin_messages", "admin_message_detail", "retry_message",
+  // editor, team, money, coupons, support, demo
+  "experience_editor", "editor_options", "save_experience", "add_experience_media", "remove_experience_media",
+  "move_experience_media", "invite_member", "cancel_invite", "accept_invites", "org_team", "set_member_active",
+  "operator_finance", "admin_coupons", "save_coupon", "admin_cancel_booking", "demo_status", "demo_join_all",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

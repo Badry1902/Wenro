@@ -7,7 +7,7 @@ import { formatMoney } from "@/lib/money";
 export type MessageKind =
   | "booking_confirmed" | "request_received" | "request_accepted" | "request_declined" | "request_expired"
   | "reconfirm" | "cancelled_by_guest" | "weather_cancelled" | "auto_cancelled" | "cancelled"
-  | "operator_request" | "admin_alert";
+  | "operator_request" | "admin_alert" | "team_invite";
 
 export type BookingContext = {
   id: string; ref: string; status: string; starts_at: string; currency: "EUR" | "USD" | "EGP"; paid_minor: number;
@@ -17,6 +17,7 @@ export type BookingContext = {
   customer: { full_name: string; email: string; phone: string };
   sealed_link?: string | null;
 };
+export type InvitePayload = { email: string; org: string; role: string };
 export type AlertPayload = { date: string; bookings: { ref: string; starts_at: string; full_name: string; phone: string }[] };
 
 export type Rendered = { subject: string; text: string; html: string; locale: string; dir: "ltr" | "rtl" };
@@ -38,7 +39,7 @@ export function staffLocale() {
  */
 export async function renderMessage(
   kind: MessageKind,
-  opts: { locale: string; booking?: BookingContext | null; payload?: AlertPayload | null; link?: string | null; dashboardUrl?: string },
+  opts: { locale: string; booking?: BookingContext | null; payload?: AlertPayload | InvitePayload | null; link?: string | null; dashboardUrl?: string },
 ): Promise<Rendered> {
   const locale = supported(opts.locale);
   const messages = await loadMessages(locale);
@@ -58,8 +59,16 @@ export async function renderMessage(
   const rows: [string, string][] = [];
   const extra: string[] = [];
 
-  if (kind === "admin_alert") {
-    const p = opts.payload!;
+  if (kind === "team_invite") {
+    const p = opts.payload as InvitePayload;
+    const role = createTranslator({ locale, messages, namespace: "app.roles" }) as unknown as Tr;
+    subject = t("team_invite.subject", { org: p.org });
+    intro = t("team_invite.intro", { org: p.org, role: role(p.role) });
+    rows.push([t("team_invite.signInWith"), p.email]);
+    extra.push(t("team_invite.note"));
+    button = opts.dashboardUrl ? t("team_invite.button") : null;
+  } else if (kind === "admin_alert") {
+    const p = opts.payload as AlertPayload;
     subject = t("admin_alert.subject", { n: p.bookings.length });
     intro = t("admin_alert.intro");
     for (const x of p.bookings) rows.push([`${x.ref} · ${when(x.starts_at)}`, `${x.full_name} · ${x.phone}`]);
@@ -93,9 +102,9 @@ export async function renderMessage(
     }
   }
 
-  const href = kind === "admin_alert" || kind === "operator_request" ? opts.dashboardUrl ?? null : opts.link ?? null;
+  const href = kind === "admin_alert" || kind === "operator_request" || kind === "team_invite" ? opts.dashboardUrl ?? null : opts.link ?? null;
   const greeting = b && kind !== "operator_request" ? t("greeting", { name: b.customer.full_name }) : t("greetingTeam");
-  const footer = kind === "operator_request" || kind === "admin_alert" ? t("footerTeam") : t("footer");
+  const footer = kind === "operator_request" || kind === "admin_alert" || kind === "team_invite" ? t("footerTeam") : t("footer");
 
   const text = [
     greeting, "", intro, "",

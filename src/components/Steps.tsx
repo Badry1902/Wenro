@@ -16,7 +16,8 @@ export function Steps({ current }: { current: 1 | 2 | 3 | 4 }) {
             aria-current={active ? "step" : undefined}
             className={`flex flex-col gap-1.5 ${done ? "text-success" : active ? "text-discovery" : "text-ink-muted"}`}
           >
-            <span className={`h-1 rounded ${done ? "bg-success" : active ? "bg-discovery" : "bg-line"}`} />
+            <span aria-hidden="true" className={`step-bar h-1 rounded bg-line ${done ? "text-success" : "text-discovery"}`}
+              style={{ "--fill": done || active ? 1 : 0 } as React.CSSProperties} />
             {label}
           </li>
         );

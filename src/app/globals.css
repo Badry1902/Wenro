@@ -65,9 +65,127 @@ html[dir="rtl"] body {
   border-radius: 4px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+/* ---------------------------------------------------------------------------
+ * Motion. Purpose first: feedback, state, continuity. Transform and opacity only.
+ * Curves and durations follow the WENRO motion rules (strong ease-out for UI, under 300 ms;
+ * longer only on the marketing pages). Reduced motion keeps fades, drops movement.
+ * ------------------------------------------------------------------------ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
+
+/* Press feedback on anything pressable */
+.btn-press {
+  transition: transform 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease, color 150ms ease, opacity 150ms ease;
+}
+.btn-press:active:not(:disabled) { transform: scale(0.97); }
+
+/* Busy indicator inside buttons while a server action runs */
+.spinner {
+  width: 1em; height: 1em; flex-shrink: 0;
+  border: 2px solid currentColor; border-inline-end-color: transparent; border-radius: 9999px;
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Things that appear once after an action: banners, added rows, previews, opened popovers */
+.flash-in, .reveal-in, .panel-in, .pop-in, .popover-panel, .value-tick {
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+}
+@starting-style {
+  .flash-in { opacity: 0; transform: translateY(-6px); }
+  .reveal-in { opacity: 0; transform: translateY(-4px); }
+  .panel-in { opacity: 0; transform: translateY(4px); }
+  .pop-in { opacity: 0; transform: scale(0.95); }
+  .popover-panel { opacity: 0; transform: scale(0.95); }
+  .value-tick { opacity: 0.35; transform: translateY(2px); }
+}
+.value-tick { display: inline-block; transition-duration: 150ms; }
+.popover-panel { transform-origin: top left; }
+[dir="rtl"] .popover-panel { transform-origin: top right; }
+.popover-panel.end-0 { transform-origin: top right; }
+[dir="rtl"] .popover-panel.end-0 { transform-origin: top left; }
+
+/* Selected chips (dates, times, tabs) change colour, never jump */
+.tab-chip, .chip-link, .nav-link { transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 160ms var(--ease-out); }
+
+/* Marketing pages: cards lift on hover (pointer devices only), group entrance is staggered */
+.card-lift { transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out); }
+.card-img { transition: transform 300ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover { transform: translateY(-2px); border-color: var(--color-discovery); box-shadow: 0 10px 30px -12px rgb(35 43 69 / 0.25); }
+  .card-lift:hover .card-img { transform: scale(1.03); }
+  .chip-link:hover { border-color: var(--color-discovery); color: var(--color-discovery); }
+}
+.stagger > * { opacity: 0; transform: translateY(8px); animation: fade-up 300ms var(--ease-out) forwards; }
+.stagger > :nth-child(2) { animation-delay: 50ms; }
+.stagger > :nth-child(3) { animation-delay: 100ms; }
+.stagger > :nth-child(4) { animation-delay: 150ms; }
+.stagger > :nth-child(5) { animation-delay: 200ms; }
+.stagger > :nth-child(n + 6) { animation-delay: 250ms; }
+.hero-in { animation: fade-up 400ms var(--ease-out) both; }
+@keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-up-hero { from { opacity: 0; transform: translateY(8px); } }
+.hero-in { animation-name: fade-up-hero; }
+
+/* Folded-map gallery: the side panels unfold once when the page opens */
+.fold-panel { transition: transform 600ms var(--ease-out), opacity 400ms var(--ease-out); }
+@starting-style {
+  .fold-panel[data-side="start"] { opacity: 0; transform: perspective(1200px) rotateY(28deg); }
+  .fold-panel[data-side="end"] { opacity: 0; transform: perspective(1200px) rotateY(-28deg); }
+  .fold-panel[data-side="mid"] { opacity: 0; transform: scale(0.97); }
+}
+.fold-panel[data-side="start"] { transform-origin: right center; transition-delay: 80ms; }
+.fold-panel[data-side="end"] { transform-origin: left center; transition-delay: 80ms; }
+
+/* Booking progress: the bar fills towards the current step */
+.step-bar { position: relative; overflow: hidden; }
+.step-bar::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor;
+  transform: scaleX(var(--fill, 0)); transform-origin: left center; transition: transform 300ms var(--ease-in-out);
+}
+[dir="rtl"] .step-bar::after { transform-origin: right center; }
+
+/* Voucher, right after booking: the check draws itself and the ticket slides in (once) */
+.check-draw path { stroke-dasharray: 24; stroke-dashoffset: 24; animation: draw 450ms var(--ease-out) 150ms forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.ticket-in { animation: ticket 350ms var(--ease-out) 120ms both; }
+@keyframes ticket { from { opacity: 0; transform: translateY(12px); } }
+
+/* Run sheet: the row that just changed glows briefly so staff see it worked */
+.row-flash { animation: row-flash 1200ms ease-out; }
+@keyframes row-flash { from { background-color: var(--color-success-tint); } to { background-color: transparent; } }
+
+/* QR camera: a scan line sweeps while the camera looks for a code */
+.scan-line { animation: scan 1600ms linear infinite alternate; }
+@keyframes scan { from { transform: translateY(0); } to { transform: translateY(calc(var(--scan-h, 300px) - 2px)); } }
+
+/* Loading placeholders while a page is fetched */
+.skeleton { background: linear-gradient(90deg, #eef0f5 0%, #f7f8fb 40%, #eef0f5 80%); background-size: 200% 100%; animation: shimmer 1400ms linear infinite; border-radius: 10px; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-press:active:not(:disabled) { transform: none; }
+  .spinner { animation: pulse 1200ms ease-in-out infinite; border-inline-end-color: currentColor; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+  @starting-style {
+    .flash-in, .reveal-in, .panel-in, .pop-in, .popover-panel, .value-tick { transform: none; }
+    .fold-panel[data-side] { transform: none; }
+  }
+  .card-lift:hover, .card-lift:hover .card-img { transform: none; }
+  .stagger > *, .hero-in, .ticket-in { animation: fade-only 200ms ease both; transform: none; }
+  @keyframes fade-only { from { opacity: 0; } to { opacity: 1; } }
+  .step-bar::after { transition-duration: 0ms; }
+  .check-draw path { animation: none; stroke-dashoffset: 0; }
+  .scan-line { animation: none; }
+  .skeleton { animation: none; }
+  html { scroll-behavior: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Upload progress: linear, it is a measurement */
+.upload-bar { transform-origin: left center; transition: transform 150ms linear; }
+[dir="rtl"] .upload-bar { transform-origin: right center; }

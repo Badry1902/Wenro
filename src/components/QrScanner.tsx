@@ -45,10 +45,15 @@ export function QrScanner({ label, stopLabel, onCodeField }: { label: string; st
   return (
     <div className="flex flex-col gap-2">
       <button type="button" onClick={() => setOn(!on)}
-        className="inline-flex min-h-11 items-center justify-center rounded-control bg-ink px-4 font-bold text-white">
+        className="btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-ink px-4 font-bold text-white">
         {on ? stopLabel : label}
       </button>
-      {on && <video ref={video} muted playsInline className="aspect-square w-full max-w-xs rounded-card bg-black object-cover" />}
+      {on && (
+        <div className="pop-in relative w-full max-w-xs overflow-hidden rounded-card" style={{ "--scan-h": "320px" } as React.CSSProperties}>
+          <video ref={video} muted playsInline className="aspect-square w-full bg-black object-cover" />
+          <span aria-hidden="true" className="scan-line absolute inset-x-4 top-0 h-0.5 rounded bg-apricot shadow-[0_0_12px_2px_rgba(245,154,107,0.8)]" />
+        </div>
+      )}
     </div>
   );
 }

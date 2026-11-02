@@ -17,6 +17,8 @@ export type Workspace = {
 export const getWorkspaces = cache(async (locale: string) => {
   const uid = await currentUserId();
   if (!uid) redirect({ href: "/signin", locale });
+  // Pending team invitations for this email become memberships on the first visit after sign-in.
+  await rpc<number>("accept_invites", {}, "user").catch((e) => console.error("accept_invites", e));
   return rpc<Workspace[]>("my_workspaces", {}, "user");
 });
 

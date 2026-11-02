@@ -39,7 +39,7 @@ export type ExperiencePage = {
   extras: ExtraRow[];
   slots: SlotRow[];
   hotels: HotelRow[];
-  media: { path: string; alt: string | null }[];
+  media: { path: string; alt: string | null; kind?: "image" | "video" }[];
   fx: Record<string, number>;
 };
 
@@ -52,6 +52,8 @@ export type ExperienceCard = {
   currency: Currency;
   duration_minutes: number | null;
   from_minor: number | null;
+  booking_mode?: "instant" | "request";
+  cover?: { path: string; alt: string | null; kind?: "image" | "video" } | null;
 };
 
 export type BookingView = {

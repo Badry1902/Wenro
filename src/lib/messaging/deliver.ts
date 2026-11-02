@@ -1,13 +1,13 @@
 import "server-only";
 import { rpc } from "@/lib/data/rpc";
 import { siteUrl } from "@/lib/env";
-import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type MessageKind } from "./render";
+import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type InvitePayload, type MessageKind } from "./render";
 import { sendEmail } from "./send";
 import { unseal } from "./seal";
 
 type Claimed = {
-  id: string; kind: MessageKind; recipient: "guest" | "operator" | "platform"; locale: string;
-  payload: AlertPayload | Record<string, never>; attempts: number; booking: BookingContext | null;
+  id: string; kind: MessageKind; recipient: "guest" | "operator" | "platform" | "invitee"; locale: string;
+  payload: AlertPayload | InvitePayload | Record<string, never>; attempts: number; booking: BookingContext | null;
 };
 
 export const manageLink = (locale: string, token: string) => `${siteUrl()}/${locale}/booking/${token}`;
@@ -26,8 +26,12 @@ export async function deliverDue(limit = 50) {
       const to =
         m.recipient === "guest" ? b?.customer.email :
         m.recipient === "operator" ? b?.operator_email :
+        m.recipient === "invitee" ? (m.payload as InvitePayload).email :
         process.env.PLATFORM_ALERT_EMAIL;
-      if (!to) {
+      if (to && /\.(example|test|invalid)$/i.test(to.trim())) {
+        status = "skipped"; // reserved test domains (demo guests): never sent
+        error = "test address, not sent";
+      } else if (!to) {
         status = "skipped";
         error = m.recipient === "platform" ? "PLATFORM_ALERT_EMAIL not set" : "no email address";
       } else {
@@ -36,9 +40,9 @@ export async function deliverDue(limit = 50) {
         const rendered = await renderMessage(m.kind, {
           locale,
           booking: b,
-          payload: m.kind === "admin_alert" ? (m.payload as AlertPayload) : null,
+          payload: m.kind === "admin_alert" || m.kind === "team_invite" ? (m.payload as AlertPayload | InvitePayload) : null,
           link: token ? manageLink(m.locale, token) : null,
-          dashboardUrl: m.recipient === "operator" ? `${siteUrl()}/${locale}/app` : m.recipient === "platform" ? `${siteUrl()}/${locale}/app/admin/bookings?r=sent` : undefined,
+          dashboardUrl: m.recipient === "invitee" ? `${siteUrl()}/${locale}/signin` : m.recipient === "operator" ? `${siteUrl()}/${locale}/app` : m.recipient === "platform" ? `${siteUrl()}/${locale}/app/admin/bookings?r=sent` : undefined,
         });
         const r = await sendEmail(to, rendered, `wenro-${m.id}`);
         status = r.status;

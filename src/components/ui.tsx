@@ -60,14 +60,14 @@ export async function Flash({ ok, err }: { ok?: string; err?: string }) {
   if (!ok && !err) return null;
   const msg = ok ? (t.has(`ok.${ok}`) ? t(`ok.${ok}`) : t("ok.done")) : (t.has(`err.${err}`) ? t(`err.${err}`) : t("err.unexpected_error"));
   return (
-    <p role={err ? "alert" : "status"} className={`mb-5 rounded-card p-3 font-semibold ${err ? "bg-critical-tint text-critical" : "bg-success-tint text-success"}`}>{msg}</p>
+    <p role={err ? "alert" : "status"} className={`flash-in mb-5 rounded-card p-3 font-semibold ${err ? "bg-critical-tint text-critical" : "bg-success-tint text-success"}`}>{msg}</p>
   );
 }
 
 export const btn = {
-  primary: "inline-flex min-h-11 items-center justify-center rounded-control bg-discovery px-4 font-bold text-white hover:bg-discovery-hover",
-  secondary: "inline-flex min-h-11 items-center justify-center rounded-control border border-discovery bg-surface px-4 font-bold text-discovery hover:bg-discovery-tint",
-  danger: "inline-flex min-h-11 items-center justify-center rounded-control bg-critical px-4 font-bold text-white",
-  quiet: "inline-flex min-h-11 items-center justify-center rounded-control border border-line bg-surface px-4 font-semibold text-ink hover:border-ink-muted",
+  primary: "btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-discovery px-4 font-bold text-white hover:bg-discovery-hover",
+  secondary: "btn-press inline-flex min-h-11 items-center justify-center rounded-control border border-discovery bg-surface px-4 font-bold text-discovery hover:bg-discovery-tint",
+  danger: "btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-critical px-4 font-bold text-white",
+  quiet: "btn-press inline-flex min-h-11 items-center justify-center rounded-control border border-line bg-surface px-4 font-semibold text-ink hover:border-ink-muted",
 };
 export const field = "min-h-11 rounded-control border border-[#8A90A6] bg-surface px-3";

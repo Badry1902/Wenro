@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { ExperiencePage, SlotRow } from "@/lib/data/types";
@@ -15,6 +15,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
   const locale = useLocale();
   const format = useFormatter();
   const router = useRouter();
+  const [navigating, startNav] = useTransition();
 
   const days = useMemo(() => {
     const map = new Map<string, SlotRow[]>();
@@ -57,7 +58,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
     if (sel.transport && sel.hotelId) { q.t = "1"; q.h = sel.hotelId; } else if (sel.hotelId) q.h = sel.hotelId;
     if (sel.extras.length) q.x = sel.extras.join(",");
     if (agency) q.ag = agency;
-    router.push({ pathname: `/book/${page.slug}`, query: q });
+    startNav(() => router.push({ pathname: `/book/${page.slug}`, query: q }));
   };
 
   const stepper = (key: "adults" | "children" | "infants", label: string, sub: string) => {
@@ -73,11 +74,11 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
         <div className="flex items-center gap-3">
           <button type="button" aria-label={t("widget.fewer", { label })} disabled={v <= min}
             onClick={() => setSel({ ...sel, [key]: v - 1 })}
-            className="h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">−</button>
-          <span aria-live="polite" className="min-w-5 text-center font-bold">{v}</span>
+            className="btn-press h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">−</button>
+          <span aria-live="polite" className="min-w-5 text-center font-bold"><span key={v} className="value-tick">{v}</span></span>
           <button type="button" aria-label={t("widget.more", { label })} disabled={v >= max}
             onClick={() => setSel({ ...sel, [key]: v + 1 })}
-            className="h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">+</button>
+            className="btn-press h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">+</button>
         </div>
       </div>
     );
@@ -120,7 +121,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
             const active = k === day;
             return (
               <button key={k} type="button" aria-pressed={active} onClick={() => pickDay(k)}
-                className={`flex min-h-16 min-w-16 flex-col items-center justify-center rounded-control border px-2 ${active ? "border-discovery bg-discovery text-white" : "border-[#C9CDDA] bg-surface"}`}>
+                className={`tab-chip btn-press flex min-h-16 min-w-16 flex-col items-center justify-center rounded-control border px-2 ${active ? "border-discovery bg-discovery text-white" : "border-[#C9CDDA] bg-surface"}`}>
                 <span className="text-[12px]">{format.dateTime(d, { weekday: "short" })}</span>
                 <span className="font-bold">{format.dateTime(d, { day: "numeric" })}</span>
                 <span className="text-[12px]">{format.dateTime(d, { month: "short" })}</span>
@@ -138,7 +139,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
             const active = s.id === slotId;
             return (
               <button key={s.id} type="button" disabled={full} aria-pressed={active} onClick={() => setSlotId(s.id)}
-                className={`min-h-11 rounded-control border px-4 font-semibold ${active ? "border-discovery bg-discovery text-white" : full ? "border-line bg-[#F3F4F8] text-[#6B7189] line-through" : "border-[#C9CDDA] bg-surface"}`}>
+                className={`tab-chip btn-press min-h-11 rounded-control border px-4 font-semibold ${active ? "border-discovery bg-discovery text-white" : full ? "border-line bg-[#F3F4F8] text-[#6B7189] line-through" : "border-[#C9CDDA] bg-surface"}`}>
                 {format.dateTime(new Date(s.starts_at), { hour: "2-digit", minute: "2-digit" })}{full ? ` · ${t("widget.full")}` : ""}
               </button>
             );
@@ -151,7 +152,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
         {stepper("adults", t("common.adults"), ageLabel("adult"))}
         {priceOf(page, "child") && stepper("children", t("common.children"), ageLabel("child"))}
         {priceOf(page, "infant") && stepper("infants", t("common.infants"), ageLabel("infant"))}
-        {notEnough && slot && <p role="alert" className="text-small font-semibold text-critical">{t("widget.notEnough", { n: slot.seats_left })}</p>}
+        {notEnough && slot && <p role="alert" className="reveal-in text-small font-semibold text-critical">{t("widget.notEnough", { n: slot.seats_left })}</p>}
       </div>
 
       {page.prices.some((pr) => pr.kind === "transport") && (
@@ -161,7 +162,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
             {t("widget.addTransfer")}
           </label>
           {sel.transport && (
-            <>
+            <div className="reveal-in flex flex-col gap-2">
               <label htmlFor="hotel" className="text-small text-ink-muted">{t("widget.yourHotel")}</label>
               <select id="hotel" value={sel.hotelId ?? ""} onChange={(e) => setSel({ ...sel, hotelId: e.target.value || null })}
                 className="min-h-11 rounded-control border border-[#8A90A6] bg-surface px-3">
@@ -180,7 +181,7 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
                 </p>
               )}
               {p.transportUnavailable && <p role="alert" className="text-small font-semibold text-critical">{t("widget.noTransfer")}</p>}
-            </>
+            </div>
           )}
         </div>
       )}
@@ -201,13 +202,13 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
 
       <div className="flex flex-col gap-1.5 border-t border-line pt-4">
         {p.lines.map((l) => (
-          <div key={l.key} className="flex justify-between gap-3">
+          <div key={l.key} className="reveal-in flex justify-between gap-3">
             <span>{l.quantity} × {lineLabel(l.kind, l.label)}</span><span className="tabular-nums">{money(l.total)}</span>
           </div>
         ))}
         <div className="mt-1 flex items-baseline justify-between">
           <span className="text-[17px] font-bold">{t("common.total")}</span>
-          <span className="text-[24px] font-bold tabular-nums">{money(p.total)}</span>
+          <span key={p.total} className="value-tick text-[24px] font-bold tabular-nums">{money(p.total)}</span>
         </div>
         {rate && <div className="text-end text-small text-ink-muted">{t("common.approx", { amount: approxDisplay(p.total, rate, display, locale) ?? "" })}</div>}
         {currencies.length > 1 && (
@@ -220,8 +221,9 @@ export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?:
         )}
       </div>
 
-      <button type="button" disabled={!canContinue} onClick={go}
-        className="min-h-13 rounded-control bg-discovery text-[16px] font-bold text-white hover:bg-discovery-hover active:bg-discovery-pressed disabled:cursor-not-allowed disabled:bg-line disabled:text-ink-muted">
+      <button type="button" disabled={!canContinue || navigating} onClick={go} aria-busy={navigating}
+        className="btn-press inline-flex items-center justify-center gap-2 min-h-13 rounded-control bg-discovery text-[16px] font-bold text-white hover:bg-discovery-hover active:bg-discovery-pressed disabled:cursor-not-allowed disabled:bg-line disabled:text-ink-muted">
+        {navigating && <span className="spinner" aria-hidden="true" />}
         {slot ? t("widget.continue") : t("widget.chooseDeparture")}
       </button>
 
