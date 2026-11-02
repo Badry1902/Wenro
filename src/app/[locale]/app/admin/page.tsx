@@ -3,7 +3,9 @@ import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
 import { dayKey } from "@/lib/pricing";
 import { requirePlatform } from "@/lib/workspaces";
-import { Card, Flash, PageTitle, Task } from "@/components/ui";
+import { Card, Flash, PageTitle, Task, btn } from "@/components/ui";
+import { Submit } from "@/components/Submit";
+import { demoJoinAll } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +22,10 @@ export default async function AdminOverview({ params, searchParams }: Props) {
   const q = await searchParams;
   await requirePlatform(locale);
   const t = await getTranslations("app.admin");
-  const o = await rpc<Overview>("admin_overview", {}, "user");
+  const [o, demo] = await Promise.all([
+    rpc<Overview>("admin_overview", {}, "user"),
+    rpc<{ available: boolean; joined?: boolean }>("demo_status", {}, "user").catch(() => ({ available: false, joined: true })),
+  ]);
   const base = `/${locale}/app/admin`;
   const money = (m: Record<string, number>) =>
     Object.entries(m).length ? Object.entries(m).map(([c, v]) => formatMoney({ minor: Number(v), currency: c as "EUR" }, locale)).join(" · ") : "—";
@@ -30,6 +35,13 @@ export default async function AdminOverview({ params, searchParams }: Props) {
     <>
       <PageTitle title={t("overviewTitle")} sub={t("overviewSub")} />
       <Flash ok={q.ok} err={q.err} />
+      {demo.available && !demo.joined && (
+        <form action={demoJoinAll} className="flash-in mb-6 flex flex-wrap items-center justify-between gap-3 rounded-card border-2 border-discovery bg-discovery-tint p-4">
+          <input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value="/app/admin" />
+          <span className="max-w-xl"><b>{t("demoTitle")}</b><br /><span className="text-small">{t("demoBody")}</span></span>
+          <Submit className={btn.primary}>{t("demoButton")}</Submit>
+        </form>
+      )}
       <h2 className="mb-3 font-bold">{t("needsAction")}</h2>
       <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         <Task tone="warn" count={o.tomorrow_unconfirmed} label={t("tomorrowUnconfirmed")} href={`${base}/bookings?d=${tomorrow}&r=sent`} />

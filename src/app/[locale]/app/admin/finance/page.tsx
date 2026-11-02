@@ -4,6 +4,7 @@ import { formatMoney } from "@/lib/money";
 import { dayKey } from "@/lib/pricing";
 import { requirePlatform } from "@/lib/workspaces";
 import { Badge, Card, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { createPayouts, generateStatements, markPayoutPaid, markStatementReceived } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -64,7 +65,7 @@ export default async function AdminFinance({ params, searchParams }: Props) {
             {hidden}
             <label className="flex flex-col gap-1 text-small font-bold">{t("from")}<input type="date" name="from" required defaultValue={lastStart} className={field} /></label>
             <label className="flex flex-col gap-1 text-small font-bold">{t("to")}<input type="date" name="to" required defaultValue={lastEnd} max={today} className={field} /></label>
-            <button className={btn.primary}>{t("generate")}</button>
+            <Submit className={btn.primary}>{t("generate")}</Submit>
           </form>
           <p className="mt-2 text-small text-ink-muted">{t("generateHint")}</p>
         </Card>
@@ -82,7 +83,7 @@ export default async function AdminFinance({ params, searchParams }: Props) {
                   <div className="font-semibold tabular-nums">{t("due")}: {m(s.due_minor, s.currency)}</div>
                 </div>
                 {s.status === "open" && (
-                  <form action={markStatementReceived}>{hidden}<input type="hidden" name="statement" value={s.id} /><button className={btn.primary}>{t("markReceived")}</button></form>
+                  <form action={markStatementReceived}>{hidden}<input type="hidden" name="statement" value={s.id} /><Submit className={btn.primary}>{t("markReceived")}</Submit></form>
                 )}
               </li>
             ))}
@@ -97,7 +98,7 @@ export default async function AdminFinance({ params, searchParams }: Props) {
             {hidden}
             <input type="hidden" name="month" value={`${thisMonth}-01`} />
             <p className="flex-1 text-small">{t("createPayoutsHint", { month: format.dateTime(new Date(`${thisMonth}-15T12:00:00Z`), { month: "long", year: "numeric" }) })}</p>
-            <button className={btn.primary}>{t("createPayouts")}</button>
+            <Submit className={btn.primary}>{t("createPayouts")}</Submit>
           </form>
         </Card>
         {f.payouts.length === 0 ? <Empty>{t("payoutsNone")}</Empty> : (
@@ -116,7 +117,7 @@ export default async function AdminFinance({ params, searchParams }: Props) {
                   <form action={markPayoutPaid} className="flex flex-wrap items-end gap-2">
                     {hidden}<input type="hidden" name="payout" value={p.id} />
                     <label className="flex flex-col gap-1 text-small font-bold">{t("reference")}<input name="reference" required maxLength={80} dir="ltr" className={`${field} w-44`} /></label>
-                    <button className={btn.primary}>{t("markPaid")}</button>
+                    <Submit className={btn.primary}>{t("markPaid")}</Submit>
                   </form>
                 )}
               </li>

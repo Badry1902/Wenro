@@ -6,6 +6,7 @@ import { formatMoney } from "@/lib/money";
 import { siteUrl } from "@/lib/env";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
 import { Badge, Card, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { CopyButton } from "@/components/CopyButton";
 import { setPayoutHandle } from "../../actions";
 
@@ -58,7 +59,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
                     {experiences.map((e) => <option key={e.slug} value={e.slug}>{e.title}</option>)}
                   </select>
                 </label>
-                <button className={btn.quiet}>{t("makeLink")}</button>
+                <Submit className={btn.quiet}>{t("makeLink")}</Submit>
               </form>
               <p dir="ltr" className="mb-3 select-all break-all rounded-control bg-[#F7F8FC] p-3 font-mono text-[14px]">{link}</p>
               <div className="flex flex-wrap items-center gap-3">
@@ -106,7 +107,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
               <label className="flex min-w-0 flex-1 flex-col gap-1 text-small font-bold">{t("instapay")}
                 <input name="handle" defaultValue={s.org.instapay ?? ""} maxLength={80} dir="ltr" placeholder="name@instapay" className={field} />
               </label>
-              <button className={btn.quiet}>{t("save")}</button>
+              <Submit className={btn.quiet}>{t("save")}</Submit>
             </form>
           ) : <p className="mb-4 text-small">{t("instapay")}: <span dir="ltr">{s.org.instapay ?? "—"}</span></p>}
           {s.payouts.length === 0 ? <p className="text-ink-muted">{t("noPayouts")}</p> : (

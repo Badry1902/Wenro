@@ -44,7 +44,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
   const itinerary = lines(page.itinerary);
   const hasTransfer = page.prices.some((p) => p.kind === "transport");
   const hours = page.duration_minutes ? page.duration_minutes / 60 : null;
-  const isDemo = (page.title ?? "").startsWith("[DEMO]");
+  const isDemo = page.slug.startsWith("demo-"); // demo content is marked by its address, see supabase/demo
   const adult = page.prices.find((p) => p.kind === "adult");
   const fromPrice = adult ? formatMoney({ minor: adult.price_minor, currency: page.currency }, locale) : null;
 
@@ -75,7 +75,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
         </div>
 
         <div className="mt-6">
-          <FoldGallery images={page.media.map((m) => ({ src: m.path, alt: m.alt ?? page.title ?? "" }))} placeholder={t("experience.photo")} />
+          <FoldGallery images={page.media.map((m) => ({ src: m.path, alt: m.alt ?? page.title ?? "", kind: m.kind }))} placeholder={t("experience.photo")} />
         </div>
 
         <div className="mt-8 flex flex-wrap items-start gap-10">

@@ -15,10 +15,11 @@ export const dynamic = "force-dynamic";
 // The link itself is the key to the booking: keep it out of search engines and referrers.
 export const metadata: Metadata = { robots: { index: false, follow: false }, referrer: "no-referrer" };
 
-type Props = { params: Promise<{ locale: string; token: string }> };
+type Props = { params: Promise<{ locale: string; token: string }>; searchParams: Promise<{ new?: string }> };
 
-export default async function BookingPage({ params }: Props) {
+export default async function BookingPage({ params, searchParams }: Props) {
   const { locale, token } = await params;
+  const fresh = (await searchParams).new === "1"; // just booked: celebrate once
   setRequestLocale(locale);
   const t = await getTranslations();
   const format = await getFormatter();
@@ -62,7 +63,9 @@ export default async function BookingPage({ params }: Props) {
 
         <div className="mt-5 flex flex-col gap-1.5">
           <span className={`inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1 text-[14px] font-bold ${badge}`}>
-            {b.status === "confirmed" && <IconCheck size={16} />}{t(`voucher.${b.status}`)}
+            {b.status === "confirmed" && (fresh
+              ? <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="check-draw"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              : <IconCheck size={16} />)}{t(`voucher.${b.status}`)}
           </span>
           <h1 className="font-display text-[32px] leading-tight rtl:font-sans rtl:font-bold">
             {b.status === "confirmed" ? t("voucher.headline", { name: first })
@@ -77,14 +80,14 @@ export default async function BookingPage({ params }: Props) {
             <input type="hidden" name="token" value={token} />
             <div className="font-bold">{t("voucher.reconfirmTitle")}</div>
             <p className="text-[14px]">{t("voucher.reconfirmBody")}</p>
-            <button className="min-h-12 rounded-control bg-discovery font-bold text-white hover:bg-discovery-hover">{t("voucher.reconfirmButton")}</button>
+            <button className="btn-press min-h-12 rounded-control bg-discovery font-bold text-white hover:bg-discovery-hover">{t("voucher.reconfirmButton")}</button>
           </form>
         )}
         {b.reconfirm_status === "confirmed" && b.status === "confirmed" && (
           <p className="mt-4 rounded-card bg-success-tint p-3 font-semibold text-success">{t("voucher.reconfirmed")}</p>
         )}
 
-        <section aria-label={t("voucher.label")} className="mt-4 overflow-hidden rounded-card border border-line bg-surface">
+        <section aria-label={t("voucher.label")} className={`${fresh ? "ticket-in " : ""}mt-4 overflow-hidden rounded-card border border-line bg-surface`}>
           <div className="flex items-center justify-between bg-discovery px-4 py-3 text-white">
             <span className="font-bold uppercase tracking-wide">{t("voucher.label")}</span>
             <span className="font-bold" dir="ltr">{b.ref}</span>
@@ -123,11 +126,11 @@ export default async function BookingPage({ params }: Props) {
             {cancellable && (
               <details className="rounded-card border border-line bg-surface p-4">
                 <summary className="min-h-11 cursor-pointer content-center font-bold text-critical">{t("voucher.cancel")}</summary>
-                <form action={cancelBooking} className="mt-3 flex flex-col gap-3">
+                <form action={cancelBooking} className="reveal-in mt-3 flex flex-col gap-3">
                   <input type="hidden" name="token" value={token} />
                   <p className="font-bold">{t("voucher.cancelTitle")}</p>
                   <p className="text-[14px]">{free ? t("voucher.cancelFree") : t("voucher.cancelLate")}</p>
-                  <button className="min-h-12 rounded-control bg-critical font-bold text-white">{t("voucher.yesCancel")}</button>
+                  <button className="btn-press min-h-12 rounded-control bg-critical font-bold text-white">{t("voucher.yesCancel")}</button>
                 </form>
               </details>
             )}

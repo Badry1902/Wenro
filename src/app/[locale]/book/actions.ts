@@ -87,7 +87,7 @@ export async function placeBooking(_: PlaceBookingState, form: FormData): Promis
     return { error: "unexpected_error" };
   }
   // The confirmation email is queued by the database and sent by the scheduled job (/api/cron/tick).
-  redirect({ href: `/booking/${token}`, locale: d.locale });
+  redirect({ href: `/booking/${token}?new=1`, locale: d.locale });
 }
 
 /**

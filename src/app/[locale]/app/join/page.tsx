@@ -4,6 +4,7 @@ import { rpc } from "@/lib/data/rpc";
 import { getWorkspaces, homeOf } from "@/lib/workspaces";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Flash, btn, field } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { applyOrganization, claimOwner } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -39,7 +40,7 @@ export default async function Join({ params, searchParams }: Props) {
             <input type="hidden" name="back" value="/app/join" />
             <h2 className="font-bold">{t("claimTitle")}</h2>
             <p className="text-[14px]">{t("claimBody")}</p>
-            <button className={btn.primary}>{t("claimButton")}</button>
+            <Submit className={btn.primary}>{t("claimButton")}</Submit>
           </form>
         )}
 
@@ -60,7 +61,7 @@ export default async function Join({ params, searchParams }: Props) {
           <label className="flex flex-col gap-1.5 text-small font-bold">{t("phone")}<input name="phone" type="tel" required dir="ltr" className={field} /></label>
           <label className="flex flex-col gap-1.5 text-small font-bold">{t("email")}<input name="email" type="email" required dir="ltr" className={field} /></label>
           <p className="text-small text-ink-muted">{t("review")}</p>
-          <button className={btn.primary}>{t("submit")}</button>
+          <Submit className={btn.primary}>{t("submit")}</Submit>
         </form>
       </main>
     </>

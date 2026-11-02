@@ -14,7 +14,9 @@ export default async function AdminLayout({ children, params }: { children: Reac
     { href: "/app/admin/partners", label: t("partners") },
     { href: "/app/admin/experiences", label: t("experiences") },
     { href: "/app/admin/finance", label: t("finance") },
+    { href: "/app/admin/coupons", label: t("coupons") },
     { href: "/app/admin/messages", label: t("messages") },
+    ...(["owner", "manager"].includes(ws.role) ? [{ href: "/app/admin/team", label: t("team") }] : []),
   ];
   return <WorkspaceShell current={ws} nav={nav}>{children}</WorkspaceShell>;
 }

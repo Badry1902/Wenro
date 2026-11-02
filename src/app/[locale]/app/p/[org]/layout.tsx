@@ -13,6 +13,7 @@ export default async function PartnerLayout({ children, params }: { children: Re
     { href: base, label: t("overview"), exact: true },
     ...(ws.type === "agency" ? [{ href: `${base}/book`, label: t("bookForClient") }] : []),
     { href: `${base}/bookings`, label: t("bookings") },
+    ...(["owner", "manager"].includes(ws.role) ? [{ href: `${base}/team`, label: t("team") }] : []),
   ];
   return <WorkspaceShell current={ws} nav={nav}>{children}</WorkspaceShell>;
 }

@@ -4,6 +4,7 @@ import { rpc } from "@/lib/data/rpc";
 import { dayKey } from "@/lib/pricing";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
 import { Badge, Card, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { createSlots, setSlot } from "../../../actions";
 
 export const dynamic = "force-dynamic";
@@ -99,7 +100,7 @@ export default async function Departures({ params, searchParams }: Props) {
                 <input type="number" name="capacity" required min={1} max={500} defaultValue={20} className={field} />
                 <span className="font-normal text-ink-muted">{t("capacityHint")}</span>
               </label>
-              <div className="md:col-span-2"><button className={btn.primary}>{t("create")}</button></div>
+              <div className="md:col-span-2"><Submit className={btn.primary}>{t("create")}</Submit></div>
             </form>
           )}
         </Card>
@@ -130,7 +131,7 @@ export default async function Departures({ params, searchParams }: Props) {
                               <option value="1">{ta("status.open")}</option>
                               <option value="0">{ta("status.closed")}</option>
                             </select>
-                            <button className={btn.quiet}>{t("save")}</button>
+                            <Submit className={btn.quiet}>{t("save")}</Submit>
                           </form>
                         )}
                       </div>

@@ -3,13 +3,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { siteUrl } from "@/lib/env";
-import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type MessageKind } from "@/lib/messaging/render";
+import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type InvitePayload, type MessageKind } from "@/lib/messaging/render";
 import { requirePlatform } from "@/lib/workspaces";
 import { Badge, PageTitle, btn } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
 
-type Detail = { id: string; kind: MessageKind; recipient: string; locale: string; status: string; payload: AlertPayload; booking: BookingContext | null };
+type Detail = { id: string; kind: MessageKind; recipient: string; locale: string; status: string; payload: AlertPayload & InvitePayload; booking: BookingContext | null };
 
 /** What the guest (or operator) receives, exactly as rendered — the manage link is replaced by a placeholder. */
 export default async function MessagePreview({ params }: { params: Promise<{ locale: string; id: string }> }) {
@@ -26,7 +26,7 @@ export default async function MessagePreview({ params }: { params: Promise<{ loc
   const r = await renderMessage(m.kind, {
     locale: readerLocale,
     booking: m.booking,
-    payload: m.kind === "admin_alert" ? m.payload : null,
+    payload: m.kind === "admin_alert" || m.kind === "team_invite" ? m.payload : null,
     link: `${siteUrl()}/${m.locale}/booking/link-hidden-in-preview`,
     dashboardUrl: `${siteUrl()}/${readerLocale}/app`,
   });

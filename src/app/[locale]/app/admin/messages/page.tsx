@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { rpc } from "@/lib/data/rpc";
 import { requirePlatform } from "@/lib/workspaces";
 import { Badge, Card, Empty, Flash, PageTitle, btn } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { retryMessage, runJobsNow } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -37,7 +38,7 @@ export default async function AdminMessages({ params, searchParams }: Props) {
         <Card>
           <form action={runJobsNow} className="flex flex-col gap-2">
             <input type="hidden" name="locale" value={locale} />
-            <button className={btn.primary}>{t("runNow")}</button>
+            <Submit className={btn.primary}>{t("runNow")}</Submit>
             <span className="max-w-64 text-small text-ink-muted">{t("runNowHint")}</span>
           </form>
         </Card>
@@ -70,7 +71,7 @@ export default async function AdminMessages({ params, searchParams }: Props) {
                   <form action={retryMessage}>
                     <input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value={back} />
                     <input type="hidden" name="message" value={m.id} />
-                    <button className={btn.quiet}>{t("retry")}</button>
+                    <Submit className={btn.quiet}>{t("retry")}</Submit>
                   </form>
                 )}
               </div>

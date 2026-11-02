@@ -31,7 +31,7 @@ export default async function AdminExperiences({ params, searchParams }: Props) 
 
   return (
     <>
-      <PageTitle title={t("title")} sub={t("sub")} />
+      <PageTitle title={t("title")} sub={t("sub")} actions={<Link href="/app/admin/experiences/new" className={btn.primary}>+ {te("new")}</Link>} />
       <Flash ok={q.ok} err={q.err} />
       {list.length === 0 ? <Empty>{t("none")}</Empty> : (
         <ul className="flex flex-col gap-3">
@@ -47,6 +47,7 @@ export default async function AdminExperiences({ params, searchParams }: Props) 
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
+                <Link href={`/app/admin/experiences/${e.id}`} className={btn.secondary}>{te("edit")}</Link>
                 {e.status === "published" && <Link href={`/experiences/${e.slug}`} className={btn.quiet}>{te("view")}</Link>}
                 {e.status !== "published" && e.status !== "archived" && to(e, "published", t("publish"), btn.primary)}
                 {e.status === "in_review" && to(e, "draft", t("sendBack"), btn.quiet)}

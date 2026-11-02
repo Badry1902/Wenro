@@ -5,6 +5,7 @@ import { dayKey } from "@/lib/pricing";
 import { formatMoney } from "@/lib/money";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
 import { Badge, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Submit } from "@/components/Submit";
 import { QrScanner } from "@/components/QrScanner";
 import { cancelSlot, checkIn, checkInByCode, decideRequest, noShow } from "../../actions";
 
@@ -18,7 +19,7 @@ type OpBooking = {
 };
 type OpSlot = { id: string; experience_id: string; title: string; starts_at: string; capacity: number; booked: number; status: string };
 
-type Props = { params: Promise<{ locale: string; org: string }>; searchParams: Promise<{ d?: string; ok?: string; err?: string }> };
+type Props = { params: Promise<{ locale: string; org: string }>; searchParams: Promise<{ d?: string; ok?: string; err?: string; hl?: string }> };
 
 const addDays = (d: string, n: number) => new Date(Date.parse(`${d}T12:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
 
@@ -73,7 +74,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
           <label className="flex flex-col gap-1 text-small font-bold">{t("scanLabel")}
             <input id="qr-code" name="code" autoComplete="off" dir="ltr" placeholder={t("scanPlaceholder")} className={`${field} w-72 max-w-full`} />
           </label>
-          <button className={btn.primary}>{t("checkIn")}</button>
+          <Submit className={btn.primary}>{t("checkIn")}</Submit>
         </form>
         <QrScanner label={t("scanCamera")} stopLabel={t("scanStop")} onCodeField="qr-code" />
       </section>
@@ -90,8 +91,8 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                 </div>
                 {manager && (
                   <div className="flex gap-2">
-                    <form action={decideRequest}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="accept" value="1" /><button className={btn.primary}>{t("accept")}</button></form>
-                    <form action={decideRequest}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="accept" value="0" /><button className={btn.quiet}>{t("decline")}</button></form>
+                    <form action={decideRequest}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="accept" value="1" /><Submit className={btn.primary}>{t("accept")}</Submit></form>
+                    <form action={decideRequest}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="accept" value="0" /><Submit className={btn.quiet}>{t("decline")}</Submit></form>
                   </div>
                 )}
               </li>
@@ -117,10 +118,10 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                     {manager && s.status !== "cancelled" && !started(s.starts_at) && (
                       <details className="relative">
                         <summary className={`${btn.quiet} cursor-pointer list-none`}>{t("weather")}</summary>
-                        <form action={cancelSlot} className="absolute end-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-lg">
+                        <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-lg">
                           {hidden}<input type="hidden" name="slot" value={s.id} />
                           <p className="text-[14px]">{t("weatherConfirm", { n: list.filter((b) => b.status === "confirmed" || b.status === "pending_request").length })}</p>
-                          <button className={btn.danger}>{t("weatherButton")}</button>
+                          <Submit className={btn.danger}>{t("weatherButton")}</Submit>
                         </form>
                       </details>
                     )}
@@ -129,7 +130,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                 {list.length === 0 ? <p className="p-4 text-ink-muted">{t("noGuests")}</p> : (
                   <ul className="divide-y divide-line">
                     {list.map((b) => (
-                      <li key={b.booking_id} className="flex flex-wrap items-center justify-between gap-3 p-4">
+                      <li key={b.booking_id} className={`flex flex-wrap items-center justify-between gap-3 p-4 ${q.hl === b.booking_id ? "row-flash" : ""}`}>
                         <div className="min-w-0">
                           <div className="flex flex-wrap items-center gap-2 font-bold">
                             {b.customer_name}<span className="text-small font-normal text-ink-muted" dir="ltr">{b.ref}</span>
@@ -148,8 +149,8 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                         </div>
                         {b.status === "confirmed" && b.execution_status === "scheduled" && (
                           <div className="flex gap-2">
-                            <form action={checkIn}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><button className={btn.primary}>{t("checkIn")}</button></form>
-                            {started(b.starts_at) && <form action={noShow}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><button className={btn.quiet}>{t("noShow")}</button></form>}
+                            <form action={checkIn}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="hl" value={b.booking_id} /><Submit className={btn.primary}>{t("checkIn")}</Submit></form>
+                            {started(b.starts_at) && <form action={noShow}>{hidden}<input type="hidden" name="booking" value={b.booking_id} /><input type="hidden" name="hl" value={b.booking_id} /><Submit className={btn.quiet}>{t("noShow")}</Submit></form>}
                           </div>
                         )}
                       </li>

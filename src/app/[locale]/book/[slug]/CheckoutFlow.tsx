@@ -97,7 +97,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
           <label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
         </div>
 
-        <div className={step === 2 ? "flex flex-col gap-5" : "hidden"}>
+        <div className={step === 2 ? "panel-in flex flex-col gap-5" : "hidden"}>
           <div className="flex flex-col gap-1.5">
             <label htmlFor="full_name" className="text-small font-bold">{t("booking.fullName")}</label>
             <input id="full_name" name="full_name" autoComplete="name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })}
@@ -111,7 +111,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
             <label htmlFor="email" className="text-small font-bold">{t("booking.email")}</label>
             <input id="email" name="email" type="email" autoComplete="email" inputMode="email" dir="ltr" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })}
               aria-invalid={touched && errs.email} aria-describedby="email-err" className={`${input} ${touched && errs.email ? bad : ""}`} />
-            {touched && errs.email && <span id="email-err" className="text-small font-semibold text-critical">{t("booking.emailError")}</span>}
+            {touched && errs.email && <span id="email-err" className="reveal-in text-small font-semibold text-critical">{t("booking.emailError")}</span>}
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -137,9 +137,9 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
           )}
         </div>
 
-        <div className={step === 3 ? "flex flex-col gap-3" : "hidden"}>
+        <div className={step === 3 ? "panel-in flex flex-col gap-3" : "hidden"}>
           {state?.error && (
-            <div role="alert" className="rounded-card bg-critical-tint p-4 font-semibold text-critical">
+            <div role="alert" className="flash-in rounded-card bg-critical-tint p-4 font-semibold text-critical">
               {t(`booking.errors.${state.error}` as "booking.errors.unexpected_error")}
               {(state.error === "sold_out" || state.error === "slot_closed") && (
                 <div className="mt-2"><Link href={backHref} className="underline">{t("widget.chooseDeparture")}</Link></div>
@@ -211,7 +211,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
             </div>
             {step === 2 ? (
               <button type="button" onClick={() => { setTouched(true); if (valid) { setStep(3); window.scrollTo({ top: 0 }); } }}
-                className="min-h-13 rounded-control bg-discovery px-6 text-[16px] font-bold text-white hover:bg-discovery-hover">
+                className="btn-press min-h-13 rounded-control bg-discovery px-6 text-[16px] font-bold text-white hover:bg-discovery-hover">
                 {t("booking.reviewBooking")}
               </button>
             ) : (
@@ -230,7 +230,8 @@ function Submit() {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending} aria-busy={pending}
-      className="min-h-13 min-w-48 rounded-control bg-discovery px-6 text-[16px] font-bold text-white hover:bg-discovery-hover disabled:opacity-70">
+      className="btn-press inline-flex min-h-13 min-w-48 items-center justify-center gap-2 rounded-control bg-discovery px-6 text-[16px] font-bold text-white hover:bg-discovery-hover disabled:opacity-80">
+      {pending && <span className="spinner" aria-hidden="true" />}
       {pending ? t("confirming") : t("confirm")}
     </button>
   );
