@@ -264,3 +264,33 @@ html[dir="rtl"] body {
 
 /* Range slider in the brand colour */
 input[type="range"].brand-range { accent-color: var(--color-discovery); }
+
+/* Trip gallery, cover-flow: front photo large, neighbours smaller and turned behind it */
+.cf-stage { perspective: 1400px; --cf-w: 80%; --cf-x: 52%; }
+@media (min-width: 768px) { .cf-stage { --cf-w: 62%; --cf-x: 60%; } }
+.cf-slide, .cf-front { width: var(--cf-w); margin-inline-start: calc(var(--cf-w) / -2); }
+.cf-slide {
+  transform-style: preserve-3d;
+  transition: transform 850ms cubic-bezier(0.65, 0, 0.35, 1), opacity 850ms cubic-bezier(0.65, 0, 0.35, 1), filter 850ms ease;
+  will-change: transform;
+}
+.cf-shade { opacity: 0; transition: opacity 850ms ease; }
+.cf-slide[data-pos="0"]  { transform: translateX(0) translateZ(0) rotateY(0); z-index: 3; opacity: 1; }
+.cf-slide[data-pos="-1"] { transform: translateX(calc(var(--cf-x) * -1)) translateZ(-220px) rotateY(-20deg); z-index: 2; opacity: 1; cursor: pointer; }
+.cf-slide[data-pos="1"]  { transform: translateX(var(--cf-x)) translateZ(-220px) rotateY(20deg); z-index: 2; opacity: 1; cursor: pointer; }
+.cf-slide[data-pos="-2"] { transform: translateX(calc(var(--cf-x) * -1.35)) translateZ(-420px) rotateY(-28deg); z-index: 1; opacity: 0; pointer-events: none; }
+.cf-slide[data-pos="2"]  { transform: translateX(calc(var(--cf-x) * 1.35)) translateZ(-420px) rotateY(28deg); z-index: 1; opacity: 0; pointer-events: none; }
+.cf-slide[data-pos="-1"] .cf-shade, .cf-slide[data-pos="1"] .cf-shade { opacity: 0.3; }
+[dir="rtl"] .cf-slide[data-pos="-1"] { transform: translateX(var(--cf-x)) translateZ(-220px) rotateY(20deg); }
+[dir="rtl"] .cf-slide[data-pos="1"]  { transform: translateX(calc(var(--cf-x) * -1)) translateZ(-220px) rotateY(-20deg); }
+[dir="rtl"] .cf-slide[data-pos="-2"] { transform: translateX(calc(var(--cf-x) * 1.35)) translateZ(-420px) rotateY(28deg); }
+[dir="rtl"] .cf-slide[data-pos="2"]  { transform: translateX(calc(var(--cf-x) * -1.35)) translateZ(-420px) rotateY(-28deg); }
+.cf-slide img { transform: scale(1.04); transition: transform 6000ms var(--ease-out); }
+.cf-slide[data-pos="0"] img { transform: scale(1); }
+@media (hover: hover) and (pointer: fine) {
+  .cf-slide[data-pos="-1"]:hover .cf-shade, .cf-slide[data-pos="1"]:hover .cf-shade { opacity: 0.15; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-slide { transition-duration: 200ms; transition-property: opacity; }
+  .cf-slide img, .cf-slide[data-pos="0"] img { transform: none; transition: none; }
+}

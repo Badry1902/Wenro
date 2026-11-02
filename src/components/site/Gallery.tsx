@@ -10,7 +10,9 @@ type Item = { src: string; alt: string; kind?: "image" | "video" };
 const STEP_MS = 5000;
 
 /**
- * Trip gallery: a slideshow that moves on by itself (cross-fade with a slow zoom), pauses while you
+ * Trip gallery, cover-flow style: one large photo in front, the previous and next ones smaller and
+ * turned slightly behind it on either side (like the folded W of the logo). It moves on by itself and
+ * the photos glide into place; it pauses while you
  * hover, focus it, or the page is in the background, and stops for good once you take control.
  * Swipe on phones, arrow keys on keyboards, thumbnails below, full-screen view on click.
  */
@@ -69,6 +71,14 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
     user(i + ((dx < 0) !== rtl ? 1 : -1));
   };
 
+  /** Where photo k sits relative to the front one: 0 front, -1/+1 beside it, ±2 waiting behind (wraps round). */
+  const posOf = (k: number) => {
+    let d = k - i;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
+    return Math.max(-2, Math.min(2, d));
+  };
+
   if (n === 0) {
     return <div className="grid h-64 place-items-center rounded-image bg-discovery-tint text-small font-semibold text-ink-muted md:h-[460px]">{placeholder}</div>;
   }
@@ -98,48 +108,55 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
         onBlur={() => setHold(false)}
         onPointerDown={onDown}
         onPointerUp={onUp}
-        className="group relative h-72 select-none overflow-hidden rounded-image bg-ink sm:h-96 md:h-[480px]"
+        className="cf-stage group relative h-72 select-none overflow-x-clip outline-none sm:h-96 md:h-[480px]"
       >
-        {items.map((it, k) => (
-          <div key={it.src} className={`g-slide absolute inset-0 ${k === i ? "is-on" : ""}`} aria-hidden={k !== i}
-            role="group" aria-roledescription="slide" aria-label={t("photoN", { n: k + 1, total: n })}>
-            {/* Only the current, next and previous photos are loaded */}
-            {Math.abs(k - i) <= 1 || (i === 0 && k === n - 1) || (i === n - 1 && k === 0) ? slide(it, k, false) : null}
-          </div>
-        ))}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-28 bg-gradient-to-t from-black/50 to-transparent" />
-
-        {n > 1 && (
-          <>
-            <button type="button" onClick={() => user(i - 1)} aria-label={t("prev")}
-              className="btn-press absolute start-3 top-1/2 z-[3] grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink opacity-100 shadow-md backdrop-blur transition-opacity md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
-              <IconChevron size={20} className="-scale-x-100" />
-            </button>
-            <button type="button" onClick={() => user(i + 1)} aria-label={t("next")}
-              className="btn-press absolute end-3 top-1/2 z-[3] grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink opacity-100 shadow-md backdrop-blur transition-opacity md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
-              <IconChevron size={20} />
-            </button>
-          </>
-        )}
-
-        <div className="absolute inset-x-4 bottom-3 z-[3] flex items-center gap-3 text-white">
-          {n > 1 && (
-            <button type="button" onClick={() => setPlaying((p) => !p)} aria-label={playing ? t("pause") : t("play")} aria-pressed={!playing}
-              className="btn-press grid size-9 place-items-center rounded-full bg-black/35 backdrop-blur hover:bg-black/55">
-              {playing ? <IconPause size={16} /> : <IconPlay size={16} />}
-            </button>
-          )}
-          {n > 1 && (
-            <div className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/30" aria-hidden="true">
-              <div key={`${i}-${tick}-${running}`} className={`g-progress absolute inset-0 rounded-full bg-white ${running ? "run" : ""}`}
-                style={{ ["--g-ms" as string]: `${STEP_MS}ms`, transform: running ? undefined : "scaleX(0)" }} />
+        {items.map((it, k) => {
+          const pos = posOf(k);
+          return (
+            <div key={it.src} data-pos={pos} className="cf-slide absolute inset-y-0 start-1/2 overflow-hidden rounded-image bg-ink shadow-[0_30px_60px_-30px_rgb(18_24_48/0.55)]"
+              aria-hidden={k !== i} role="group" aria-roledescription="slide" aria-label={t("photoN", { n: k + 1, total: n })}
+              onClick={pos === -1 || pos === 1 ? () => user(k) : undefined}>
+              {/* the photo in front, the two beside it and the next ones are loaded */}
+              {Math.abs(pos) <= 2 ? slide(it, k, false) : null}
+              <span className="cf-shade pointer-events-none absolute inset-0 bg-ink" />
             </div>
+          );
+        })}
+
+        {/* Controls sit on the front photo */}
+        <div className="cf-front pointer-events-none absolute inset-y-0 start-1/2 z-[5]">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 rounded-b-image bg-gradient-to-t from-black/50 to-transparent" />
+          {n > 1 && (
+            <>
+              <button type="button" onClick={() => user(i - 1)} aria-label={t("prev")}
+                className="btn-press pointer-events-auto absolute start-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-md backdrop-blur">
+                <IconChevron size={20} className="-scale-x-100" />
+              </button>
+              <button type="button" onClick={() => user(i + 1)} aria-label={t("next")}
+                className="btn-press pointer-events-auto absolute end-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-md backdrop-blur">
+                <IconChevron size={20} />
+              </button>
+            </>
           )}
-          <span className="rounded-full bg-black/35 px-2.5 py-1 text-small font-bold tabular-nums backdrop-blur" aria-live="polite">{i + 1} / {n}</span>
-          <button type="button" onClick={() => setBox(true)} aria-label={t("showAll", { n })}
-            className="btn-press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white px-3 text-small font-bold text-ink hover:bg-discovery-tint">
-            <IconExpand size={16} /><span className="hidden sm:inline">{t("showAll", { n })}</span>
-          </button>
+          <div className="pointer-events-auto absolute inset-x-4 bottom-3 flex items-center gap-3 text-white">
+            {n > 1 && (
+              <button type="button" onClick={() => setPlaying((p) => !p)} aria-label={playing ? t("pause") : t("play")} aria-pressed={!playing}
+                className="btn-press grid size-9 place-items-center rounded-full bg-black/35 backdrop-blur hover:bg-black/55">
+                {playing ? <IconPause size={16} /> : <IconPlay size={16} />}
+              </button>
+            )}
+            {n > 1 && (
+              <div className="relative h-1 flex-1 overflow-hidden rounded-full bg-white/30" aria-hidden="true">
+                <div key={`${i}-${tick}-${running}`} className={`g-progress absolute inset-0 rounded-full bg-white ${running ? "run" : ""}`}
+                  style={{ ["--g-ms" as string]: `${STEP_MS}ms`, transform: running ? undefined : "scaleX(0)" }} />
+              </div>
+            )}
+            <span className="rounded-full bg-black/35 px-2.5 py-1 text-small font-bold tabular-nums backdrop-blur" aria-live="polite">{i + 1} / {n}</span>
+            <button type="button" onClick={() => setBox(true)} aria-label={t("showAll", { n })}
+              className="btn-press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white px-3 text-small font-bold text-ink hover:bg-discovery-tint">
+              <IconExpand size={16} /><span className="hidden sm:inline">{t("showAll", { n })}</span>
+            </button>
+          </div>
         </div>
       </div>
 
