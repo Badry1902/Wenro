@@ -45,7 +45,7 @@ export default async function middleware(req: NextRequest) {
         setAll: (toSet) => toSet.forEach(({ name, value, options }) => res.cookies.set(name, value, options)),
       },
     });
-    await supabase.auth.getUser();
+    await supabase.auth.getClaims();
   }
   return res;
 }

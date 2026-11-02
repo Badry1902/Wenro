@@ -34,6 +34,10 @@ export function serverEnv() {
   return serverSchema.parse(process.env);
 }
 
+/** Public address used in links (emails, partner links). Set NEXT_PUBLIC_SITE_URL; on Vercel the project's production domain is the fallback. */
 export function siteUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const set = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (set) return set;
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  return vercel ? `https://${vercel}` : "http://localhost:3000";
 }

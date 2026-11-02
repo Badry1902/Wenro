@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import type { ExperiencePage, SlotRow } from "@/lib/data/types";
@@ -10,7 +10,12 @@ import { IconCalendar, IconCash, IconCheck } from "./Icons";
 
 const defaultDisplay: Record<string, string> = { de: "EUR", fr: "EUR", en: "USD", ru: "RUB", ar: "USD" };
 
-export function BookingWidget({ page, agency }: { page: ExperiencePage; agency?: string }) {
+const GUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export function BookingWidget({ page }: { page: ExperiencePage }) {
+  // An agency booking for a client opens this page with ?ag=<agency id> (checked again on the booking page and in the database)
+  const [agency, setAgency] = useState<string | undefined>();
+  useEffect(() => { const a = new URLSearchParams(location.search).get("ag"); if (a && GUID.test(a)) setAgency(a); }, []);
   const t = useTranslations();
   const locale = useLocale();
   const format = useFormatter();

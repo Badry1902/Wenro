@@ -293,6 +293,12 @@
   "app": {
     "signin": {
       "rateError": "Trop d'e-mails de connexion en peu de temps. Attendez quelques minutes puis demandez un nouveau lien."
+    },
+    "types": {
+      "platform": "Administration WENRO",
+      "operator": "Prestataire",
+      "marketer": "Partenaire marketing",
+      "agency": "Agence / comptoir d'hôtel"
     }
   }
 }

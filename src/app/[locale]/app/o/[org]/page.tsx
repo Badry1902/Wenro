@@ -68,6 +68,29 @@ export default async function OperatorToday({ params, searchParams }: Props) {
       />
       <Flash ok={q.ok} err={q.err} />
 
+      {/* The day at a glance, and the things operators do most */}
+      <div className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {[
+          { label: t("kDepartures"), value: slots.filter((x) => x.status !== "cancelled").length },
+          { label: t("kGuests"), value: bookings.filter((x) => x.status === "confirmed").reduce((n, x) => n + x.adults + x.children + x.infants, 0) },
+          { label: t("kPickups"), value: bookings.filter((x) => x.status === "confirmed" && x.transport).length },
+          { label: t("kRequests"), value: requests.length, warn: requests.length > 0 },
+        ].map((k) => (
+          <div key={k.label} className={`rounded-card border p-4 ${k.warn ? "border-apricot bg-apricot-tint" : "border-line"}`}>
+            <div className="text-small font-semibold text-ink-muted">{k.label}</div>
+            <div className="mt-1 text-[26px] font-extrabold leading-tight tabular-nums">{k.value}</div>
+          </div>
+        ))}
+      </div>
+      {manager && (
+        <nav aria-label={t("quick")} className="mb-6 flex flex-wrap gap-2">
+          <Link href={`${back}/departures`} className={btn.quiet}>{t("qDepartures")}</Link>
+          <Link href={`${back}/experiences/new`} className={btn.quiet}>{t("qExperience")}</Link>
+          {["owner", "manager"].includes(ws.role) && <Link href={`${back}/money`} className={btn.quiet}>{t("qMoney")}</Link>}
+          {["owner", "manager"].includes(ws.role) && <Link href={`${back}/team`} className={btn.quiet}>{t("qTeam")}</Link>}
+        </nav>
+      )}
+
       <section className="mb-8 flex flex-wrap items-end gap-3 rounded-card border border-line p-4">
         <form action={checkInByCode} className="flex flex-wrap items-end gap-2">
           {hidden}

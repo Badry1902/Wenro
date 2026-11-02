@@ -293,6 +293,12 @@
   "app": {
     "signin": {
       "rateError": "Zu viele Anmelde-E-Mails in kurzer Zeit. Bitte warte ein paar Minuten und fordere dann einen neuen Link an."
+    },
+    "types": {
+      "platform": "WENRO-Verwaltung",
+      "operator": "Ausflugsanbieter",
+      "marketer": "Marketing-Partner",
+      "agency": "Agentur / Hotelschalter"
     }
   }
 }

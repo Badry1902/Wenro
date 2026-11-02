@@ -14,14 +14,16 @@ import { Rail, RailItem } from "@/components/site/Rail";
 import { TripCard } from "@/components/site/TripCard";
 import { WishButton } from "@/components/site/WishButton";
 import { BookingWidget } from "@/components/BookingWidget";
+import { RefBeacon } from "@/components/site/RefBeacon";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconClock, IconClose, IconPin } from "@/components/Icons";
 
-export const dynamic = "force-dynamic"; // seats and prices change; always read fresh
+// Cached for a minute and refreshed in the background, so visitors get it from the CDN. Seats are
+// checked again, live, on the booking page and in the database, so a cached seat count never overbooks.
+export const revalidate = 60;
+// Pages are built on the first visit and then served from the cache.
+export function generateStaticParams() { return []; }
 
 type Params = { params: Promise<{ locale: string; slug: string }> };
-type Search = { searchParams: Promise<{ ref?: string; ag?: string }> };
-const REF = /^[A-Za-z0-9]{4,20}$/;
-const GUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 async function load(slug: string, locale: string) {
   return rpc<ExperiencePage | null>("experience_page", { p_slug: slug, p_locale: locale }, "anon");
@@ -35,19 +37,15 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 const lines = (text: string | null) => (text ?? "").split("\n").map((l) => l.trim()).filter(Boolean);
 
-export default async function ExperiencePageView({ params, searchParams }: Params & Search) {
+export default async function ExperiencePageView({ params }: Params) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const q = await searchParams;
   const [page, all] = await Promise.all([
     load(slug, locale),
     rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]),
   ]);
   if (!page) notFound();
   const similar = similarTo(all, page, 8);
-  // Count a partner-link visit (no personal data). Never blocks or breaks the page.
-  if (q.ref && REF.test(q.ref)) await rpc("record_click", { p_code: q.ref, p_experience: page.id }, "service").catch(() => undefined);
-  const agency = q.ag && GUID.test(q.ag) ? q.ag : undefined; // checked again on the booking page and in the database
   const t = await getTranslations();
 
   const included = lines(page.included);
@@ -165,7 +163,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
           </div>
 
           <div className="flex w-full flex-[1_1_360px] flex-col gap-8 md:max-w-[400px]">
-            <BookingWidget page={page} agency={agency} />
+            <BookingWidget page={page} />
             {similar.length > 0 && (
               <aside aria-labelledby="similar-aside" className="rounded-card border border-line bg-surface p-4">
                 <h2 id="similar-aside" className="mb-3 text-h3 font-bold">{t("similar.aside")}</h2>
@@ -204,6 +202,7 @@ export default async function ExperiencePageView({ params, searchParams }: Param
           </section>
         )}
       </main>
+      <RefBeacon experienceId={page.id} />
       <SiteFooter />
       {/* Phone: the booking card sits below the details, so keep the price and a shortcut in reach */}
       <div className="sticky bottom-0 z-10 flex items-center justify-between gap-3 border-t border-line bg-surface px-4 py-3 md:hidden">

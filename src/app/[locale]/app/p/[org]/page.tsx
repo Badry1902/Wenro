@@ -8,6 +8,8 @@ import { canManage, requireWorkspace } from "@/lib/workspaces";
 import { Badge, Card, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { CopyButton } from "@/components/CopyButton";
+import { QrDownload, ShareKit } from "@/components/ShareKit";
+import { Link } from "@/i18n/navigation";
 import { setPayoutHandle } from "../../actions";
 
 export const dynamic = "force-dynamic";
@@ -29,13 +31,20 @@ export default async function PartnerHome({ params, searchParams }: Props) {
   const ws = await requireWorkspace(locale, org, ["marketer", "agency"]);
   const t = await getTranslations("app.partner");
   const format = await getFormatter();
-  const [s, experiences] = await Promise.all([
+  const [s, experiences, bookings] = await Promise.all([
     rpc<Summary>("partner_summary", { p_partner: org }, "user"),
     rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]),
+    rpc<{ status: string; execution_status: string }[]>("partner_bookings", { p_partner: org }, "user").catch(() => []),
   ]);
+  const visits = s.codes.reduce((a, c) => a + Number(c.clicks), 0);
+  const booked = bookings.filter((b) => !["cancelled", "expired", "declined"].includes(b.status)).length;
+  const done = bookings.filter((b) => b.execution_status === "executed").length;
+  // Only meaningful once visits are counted for most bookings (older bookings came before link counting)
+  const conversion = visits > 0 && booked <= visits ? Math.round((booked / visits) * 1000) / 10 : null;
+  const base = siteUrl();
   const code = s.codes.find((c) => c.active)?.code ?? null;
   const target = experiences.find((e) => e.slug === q.x) ?? null;
-  const link = code ? `${siteUrl()}/${locale}${target ? `/experiences/${target.slug}` : ""}?ref=${code}` : null;
+  const link = code ? `${base}/${locale}${target ? `/experiences/${target.slug}` : ""}?ref=${code}` : null;
   const qr = link ? await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#232B45", light: "#FFFFFF" } }) : null;
 
   const currencies = [...new Set(Object.keys(s.totals).map((k) => k.split(":")[0]))];
@@ -44,8 +53,35 @@ export default async function PartnerHome({ params, searchParams }: Props) {
 
   return (
     <>
-      <PageTitle title={t("title")} sub={t(ws.type === "agency" ? "subAgency" : "subMarketer")} />
+      <PageTitle title={t(ws.type === "agency" ? "titleAgency" : "titleMarketer")} sub={t(ws.type === "agency" ? "subAgency" : "subMarketer")}
+        actions={ws.type === "agency" ? <Link href={`/app/p/${org}/book`} className={btn.primary}>{t("bookNow")}</Link> : undefined} />
       <Flash ok={q.ok} err={q.err} />
+
+      {/* At a glance */}
+      <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        {[
+          { label: t("kpiVisits"), value: format.number(visits), hint: t("kpiVisitsHint") },
+          { label: t("kpiBookings"), value: format.number(booked), hint: t("kpiBookingsHint", { done }) },
+          { label: t("kpiConversion"), value: conversion == null ? "—" : `${format.number(conversion)}%`, hint: t("kpiConversionHint") },
+          { label: t("kpiReady"), value: currencies.length ? currencies.map((c) => m(s.totals[`${c}:payable`] ?? 0, c)).join(" · ") : "—", hint: t("kpiReadyHint") },
+        ].map((k) => (
+          <div key={k.label} className="rounded-card border border-line p-4">
+            <div className="text-small font-semibold text-ink-muted">{k.label}</div>
+            <div className="mt-1 text-[26px] font-extrabold leading-tight tabular-nums">{k.value}</div>
+            <div className="mt-1 text-small text-ink-muted">{k.hint}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* How earning works, in three steps */}
+      <ol className="mb-8 grid gap-3 md:grid-cols-3">
+        {(["how1", "how2", "how3"] as const).map((k, n) => (
+          <li key={k} className="flex gap-3 rounded-card bg-apricot-tint p-4">
+            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white font-extrabold text-ink">{n + 1}</span>
+            <span className="text-small">{t(`${k}${ws.type === "agency" ? "Agency" : ""}` as "how1")}</span>
+          </li>
+        ))}
+      </ol>
 
       <div className="mb-8 grid gap-4 lg:grid-cols-[1fr_auto]">
         <Card title={t("linkTitle")}>
@@ -74,9 +110,20 @@ export default async function PartnerHome({ params, searchParams }: Props) {
           <figure className="flex flex-col items-center gap-2 rounded-card border border-line p-4">
             <div className="h-44 w-44" aria-hidden="true" dangerouslySetInnerHTML={{ __html: qr }} />
             <figcaption className="max-w-44 text-center text-small text-ink-muted">{t("qrHint")}</figcaption>
+            <QrDownload svg={qr} name={`wenro-${code}`} labels={{ png: t("qrPng"), svg: t("qrSvg") }} />
           </figure>
         )}
       </div>
+
+      {code && experiences.length > 0 && (
+        <Card title={t("shareTitle")} className="mb-8">
+          <p className="mb-3 text-small text-ink-muted">{t("shareHint")}</p>
+          <ShareKit
+            items={experiences.map((e) => ({ title: e.title ?? e.slug, url: `${base}/${locale}/experiences/${e.slug}?ref=${code}` }))}
+            labels={{ more: t("shareMore"), search: t("shareSearch"), copy: t("copy"), copied: t("copied"), whatsapp: "WhatsApp", telegram: "Telegram", facebook: "Facebook", message: t("shareMessage"), none: t("shareNone") }}
+          />
+        </Card>
+      )}
 
       <h2 className="mb-3 text-h3 font-bold">{t("earningsTitle")}</h2>
       {currencies.length === 0 ? <Empty>{t("noEarnings")}</Empty> : currencies.map((c) => (

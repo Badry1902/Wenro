@@ -17,9 +17,13 @@ export type Workspace = {
 export const getWorkspaces = cache(async (locale: string) => {
   const uid = await currentUserId();
   if (!uid) redirect({ href: "/signin", locale });
-  // Pending team invitations for this email become memberships on the first visit after sign-in.
-  await rpc<number>("accept_invites", {}, "user").catch((e) => console.error("accept_invites", e));
-  return rpc<Workspace[]>("my_workspaces", {}, "user");
+  // Pending team invitations for this email become memberships. Checked alongside the list (no extra
+  // wait); the list is fetched again only when an invitation was actually accepted.
+  const [accepted, list] = await Promise.all([
+    rpc<number>("accept_invites", {}, "user").catch((e) => { console.error("accept_invites", e); return 0; }),
+    rpc<Workspace[]>("my_workspaces", {}, "user"),
+  ]);
+  return accepted > 0 ? rpc<Workspace[]>("my_workspaces", {}, "user") : list;
 });
 
 export async function requireWorkspace(locale: string, orgId: string, types: Workspace["type"][]) {

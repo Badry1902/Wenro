@@ -248,10 +248,10 @@
     "pendingNotice": "Your account is waiting for approval by the WENRO team. You can look around; bookings and payouts start once it is approved.",
     "timezoneNote": "All times are Hurghada time (Africa/Cairo).",
     "types": {
-      "platform": "WENRO team",
-      "operator": "Operator",
-      "marketer": "Marketer",
-      "agency": "Agency"
+      "platform": "WENRO admin",
+      "operator": "Trip operator",
+      "marketer": "Marketing partner",
+      "agency": "Agency / hotel desk"
     },
     "roles": {
       "owner": "Owner",
@@ -449,7 +449,16 @@
       "phoneHidden": "Phone shown 24 h before the trip",
       "collect": "Collect {amount} in cash",
       "noShow": "No-show",
-      "waText": "Hello {name}, this is {operator} (via WENRO) about your booking {ref} at {time}."
+      "waText": "Hello {name}, this is {operator} (via WENRO) about your booking {ref} at {time}.",
+      "kDepartures": "Departures this day",
+      "kGuests": "Confirmed guests",
+      "kPickups": "Hotel pickups",
+      "kRequests": "Requests to answer",
+      "quick": "Shortcuts",
+      "qDepartures": "+ Add departures",
+      "qExperience": "+ New experience",
+      "qMoney": "Money & statements",
+      "qTeam": "Team"
     },
     "dep": {
       "title": "Departures",
@@ -614,10 +623,10 @@
       "earningsTitle": "Your earnings",
       "noEarnings": "No bookings yet.",
       "stage": {
-        "pending": "Booked, trip ahead",
-        "eligible": "Trip done, awaiting settlement",
-        "payable": "Ready for next payout",
-        "paid": "Paid",
+        "pending": "Booked — trip still ahead",
+        "eligible": "Trip done — waiting for the operator to settle",
+        "payable": "Ready for your next payout",
+        "paid": "Paid to you",
         "void": "No commission"
       },
       "stagesHint": "Earnings move to 'ready' once the operator has settled with WENRO. Payouts go out monthly, no minimum.",
@@ -627,7 +636,32 @@
       "payoutTitle": "Payouts",
       "instapay": "InstaPay address or phone",
       "save": "Save",
-      "noPayouts": "No payouts yet."
+      "noPayouts": "No payouts yet.",
+      "titleMarketer": "Your marketing dashboard",
+      "titleAgency": "Your agency dashboard",
+      "bookNow": "Book for a client",
+      "kpiVisits": "Link visits",
+      "kpiVisitsHint": "People who opened your links",
+      "kpiBookings": "Bookings from you",
+      "kpiBookingsHint": "{done} of them already ran",
+      "kpiConversion": "Visits that booked",
+      "kpiConversionHint": "Bookings ÷ link visits",
+      "kpiReady": "Ready to be paid",
+      "kpiReadyHint": "Goes out in the next monthly payout",
+      "how1": "Share your link or code — on social media, WhatsApp or printed as a QR code.",
+      "how2": "A guest books within 30 days. You earn 10% of the price once the trip runs.",
+      "how3": "WENRO pays you monthly by InstaPay, no minimum amount.",
+      "how1Agency": "Book for a walk-in client, or share your link with them.",
+      "how2Agency": "The client pays the operator in cash on the day. You pay nothing.",
+      "how3Agency": "You earn 10% of every trip that runs, paid monthly by InstaPay.",
+      "shareTitle": "Ready-made links for every trip",
+      "shareHint": "Each link already carries your code. Copy it or send it straight to WhatsApp, Telegram or Facebook.",
+      "shareSearch": "Find a trip…",
+      "shareMessage": "Book it on WENRO:",
+      "shareNone": "No trip matches.",
+      "qrPng": "Download PNG",
+      "qrSvg": "Download SVG",
+      "shareMore": "Show {n} more trips"
     },
     "partnerBookings": {
       "title": "Bookings",
@@ -827,7 +861,21 @@
       "until": "until {date}",
       "turnOff": "Turn off",
       "turnOn": "Turn on"
-    }
+    },
+    "typeGroups": {
+      "platform": "WENRO admin",
+      "operator": "Trip operators",
+      "agency": "Agencies & hotel desks",
+      "marketer": "Marketing partners"
+    },
+    "typeHints": {
+      "platform": "You run the whole platform.",
+      "operator": "You run the trips: departures, guests, cash.",
+      "agency": "You book trips for your clients and earn 10%.",
+      "marketer": "You share links and earn 10% of every trip that runs."
+    },
+    "youAre": "Your role: {role}",
+    "toSite": "Back to the website"
   },
   "email": {
     "greeting": "Hello {name},",

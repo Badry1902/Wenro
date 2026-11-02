@@ -31,7 +31,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
   const op = await as('op');
   check('operator lands on the run sheet', (await op.locator('h1').innerText()) === 'Run sheet');
   await op.screenshot({ path: `${SHOTS}/d1-operator-today.png`, fullPage: true });
-  await op.getByRole('link', { name: 'Departures' }).click();
+  await op.getByRole('link', { name: 'Departures', exact: true }).click();
   await op.getByLabel('Experience').selectOption({ label: '[DEMO] Giftun Island Snorkeling' }).catch(async () => {
     await op.getByLabel('Experience').selectOption({ index: 0 });
   });
@@ -46,7 +46,9 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
   const mk = await as('marketer');
   const before = Number(((await mk.getByText(/\d+ visits?/).first().innerText()).match(/\d+/) || ['0'])[0]);
   const visitor = await b.newPage();
+  const counted = visitor.waitForResponse((r) => r.url().endsWith('/api/click'), { timeout: 15000 }).catch(() => null);
   await visitor.goto(`${B}/en/experiences/demo-giftun-island?ref=BLOGGER10`);
+  await counted; // the visit is counted from the browser, so the trip page itself can stay cached
   await visitor.close();
   await mk.reload();
   const after = Number(((await mk.getByText(/\d+ visits?/).first().innerText()).match(/\d+/) || ['0'])[0]);
@@ -59,7 +61,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
 
   // 3. Agency manager books for a walk-in client
   const ag = await as('agency');
-  await ag.getByRole('link', { name: 'Book for a client' }).click();
+  await ag.getByRole('link', { name: 'Book for a client' }).first().click();
   await ag.locator('li', { hasText: 'Giftun' }).getByRole('link', { name: 'Choose date' }).click();
   await ag.waitForURL(/ag=/);
   await ag.getByRole('button', { name: 'Continue' }).click();
