@@ -1,0 +1,58 @@
+// End-to-end check of the booking flow in a real browser. Needs the app on :3100 and Playwright.
+
+const { chromium } = require('playwright');
+const B = 'http://localhost:3100';
+(async () => {
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 1000 } });
+  const p = await ctx.newPage();
+  const errors = []; p.on('pageerror', e => errors.push(e.message)); p.on('console', m => m.type()==='error' && errors.push(m.text()));
+  await p.goto(`${B}/en/experiences/demo-giftun-island?ref=blogger10`);
+  await p.screenshot({ path: '/tmp/claude-0/shots/1-exp-en.png', fullPage: true });
+  await p.getByRole('button', { name: 'More: Children' }).click();
+  await p.getByLabel('Add hotel transfer').check();
+  await p.getByLabel('Your hotel').selectOption({ label: '[DEMO] Hurghada Beach Hotel' });
+  const total = await p.locator('section[aria-label="Book this experience"]').innerText();
+  console.log('widget has 95:', total.includes('€95.00'), '| approx:', (total.match(/≈ [^\n]+/)||[])[0]);
+  await p.screenshot({ path: '/tmp/claude-0/shots/2-widget.png', fullPage: true });
+  await p.getByRole('button', { name: 'Continue' }).click();
+  await p.waitForURL(/\/en\/book\//);
+  await p.getByRole('button', { name: 'Review booking' }).click();
+  console.log('validation errors shown:', await p.getByText('Enter your full name').isVisible());
+  await p.getByLabel('Full name').fill('Anna Becker');
+  await p.getByLabel('Email').fill('anna@example.com');
+  await p.locator('#phone').fill('151 2345678');
+  await p.getByLabel(/Room number/).fill('214');
+  await p.screenshot({ path: '/tmp/claude-0/shots/3-details.png', fullPage: true });
+  await p.getByRole('button', { name: 'Review booking' }).click();
+  await p.getByLabel(/Promo code/).fill('welcome10');
+  await p.getByRole('button', { name: 'Confirm booking' }).click();
+  await p.waitForTimeout(1500);
+  console.log('accept error:', await p.getByRole('alert').first().innerText().catch(()=>'none'));
+  await p.getByLabel(/I accept/).check();
+  await p.screenshot({ path: '/tmp/claude-0/shots/4-review.png', fullPage: true });
+  await p.getByRole('button', { name: 'Confirm booking' }).click();
+  await p.waitForURL(/\/en\/booking\//, { timeout: 15000 });
+  const v = await p.locator('main').innerText();
+  console.log('voucher ref:', (v.match(/WR-\d+/)||[])[0], '| pays 85.50:', v.includes('€85.50'), '| qr:', await p.locator('[aria-label="Voucher QR code"] svg').count());
+  await p.setViewportSize({ width: 390, height: 900 });
+  await p.screenshot({ path: '/tmp/claude-0/shots/5-voucher-mobile.png', fullPage: true });
+  const voucherUrl = p.url();
+  require('fs').writeFileSync('/tmp/claude-0/voucher-url.txt', voucherUrl);
+  await p.getByText('Cancel booking').click();
+  await p.getByRole('button', { name: 'Yes, cancel' }).click();
+  await p.waitForTimeout(1500); await p.reload();
+  console.log('after cancel:', (await p.locator('main h1').innerText()));
+  // Arabic mobile
+  const m = await b.newPage({ viewport: { width: 390, height: 844 } });
+  m.on('pageerror', e => errors.push('AR ' + e.message));
+  await m.goto(`${B}/ar/experiences/demo-giftun-island`);
+  console.log('ar dir:', await m.evaluate(() => document.documentElement.dir), '| hscroll:', await m.evaluate(() => document.documentElement.scrollWidth > innerWidth));
+  await m.screenshot({ path: '/tmp/claude-0/shots/6-exp-ar-mobile.png', fullPage: true });
+  await m.getByRole('button', { name: 'متابعة' }).click({ force: true });
+  await m.waitForURL(/\/ar\/book\//);
+  await m.getByRole('button', { name: 'مراجعة الحجز' }).click();
+  await m.screenshot({ path: '/tmp/claude-0/shots/7-details-ar.png', fullPage: true });
+  console.log('errors:', errors.length ? errors : 'none');
+  await b.close();
+})().catch(e => { console.error('E2E FAILED:', e.message); process.exit(1); });
