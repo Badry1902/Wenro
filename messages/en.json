@@ -17,7 +17,9 @@
     "cta": "Explore experiences",
     "listTitle": "Experiences around Hurghada",
     "from": "From {price}",
-    "empty": "No experiences published yet."
+    "empty": "No experiences published yet.",
+    "more": "More",
+    "demoTag": "Demo"
   },
   "categories": {
     "sea": "Sea",
@@ -271,7 +273,19 @@
         "payout_paid": "Payout marked as paid.",
         "handle_saved": "Payout details saved.",
         "jobs_ran": "Scheduled jobs ran.",
-        "message_queued": "Message queued again."
+        "message_queued": "Message queued again.",
+        "experience_saved": "Saved.",
+        "experience_created": "Draft created. Add photos and departures, then send it for review.",
+        "photo_added": "Photo added.",
+        "photo_removed": "Photo removed.",
+        "photo_cover": "Cover photo changed.",
+        "invited": "Invitation sent.",
+        "invite_cancelled": "Invitation cancelled.",
+        "member_on": "Access given back.",
+        "member_off": "Access removed.",
+        "coupon_saved": "Code saved.",
+        "booking_cancelled": "Booking cancelled. The guest is emailed.",
+        "demo_joined": "Done. Use “Switch workspace” in the menu to open each dashboard."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -294,7 +308,21 @@
         "invalid_type": "Choose an account type.",
         "invalid_handle": "Payout details are too long.",
         "not_signed_in": "Please sign in again.",
-        "message_not_retryable": "This message cannot be sent again."
+        "message_not_retryable": "This message cannot be sent again.",
+        "photo_too_big": "That photo is larger than 4 MB.",
+        "photo_type": "Only JPG, PNG or WebP photos.",
+        "no_file": "Choose a photo first.",
+        "too_many_photos": "Up to 12 photos per experience.",
+        "upload_failed": "Upload failed. Try again.",
+        "invalid_role": "That role is not available here.",
+        "invalid_email": "Check the email address.",
+        "already_member": "This person is already on the team.",
+        "cannot_change_self": "You cannot change your own access.",
+        "cannot_change_owner": "The owner's access cannot be changed.",
+        "invalid_code": "Codes are 3–20 letters or numbers.",
+        "discount_too_big": "That discount is above the maximum.",
+        "booking_not_cancellable": "This booking can no longer be cancelled.",
+        "too_many_videos": "Up to 3 videos per experience."
       }
     },
     "signin": {
@@ -344,7 +372,10 @@
       "partners": "Partners",
       "finance": "Money",
       "bookForClient": "Book for a client",
-      "messages": "Messages"
+      "messages": "Messages",
+      "money": "Money",
+      "team": "Team",
+      "coupons": "Discount codes"
     },
     "op": {
       "todayTitle": "Run sheet",
@@ -409,7 +440,9 @@
       "view": "View page",
       "submit": "Send for review",
       "withdraw": "Withdraw from review",
-      "editorNote": "During launch, the WENRO team enters texts, photos and net prices with you. Send changes on WhatsApp; an editor is coming."
+      "editorNote": "Drafts are reviewed by WENRO before they go live.",
+      "new": "New experience",
+      "edit": "Edit"
     },
     "admin": {
       "overviewTitle": "Today at WENRO",
@@ -428,7 +461,10 @@
       "dueFromOperatorsHint": "WENRO and partner shares of cash the operators collected.",
       "owedToPartners": "Owed to partners",
       "owedToPartnersHint": "Commissions ready for the next monthly payout.",
-      "automationNote": "Automatic jobs (request expiry after 12 h, reconfirm message at 18:00, alert at 21:00, auto-cancel at 22:00) are built and tested in the database but not scheduled yet. Until then, check this page every evening."
+      "automationNote": "Automatic jobs (request expiry after 12 h, reconfirm message at 18:00, alert at 21:00, auto-cancel at 22:00) are built and tested in the database but not scheduled yet. Until then, check this page every evening.",
+      "demoTitle": "Try every dashboard",
+      "demoBody": "Join the [DEMO] operators, marketers and agencies, then switch between them from the menu. Removed together with the demo data.",
+      "demoButton": "Join the demo workspaces"
     },
     "adminBookings": {
       "title": "Bookings",
@@ -456,7 +492,10 @@
         "agency": "Via agency"
       },
       "waReconfirm": "WhatsApp: ask to confirm",
-      "waMessage": "WhatsApp the guest"
+      "waMessage": "WhatsApp the guest",
+      "cancel": "Cancel booking",
+      "cancelConfirm": "Cancel {ref} for the guest? They get an email. Nothing is charged.",
+      "cancelYes": "Yes, cancel it"
     },
     "partners": {
       "title": "Partners",
@@ -598,6 +637,153 @@
         "operator_request": "New request for operator",
         "admin_alert": "21:00 alert"
       }
+    },
+    "editor": {
+      "newTitle": "New experience",
+      "newSub": "Starts as a draft. WENRO reviews it before it goes live.",
+      "untitled": "Untitled experience",
+      "viewLive": "View live page",
+      "liveWarning": "This experience is live. Changes appear on the site as soon as you save. Bookings already made keep the price and rules they were made with.",
+      "basics": "Basics",
+      "operator": "Operator",
+      "choose": "Choose…",
+      "category": "Category",
+      "duration": "Duration (hours)",
+      "bookingMode": "How bookings are confirmed",
+      "mode": {
+        "instant": "Instant",
+        "instantHint": "Guests are confirmed straight away from your allotment.",
+        "request": "On request",
+        "requestHint": "You accept or decline each booking within 12 hours."
+      },
+      "policy": "Free cancellation",
+      "policyHours": "Up to {hours} hours before the start",
+      "texts": "Texts",
+      "textsHint": "English is required. Arabic, German, Russian and French are optional; missing languages show the English text.",
+      "filled": "has text",
+      "field": {
+        "title": "Title",
+        "summary": "One-line summary",
+        "description": "Description",
+        "itinerary": "Itinerary",
+        "included": "Included",
+        "excluded": "Not included",
+        "requirements": "Good to know",
+        "meeting_info": "Meeting point / pickup details"
+      },
+      "onePerLine": "One item per line.",
+      "prices": "Prices",
+      "pricesHint": "Enter your net price in euros: what you keep per person. WENRO adds its share and shows guests the rounded price on the right.",
+      "netLabel": "Your net (€)",
+      "optional": "optional",
+      "ageFrom": "Age from",
+      "ageTo": "to",
+      "guestPays": "Guest pays",
+      "price": {
+        "adult": "Adult",
+        "child": "Child",
+        "infant": "Infant",
+        "private_group": "Private group (whole boat/car)"
+      },
+      "private": "Offer a private group option",
+      "maxGroup": "Max people",
+      "extras": "Extras (optional add-ons)",
+      "extraName": "Name ({lang})",
+      "per": "Charged",
+      "perPerson": "per person",
+      "perBooking": "per booking",
+      "perVehicle": "per vehicle",
+      "addExtra": "Add an extra",
+      "remove": "Remove",
+      "transfer": "Hotel transfer",
+      "transferHint": "Tick each area you pick up from and set your net price. Guests choose their hotel; the area decides the price.",
+      "seatsPerCar": "Seats per car",
+      "cancel": "Cancel",
+      "save": "Save changes",
+      "create": "Create draft",
+      "saving": "Saving…",
+      "photos": "Photos",
+      "cover": "Cover photo",
+      "makeCover": "Make cover",
+      "choosePhoto": "Photo",
+      "photoAlt": "Short description (for screen readers)",
+      "upload": "Upload",
+      "uploading": "Uploading…",
+      "photoHint": "JPG, PNG or WebP, up to 4 MB. Use your own photos only.",
+      "errors": {
+        "unexpected_error": "Something went wrong. Your changes are still here; try again.",
+        "invalid_input": "Some fields are not valid. Check numbers and dates.",
+        "title_required": "Add an English title (at least 3 characters).",
+        "price_required": "Add at least an adult price (or a private group price).",
+        "invalid_duration": "Duration must be between 15 minutes and 48 hours.",
+        "invalid_price": "A price is not valid.",
+        "forbidden": "You are not allowed to edit this experience.",
+        "operator_not_found": "Choose the operator.",
+        "photo_too_big": "That photo is larger than 4 MB. Please choose a smaller one.",
+        "photo_type": "Only JPG, PNG or WebP photos.",
+        "no_file": "Choose a photo first.",
+        "too_many_photos": "Up to 12 photos per experience.",
+        "image_too_big": "That photo is larger than 10 MB.",
+        "video_too_big": "That video is larger than 100 MB. Shorten it or export it smaller.",
+        "upload_failed": "The upload did not finish. Check the connection and try again.",
+        "upload_not_verified": "The upload could not be verified. Try again.",
+        "too_many_videos": "Up to 3 videos per experience."
+      },
+      "video": "Video",
+      "chooseMedia": "Photo or short video",
+      "savingMedia": "Saving…",
+      "mediaAdded": "Added. It is on the page now.",
+      "mediaHint": "Photos: JPG, PNG or WebP up to 10 MB. Videos: MP4, MOV or WebM up to 100 MB, best under 30 seconds, no sound needed. Up to 12 files, 3 of them videos. Use your own material only."
+    },
+    "team": {
+      "title": "Team",
+      "sub": "Who can use this workspace.",
+      "inviteTitle": "Invite someone",
+      "email": "Email",
+      "role": "Role",
+      "invite": "Send invitation",
+      "inviteHint": "They get an email and join as soon as they sign in with that address. Staff see the run sheet and check guests in, never money.",
+      "pending": "Invitations waiting",
+      "cancelInvite": "Cancel",
+      "members": "Members",
+      "none": "No members yet.",
+      "you": "you",
+      "deactivate": "Remove access",
+      "reactivate": "Give access back"
+    },
+    "money": {
+      "title": "Money",
+      "sub": "{month} so far. Cash is collected by you at the trip.",
+      "trips": "Trips done",
+      "guests": "{n} guests",
+      "collected": "Cash collected",
+      "kept": "You keep",
+      "toWenro": "Owed to WENRO",
+      "toWenroHint": "{n, plural, =0 {Nothing waiting} one {from # trip not yet on a statement} other {from # trips not yet on a statement}}",
+      "upcoming": "{bookings, plural, =0 {No upcoming bookings.} one {# upcoming booking} other {# upcoming bookings}} · {guests} guests.",
+      "statements": "Monthly statements",
+      "noStatements": "No statements yet.",
+      "tripsN": "{n, plural, one {# trip} other {# trips}}",
+      "statementsHint": "WENRO sends a statement each month with what you owe. Pay by InstaPay or bank transfer; WENRO marks it received.",
+      "recent": "Recent trips",
+      "noTrips": "No trips checked in yet.",
+      "recentHint": "Each line: what you keep / WENRO's share (includes the partner's commission)."
+    },
+    "coupons": {
+      "title": "Discount codes",
+      "sub": "The discount comes out of WENRO's share. Maximum {max}%.",
+      "new": "Create or update a code",
+      "code": "Code",
+      "percent": "Discount %",
+      "validTo": "Valid until",
+      "maxUses": "Max uses",
+      "save": "Save code",
+      "hint": "Saving an existing code updates it. Partners still earn 10% of the price after the discount.",
+      "none": "No codes yet.",
+      "uses": "{n} used",
+      "until": "until {date}",
+      "turnOff": "Turn off",
+      "turnOn": "Turn on"
     }
   },
   "email": {
@@ -681,6 +867,13 @@
       "reconfirm": "Hello {name}, this is WENRO about your {title} tomorrow ({time}). Please confirm you are coming before 22:00: {link}",
       "hello": "Hello {name}, this is WENRO about your booking {ref} ({title}, {time})."
     },
-    "footerTeam": "WENRO · operations message for WENRO partners and the WENRO team."
+    "footerTeam": "WENRO · operations message for WENRO partners and the WENRO team.",
+    "team_invite": {
+      "subject": "You are invited to {org} on WENRO",
+      "intro": "You have been invited to join {org} on WENRO as {role}.",
+      "signInWith": "Sign in with",
+      "note": "Sign in with this email address; no password needed.",
+      "button": "Sign in"
+    }
   }
 }

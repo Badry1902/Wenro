@@ -36,7 +36,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
     await op.getByLabel('Experience').selectOption({ index: 0 });
   });
   await op.getByLabel('Start times').fill('17:00');
-  await op.locator('input[name="capacity"][min="1"]').fill('10');
+  await op.locator('form:has(button:has-text("Add departures")) input[name="capacity"]').fill('10');
   await op.getByRole('button', { name: 'Add departures' }).click();
   await op.waitForURL(/ok=slots_created/);
   check('operator creates repeating departures', (await flash(op)).includes('Departures added'));
@@ -128,10 +128,9 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
 
   // 7. Permissions: other workspaces are not reachable by URL
   const opOrg = op.url().match(/\/app\/o\/([0-9a-f-]{36})/)[1];
-  const res = await mk.goto(`${B}/en/app/o/${opOrg}`);
-  check('marketer cannot open the operator workspace (404)', res.status() === 404);
-  const res2 = await op.goto(`${B}/en/app/admin/finance`);
-  check('operator cannot open WENRO finance (404)', res2.status() === 404);
+  const notFound = async (p, url) => { await p.goto(url); return p.getByText('could not be found').first().waitFor({ timeout: 10000 }).then(() => true, () => false); };
+  check('marketer cannot open the operator workspace (not found)', await notFound(mk, `${B}/en/app/o/${opOrg}`));
+  check('operator cannot open WENRO finance (not found)', await notFound(op, `${B}/en/app/admin/finance`));
 
   // 8. Arabic, phone width: operator run sheet
   const ar = await as('op', { width: 390, height: 844 });

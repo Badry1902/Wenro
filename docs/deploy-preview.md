@@ -32,6 +32,7 @@ it generates itself; it is not a host for this project.
    | `MESSAGE_LINK_KEY` | same as `.env.local` (secret) |
    | `NEXT_PUBLIC_SITE_URL` | `https://<your-project>.vercel.app` (fill after the first deploy, then redeploy) |
    | `NEXT_PUBLIC_SITE_MODE` | `preview` (test banner + hidden from Google) |
+   | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` | from the Cloudinary console (photos and videos; see `docs/media-cloudinary.md`) |
    Never set `WENRO_LOCAL_PG_URL` on Vercel.
 4. **Deploy**, open the link, check `/en` and `/ar`.
 5. **Supabase sign-in links** (Supabase → Authentication → URL Configuration):

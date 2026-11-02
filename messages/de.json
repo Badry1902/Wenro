@@ -17,7 +17,9 @@
     "cta": "Erlebnisse entdecken",
     "listTitle": "Erlebnisse rund um Hurghada",
     "from": "Ab {price}",
-    "empty": "Noch keine Erlebnisse veröffentlicht."
+    "empty": "Noch keine Erlebnisse veröffentlicht.",
+    "more": "Mehr",
+    "demoTag": "Demo"
   },
   "categories": {
     "sea": "Meer",
