@@ -1,8 +1,14 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+import { BrandLoader } from "@/components/brand/BrandMotion";
+
 /** Shown while an experience page loads: same layout as the page, so nothing jumps when it arrives. */
 export default function Loading() {
+  const t = useTranslations("common");
   return (
-    <div aria-busy="true" className="mx-auto max-w-6xl px-4 pb-16 pt-20">
-      <span className="sr-only">Loading…</span>
+    <div aria-busy="true" className="relative mx-auto max-w-6xl px-4 pb-16 pt-20">
+      <div className="pointer-events-none absolute inset-x-0 top-48 z-10 flex justify-center md:top-64"><BrandLoader label={t("loading")} size={96} /></div>
       <div className="skeleton h-4 w-40" />
       <div className="skeleton mt-3 h-10 w-2/3" />
       <div className="mt-6 grid h-64 grid-cols-[1fr_1.25fr_1fr] gap-2 md:h-96">

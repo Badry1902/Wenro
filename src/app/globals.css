@@ -294,3 +294,8 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
   .cf-slide { transition-duration: 200ms; transition-property: opacity; }
   .cf-slide img, .cf-slide[data-pos="0"] img { transform: none; transition: none; }
 }
+
+/* Loading sign: appears after a short moment so quick pages never flash it */
+.brand-loader { opacity: 0; animation: brand-loader-in 240ms ease-out 180ms forwards; }
+@keyframes brand-loader-in { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .brand-loader { animation-duration: 1ms; } }

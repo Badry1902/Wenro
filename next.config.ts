@@ -46,6 +46,8 @@ const nextConfig: NextConfig = {
       { source: "/:path*", headers: list },
       // Guests' booking pages and dashboards are never cached by shared caches
       { source: "/:locale/(booking|app)/:path*", headers: [{ key: "Cache-Control", value: "private, no-store" }] },
+      // Logo animations: cached for a week (rename the file when it changes)
+      { source: "/brand/motion/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }] },
     ];
   },
 };

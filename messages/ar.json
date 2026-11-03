@@ -94,7 +94,11 @@
     "adultsCount": "{n, plural, one {بالغ واحد} two {بالغان} few {# بالغين} many {# بالغًا} other {# بالغ}}",
     "childrenCount": "{n, plural, one {طفل واحد} two {طفلان} few {# أطفال} many {# طفلًا} other {# طفل}}",
     "infantsCount": "{n, plural, one {رضيع واحد} two {رضيعان} few {# رُضّع} many {# رضيعًا} other {# رضيع}}",
-    "previewBanner": "نسخة تجريبية: الحجوزات هنا ليست حقيقية ولن تُنفذ أي رحلة."
+    "previewBanner": "نسخة تجريبية: الحجوزات هنا ليست حقيقية ولن تُنفذ أي رحلة.",
+    "loading": "جاري التحميل…",
+    "notFoundTitle": "الصفحة دي مش موجودة",
+    "notFoundText": "ممكن اللينك قديم أو فيه غلطة. الرحلات لسه مستنياك.",
+    "notFoundCta": "تصفّح الرحلات"
   },
   "experience": {
     "hours": "{n, plural, one {ساعة واحدة} two {ساعتان} few {# ساعات} many {# ساعة} other {# ساعة}}",

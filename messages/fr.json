@@ -68,7 +68,11 @@
     "adultsCount": "{n, plural, one {# adulte} other {# adultes}}",
     "childrenCount": "{n, plural, one {# enfant} other {# enfants}}",
     "infantsCount": "{n, plural, one {# bébé} other {# bébés}}",
-    "previewBanner": "Version de test : les réservations ici ne sont pas réelles, aucune sortie n’aura lieu."
+    "previewBanner": "Version de test : les réservations ici ne sont pas réelles, aucune sortie n’aura lieu.",
+    "loading": "Chargement…",
+    "notFoundTitle": "Cette page n'existe pas",
+    "notFoundText": "Le lien est peut-être ancien ou mal saisi. Les sorties vous attendent toujours.",
+    "notFoundCta": "Voir les sorties"
   },
   "experience": {
     "hours": "{n, plural, one {# heure} other {# heures}}",

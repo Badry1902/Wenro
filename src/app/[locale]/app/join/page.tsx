@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { rpc } from "@/lib/data/rpc";
 import { getWorkspaces, homeOf } from "@/lib/workspaces";
 import { SiteHeader } from "@/components/SiteHeader";
+import { LogoLoop } from "@/components/brand/BrandMotion";
 import { Flash, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { applyOrganization, claimOwner } from "../actions";
@@ -23,6 +24,7 @@ export default async function Join({ params, searchParams }: Props) {
     <>
       <SiteHeader />
       <main className="mx-auto flex max-w-xl flex-col gap-6 px-4 py-10">
+        <LogoLoop width={150} className="self-center" />
         <h1 className="text-h2 font-bold">{t("title")}</h1>
         <Flash ok={ok} err={err} />
 

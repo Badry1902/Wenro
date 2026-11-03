@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { dataMode } from "@/lib/env";
 import { SiteHeader } from "@/components/SiteHeader";
+import { LogoLoop } from "@/components/brand/BrandMotion";
 import { devSignIn, sendSignInLink } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +30,9 @@ export default async function SignIn({ params, searchParams }: Props) {
     <>
       <SiteHeader />
       <main className="mx-auto flex max-w-md flex-col gap-5 px-4 py-14">
-        <h1 className="text-h2 font-bold">{t("title")}</h1>
-        <p className="text-ink-muted">{t("subtitle")}</p>
+        <LogoLoop width={180} className="self-center" />
+        <h1 className="text-center text-h2 font-bold">{t("title")}</h1>
+        <p className="text-center text-ink-muted">{t("subtitle")}</p>
 
         {error && <p role="alert" className="rounded-card bg-critical-tint p-3 font-semibold text-critical">{error === "link" ? t("linkError") : error === "rate" ? t("rateError") : t("sendError")}</p>}
 

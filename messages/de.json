@@ -68,7 +68,11 @@
     "adultsCount": "{n, plural, one {# Erwachsener} other {# Erwachsene}}",
     "childrenCount": "{n, plural, one {# Kind} other {# Kinder}}",
     "infantsCount": "{n, plural, one {# Kleinkind} other {# Kleinkinder}}",
-    "previewBanner": "Testversion: Buchungen hier sind nicht echt, es findet kein Ausflug statt."
+    "previewBanner": "Testversion: Buchungen hier sind nicht echt, es findet kein Ausflug statt.",
+    "loading": "Wird geladen…",
+    "notFoundTitle": "Diese Seite gibt es nicht",
+    "notFoundText": "Der Link ist vielleicht alt oder falsch geschrieben. Die Touren warten trotzdem auf Sie.",
+    "notFoundCta": "Touren ansehen"
   },
   "experience": {
     "hours": "{n, plural, one {# Stunde} other {# Stunden}}",
