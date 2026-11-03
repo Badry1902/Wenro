@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { redirect } from "@/i18n/navigation";
 import { currentUserId } from "@/lib/auth";
 import { rpc } from "@/lib/data/rpc";
+import { platformCan, type PlatformPerm } from "@/lib/permissions";
 
 export type Workspace = {
   org_id: string;
@@ -32,9 +33,14 @@ export async function requireWorkspace(locale: string, orgId: string, types: Wor
   return ws;
 }
 
-export async function requirePlatform(locale: string) {
+/**
+ * The WENRO admin workspace. With `perm`, people whose role cannot use that page are sent back to the
+ * overview with a short note instead of meeting an error (the menu does not show them the page anyway).
+ */
+export async function requirePlatform(locale: string, perm?: PlatformPerm) {
   const ws = (await getWorkspaces(locale)).find((w) => w.type === "platform");
   if (!ws) notFound();
+  if (perm && !platformCan(ws.role, perm)) redirect({ href: "/app/admin?err=no_access", locale });
   return ws;
 }
 

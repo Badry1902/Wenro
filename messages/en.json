@@ -367,7 +367,8 @@
         "discount_too_big": "That discount is above the maximum.",
         "booking_not_cancellable": "This booking can no longer be cancelled.",
         "too_many_videos": "Up to 3 videos per experience.",
-        "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again."
+        "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again.",
+        "no_access": "That page isn't part of your role. Here is what you can work on."
       }
     },
     "signin": {
@@ -520,7 +521,17 @@
       "automationNote": "Automatic jobs (request expiry after 12 h, reconfirm message at 18:00, alert at 21:00, auto-cancel at 22:00) are built and tested in the database but not scheduled yet. Until then, check this page every evening.",
       "demoTitle": "Try every dashboard",
       "demoBody": "Join the [DEMO] operators, marketers and agencies, then switch between them from the menu. Removed together with the demo data.",
-      "demoButton": "Join the demo workspaces"
+      "demoButton": "Join the demo workspaces",
+      "failedMessages": "Messages that failed to send",
+      "plusUnsettled": "+ {amount} from trips not on a statement yet",
+      "seeTrips": "See the trips behind this number",
+      "focus": {
+        "owner": "Everything that needs a decision, then the numbers.",
+        "ops": "Your day: bookings, partners, trips and messages.",
+        "finance": "Your work: what operators owe, what partners are owed, statements and payouts.",
+        "support": "Your day: guests who need help, bookings and messages.",
+        "content": "Your work: trips waiting for review and the trip pages."
+      }
     },
     "adminBookings": {
       "title": "Bookings",
@@ -881,7 +892,33 @@
       "marketer": "You share links and earn 10% of every trip that runs."
     },
     "youAre": "Your role: {role}",
-    "toSite": "Back to the website"
+    "toSite": "Back to the website",
+    "dues": {
+      "drill": "Details",
+      "operatorsTitle": "Owed by operators",
+      "operatorsSub": "Open statements and done trips, with every booking behind the amount.",
+      "partnersTitle": "Owed to partners",
+      "partnersSub": "Commissions ready for the monthly payout, partner by partner.",
+      "backToFinance": "Back to money",
+      "openStatements": "Open statements",
+      "unsettledHint": "These trips were checked in but are not on a statement yet. Create statements to collect them.",
+      "makeStatements": "Create statements",
+      "trip": "Trip",
+      "date": "Date",
+      "collected": "Guest paid",
+      "operatorKeeps": "Operator keeps",
+      "toWenro": "To WENRO",
+      "seats": "{n, plural, one {# seat} other {# seats}}",
+      "source": {
+        "direct": "direct",
+        "marketer": "marketer link",
+        "agency": "agency"
+      },
+      "operator": "Operator",
+      "commission": "Commission",
+      "partnersNone": "No commissions are waiting for a payout.",
+      "partnersNote": "A commission becomes payable once the trip has been done and the operator's statement is settled. Pending commissions for upcoming trips are not counted here."
+    }
   },
   "email": {
     "greeting": "Hello {name},",

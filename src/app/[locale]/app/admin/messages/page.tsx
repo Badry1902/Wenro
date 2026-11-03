@@ -18,7 +18,7 @@ export default async function AdminMessages({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  await requirePlatform(locale, "messages");
   const t = await getTranslations("app.messages");
   const format = await getFormatter();
   const data = await rpc<{ counts: Record<string, number>; messages: Row[] }>("admin_messages", { p_limit: 200 }, "user");

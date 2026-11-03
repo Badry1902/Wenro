@@ -15,7 +15,7 @@ type Detail = { id: string; kind: MessageKind; recipient: string; locale: string
 export default async function MessagePreview({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;
   setRequestLocale(locale);
-  await requirePlatform(locale);
+  await requirePlatform(locale, "messages");
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
   const t = await getTranslations("app.messages");
   const m = await rpc<Detail>("admin_message_detail", { p_id: id }, "user").catch((e) => {

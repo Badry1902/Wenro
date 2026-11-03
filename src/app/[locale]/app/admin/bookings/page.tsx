@@ -27,7 +27,7 @@ export default async function AdminBookings({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  await requirePlatform(locale, "bookings");
   const t = await getTranslations("app.adminBookings");
   const ts = await getTranslations("app.status");
   const format = await getFormatter();

@@ -13,7 +13,7 @@ export default async function AdminCoupons({ params, searchParams }: { params: P
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  await requirePlatform(locale, "coupons");
   const t = await getTranslations("app.coupons");
   const format = await getFormatter();
   const data = await rpc<{ max_bps: number; coupons: Coupon[] }>("admin_coupons", {}, "user");

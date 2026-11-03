@@ -1,5 +1,6 @@
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
+import { platformCan } from "@/lib/permissions";
 import { requirePlatform } from "@/lib/workspaces";
 import { Badge, Empty, Flash, PageTitle, btn } from "@/components/ui";
 import { setOrgStatus } from "../../actions";
@@ -16,7 +17,8 @@ export default async function AdminPartners({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  const ws = await requirePlatform(locale, "partners");
+  const canAct = platformCan(ws.role, "partnersAct");
   const t = await getTranslations("app.partners");
   const tt = await getTranslations("app.types");
   const format = await getFormatter();
@@ -46,10 +48,10 @@ export default async function AdminPartners({ params, searchParams }: Props) {
                 </div>
                 <div className="text-[12px] text-ink-muted">{t("since", { date: format.dateTime(new Date(o.created_at), { day: "numeric", month: "short", year: "numeric" }) })}</div>
               </div>
-              <div className="flex flex-wrap gap-2">
+              {canAct && <div className="flex flex-wrap gap-2">
                 {o.status !== "active" && action(o, "active", o.status === "pending" ? t("approve") : t("reactivate"), btn.primary)}
                 {o.status === "active" && action(o, "suspended", t("suspend"), btn.quiet)}
-              </div>
+              </div>}
             </li>
           ))}
         </ul>

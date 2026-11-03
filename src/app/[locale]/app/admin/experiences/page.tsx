@@ -17,7 +17,7 @@ export default async function AdminExperiences({ params, searchParams }: Props) 
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  await requirePlatform(locale, "experiences");
   const t = await getTranslations("app.adminExp");
   const te = await getTranslations("app.exp");
   const list = await rpc<Exp[]>("admin_experiences", {}, "user");

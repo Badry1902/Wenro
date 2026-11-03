@@ -1,4 +1,5 @@
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
 import { dayKey } from "@/lib/pricing";
@@ -20,9 +21,10 @@ export default async function AdminFinance({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const q = await searchParams;
-  await requirePlatform(locale);
+  await requirePlatform(locale, "finance");
   const t = await getTranslations("app.finance");
   const tt = await getTranslations("app.types");
+  const td = await getTranslations("app.dues");
   const format = await getFormatter();
   const f = await rpc<Finance>("finance_overview", {}, "user");
   const back = "/app/admin/finance";
@@ -47,6 +49,11 @@ export default async function AdminFinance({ params, searchParams }: Props) {
           <li key={s} className="rounded-card border border-line p-3"><b className="me-1 text-discovery">{i + 1}.</b>{t(s)}</li>
         ))}
       </ol>
+
+      <nav className="mb-8 grid gap-3 md:grid-cols-2" aria-label={td("drill")}>
+        <Link href="/app/admin/finance/operators" className="rounded-card border border-line p-4 font-bold hover:border-discovery hover:bg-discovery-tint">{td("operatorsTitle")} <span className="block text-small font-normal text-ink-muted">{td("operatorsSub")}</span></Link>
+        <Link href="/app/admin/finance/partners" className="rounded-card border border-line p-4 font-bold hover:border-discovery hover:bg-discovery-tint">{td("partnersTitle")} <span className="block text-small font-normal text-ink-muted">{td("partnersSub")}</span></Link>
+      </nav>
 
       <section id="unsettled" className="mb-8">
         <h2 className="mb-3 text-h3 font-bold">{t("unsettledTitle")}</h2>
