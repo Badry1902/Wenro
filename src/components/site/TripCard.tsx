@@ -7,7 +7,7 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
 import { mediaSrc } from "@/lib/media";
 import { cardImages } from "@/lib/catalog";
-import { IconCar, IconCheck, IconClock } from "../Icons";
+import { IconCar, IconCheck, IconClock, IconStar } from "../Icons";
 import { WishButton } from "./WishButton";
 
 /**
@@ -63,6 +63,12 @@ export function TripCard({ c, size = "md", priority = false }: { c: ExperienceCa
         <Link href={`/experiences/${c.slug}`} className="text-[17px] font-bold leading-snug after:absolute after:inset-0 after:content-[''] group-hover:text-discovery line-clamp-2">
           {c.title}
         </Link>
+        {c.reviews ? (
+          <span className="inline-flex items-center gap-1 text-small" aria-label={t("reviews.cardLabel", { avg: c.rating ?? 0, n: c.reviews })}>
+            <IconStar size={15} className="text-apricot" /><b className="text-ink">{Number(c.rating).toFixed(1)}</b>
+            <span className="text-ink-muted">({c.reviews})</span>
+          </span>
+        ) : null}
         <span className="flex flex-col gap-0.5 text-small text-ink-muted">
           {c.free_cancel_hours ? <span className="inline-flex items-center gap-1 text-success"><IconCheck size={14} />{t("home.freeCancel", { h: c.free_cancel_hours })}</span> : null}
           {c.pickup ? <span className="inline-flex items-center gap-1"><IconCar size={14} />{t("home.pickup")}</span> : null}

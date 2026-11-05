@@ -10,6 +10,8 @@ import { IconCheck } from "@/components/Icons";
 import { cancelBooking, reconfirmBooking } from "../actions";
 import { PrintButton } from "./PrintButton";
 import { CalendarButton } from "./CalendarButton";
+import { ReviewForm } from "./ReviewForm";
+import { MeetingMap } from "@/components/site/MeetingMap";
 import { siteUrl } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
@@ -36,6 +38,8 @@ export default async function BookingPage({ params, searchParams }: Props) {
     );
   }
 
+  const review = await rpc<{ eligible: boolean; review: { rating: number; body: string | null; status: string } | null } | null>(
+    "review_for_token", { p_token: token }, "service").catch(() => null);
   const start = new Date(b.starts_at);
   const money = formatMoney({ minor: b.paid_minor, currency: b.currency }, locale);
   const active = b.status === "confirmed" || b.status === "pending_request";
@@ -89,6 +93,23 @@ export default async function BookingPage({ params, searchParams }: Props) {
           <p className="mt-4 rounded-card bg-success-tint p-3 font-semibold text-success">{t("voucher.reconfirmed")}</p>
         )}
 
+        {review?.eligible && (
+          <div className="mt-4 print:hidden">
+            <ReviewForm token={token} labels={{
+              title: t("reviews.formTitle"), intro: t("reviews.formIntro"), rate: t("reviews.rate"), body: t("reviews.body"),
+              bodyHint: t("reviews.bodyHint"), send: t("reviews.send"), sending: t("reviews.sending"), thanks: t("reviews.thanks"),
+              stars: [1, 2, 3, 4, 5].map((n) => t(`reviews.star${n}` as "reviews.star1")),
+              errors: { invalid_rating: t("reviews.errRating"), already_reviewed: t("reviews.errAlready"), review_too_long: t("reviews.errLong"),
+                review_not_yet: t("reviews.errNotYet"), review_too_late: t("reviews.errLate"), unexpected_error: t("reviews.errOther") },
+            }} />
+          </div>
+        )}
+        {review?.review && (
+          <p className="mt-4 rounded-card bg-success-tint p-4 text-[14px] print:hidden">
+            <b>{t("reviews.yours", { n: review.review.rating })}</b> {review.review.status === "published" ? t("reviews.yoursPublished") : review.review.status === "pending" ? t("reviews.yoursPending") : ""}
+          </p>
+        )}
+
         <section aria-label={t("voucher.label")} className={`${fresh ? "ticket-in " : ""}mt-4 overflow-hidden rounded-card border border-line bg-surface`}>
           <div className="flex items-center justify-between bg-discovery px-4 py-3 text-white">
             <span className="font-bold uppercase tracking-wide">{t("voucher.label")}</span>
@@ -113,7 +134,17 @@ export default async function BookingPage({ params, searchParams }: Props) {
               {b.transport && <dd className="text-small text-ink-muted">{t("voucher.pickupNote")}</dd>}
             </div>
             <div><dt className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{t("voucher.travelers")}</dt><dd className="font-bold">{travelers}</dd></div>
-            <div><dt className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{t("voucher.operator")}</dt><dd className="font-bold">{b.operator}</dd></div>
+            <div><dt className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{t("voucher.operator")}</dt>
+              {b.operator ? (
+                <>
+                  <dd className="font-bold">{b.operator}</dd>
+                  {b.operator_phone && <dd><a href={`tel:${b.operator_phone.replace(/[^+\d]/g, "")}`} dir="ltr" className="font-semibold text-discovery hover:underline">{b.operator_phone}</a></dd>}
+                </>
+              ) : (
+                <dd><span className="font-bold">{t("voucher.operatorLater")}</span>
+                  <span className="block text-small text-ink-muted">{t("voucher.operatorLaterNote", { when: format.dateTime(new Date(b.operator_reveal_at), { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) })}</span></dd>
+              )}
+            </div>
             <div className="col-span-2 rounded-[12px] bg-apricot-tint p-3">
               <dt className="text-[12px] font-semibold uppercase tracking-wider">{t("voucher.payAtPickup")}</dt>
               <dd className="text-[24px] font-bold tabular-nums">{money}</dd>
@@ -121,6 +152,11 @@ export default async function BookingPage({ params, searchParams }: Props) {
             </div>
           </dl>
         </section>
+
+        {b.location && active && !b.transport && (
+          <MeetingMap className="mt-4" point={{ lat: Number(b.location.lat), lng: Number(b.location.lng) }} exact
+            label={b.location.place ?? t("voucher.meetingPoint")} openLabel={t("map.open")} note={t("map.voucherNote")} />
+        )}
 
         {active && (
           <div className="mt-4 grid gap-3 print:hidden">

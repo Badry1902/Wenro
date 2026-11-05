@@ -91,7 +91,7 @@
     "cancellation": "Stornierungsbedingungen",
     "cancellationText": "Kostenlose Stornierung bis {hours} Stunden vor Beginn. Fällt der Ausflug wegen Wetter oder Hafenschließung aus, bekommst du kostenlos einen anderen Termin angeboten.",
     "operatedBy": "Anbieter",
-    "operatorGeneric": "Ein lizenzierter lokaler Anbieter in Hurghada. Name und Kontakt erhältst du mit deinem Voucher.",
+    "operatorGeneric": "Ein lizenzierter lokaler Anbieter in Hurghada. Name und Telefon erscheinen kurz vor der Tour auf Ihrem Voucher.",
     "photo": "Fotos folgen",
     "map": "Karte folgt",
     "pending": "Details folgen vom Anbieter.",
@@ -218,7 +218,9 @@
     "reconfirmed": "Danke — du bist bestätigt.",
     "qr": "QR-Code des Vouchers",
     "notFound": "Wir finden diese Buchung nicht. Bitte prüfe den Link in deiner Bestätigung.",
-    "calendar": "Zum Kalender hinzufügen"
+    "calendar": "Zum Kalender hinzufügen",
+    "operatorLater": "Ein lizenzierter lokaler Anbieter",
+    "operatorLaterNote": "Name und Telefon erscheinen hier ab {when}. Bis dahin antworten Sie bei Fragen auf Ihre Bestätigungs-E-Mail."
   },
   "email": {
     "greeting": "Hallo {name},",
@@ -298,7 +300,26 @@
   },
   "app": {
     "signin": {
-      "rateError": "Zu viele Anmelde-E-Mails in kurzer Zeit. Bitte warte ein paar Minuten und fordere dann einen neuen Link an."
+      "rateError": "Zu viele Versuche in kurzer Zeit. Bitte einige Minuten warten.",
+      "subtitle": "Für Anbieter, Partner, Agenturen und das WENRO-Team.",
+      "how": "Anmeldeart",
+      "tabCode": "Code per E-Mail",
+      "tabPassword": "Benutzername & Passwort",
+      "identifier": "Benutzername oder E-Mail",
+      "password": "Passwort",
+      "signInButton": "Anmelden",
+      "forgot": "Passwort vergessen oder zum ersten Mal hier? Mit E-Mail-Code anmelden",
+      "codeSent": "Wir haben einen 6-stelligen Code an {email} gesendet. Er gilt etwa eine Stunde.",
+      "code": "Code aus der E-Mail",
+      "codeButton": "Mit Code anmelden",
+      "codeHint": "Sie können die E-Mail auf jedem Gerät lesen und den Code hier eingeben. Der Link in der E-Mail funktioniert nur in diesem Browser.",
+      "resend": "Neuen Code senden",
+      "otherEmail": "Andere E-Mail verwenden",
+      "sendCode": "Code per E-Mail senden",
+      "codeIntro": "Zum ersten Mal hier? Verwenden Sie die E-Mail Ihrer Einladung. Danach wählen Sie Benutzername und Passwort.",
+      "emailError": "Bitte E-Mail-Adresse prüfen.",
+      "codeError": "Der Code ist falsch oder abgelaufen. Prüfen Sie die neueste E-Mail oder fordern Sie einen neuen an.",
+      "credsError": "Benutzername oder Passwort falsch. Erneut versuchen oder mit E-Mail-Code anmelden."
     },
     "types": {
       "platform": "WENRO-Verwaltung",
@@ -308,7 +329,24 @@
     },
     "flash": {
       "err": {
-        "too_many_attempts": "Zu viele Versuche in kurzer Zeit. Bitte warte ein paar Minuten."
+        "too_many_attempts": "Zu viele Versuche in kurzer Zeit. Bitte warte ein paar Minuten.",
+        "invalid_username": "Choose a username of 3–30 characters (letters, numbers, dot, dash, underscore).",
+        "username_taken": "That username is taken. Try another one.",
+        "password_short": "The password needs at least 10 characters.",
+        "password_long": "The password is too long (72 characters at most).",
+        "password_mismatch": "The two passwords are not the same.",
+        "password_weak": "Choose a stronger password (not your username or email).",
+        "password_same": "That is already your password.",
+        "review_not_found": "That review no longer exists.",
+        "location_unreadable": "We could not read a place from that link. In Google Maps tap the place, then Share → Copy link, and paste it here.",
+        "location_outside_egypt": "That point is outside Egypt. Check the link."
+      },
+      "ok": {
+        "review_published": "Review published.",
+        "review_hidden": "Review hidden.",
+        "account_saved": "Saved. Use your username and password next time.",
+        "location_saved": "Meeting point saved.",
+        "location_cleared": "Meeting point removed."
       }
     },
     "dep": {
@@ -319,6 +357,25 @@
     },
     "adminBookings": {
       "exportCsv": "Excel (CSV) herunterladen"
+    },
+    "account": {
+      "menu": "Mein Konto",
+      "title": "Mein Konto",
+      "sub": "So melden Sie sich bei WENRO an.",
+      "firstTitle": "Anmeldung festlegen",
+      "firstSub": "Letzter Schritt: Wählen Sie Benutzername und Passwort. Damit melden Sie sich künftig auf jedem Gerät an, ohne auf eine E-Mail zu warten.",
+      "email": "E-Mail",
+      "username": "Benutzername",
+      "usernameHint": "3–30 Zeichen: Buchstaben, Zahlen, Punkt, Bindestrich oder Unterstrich.",
+      "password": "Passwort",
+      "newPassword": "Neues Passwort",
+      "passwordHint": "Mindestens 10 Zeichen, nirgendwo sonst verwendet.",
+      "passwordKeep": "Leer lassen, um das aktuelle Passwort zu behalten.",
+      "confirm": "Passwort wiederholen",
+      "save": "Speichern",
+      "saveFirst": "Speichern und weiter",
+      "toDashboard": "Zurück zum Dashboard",
+      "privacy": "Ihr Passwort wird sicher beim Anmeldedienst gespeichert und ist für WENRO nie sichtbar."
     }
   },
   "share": {
@@ -330,5 +387,58 @@
   },
   "wishlist": {
     "title": "Merkliste"
+  },
+  "reviews": {
+    "title": "Gästebewertungen",
+    "none": "Noch keine Bewertungen. Nur Gäste, die diese Tour gemacht haben, können sie über ihre Buchungsseite bewerten.",
+    "count": "{n, plural, one {# Bewertung} other {# Bewertungen}}",
+    "breakdown": "Bewertungen nach Sternen",
+    "travelled": "Gereist im {date}",
+    "outOf": "{n} von 5 Sternen",
+    "verified": "Verifizierte Buchung",
+    "policy": "Bewertungen stammen nur von Gästen, die über WENRO gebucht und die Tour gemacht haben. WENRO prüft sie vor der Veröffentlichung und ändert nie den Text.",
+    "cardLabel": "Bewertet mit {avg} von 5 aus {n} Bewertungen",
+    "formTitle": "Wie war Ihre Tour?",
+    "formIntro": "Ihre Bewertung hilft anderen Reisenden und dem Anbieter. Angezeigt werden nur Vorname und Initiale.",
+    "rate": "Ihre Bewertung",
+    "body": "Erzählen Sie davon (optional)",
+    "bodyHint": "Bis zu 1.500 Zeichen. Bitte keine Telefonnummern oder persönlichen Daten.",
+    "send": "Bewertung senden",
+    "sending": "Wird gesendet…",
+    "thanks": "Danke! Ihre Bewertung wurde gesendet und erscheint nach einer kurzen Prüfung.",
+    "star1": "Schlecht",
+    "star2": "Mäßig",
+    "star3": "Gut",
+    "star4": "Sehr gut",
+    "star5": "Ausgezeichnet",
+    "errRating": "Bitte zuerst Sterne wählen.",
+    "errAlready": "Sie haben diese Tour bereits bewertet.",
+    "errLong": "Der Text ist zu lang.",
+    "errNotYet": "Bewerten können Sie, sobald die Tour stattgefunden hat.",
+    "errLate": "Bewertungen sind bis 120 Tage nach der Tour möglich.",
+    "errOther": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+    "yours": "Ihre Bewertung: {n} von 5 Sternen.",
+    "yoursPublished": "Sie wird auf der Tourseite angezeigt. Danke!",
+    "yoursPending": "Sie erscheint nach einer kurzen Prüfung."
+  },
+  "map": {
+    "open": "In Google Maps öffnen",
+    "exactNote": "Genauer Treffpunkt",
+    "areaNote": "Nur die Gegend: der genaue Punkt kommt mit Ihrer Buchung",
+    "voucherNote": "Tippen, um den genauen Ort in Google Maps zu öffnen"
+  },
+  "partnerShare": {
+    "button": "Mein Link",
+    "title": "Ihr Link für diese Tour",
+    "sub": "Buchungen über diesen Link oder QR zählen 30 Tage für Sie.",
+    "qr": "QR-Code Ihres Links",
+    "png": "PNG laden",
+    "svg": "SVG laden",
+    "copy": "Link kopieren",
+    "copied": "Kopiert",
+    "whatsapp": "Per WhatsApp senden",
+    "close": "Schließen",
+    "note": "Ihr Code {code} gilt auch, wenn er beim Buchen eingegeben wird.",
+    "as": "Teilen als"
   }
 }

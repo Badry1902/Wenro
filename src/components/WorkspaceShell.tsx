@@ -92,6 +92,7 @@ export async function WorkspaceShell({
           </>
         )}
         <div className="mt-auto hidden px-5 pb-6 pt-6 md:block">
+          <Link href="/app/account" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
           <Link href="/" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
           <SignOut className="" />
         </div>
@@ -101,7 +102,10 @@ export async function WorkspaceShell({
           <p role="status" className="mb-6 rounded-card bg-warning-tint p-4 text-warning">{t("pendingNotice")}</p>
         )}
         {children}
-        <SignOut className="mt-10 border-t border-line pt-4 md:hidden [&_button]:text-ink-muted" />
+        <div className="mt-10 flex items-center justify-between border-t border-line pt-4 md:hidden">
+          <Link href="/app/account" className="min-h-11 content-center text-small font-semibold text-ink-muted hover:underline">{t("account.menu")}</Link>
+          <SignOut className="[&_button]:text-ink-muted" />
+        </div>
       </main>
     </div>
   );

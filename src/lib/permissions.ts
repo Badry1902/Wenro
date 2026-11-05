@@ -18,6 +18,8 @@ const PLATFORM = {
   partnersAct: ["owner", "ops"],
   /** admin_experiences + editor */
   experiences: ["owner", "ops", "content"],
+  /** admin_reviews, moderate_review */
+  reviews: ["owner", "ops", "content"],
   /** coupons list / save_coupon */
   coupons: ["owner", "ops", "finance"],
   /** admin_messages; retry_message, run jobs */

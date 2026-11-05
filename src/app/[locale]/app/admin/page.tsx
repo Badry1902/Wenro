@@ -26,11 +26,12 @@ export default async function AdminOverview({ params, searchParams }: Props) {
   const ws = await requirePlatform(locale);
   const can = (p: PlatformPerm) => platformCan(ws.role, p);
   const t = await getTranslations("app.admin");
-  const [o, demo] = await Promise.all([
+  const [o, demo, pendingReviews] = await Promise.all([
     rpc<Overview>("admin_overview", {}, "user"),
     can("team")
       ? rpc<{ available: boolean; joined?: boolean }>("demo_status", {}, "user").catch(() => ({ available: false, joined: true }))
       : Promise.resolve({ available: false, joined: true }),
+    can("reviews") ? rpc<unknown[]>("admin_reviews", { p_status: "pending" }, "user").then((r) => r.length).catch(() => 0) : Promise.resolve(0),
   ]);
   const base = `/${locale}/app/admin`;
   const money = (m: Record<string, number> = {}) =>
@@ -54,6 +55,7 @@ export default async function AdminOverview({ params, searchParams }: Props) {
         {can("bookings") && <Task tone="warn" count={o.pending_requests} label={t("pendingRequests")} href={`${base}/bookings?s=pending_request&span=90`} />}
         {can("partnersAct") && <Task tone="warn" count={o.pending_orgs} label={t("pendingOrgs")} href={`${base}/partners`} />}
         {can("experiences") && <Task tone="warn" count={o.experiences_in_review} label={t("inReview")} href={`${base}/experiences`} />}
+        {can("reviews") && <Task tone="warn" count={pendingReviews} label={t("pendingReviews")} href={`${base}/reviews`} />}
         {can("messages") && <Task tone="warn" count={o.failed_messages} label={t("failedMessages")} href={`${base}/messages`} />}
         {can("finance") && <Task tone="warn" count={o.pending_payouts ?? 0} label={t("pendingPayouts")} href={`${base}/finance#payouts`} />}
         {can("finance") && <Task tone="warn" count={o.open_statements ?? 0} label={t("openStatements")} href={`${base}/finance/operators`} />}

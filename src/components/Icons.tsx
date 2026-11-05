@@ -45,6 +45,11 @@ export const IconSearch = ({ size, className }: P) => (
 export const IconHeart = ({ size, className, filled }: P & { filled?: boolean }) => (
   <svg {...base(size)} className={className} fill={filled ? "currentColor" : "none"}><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z" /></svg>
 );
+export const IconStar = ({ size, className, filled = true }: P & { filled?: boolean }) => (
+  <svg {...base(size)} className={className} fill={filled ? "currentColor" : "none"} strokeWidth={1.5}>
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />
+  </svg>
+);
 export const IconChevron = ({ size, className }: P) => (
   <svg {...base(size)} className={`rtl:rotate-180 ${className ?? ""}`}><path d="M9 5l7 7-7 7" /></svg>
 );

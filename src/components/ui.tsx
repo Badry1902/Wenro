@@ -40,7 +40,7 @@ const tones: Record<string, string> = {
   sent: "bg-success-tint text-success", draft: "bg-[#F3F4F8] text-ink-muted", closed: "bg-[#F3F4F8] text-ink-muted",
   cancelled: "bg-critical-tint text-critical", expired: "bg-critical-tint text-critical", declined: "bg-critical-tint text-critical",
   no_show: "bg-critical-tint text-critical", suspended: "bg-critical-tint text-critical", not_operated: "bg-critical-tint text-critical",
-  archived: "bg-[#F3F4F8] text-ink-muted", scheduled: "bg-[#F3F4F8] text-ink-muted",
+  hidden: "bg-[#F3F4F8] text-ink-muted", archived: "bg-[#F3F4F8] text-ink-muted", scheduled: "bg-[#F3F4F8] text-ink-muted",
   queued: "bg-discovery-tint text-discovery", sending: "bg-discovery-tint text-discovery", logged: "bg-warning-tint text-warning",
   failed: "bg-critical-tint text-critical", skipped: "bg-[#F3F4F8] text-ink-muted",
 };

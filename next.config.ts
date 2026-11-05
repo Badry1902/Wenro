@@ -15,7 +15,7 @@ const csp = [
   "media-src 'self' blob: https://res.cloudinary.com https://*.supabase.co",
   "font-src 'self' data:",
   `connect-src 'self' ${supabase} https://*.supabase.co https://api.cloudinary.com https://vercel.live ${cloudApi}`.trim(),
-  "frame-src https://vercel.live",
+  "frame-src https://vercel.live https://www.openstreetmap.org",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",

@@ -62,7 +62,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
   // 3. Agency manager books for a walk-in client
   const ag = await as('agency');
   await ag.getByRole('link', { name: 'Book for a client' }).first().click();
-  await ag.locator('li', { hasText: 'Giftun' }).getByRole('link', { name: 'Choose date' }).click();
+  await ag.locator('li', { has: ag.locator('a[href*="demo-giftun-island"]') }).getByRole('link', { name: 'Choose date' }).click();
   await ag.waitForURL(/ag=/);
   await ag.getByRole('button', { name: 'Continue' }).click();
   await ag.waitForURL(/\/en\/book\//);

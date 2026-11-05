@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
-import type { ExperienceCard, ExperiencePage } from "@/lib/data/types";
+import type { ExperienceCard, ExperiencePage, ReviewSummary } from "@/lib/data/types";
 import { Link } from "@/i18n/navigation";
 import { mediaSrc } from "@/lib/media";
 import { cardImages, similarTo } from "@/lib/catalog";
@@ -19,6 +19,9 @@ import { TripCard } from "@/components/site/TripCard";
 import { WishButton } from "@/components/site/WishButton";
 import { BookingWidget } from "@/components/BookingWidget";
 import { RefBeacon } from "@/components/site/RefBeacon";
+import { ReviewsSection, Stars } from "@/components/site/Reviews";
+import { MeetingMap } from "@/components/site/MeetingMap";
+import { PartnerShareBar } from "@/components/site/PartnerShareBar";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconClock, IconClose, IconPin } from "@/components/Icons";
 
 // Cached for a minute and refreshed in the background, so visitors get it from the CDN. Seats are
@@ -58,6 +61,11 @@ export default async function ExperiencePageView({ params }: Params) {
     rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]),
   ]);
   if (!page) notFound();
+  const noReviews: ReviewSummary = { count: 0, average: null, stars: {}, items: [] };
+  const [reviews, location] = await Promise.all([
+    rpc<ReviewSummary>("experience_reviews", { p_experience: page.id, p_limit: 12 }, "anon").catch(() => noReviews),
+    rpc<{ lat: number; lng: number; place: string | null; exact: boolean } | null>("public_location", { p_experience: page.id }, "anon").catch(() => null),
+  ]);
   const similar = similarTo(all, page, 8);
   const t = await getTranslations();
 
@@ -105,7 +113,11 @@ export default async function ExperiencePageView({ params }: Params) {
           {hours && <span className="inline-flex items-center gap-1.5"><IconClock size={18} className="text-discovery" />{Number.isInteger(hours) ? t("experience.hours", { n: hours }) : t("experience.minutes", { n: page.duration_minutes! })}</span>}
           {hasTransfer && <span className="inline-flex items-center gap-1.5"><IconCar size={18} className="text-discovery" />{t("experience.hotelPickup")}</span>}
           <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-discovery" />{t("experience.hurghada")}</span>
-          <span className="rounded-full bg-discovery-tint px-3 py-0.5 text-small font-semibold text-discovery">{t("experience.newNoReviews")}</span>
+          {reviews.count > 0 ? (
+            <a href="#reviews-list" className="inline-flex items-center gap-1.5 font-semibold text-ink hover:underline">
+              <Stars value={Number(reviews.average)} /> {Number(reviews.average).toFixed(1)} <span className="font-normal text-ink-muted">({t("reviews.count", { n: reviews.count })})</span>
+            </a>
+          ) : <span className="rounded-full bg-discovery-tint px-3 py-0.5 text-small font-semibold text-discovery">{t("experience.newNoReviews")}</span>}
         </div>
 
         <div className="mt-6">
@@ -158,7 +170,11 @@ export default async function ExperiencePageView({ params }: Params) {
 
             <Section id="meet" title={t("experience.meeting")}>
               {hasTransfer && <p className="mb-3">{t("experience.meetingTransfer")}</p>}
-              {page.meeting_info ? <p className="whitespace-pre-line">{page.meeting_info}</p> : <Pending />}
+              {page.meeting_info ? <p className="whitespace-pre-line">{page.meeting_info}</p> : !location && <Pending />}
+              {location && (
+                <MeetingMap className="mt-4" point={{ lat: Number(location.lat), lng: Number(location.lng) }} exact={location.exact}
+                  label={location.place ?? t("experience.meeting")} openLabel={t("map.open")} note={location.exact ? t("map.exactNote") : t("map.areaNote")} />
+              )}
             </Section>
 
             {page.requirements && (
@@ -172,6 +188,8 @@ export default async function ExperiencePageView({ params }: Params) {
                 <p>{t("experience.cancellationText", { hours: page.policy.free_cancel_hours })}</p>
               </Section>
             )}
+
+            <ReviewsSection data={reviews} />
 
             <Section id="op" title={t("experience.operatedBy")}>
               <p>{t("experience.operatorGeneric")}</p>
@@ -219,6 +237,7 @@ export default async function ExperiencePageView({ params }: Params) {
         )}
       </main>
       <RefBeacon experienceId={page.id} />
+      <PartnerShareBar slug={page.slug} title={page.title ?? "WENRO"} />
       <RecentTracker id={page.id} />
       {/* Structured data for search engines: a bookable trip with its starting price */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -227,6 +246,8 @@ export default async function ExperiencePageView({ params }: Params) {
         image: page.media.filter((m) => m.kind !== "video").slice(0, 4).map((m) => mediaSrc(m.path, { w: 1200, h: 800 })),
         touristType: page.category ?? undefined,
         provider: { "@type": "Organization", name: "WENRO", url: siteUrl() },
+        // Only real, published guest reviews (never added when there are none)
+        aggregateRating: reviews.count > 0 ? { "@type": "AggregateRating", ratingValue: Number(reviews.average), reviewCount: reviews.count, bestRating: 5, worstRating: 1 } : undefined,
         offers: adult ? { "@type": "Offer", price: (adult.price_minor / 100).toFixed(2), priceCurrency: page.currency, availability: page.slots.length ? "https://schema.org/InStock" : "https://schema.org/SoldOut", url: `${siteUrl()}/${locale}/experiences/${page.slug}` } : undefined,
       }).replace(/</g, "\\u003c") }} />
       <SiteFooter />

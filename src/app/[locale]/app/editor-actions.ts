@@ -162,3 +162,33 @@ export async function finishUpload(input: unknown): Promise<{ ok: true } | { err
     return { error: e instanceof RpcError ? e.code : "unexpected_error" };
   }
 }
+
+/** Meeting point from a Google Maps link (short or long) or typed coordinates. */
+export async function saveLocation(form: FormData) {
+  const { resolveMapsLink } = await import("@/lib/maps");
+  const id = guid.parse(form.get("experience"));
+  const link = String(form.get("maps") ?? "").trim().slice(0, 600);
+  const place = String(form.get("place") ?? "").trim().slice(0, 120);
+  const exact = form.get("exact") === "1";
+  let result = "ok=location_saved";
+  try {
+    if (form.get("clear") === "1") {
+      await rpc("set_experience_location", { p_experience: id, p_lat: null, p_lng: null, p_place: null, p_exact_public: true, p_url: null }, "user");
+      result = "ok=location_cleared";
+    } else {
+      if (!link) throw new RpcError("location_unreadable");
+      const found = await resolveMapsLink(link);
+      if (!found) throw new RpcError("location_unreadable");
+      await rpc("set_experience_location", {
+        p_experience: id, p_lat: found.point.lat, p_lng: found.point.lng, p_place: place || null, p_exact_public: exact,
+        p_url: found.url && /^https:\/\//.test(found.url) ? found.url : null,
+      }, "user");
+    }
+  } catch (e) {
+    result = `err=${e instanceof RpcError ? e.code : "unexpected_error"}`;
+    if (!(e instanceof RpcError)) console.error("saveLocation", e);
+  }
+  const l = locale.parse(form.get("locale"));
+  const b = base.parse(form.get("base"));
+  redirect({ href: `${b}/${id}?${result}#location`, locale: l });
+}

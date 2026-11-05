@@ -35,6 +35,10 @@ const ALLOWED = new Set([
   "experience_editor", "editor_options", "save_experience", "add_experience_media", "remove_experience_media",
   "move_experience_media", "invite_member", "cancel_invite", "accept_invites", "org_team", "set_member_active",
   "operator_finance", "hit_rate_limit", "admin_coupons", "save_coupon", "admin_cancel_booking", "demo_status", "demo_join_all", "admin_operator_dues", "admin_partner_dues",
+  // reviews and accounts
+  "review_for_token", "submit_review_by_token", "experience_reviews", "admin_reviews", "moderate_review", "operator_reviews",
+  "my_account", "set_username", "mark_password_set", "email_for_username",
+  "set_experience_location", "experience_location", "public_location",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

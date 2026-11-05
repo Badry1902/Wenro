@@ -176,3 +176,17 @@ export async function adminCancelBooking(form: FormData) {
 export async function demoJoinAll(form: FormData) {
   await run(form, "demo_joined", "demo_join_all", {});
 }
+
+// ---- reviews (WENRO team) ----
+export async function moderateReview(form: FormData) {
+  const publish = v(form, "publish") === "1";
+  const slug = v(form, "slug");
+  // Trip page, list and home are cached; refresh them now so the stars show (or go) straight away
+  const { revalidatePath } = await import("next/cache");
+  for (const l of ["en", "de", "ru", "fr", "ar"]) {
+    if (/^[a-z0-9-]{1,120}$/.test(slug)) revalidatePath(`/${l}/experiences/${slug}`);
+    revalidatePath(`/${l}/experiences`);
+    revalidatePath(`/${l}`);
+  }
+  await run(form, publish ? "review_published" : "review_hidden", "moderate_review", { p_review: id.parse(v(form, "review")), p_publish: publish });
+}

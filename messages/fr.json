@@ -91,7 +91,7 @@
     "cancellation": "Conditions d'annulation",
     "cancellationText": "Annulation gratuite jusqu'à {hours} heures avant le départ. Si l'excursion est annulée pour météo ou fermeture du port, une autre date vous est proposée sans frais.",
     "operatedBy": "Organisateur",
-    "operatorGeneric": "Un organisateur local agréé à Hurghada. Son nom et son contact accompagnent votre voucher.",
+    "operatorGeneric": "Un prestataire local agréé à Hurghada. Son nom et son téléphone apparaissent sur votre bon peu avant la sortie.",
     "photo": "Photos bientôt",
     "map": "Carte bientôt",
     "pending": "Détails à venir de l'organisateur.",
@@ -218,7 +218,9 @@
     "reconfirmed": "Merci — c'est confirmé.",
     "qr": "QR code du voucher",
     "notFound": "Réservation introuvable. Vérifiez le lien de votre confirmation.",
-    "calendar": "Ajouter au calendrier"
+    "calendar": "Ajouter au calendrier",
+    "operatorLater": "Un prestataire local agréé",
+    "operatorLaterNote": "Nom et téléphone apparaissent ici à partir du {when}. D'ici là, répondez à votre e-mail de confirmation pour toute question."
   },
   "email": {
     "greeting": "Bonjour {name},",
@@ -298,7 +300,26 @@
   },
   "app": {
     "signin": {
-      "rateError": "Trop d'e-mails de connexion en peu de temps. Attendez quelques minutes puis demandez un nouveau lien."
+      "rateError": "Trop de tentatives en peu de temps. Patientez quelques minutes.",
+      "subtitle": "Pour les prestataires, partenaires, agences et l'équipe WENRO.",
+      "how": "Mode de connexion",
+      "tabCode": "Code par e-mail",
+      "tabPassword": "Identifiant et mot de passe",
+      "identifier": "Identifiant ou e-mail",
+      "password": "Mot de passe",
+      "signInButton": "Se connecter",
+      "forgot": "Mot de passe oublié ou première fois ? Connectez-vous avec un code par e-mail",
+      "codeSent": "Nous avons envoyé un code à 6 chiffres à {email}. Il est valable environ une heure.",
+      "code": "Code reçu par e-mail",
+      "codeButton": "Se connecter avec le code",
+      "codeHint": "Vous pouvez lire l'e-mail sur n'importe quel appareil et saisir le code ici. Le lien de l'e-mail ne fonctionne que dans ce navigateur.",
+      "resend": "Envoyer un nouveau code",
+      "otherEmail": "Utiliser un autre e-mail",
+      "sendCode": "Recevoir un code",
+      "codeIntro": "Première fois ? Utilisez l'e-mail de votre invitation. Vous choisirez ensuite un identifiant et un mot de passe.",
+      "emailError": "Vérifiez l'adresse e-mail.",
+      "codeError": "Code incorrect ou expiré. Vérifiez le dernier e-mail ou demandez un nouveau code.",
+      "credsError": "Identifiant ou mot de passe incorrect. Réessayez ou connectez-vous avec un code."
     },
     "types": {
       "platform": "Administration WENRO",
@@ -308,7 +329,24 @@
     },
     "flash": {
       "err": {
-        "too_many_attempts": "Trop de tentatives. Patientez quelques minutes."
+        "too_many_attempts": "Trop de tentatives. Patientez quelques minutes.",
+        "invalid_username": "Choose a username of 3–30 characters (letters, numbers, dot, dash, underscore).",
+        "username_taken": "That username is taken. Try another one.",
+        "password_short": "The password needs at least 10 characters.",
+        "password_long": "The password is too long (72 characters at most).",
+        "password_mismatch": "The two passwords are not the same.",
+        "password_weak": "Choose a stronger password (not your username or email).",
+        "password_same": "That is already your password.",
+        "review_not_found": "That review no longer exists.",
+        "location_unreadable": "We could not read a place from that link. In Google Maps tap the place, then Share → Copy link, and paste it here.",
+        "location_outside_egypt": "That point is outside Egypt. Check the link."
+      },
+      "ok": {
+        "review_published": "Review published.",
+        "review_hidden": "Review hidden.",
+        "account_saved": "Saved. Use your username and password next time.",
+        "location_saved": "Meeting point saved.",
+        "location_cleared": "Meeting point removed."
       }
     },
     "dep": {
@@ -319,6 +357,25 @@
     },
     "adminBookings": {
       "exportCsv": "Télécharger Excel (CSV)"
+    },
+    "account": {
+      "menu": "Mon compte",
+      "title": "Mon compte",
+      "sub": "Votre façon de vous connecter à WENRO.",
+      "firstTitle": "Choisissez votre connexion",
+      "firstSub": "Dernière étape : choisissez un identifiant et un mot de passe. Vous pourrez ensuite vous connecter depuis n'importe quel appareil sans attendre d'e-mail.",
+      "email": "E-mail",
+      "username": "Identifiant",
+      "usernameHint": "3 à 30 caractères : lettres, chiffres, point, tiret ou tiret bas.",
+      "password": "Mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "passwordHint": "Au moins 10 caractères, à ne pas réutiliser ailleurs.",
+      "passwordKeep": "Laissez vide pour garder le mot de passe actuel.",
+      "confirm": "Répétez le mot de passe",
+      "save": "Enregistrer",
+      "saveFirst": "Enregistrer et continuer",
+      "toDashboard": "Retour au tableau de bord",
+      "privacy": "Votre mot de passe est stocké de façon sécurisée par notre service de connexion ; WENRO ne le voit jamais."
     }
   },
   "share": {
@@ -330,5 +387,58 @@
   },
   "wishlist": {
     "title": "Mes favoris"
+  },
+  "reviews": {
+    "title": "Avis des voyageurs",
+    "none": "Pas encore d'avis. Seuls les voyageurs ayant fait cette sortie peuvent la noter, depuis leur page de réservation.",
+    "count": "{n, plural, one {# avis} other {# avis}}",
+    "breakdown": "Avis par étoiles",
+    "travelled": "Voyage en {date}",
+    "outOf": "{n} sur 5 étoiles",
+    "verified": "Réservation vérifiée",
+    "policy": "Les avis viennent uniquement de voyageurs ayant réservé sur WENRO et fait la sortie. WENRO les vérifie avant publication et ne modifie jamais leur texte.",
+    "cardLabel": "Noté {avg} sur 5 d'après {n} avis",
+    "formTitle": "Comment s'est passée votre sortie ?",
+    "formIntro": "Votre avis aide les autres voyageurs et le prestataire. Seuls votre prénom et votre initiale sont affichés.",
+    "rate": "Votre note",
+    "body": "Racontez (facultatif)",
+    "bodyHint": "Jusqu'à 1 500 caractères. Merci de ne pas indiquer de numéro de téléphone ni de données personnelles.",
+    "send": "Envoyer l'avis",
+    "sending": "Envoi…",
+    "thanks": "Merci ! Votre avis a été envoyé et apparaîtra après une courte vérification.",
+    "star1": "Médiocre",
+    "star2": "Passable",
+    "star3": "Bien",
+    "star4": "Très bien",
+    "star5": "Excellent",
+    "errRating": "Choisissez d'abord une note.",
+    "errAlready": "Vous avez déjà noté cette sortie.",
+    "errLong": "Le texte est trop long.",
+    "errNotYet": "Vous pourrez noter une fois la sortie effectuée.",
+    "errLate": "Les avis sont possibles jusqu'à 120 jours après la sortie.",
+    "errOther": "Un problème est survenu. Réessayez.",
+    "yours": "Votre avis : {n} sur 5 étoiles.",
+    "yoursPublished": "Il est affiché sur la page de la sortie. Merci !",
+    "yoursPending": "Il apparaîtra après une courte vérification."
+  },
+  "map": {
+    "open": "Ouvrir dans Google Maps",
+    "exactNote": "Point de rendez-vous exact",
+    "areaNote": "Zone seulement : le point exact arrive avec votre réservation",
+    "voucherNote": "Touchez pour ouvrir le lieu exact dans Google Maps"
+  },
+  "partnerShare": {
+    "button": "Mon lien",
+    "title": "Votre lien pour cette sortie",
+    "sub": "Les réservations via ce lien ou QR comptent pour vous pendant 30 jours.",
+    "qr": "QR code de votre lien",
+    "png": "Télécharger PNG",
+    "svg": "Télécharger SVG",
+    "copy": "Copier le lien",
+    "copied": "Copié",
+    "whatsapp": "Envoyer sur WhatsApp",
+    "close": "Fermer",
+    "note": "Votre code {code} fonctionne aussi s'il est saisi lors de la réservation.",
+    "as": "Partager en tant que"
   }
 }

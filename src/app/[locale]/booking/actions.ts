@@ -27,3 +27,20 @@ export async function reconfirmBooking(form: FormData) {
   }
   revalidatePath("/[locale]/booking/[token]", "page");
 }
+
+/** Guest review through their own booking link. Saved for the WENRO team to publish. */
+export async function submitReview(form: FormData) {
+  const t = token.safeParse(form.get("token"));
+  const rating = z.coerce.number().int().min(1).max(5).safeParse(form.get("rating"));
+  const body = z.string().max(1500).catch("").parse(form.get("body") ?? "");
+  if (!t.success) return;
+  if (!rating.success) return { error: "invalid_rating" as const };
+  try {
+    await rpc("submit_review_by_token", { p_token: t.data, p_rating: rating.data, p_body: body }, "service");
+  } catch (e) {
+    if (!(e instanceof RpcError)) throw e;
+    return { error: e.code };
+  }
+  revalidatePath("/[locale]/booking/[token]", "page");
+  return { ok: true as const };
+}

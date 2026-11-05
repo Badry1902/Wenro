@@ -57,6 +57,16 @@ export type ExperienceCard = {
   images?: string[];
   pickup?: boolean;
   free_cancel_hours?: number | null;
+  /** published guest reviews only */
+  rating?: number | null;
+  reviews?: number;
+};
+
+export type ReviewSummary = {
+  count: number;
+  average: number | null;
+  stars: Record<string, number>;
+  items: { id: string; rating: number; body: string | null; author: string; locale: string; trip_date: string; created_at: string }[];
 };
 
 export type BookingView = {
@@ -79,7 +89,11 @@ export type BookingView = {
   cancel_reason: string | null;
   terms: { cancellation_policy: { code: string; free_cancel_hours: number } | null };
   experience: { slug: string; title: string | null; meeting_info: string | null };
-  operator: string;
+  /** null until shortly before the trip (platform_settings.operator_reveal_hours) */
+  operator: string | null;
+  operator_phone: string | null;
+  operator_reveal_at: string;
+  location: { lat: number; lng: number; place: string | null } | null;
   hotel: string | null;
   zone: string | null;
   lines: { kind: string; quantity: number; unit_price_minor: number; line_price_minor: number }[];

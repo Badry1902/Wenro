@@ -117,7 +117,7 @@
     "cancellation": "Cancellation policy",
     "cancellationText": "Free cancellation up to {hours} hours before the start. If the trip is cancelled for weather or a port closure, you are offered another date at no cost.",
     "operatedBy": "Operated by",
-    "operatorGeneric": "A licensed local operator in Hurghada. Their name and contact come with your voucher.",
+    "operatorGeneric": "A licensed local operator in Hurghada. Their name and phone appear on your voucher shortly before the trip.",
     "photo": "Photo coming soon",
     "map": "Map coming soon",
     "pending": "Details coming soon from the operator.",
@@ -246,7 +246,9 @@
     "reconfirmed": "Thanks — you're confirmed.",
     "qr": "Voucher QR code",
     "notFound": "We couldn't find this booking. Check the link in your confirmation message.",
-    "calendar": "Add to calendar"
+    "calendar": "Add to calendar",
+    "operatorLater": "A licensed local operator",
+    "operatorLaterNote": "Name and phone appear here from {when}. Until then, reply to your confirmation email with any question."
   },
   "app": {
     "menu": "Workspace menu",
@@ -294,7 +296,8 @@
       "sending": "Sending",
       "logged": "Logged (not sent)",
       "failed": "Failed",
-      "skipped": "Skipped"
+      "skipped": "Skipped",
+      "hidden": "Hidden"
     },
     "flash": {
       "ok": {
@@ -333,7 +336,12 @@
         "member_off": "Access removed.",
         "coupon_saved": "Code saved.",
         "booking_cancelled": "Booking cancelled. The guest is emailed.",
-        "demo_joined": "Done. Use “Switch workspace” in the menu to open each dashboard."
+        "demo_joined": "Done. Use “Switch workspace” in the menu to open each dashboard.",
+        "review_published": "Review published.",
+        "review_hidden": "Review hidden.",
+        "account_saved": "Saved. Use your username and password next time.",
+        "location_saved": "Meeting point saved.",
+        "location_cleared": "Meeting point removed."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -372,12 +380,22 @@
         "booking_not_cancellable": "This booking can no longer be cancelled.",
         "too_many_videos": "Up to 3 videos per experience.",
         "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again.",
-        "no_access": "That page isn't part of your role. Here is what you can work on."
+        "no_access": "That page isn't part of your role. Here is what you can work on.",
+        "invalid_username": "Choose a username of 3–30 characters (letters, numbers, dot, dash, underscore).",
+        "username_taken": "That username is taken. Try another one.",
+        "password_short": "The password needs at least 10 characters.",
+        "password_long": "The password is too long (72 characters at most).",
+        "password_mismatch": "The two passwords are not the same.",
+        "password_weak": "Choose a stronger password (not your username or email).",
+        "password_same": "That is already your password.",
+        "review_not_found": "That review no longer exists.",
+        "location_unreadable": "We could not read a place from that link. In Google Maps tap the place, then Share → Copy link, and paste it here.",
+        "location_outside_egypt": "That point is outside Egypt. Check the link."
       }
     },
     "signin": {
       "title": "Sign in to WENRO",
-      "subtitle": "For operators, marketers, agencies and the WENRO team. We email you a sign-in link; no password.",
+      "subtitle": "For operators, marketers, agencies and the WENRO team.",
       "email": "Work email",
       "send": "Email me a link",
       "sent": "Check your inbox for the sign-in link.",
@@ -385,7 +403,25 @@
       "linkError": "That link has expired or was already used. Ask for a new one.",
       "devTitle": "Developer mode: sign in as a test person",
       "signOut": "Sign out",
-      "rateError": "Too many sign-in emails in a short time. Wait a few minutes, then ask for a new link (use the newest email only)."
+      "rateError": "Too many attempts in a short time. Wait a few minutes, then try again (use the newest email only).",
+      "how": "How to sign in",
+      "tabCode": "Email code",
+      "tabPassword": "Username & password",
+      "identifier": "Username or email",
+      "password": "Password",
+      "signInButton": "Sign in",
+      "forgot": "Forgot your password or first time here? Sign in with an email code",
+      "codeSent": "We sent a 6-digit code to {email}. It works for about an hour.",
+      "code": "Code from the email",
+      "codeButton": "Sign in with the code",
+      "codeHint": "You can read the email on any device (for example your phone) and type the code here. The link in the email also works, but only in this same browser.",
+      "resend": "Send a new code",
+      "otherEmail": "Use another email",
+      "sendCode": "Email me a code",
+      "codeIntro": "First time? Use the email your invitation was sent to. After signing in you choose a username and password.",
+      "emailError": "Check the email address.",
+      "codeError": "That code is wrong or has expired. Check the newest email, or send a new code.",
+      "credsError": "Wrong username or password. Try again, or sign in with an email code."
     },
     "join": {
       "title": "Your workspaces",
@@ -426,7 +462,8 @@
       "messages": "Messages",
       "money": "Money",
       "team": "Team",
-      "coupons": "Discount codes"
+      "coupons": "Discount codes",
+      "reviews": "Reviews"
     },
     "op": {
       "todayTitle": "Run sheet",
@@ -535,7 +572,8 @@
         "finance": "Your work: what operators owe, what partners are owed, statements and payouts.",
         "support": "Your day: guests who need help, bookings and messages.",
         "content": "Your work: trips waiting for review and the trip pages."
-      }
+      },
+      "pendingReviews": "Reviews to check"
     },
     "adminBookings": {
       "title": "Bookings",
@@ -831,7 +869,20 @@
       "chooseMedia": "Photo or short video",
       "savingMedia": "Saving…",
       "mediaAdded": "Added. It is on the page now.",
-      "mediaHint": "Photos: JPG, PNG or WebP up to 10 MB. Videos: MP4, MOV or WebM up to 100 MB, best under 30 seconds, no sound needed. Up to 12 files, 3 of them videos. Use your own material only."
+      "mediaHint": "Photos: JPG, PNG or WebP up to 10 MB. Videos: MP4, MOV or WebM up to 100 MB, best under 30 seconds, no sound needed. Up to 12 files, 3 of them videos. Use your own material only.",
+      "location": "Meeting point on the map",
+      "locationHint": "Paste the Google Maps link of where guests meet you (in Google Maps: tap the place → Share → Copy link). Guests see a small map and can open the exact spot. Do not put your company name or phone number in the trip texts: WENRO shares them with guests shortly before the trip.",
+      "locationLink": "Google Maps link",
+      "locationLinkHint": "A short link (maps.app.goo.gl/…), the full address bar link, or coordinates like 27.2246, 33.8411.",
+      "locationPlace": "Name of the place (optional)",
+      "locationPlaceHint": "For example \"Hurghada New Marina, gate 2\". Shown with the map.",
+      "locationExact": "Show the exact pin on the trip page",
+      "locationExactHint": "Untick if the meeting point is your own shop or office: the trip page then shows only the area, and guests get the exact pin with their booking.",
+      "locationSave": "Save meeting point",
+      "locationClear": "Remove meeting point",
+      "locationOpen": "Open in Google Maps",
+      "locationPublic": "Exact pin shown on the trip page",
+      "locationPrivate": "Trip page shows the area only; exact pin on the voucher"
     },
     "team": {
       "title": "Team",
@@ -922,6 +973,48 @@
       "commission": "Commission",
       "partnersNone": "No commissions are waiting for a payout.",
       "partnersNote": "A commission becomes payable once the trip has been done and the operator's statement is settled. Pending commissions for upcoming trips are not counted here."
+    },
+    "account": {
+      "menu": "My account",
+      "title": "My account",
+      "sub": "How you sign in to WENRO.",
+      "firstTitle": "Choose how you sign in",
+      "firstSub": "One last step: pick a username and a password. Next time you can sign in with them, from any device, without waiting for an email.",
+      "email": "Email",
+      "username": "Username",
+      "usernameHint": "3–30 characters: letters, numbers, dot, dash or underscore.",
+      "password": "Password",
+      "newPassword": "New password",
+      "passwordHint": "At least 10 characters. Use something you don't use elsewhere.",
+      "passwordKeep": "Leave empty to keep your current password.",
+      "confirm": "Repeat the password",
+      "save": "Save",
+      "saveFirst": "Save and continue",
+      "toDashboard": "Back to my dashboard",
+      "privacy": "Your password is stored securely by our sign-in provider and is never visible to WENRO."
+    },
+    "reviews": {
+      "title": "Guest reviews",
+      "sub": "Reviews from guests whose trip was checked in. Publish real, relevant reviews; hide abuse, personal data or off-topic text.",
+      "tab": {
+        "pending": "To check",
+        "published": "Published",
+        "hidden": "Hidden"
+      },
+      "none": {
+        "pending": "Nothing to check.",
+        "published": "No published reviews yet.",
+        "hidden": "No hidden reviews."
+      },
+      "tripOn": "trip on {date}",
+      "noText": "Stars only, no text.",
+      "publish": "Publish",
+      "hide": "Hide",
+      "rules": "Never edit or write reviews, and never hide one only because it is negative. Hide a review only for abuse, personal data, spam or text about something else. Check with a lawyer how reviews must be handled under consumer rules before launch.",
+      "opTitle": "Guest reviews",
+      "opSub": "What guests said about your trips (published reviews).",
+      "opNone": "No published reviews yet. Guests can review after you check them in.",
+      "count": "{n, plural, one {# review} other {# reviews}}"
     }
   },
   "email": {
@@ -1092,5 +1185,58 @@
     "title": "Your wishlist",
     "sub": "Trips you saved with the heart. Saved on this device.",
     "empty": "No saved trips yet. Tap the heart on any trip to keep it here."
+  },
+  "reviews": {
+    "title": "Guest reviews",
+    "none": "No reviews yet. Only guests who have done this trip can review it, from their booking page.",
+    "count": "{n, plural, one {# review} other {# reviews}}",
+    "breakdown": "Reviews by stars",
+    "travelled": "Travelled in {date}",
+    "outOf": "{n} out of 5 stars",
+    "verified": "Verified booking",
+    "policy": "Reviews come only from guests who booked on WENRO and did the trip. WENRO checks them before they appear and never changes what guests write.",
+    "cardLabel": "Rated {avg} out of 5 from {n} reviews",
+    "formTitle": "How was your trip?",
+    "formIntro": "Your review helps other travellers and the operator. Only your first name and initial are shown.",
+    "rate": "Your rating",
+    "body": "Tell others about it (optional)",
+    "bodyHint": "Up to 1,500 characters. Please leave out phone numbers and other personal details.",
+    "send": "Send review",
+    "sending": "Sending…",
+    "thanks": "Thank you! Your review was sent and will appear after a quick check.",
+    "star1": "Poor",
+    "star2": "Fair",
+    "star3": "Good",
+    "star4": "Very good",
+    "star5": "Excellent",
+    "errRating": "Choose a star rating first.",
+    "errAlready": "You already reviewed this trip.",
+    "errLong": "The text is too long.",
+    "errNotYet": "You can review once the trip has taken place.",
+    "errLate": "Reviews can be left up to 120 days after the trip.",
+    "errOther": "Something went wrong. Please try again.",
+    "yours": "Your review: {n} of 5 stars.",
+    "yoursPublished": "It is shown on the trip page. Thank you!",
+    "yoursPending": "It will appear after a quick check."
+  },
+  "map": {
+    "open": "Open in Google Maps",
+    "exactNote": "Exact meeting point",
+    "areaNote": "Area only: the exact pin comes with your booking",
+    "voucherNote": "Tap to open the exact spot in Google Maps"
+  },
+  "partnerShare": {
+    "button": "Get my link",
+    "title": "Your link for this trip",
+    "sub": "Bookings through this link or QR count for you for 30 days.",
+    "qr": "QR code for your link",
+    "png": "Download PNG",
+    "svg": "Download SVG",
+    "copy": "Copy link",
+    "copied": "Copied",
+    "whatsapp": "Send on WhatsApp",
+    "close": "Close",
+    "note": "Your code {code} also works when typed at checkout.",
+    "as": "Share as"
   }
 }

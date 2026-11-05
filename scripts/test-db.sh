@@ -14,4 +14,6 @@ psql "${args[@]}"
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/10_booking_engine_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/30_messaging_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/40_editor_team_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
+psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/50_reviews_accounts_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
+psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/60_locations_identity_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 bash supabase/tests/20_concurrency_test.sh "$DB"

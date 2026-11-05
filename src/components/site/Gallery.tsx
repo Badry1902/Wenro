@@ -42,10 +42,15 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
     const id = setTimeout(() => go(i + 1), STEP_MS);
     return () => clearTimeout(id);
   }, [running, i, tick, go]);
-  // keep the active thumbnail in view
+  // Keep the active thumbnail in view by scrolling the thumbnail strip only. (scrollIntoView would also
+  // scroll the page itself, pulling the visitor back up to the gallery every time it moves on.)
   useEffect(() => {
-    const el = thumbs.current?.querySelector<HTMLElement>(`[data-i="${i}"]`);
-    el?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    const rail = thumbs.current;
+    const el = rail?.querySelector<HTMLElement>(`[data-i="${i}"]`);
+    if (!rail || !el) return;
+    const r = rail.getBoundingClientRect(), e = el.getBoundingClientRect();
+    if (e.left < r.left) rail.scrollBy({ left: e.left - r.left - 8, behavior: "smooth" });
+    else if (e.right > r.right) rail.scrollBy({ left: e.right - r.right + 8, behavior: "smooth" });
   }, [i]);
   // lightbox keys
   useEffect(() => {
