@@ -10,6 +10,7 @@ import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 import { routing, isRtl } from "@/i18n/routing";
+import { VisitBeacon } from "@/components/site/VisitBeacon";
 import "../globals.css";
 
 // Font choices follow the design guide's proposals (DM Serif Display / Manrope).
@@ -59,7 +60,7 @@ export default async function LocaleLayout({
         {preview && (
           <p role="note" className="bg-ink px-4 py-2 text-center text-small font-semibold text-white print:hidden">{t("previewBanner")}</p>
         )}
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>{children}<VisitBeacon /></NextIntlClientProvider>
       </body>
     </html>
   );

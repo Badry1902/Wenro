@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getWorkspaces, homeOf, type Workspace } from "@/lib/workspaces";
 import { signOut } from "@/app/[locale]/signin/actions";
 import { NavLink } from "./NavLink";
+import { rpc } from "@/lib/data/rpc";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
 export const TYPE_STYLE: Record<Workspace["type"], { dot: string; pill: string; bar: string }> = {
@@ -30,7 +31,10 @@ export async function WorkspaceShell({
 }) {
   const locale = await getLocale();
   const t = await getTranslations("app");
-  const all = await getWorkspaces(locale);
+  const [all, unread] = await Promise.all([
+    getWorkspaces(locale),
+    rpc<number>("unread_notifications", {}, "user").catch(() => 0),
+  ]);
   const others = all.filter((w) => w.org_id !== current.org_id);
   const groups = ORDER.map((type) => ({ type, items: others.filter((w) => w.type === type) })).filter((g) => g.items.length);
   const style = TYPE_STYLE[current.type];
@@ -71,9 +75,14 @@ export async function WorkspaceShell({
     <div className="flex min-h-dvh flex-col md:flex-row">
       <aside className="bg-ink text-white md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
         <div className={`h-1 ${style.bar}`} aria-hidden="true" />
-        <div className="flex items-center justify-between gap-3 px-4 py-3 md:block md:px-5 md:pt-6">
-          <Link href="/" className="flex min-h-11 items-center gap-2 rounded-control bg-white px-2 md:mb-6" aria-label={t("toSite")}>
+        <div className="relative flex items-center justify-between gap-3 px-4 py-3 md:block md:px-5 md:pt-6">
+          <Link href="/" className="flex min-h-11 items-center gap-2 rounded-control bg-white px-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
             <Image src="/brand/logo-horizontal-temp.png" alt="WENRO" width={110} height={21} />
+          </Link>
+          <Link href="/app/notifications" aria-label={t("notify.bell", { n: unread })} title={t("notify.bell", { n: unread })}
+            className="relative order-last grid size-11 shrink-0 place-items-center rounded-full text-white/90 hover:bg-white/10 md:absolute md:end-4 md:top-7">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M6 8a6 6 0 1112 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 004 0" /></svg>
+            {unread > 0 && <span className="absolute end-1 top-1 grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-ink">{unread > 99 ? "99+" : unread}</span>}
           </Link>
           <div className="min-w-0 md:mb-5">
             <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-bold ${style.pill}`}>{t(`types.${current.type}`)}</span>

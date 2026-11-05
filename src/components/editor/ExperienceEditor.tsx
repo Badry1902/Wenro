@@ -29,6 +29,9 @@ export function ExperienceEditor({ initial, options, back, base }: { initial: Ed
   const locale = useLocale();
   const [d, setD] = useState<EditorData>(initial);
   const [tab, setTab] = useState<Loc>("en");
+  // Languages filled in by machine translation (until someone edits them), and languages edited in this session
+  const [machine] = useState<Set<Loc>>(() => new Set(LOCALES.filter((l) => (initial.translations[l] as { machine_translated?: boolean } | undefined)?.machine_translated)));
+  const [touched, setTouched] = useState<Set<Loc>>(() => new Set());
   const [state, action] = useActionState<SaveState, FormData>(saveExperience, undefined);
 
   // Same rule as the database: guest price = net ÷ operator share, rounded up to whole units.
@@ -40,8 +43,10 @@ export function ExperienceEditor({ initial, options, back, base }: { initial: Ed
   };
   const eur = (minor: number | null) => (minor == null ? "—" : formatMoney({ minor, currency: "EUR" }, locale));
 
-  const setText = (loc: Loc, f: TextField, v: string) =>
+  const setText = (loc: Loc, f: TextField, v: string) => {
+    setTouched((s) => (s.has(loc) ? s : new Set(s).add(loc)));
     setD((x) => ({ ...x, translations: { ...x.translations, [loc]: { ...(x.translations[loc] ?? {}), [f]: v } } }));
+  };
   const setPrice = (kind: "adult" | "child" | "infant" | "private_group", patch: Partial<{ net_minor: number | null; age_min: number | null; age_max: number | null; max_group: number | null }>) =>
     setD((x) => {
       const cur = x.prices[kind] ?? { net_minor: 0, age_min: null, age_max: null, max_group: null, active: true };
@@ -56,10 +61,13 @@ export function ExperienceEditor({ initial, options, back, base }: { initial: Ed
     id: d.id, operator_id: d.operator_id, category_id: d.category_id, booking_mode: d.booking_mode,
     duration_minutes: d.duration_minutes, cancellation_policy_id: d.cancellation_policy_id,
     private_available: d.private_available, private_max_group: d.private_max_group,
-    translations: d.translations,
+    // only the text fields (the stored rows also carry flags such as machine_translated)
+    translations: Object.fromEntries(Object.entries(d.translations).map(([l, tr]) => [l, Object.fromEntries(TEXT_FIELDS.map((f) => [f, tr?.[f] ?? null]))])),
+    touched: [...touched],
+    machine: [...machine].filter((l) => !touched.has(l)),
     prices: Object.fromEntries(Object.entries(d.prices).filter(([, v]) => v && v.active !== false)),
     extras: d.extras, transport: d.transport,
-  }), [d]);
+  }), [d, touched, machine]);
 
   const priceRow = (kind: "adult" | "child" | "infant", ages: boolean) => {
     const p = d.prices[kind];
@@ -145,10 +153,14 @@ export function ExperienceEditor({ initial, options, back, base }: { initial: Ed
               <button key={l} type="button" role="tab" aria-selected={tab === l} onClick={() => setTab(l)}
                 className={`tab-chip btn-press min-h-11 rounded-control border px-4 font-semibold ${tab === l ? "border-discovery bg-discovery text-white" : "border-line bg-surface"}`}>
                 {l.toUpperCase()}{filled && <span aria-label={t("filled")} className="ms-1.5 inline-block h-2 w-2 rounded-full bg-success align-middle" />}
+                {filled && machine.has(l) && !touched.has(l) && <span className={`ms-1.5 rounded-full px-1.5 text-[10px] font-bold uppercase ${tab === l ? "bg-white/25" : "bg-apricot-tint text-ink"}`}>{t("auto")}</span>}
               </button>
             );
           })}
         </div>
+        {machine.has(tab) && !touched.has(tab) && !!d.translations[tab]?.title?.trim() && (
+          <p className="mb-3 rounded-card bg-apricot-tint p-3 text-small">{t("autoNote")}</p>
+        )}
         <div key={tab} className="panel-in grid gap-4" dir={tab === "ar" ? "rtl" : "ltr"}>
           {TEXT_FIELDS.map((f) => {
             const long = !["title", "summary"].includes(f);

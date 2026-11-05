@@ -4,6 +4,8 @@ import { rpc } from "@/lib/data/rpc";
 import { requirePlatform } from "@/lib/workspaces";
 import { Badge, Empty, Flash, PageTitle, btn } from "@/components/ui";
 import { setExperienceStatus } from "../../actions";
+import { translateMissing } from "../../editor-actions";
+import { Submit } from "@/components/Submit";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +33,9 @@ export default async function AdminExperiences({ params, searchParams }: Props) 
 
   return (
     <>
-      <PageTitle title={t("title")} sub={t("sub")} actions={<Link href="/app/admin/experiences/new" className={btn.primary}>+ {te("new")}</Link>} />
+      <PageTitle title={t("title")} sub={t("sub")} actions={<div className="flex flex-wrap gap-2">
+        <form action={translateMissing}><input type="hidden" name="locale" value={locale} /><Submit className={btn.quiet}>{te("translateAll")}</Submit></form>
+        <Link href="/app/admin/experiences/new" className={btn.primary}>+ {te("new")}</Link></div>} />
       <Flash ok={q.ok} err={q.err} />
       {list.length === 0 ? <Empty>{t("none")}</Empty> : (
         <ul className="flex flex-col gap-3">

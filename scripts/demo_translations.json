@@ -1,0 +1,1176 @@
+{
+ "trips": {
+  "de": {
+   "demo-spa-day": {
+    "title": "Spa-Tagespass mit Pool und Massage",
+    "summary": "Ein ganzer Tag voller Ruhe: Pools, Dampfbad, eine 30-minütige Massage und ein leichtes Mittagessen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nZusätzliche Anwendungen",
+    "included": "Spa-Zugang für den ganzen Tag\n30-minütige Massage\nLeichtes Mittagessen und Wasser\nHandtücher, Bademantel und Hausschuhe",
+    "itinerary": "10:00 Begrüßungsgetränk\nPools, Sauna und Dampfbad\n30-minütige Massage\nLeichtes Mittagessen\n16:00 Ende des Tages",
+    "description": "Verbringen Sie den Tag in einem ruhigen Spa in Sahl Hasheesh. Nutzen Sie Innen- und Außenpools, Sauna und Dampfbad ganz nach Belieben, genießen Sie zu einer Uhrzeit Ihrer Wahl eine 30-minütige Entspannungsmassage und essen Sie am Pool ein leichtes Mittagessen.",
+    "meeting_info": "Spa-Rezeption, Altstadt von Sahl Hasheesh. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Mindestalter 16 Jahre."
+   },
+   "demo-flyboard": {
+    "title": "Flyboard-Session über dem Meer",
+    "summary": "Schweben Sie auf Wasserdüsen über dem Meer, während ein Instruktor Sie per Funk anleitet. 15 Minuten Flugzeit.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nVideo",
+    "included": "Flyboard-Session mit Instruktor\nHelm, Weste und Neoprenanzug",
+    "itinerary": "Sicherheitseinweisung am Strand\nAusrüstung anlegen\n15 Minuten auf dem Flyboard\nZurück zum Strand",
+    "description": "Nach einer kurzen Einweisung an Land ziehen Sie Schuhe, Helm und Weste an. Der Instruktor steuert die Leistung des Jetskis und spricht über das Helmfunkgerät mit Ihnen, sodass die meisten schon nach wenigen Minuten fliegen.",
+    "meeting_info": "Wassersporthütte am öffentlichen Strand, Sheraton Road.",
+    "requirements": "Mindestalter 14 Jahre und Gewicht 45–110 kg.\nSie müssen schwimmen können."
+   },
+   "demo-sup-tour": {
+    "title": "Stand-up-Paddling bei Sonnenaufgang oder Sonnenuntergang",
+    "summary": "Eine geführte Paddeltour entlang der Küste in den ruhigen Stunden, mit kurzem Badestopp.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nWasserdichte Handyhülle",
+    "included": "Board, Paddel und Leash\nGuide\nWasser",
+    "itinerary": "Board-Anpassung und Übung am Strand\nGeführte Paddeltour entlang der Küste\nBadestopp\nZurück zum Strand",
+    "description": "Frühmorgens und vor Sonnenuntergang ist das Meer am ruhigsten. Nach ein paar Minuten Übung im Sand führt Ihr Guide Sie gemächlich paddelnd die Küste entlang, mit einem Stopp zum Schwimmen und zum Betrachten des flachen Riffs.",
+    "meeting_info": "Wassersporthütte am öffentlichen Strand, Sheraton Road.",
+    "requirements": "Sie müssen schwimmen können. Mindestalter 10 Jahre."
+   },
+   "demo-aqua-park": {
+    "title": "Aquapark-Tag mit Rutschen und Pools",
+    "summary": "Ein ganzer Tag mit Rutschen, Wellenbad und Lazy River, inklusive Mittagessen und Softdrinks.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nSchließfächer und Handtücher",
+    "included": "Tagesticket\nMittagessen und Softdrinks\nLiegen und Sonnenschirme",
+    "itinerary": "10:00 Einlass\nFreie Zeit an Rutschen und Pools\n13:00 Mittagessen\n17:00 Der Park schließt",
+    "description": "Ein Tag für die ganze Familie: große Rutschen für Teenager und Erwachsene, ein Planschbereich für kleine Kinder, ein Lazy River und Liegen im Schatten. Mittagessen und Softdrinks sind inklusive.",
+    "meeting_info": "Haupteingang des Aquaparks, Straße Hurghada–Safaga. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Kinder unter 120 cm nutzen den Kinderbereich.\nFür einige Rutschen gelten Größen- und Gewichtsgrenzen."
+   },
+   "demo-cairo-day": {
+    "title": "Kairo und die Pyramiden an einem Tag",
+    "summary": "Früher Start im klimatisierten Reisebus zu den Pyramiden von Gizeh, der Sphinx und dem Ägyptischen Museum, mit Mittagessen.",
+    "excluded": "Eintritt ins Innere der Großen Pyramide\nTrinkgelder",
+    "included": "Reisebus mit Abholung vom Hotel\nÄgyptologe als Guide\nEintrittskarten\nMittagessen und Wasser",
+    "itinerary": "03:00 Abholung vom Hotel\n09:30 Pyramiden von Gizeh und Sphinx\n12:30 Mittagessen\n14:00 Ägyptisches Museum\n16:30 Rückfahrt\n23:00 Zurück in Ihrem Hotel",
+    "description": "Ein langer, aber lohnender Tag. Der Bus verlässt Hurghada vor Sonnenaufgang und erreicht Gizeh am späten Vormittag. Ihr Ägyptologe führt Sie zu den Pyramiden und der Sphinx und nach dem Mittagessen ins Ägyptische Museum.\nDer Anbieter bestätigt jede Anfrage einzeln, da Busplätze und Museumstickets im Voraus gebucht werden.",
+    "meeting_info": "Abholung an Ihrer Hotelrezeption; die Uhrzeit wird am Vortag bestätigt.",
+    "requirements": "Bitte Reisepass mitbringen. Bequeme Schuhe und eine Kopfbedeckung.\nInsgesamt etwa 12 Stunden Fahrt."
+   },
+   "demo-city-tour": {
+    "title": "Stadtrundfahrt Hurghada: Moschee, Kirche und Marina",
+    "summary": "Vier Stunden mit einem einheimischen Guide zu den Sehenswürdigkeiten, den alten Gassen und der Marina.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nEinkäufe\nTrinkgelder",
+    "included": "Einheimischer Guide\nKlimatisierter Minibus\nWasser",
+    "itinerary": "Abholung oder Treffpunkt\nEl-Dahar-Moschee\nKoptische Kirche\nFischmarkt und alte Gassen\nSpaziergang an der Marina und freie Zeit",
+    "description": "Entdecken Sie das Hurghada, das die meisten Besucher verpassen. Ihr Guide zeigt Ihnen die große Moschee von El Dahar, die koptische Kirche, den Fischmarkt und die belebten Straßen der Altstadt; zum Abschluss spazieren Sie an der Marina entlang.\nFür den Besuch der Moschee ist angemessene Kleidung nötig; Tücher werden gestellt.",
+    "meeting_info": "Hauptplatz von El Dahar, vor dem alten Postamt.",
+    "requirements": "Schultern und Knie müssen für die Moschee bedeckt sein."
+   },
+   "demo-gouna-day": {
+    "title": "Tagesausflug nach El Gouna: Lagunen, Marina und Bootsfahrt",
+    "summary": "Ein Tag in der Lagunenstadt nördlich von Hurghada mit Bootsfahrt durch die Kanäle und freier Zeit an der Abu Tig Marina.",
+    "excluded": "Mittagessen\nHoteltransfer (optional zubuchbar)",
+    "included": "Guide und klimatisierter Minibus\nBootsfahrt durch die Lagune\nWasser",
+    "itinerary": "09:30 Abholung oder Treffpunkt\n10:15 Ankunft in El Gouna\n10:30 Bootsfahrt durch die Lagune\n11:30 Spaziergang durch die Innenstadt\n12:30 Freie Zeit an der Marina\n16:00 Rückfahrt nach Hurghada",
+    "description": "El Gouna ist auf Lagunen und Kanälen erbaut. Nach der Fahrt in den Norden bringt Sie ein kleines Boot durch die Wasserwege vorbei an bunten Häusern. Danach spazieren Sie durch die Innenstadt und verbringen den Nachmittag an der Marina – zum Mittagessen, Shoppen oder für einen Kaffee bei den Yachten.",
+    "meeting_info": "Hauptplatz von El Dahar, vor dem alten Postamt.",
+    "requirements": "Tragen Sie bequeme Schuhe."
+   },
+   "demo-luxor-day": {
+    "title": "Tagesausflug nach Luxor: Tempel und Westbank",
+    "summary": "Ein langer Tag auf der Straße nach Luxor mit einem Ägyptologen: Karnak, das Tal der Könige und Mittagessen am Nil.",
+    "excluded": "Besondere Gräber und Fotogenehmigungen\nTrinkgelder",
+    "included": "Klimatisierter Transport\nÄgyptologe als Guide\nEintrittsgelder für die genannten Stätten\nMittagessen und Wasser",
+    "itinerary": "05:00 Abholung vom Hotel\n09:00 Karnak-Tempel\n11:30 Tal der Könige\n13:30 Mittagessen am Nil\n15:00 Hatschepsut-Tempel (Außenansicht)\n16:00 Rückfahrt\n20:00 Zurück in Ihrem Hotel",
+    "description": "Ein ganzer Tag: etwa vier Stunden pro Strecke im klimatisierten Minibus. In Luxor führt Sie ein Ägyptologe zum Karnak-Tempel, über den Nil ins Tal der Könige und zum Mittagessen mit Blick auf den Fluss.\nDie Eintrittsgelder für die Stätten im Programm sind inklusive; besondere Gräber kosten vor Ort extra.",
+    "meeting_info": "Abholung in Ihrer Hotellobby (Raum Hurghada inklusive).",
+    "requirements": "Kopie des Reisepasses erforderlich. Langer Tag: für Kinder unter 6 Jahren nicht ideal."
+   },
+   "demo-submarine": {
+    "title": "U-Boot-Fahrt zum Korallenriff",
+    "summary": "Tauchen Sie in einem echten Touristen-U-Boot etwa 20 Meter tief und beobachten Sie das Riff durch große Fenster, ohne nass zu werden.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nFotos",
+    "included": "Zubringerboot und U-Boot-Tauchgang\nGuide an Bord\nWasser",
+    "itinerary": "Zubringerboot zum U-Boot\nEtwa 45 Minuten unter Wasser\nZubringer zurück zur Marina",
+    "description": "Perfekt für Familien und Nichtschwimmer. Ein Zubringerboot bringt Sie zum U-Boot, das dann langsam am Riff entlang abtaucht. Jeder Platz hat ein eigenes Fenster, und ein Guide erklärt Ihnen die Fische und Korallen, die Sie sehen.",
+    "meeting_info": "Hurghada New Marina, U-Boot-Anleger, 30 Minuten vor Abfahrt.",
+    "requirements": "Nicht geeignet für Personen mit starker Platzangst."
+   },
+   "demo-beach-yoga": {
+    "title": "Strand-Yoga bei Sonnenaufgang oder Sonnenuntergang",
+    "summary": "Eine 75-minütige sanfte Yogastunde im Sand für alle Niveaus, danach frischer Saft.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Yogastunde mit zertifizierter Lehrkraft\nMatte und Handtuch\nFrischer Saft",
+    "itinerary": "Begrüßung und Atemübungen\nSanfter Flow\nEntspannung\nFrischer Saft",
+    "description": "Eine ruhige Stunde mit einer zertifizierten Lehrkraft an einem stillen Strand in Sahl Hasheesh. Atemübungen, sanfter Flow und eine lange Entspannung zum Rauschen des Meeres. Matten werden gestellt.",
+    "meeting_info": "Strandterrasse des Spas, Sahl Hasheesh. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Alle Niveaus willkommen. Informieren Sie die Lehrkraft über Verletzungen."
+   },
+   "demo-glass-boat": {
+    "title": "Glasbodenboot: Riffe sehen, ohne nass zu werden",
+    "summary": "Zwei Stunden Korallen und Fische durch den Glasboden des Bootes beobachten.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Bootsfahrt\nWasser",
+    "itinerary": "Abfahrt von der Marina\nLangsame Fahrt über zwei Riffe\nKurzer Stopp – nichts füttern, nichts berühren: einfach zuschauen\nRückkehr zur Marina",
+    "description": "Die einfachste Art, die Riffe des Roten Meeres zu sehen: Setzen Sie sich aufs Unterdeck und beobachten Sie Korallen und Fische durch große Glasfenster. Ideal für kleine Kinder, Großeltern und alle, die lieber trocken bleiben.",
+    "meeting_info": "Hurghada New Marina, Tor 1, 15 Minuten vor Abfahrt.",
+    "requirements": "Für alle Altersgruppen geeignet."
+   },
+   "demo-hammam-spa": {
+    "title": "Hammam- und Massageritual",
+    "summary": "Dampfbad, Peeling mit schwarzer Seife, Schaumwäsche und eine 45-minütige Ölmassage, danach Minztee.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Hammam und Massage\nHandtücher, Bademantel und Hausschuhe\nMinztee",
+    "itinerary": "Dampfbad\nPeeling mit schwarzer Seife und Schaumwäsche\n45-minütige Ölmassage\nRuhepause mit Minztee",
+    "description": "Zwei Stunden zum Entschleunigen. Sie beginnen im Dampfbad, dann werden Sie auf dem warmen Marmor gepeelt und mit Schaum gewaschen, gefolgt von einer 45-minütigen Massage mit Arganöl. Zum Abschluss gibt es Minztee im Ruheraum.",
+    "meeting_info": "Spa-Rezeption, Altstadt von Sahl Hasheesh. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Mindestalter 16 Jahre. Bitte informieren Sie uns über eine Schwangerschaft oder gesundheitliche Beschwerden."
+   },
+   "demo-horse-ride": {
+    "title": "Ausritt am Strand und in der Wüste",
+    "summary": "Zwei Stunden zu Pferd vom Wüstenrand bis ans Meer, für Anfänger und geübte Reiter.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Pferd und Guide\nHelm\nTee",
+    "itinerary": "Kennenlernen der Pferde und kurze Einweisung\nRitt am Wüstenrand\nStrand und Ritt durchs Meer\nZurück zum Stall, Tee",
+    "description": "Reiten Sie vom Stall über den Wüstenrand hinunter zu einem ruhigen Strand, wo die Pferde durch das flache Wasser gehen. Ruhige Pferde für Anfänger, lebhaftere für erfahrene Reiter.",
+    "meeting_info": "Reitstall, hinter der Makadi Bay. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Mindestalter 8 Jahre. Höchstgewicht 100 kg.\nLange Hosen empfohlen."
+   },
+   "demo-night-dive": {
+    "title": "Nachttauchgang am Hausriff",
+    "summary": "Ein geführter Tauchgang nach Sonnenuntergang mit Lampen, wenn das nächtliche Leben am Riff erwacht.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Geführter Nachttauchgang\nLampe, Flasche, Blei und komplette Ausrüstung\nHeißgetränk",
+    "itinerary": "17:30 Check-in und Briefing\n18:15 Ausrüstung und Einstieg\n18:30 Nachttauchgang (etwa 45 Minuten)\n19:30 Heißgetränk und Logbuch",
+    "description": "Nachts verwandelt sich das Riff völlig: Oktopusse und Muränen gehen auf Jagd, Papageifische schlafen in ihren Schleimkokons und das Plankton leuchtet. Sie tauchen mit einem erfahrenen Guide und einer Lampe in einem ruhigen, flachen Bereich.\nDas Tauchzentrum prüft vor der Bestätigung Ihre Erfahrung.",
+    "meeting_info": "Tauchzentrum an der Sheraton Road. Genauer Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Open-Water-Brevet und mindestens 10 geloggte Tauchgänge.\nMindestalter 15 Jahre."
+   },
+   "demo-orange-bay": {
+    "title": "Strandtag in der Orange Bay",
+    "summary": "Ein langer Strandaufenthalt in einer Bucht mit weißem Sand, ein Schnorchelstopp und Mittagessen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nLiegen (optional gegen Aufpreis)",
+    "included": "Bootsfahrt\nStrandeintritt\nMittagessen und Softdrinks\nSchnorchelausrüstung",
+    "itinerary": "09:00 Das Boot verlässt die Marina\n10:30 Ankunft in der Bucht: freie Zeit am Strand\n13:00 Mittagessen\n14:30 Schnorchelstopp\n16:30 Zurück an der Marina",
+    "description": "Ein entspannter Tag rund um den Strand. Die meiste Zeit verbringen Sie in einer Bucht mit weißem Sand und flachem, türkisfarbenem Wasser – gut für Familien und Nichtschwimmer. Auf dem Rückweg gibt es einen Schnorchelstopp.",
+    "meeting_info": "Hurghada New Marina, Tor 2, 20 Minuten vor Abfahrt.",
+    "requirements": "Bringen Sie ein Handtuch und riffschonende Sonnencreme mit."
+   },
+   "demo-wreck-dive": {
+    "title": "Wracktauchen: ein gesunkenes Schiff bei Hurghada",
+    "summary": "Betauchen Sie mit einem erfahrenen Guide ein mit Korallen bewachsenes Wrack; der zweite Tauchgang führt an ein Riff.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nMeeresparkgebühr",
+    "included": "Zwei geführte Tauchgänge (Wrack und Riff)\nKomplette Ausrüstung\nMittagessen und Getränke",
+    "itinerary": "07:00 Check-in und Briefing\n08:00 Abfahrt des Bootes\n09:30 Wracktauchgang\n11:00 Mittagessen an Bord\n12:30 Rifftauchgang\n14:30 Zurück an der Marina",
+    "description": "Ein Wracktauchgang für zertifizierte Taucher mit etwas Erfahrung. Nach einem ausführlichen Briefing steigen Sie an der Leine ab und erkunden das Schiff von außen, das heute Korallen und Fischen ein Zuhause bietet. Ein Eindringen ins Wrack ist nicht Teil dieses Ausflugs.\nDas Tauchzentrum prüft vor der Bestätigung Ihr Logbuch, daher wird dieser Ausflug auf Anfrage gebucht.",
+    "meeting_info": "Tauchzentrum, Sheraton Road. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Advanced-Brevet oder 20 geloggte Tauchgänge.\nMindestalter 15 Jahre."
+   },
+   "demo-parasailing": {
+    "title": "Parasailing über der Bucht",
+    "summary": "Etwa 10 Minuten in der Luft über dem Meer, allein oder im Tandem, mit dem Strand unter Ihnen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nFotos und Videos",
+    "included": "Flug mit Gurtzeug und Schwimmweste\nBootsfahrt",
+    "itinerary": "Kurze Sicherheitseinweisung am Strand\nBootsfahrt zum Fluggebiet\nEtwa 10 Minuten in der Luft\nZurück zum Strand",
+    "description": "Sie starten vom Heck des Bootes und steigen langsam über die Bucht auf. Der Flug ist ruhig und leise; Sie landen trocken wieder auf dem Boot. Tandemflüge für zwei Personen sind bis zum gemeinsamen Gewichtslimit möglich.",
+    "meeting_info": "Wassersporthütte am öffentlichen Strand, Sheraton Road.",
+    "requirements": "Mindestalter 8 Jahre (Kinder fliegen im Tandem mit einem Erwachsenen).\nBei starkem Wind abgesagt: Sie erhalten einen anderen Termin oder den vollen Betrag zurück."
+   },
+   "demo-quad-safari": {
+    "title": "Quadtour zu einem Beduinendorf",
+    "summary": "Eine Stunde auf Ihrem eigenen Quad durch die Wüste, Tee in einem Beduinendorf.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nIm Camp verkaufte Fotos",
+    "included": "Quad und Treibstoff\nHelm, Brille und Tuch\nGuide\nBeduinentee und Brot",
+    "itinerary": "Sicherheitseinweisung und Anpassen des Helms\n1 Stunde Quadfahrt mit Guide vorne und hinten\nBeduinendorf: Tee, Brot, kurzer Kamelritt\nRückfahrt zum Camp",
+    "description": "Nach einer kurzen Sicherheitseinweisung fahren Sie Ihr eigenes Quad in einer geführten Kolonne über offene Wüstenpisten. Auf halber Strecke halten Sie in einem Beduinendorf für Tee und über dem Feuer gebackenes Brot sowie einen kurzen Kamelritt.\nDer Anbieter bestätigt Ihre Anfrage innerhalb von 12 Stunden, da Fahrer und Helme im Voraus zugeteilt werden.",
+    "meeting_info": "Wüstencamp an der Straße Hurghada–Safaga. Der genaue Standort-Pin kommt mit Ihrem Voucher.",
+    "requirements": "Mindestalter 16 Jahre zum Selbstfahren. Geschlossene Schuhe empfohlen.\nNicht geeignet während der Schwangerschaft oder bei Rückenproblemen."
+   },
+   "demo-sunset-sail": {
+    "title": "Segeltörn bei Sonnenuntergang",
+    "summary": "Zweieinhalb Stunden unter Segeln, während die Sonne untergeht, mit Tee und Snacks.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Segeltörn mit Skipper\nTee, Softdrinks und Snacks",
+    "itinerary": "16:00 Einschiffen\n16:15 Segeln entlang der Küste\nSonnenuntergang an Deck mit Tee und Snacks\n18:30 Zurück an der Marina",
+    "description": "Ein kleines Segelboot verlässt am späten Nachmittag die Marina und segelt die Küste entlang, während die Sonne hinter den Bergen untergeht. Ruhig, gemächlich und schön für Paare.",
+    "meeting_info": "Hurghada Marina Boulevard, Steg C.",
+    "requirements": "Bringen Sie eine leichte Jacke mit: Nach Sonnenuntergang wird es auf dem Wasser kühler."
+   },
+   "demo-desert-stars": {
+    "title": "Sterne beobachten in der Wüste mit Grill-Abendessen",
+    "summary": "Sonnenuntergang in den Dünen, Abendessen in einem Beduinencamp und der Nachthimmel durchs Teleskop.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Transport vom Treffpunkt zum Camp\nAbendessen, Tee und Wasser\nTeleskop-Session mit Guide",
+    "itinerary": "17:00 Abholung und Fahrt zum Camp\nSonnenuntergang von einer Düne\nGrill-Abendessen und Tee\nSterne beobachten mit Teleskop\n22:00 Zurück in Ihrem Hotel",
+    "description": "Am späten Nachmittag fahren Sie aus der Stadt hinaus und erreichen vor Sonnenuntergang ein ruhiges Wüstencamp. Nach einem Grill-Abendessen am Feuer gehen die Lichter aus, und ein Guide zeigt Ihnen Sterne und Planeten durch ein Teleskop.",
+    "meeting_info": "Treffpunkt: Safari-Büro, El Nasr Road.",
+    "requirements": "Bringen Sie eine warme Schicht mit: Von November bis März sind die Wüstennächte kalt."
+   },
+   "demo-fishing-trip": {
+    "title": "Angelmorgen im Roten Meer",
+    "summary": "Grundangeln von einem kleinen Boot aus, mit Ruten, Köder und einem Mittagessen mit gegrilltem Fisch.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nTrinkgelder",
+    "included": "Boot, Kapitän und Crew\nRuten, Schnüre und Köder\nMittagessen mit Ihrem Fang\nWasser und Tee",
+    "itinerary": "07:30 Das Boot verlässt die Marina\n08:30 Erster Angelplatz\n10:30 Zweiter Angelplatz\n12:00 Gegrillter Fang zum Mittagessen\n12:30 Zurück zur Marina",
+    "description": "Fahren Sie mit einem einheimischen Kapitän zu den Fanggründen nördlich von Hurghada. Ruten, Schnüre und Köder liegen an Bord bereit, und die Crew zeigt Anfängern, wie man die Leine auswirft und einholt.\nIhr Fang wird an Bord ausgenommen und zum Mittagessen gegrillt.",
+    "meeting_info": "Hurghada New Marina, Tor 2, 20 Minuten vor Abfahrt.",
+    "requirements": "Ausflug bei ruhiger See; bringen Sie bei Bedarf trotzdem Tabletten gegen Reiseübelkeit mit."
+   },
+   "demo-island-beach": {
+    "title": "Inselstrandtag bei Giftun",
+    "summary": "Ein Tag an einem feinsandigen Inselstrand: Liege und Sonnenschirm, Schnorcheln vom Ufer aus und Mittagessen.",
+    "excluded": "Leihgebühr für Schnorchelausrüstung\nMeeresparkgebühr\nHoteltransfer (optional zubuchbar)",
+    "included": "Transfer im Schnellboot\nLiege und Sonnenschirm\nMittagsbuffet und Wasser",
+    "itinerary": "08:30 Das Boot verlässt die Marina\n09:15 Ankunft auf der Insel\nFreie Zeit am Strand\n12:30 Mittagsbuffet\n16:00 Zurück an der Marina",
+    "description": "Ein Schnellboot bringt Sie zu einem geschützten Inselstrand im Gebiet von Giftun. Verbringen Sie den Tag auf einer Liege unter dem Sonnenschirm, schnorcheln Sie direkt vom Strand aus über dem flachen Riff und genießen Sie ein Mittagsbuffet.",
+    "meeting_info": "Hurghada New Marina, Tor 4, 20 Minuten vor Abfahrt.",
+    "requirements": "Verwenden Sie riffschonende Sonnencreme. Korallen dürfen nicht berührt werden."
+   },
+   "demo-super-safari": {
+    "title": "Super-Safari: Jeep, Quad, Kamel und Abendessen",
+    "summary": "Ein halber Tag in der Wüste: Jeepfahrt, Quad, Kamel, ein Beduinendorf und Abendessen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Jeep-, Quad- und Kamelritt\nGuide\nAbendessen und Getränke",
+    "itinerary": "13:00 Jeepfahrt in die Wüste\nQuadfahrt (30 Minuten)\nKamelritt und Beduinendorf\nSonnenuntergang und Abendessen\n19:00 Zurück in der Stadt",
+    "description": "Alles an einem Nachmittag. Ein Jeep bringt Sie tief in die Wüste, Sie fahren Quad und reiten auf einem Kamel, besuchen ein Beduinendorf und lassen den Tag mit Abendessen und einer Show unter den Sternen ausklingen.",
+    "meeting_info": "Safari-Büro, El Nasr Road.",
+    "requirements": "Kinder fahren auf dem Quad als Beifahrer mit einem Erwachsenen mit."
+   },
+   "demo-cooking-class": {
+    "title": "Ägyptischer Kochkurs bei einer einheimischen Familie",
+    "summary": "Einkaufen auf dem Markt, vier klassische Gerichte bei einer Gastfamilie kochen und anschließend gemeinsam essen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Zutaten und Kochkurs\nEssen und Getränke\nRezeptkarte",
+    "itinerary": "Treffen mit Ihren Gastgebern auf dem Markt\nEinkauf der Zutaten\nGemeinsames Kochen von vier Gerichten\nGemeinsames Essen und Rezepte",
+    "description": "Sie beginnen auf dem örtlichen Markt und wählen Gemüse und Gewürze aus, dann wird in einer Familienküche gekocht: gefüllte Weinblätter, Koshari, Baladi-Brot und ein Dessert. Was Sie gekocht haben, essen Sie am Familientisch, und die Rezepte nehmen Sie mit nach Hause.\nKleine Gruppe; die Familie bestätigt Ihren Termin auf Anfrage.",
+    "meeting_info": "Gemüsemarkt El Dahar, Haupteingang. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Bitte teilen Sie uns bei der Buchung Allergien oder vegetarische Wünsche mit."
+   },
+   "demo-dinner-cruise": {
+    "title": "Dinner-Kreuzfahrt mit Musik",
+    "summary": "Drei Stunden auf dem abendlichen Meer: Sonnenuntergang, Abendbuffet und orientalische Livemusik an Deck.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nAlkoholische Getränke",
+    "included": "Kreuzfahrt\nAbendbuffet\nWasser und Softdrinks\nLivemusik",
+    "itinerary": "18:30 Einschiffen\n19:00 Ablegen bei Sonnenuntergang\n19:30 Abendbuffet\n20:30 Livemusik an Deck\n21:30 Zurück an der Marina",
+    "description": "Gehen Sie bei Sonnenuntergang an Bord und fahren Sie langsam die Küste entlang, während die Lichter von Hurghada angehen. Zum Abendessen gibt es ein Buffet mit Gegrilltem, Salaten und ägyptischen Gerichten; auf dem Oberdeck spielt eine Band.",
+    "meeting_info": "Hurghada New Marina, Tor 1, 20 Minuten vor Abfahrt.",
+    "requirements": "Smart-Casual-Kleidung. Bringen Sie eine leichte Jacke mit: Auf dem Meer ist es windig."
+   },
+   "demo-dolphin-house": {
+    "title": "Dolphin House mit dem Schnellboot",
+    "summary": "Mit einem schnellen Boot zum Riff, an dem Spinnerdelfine oft rasten, mit zwei Schnorchelstopps.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nTrinkgelder",
+    "included": "Schnellboot mit Crew\nSchnorchelausrüstung\nMittagessen, Wasser und Softdrinks",
+    "itinerary": "08:00 Das Boot verlässt die Marina\n09:15 Dolphin House: rücksichtsvoll beobachten und schnorcheln\n11:30 Schnorchelstopp am Korallengarten\n12:30 Mittagessen an Bord\n14:00 Zurück an der Marina",
+    "description": "Dolphin House ist ein hufeisenförmiges Riff, an dem wilde Spinnerdelfine oft zum Ausruhen kommen. Die Crew hält respektvollen Abstand und befolgt die örtlichen Verhaltensregeln: nicht verfolgen, nicht füttern, nicht berühren.\nDelfine sind Wildtiere, daher sind Sichtungen wahrscheinlich, aber nie garantiert. Der zweite Stopp ist ein Korallengarten zum Schnorcheln.",
+    "meeting_info": "Hurghada New Marina, Tor 2, 20 Minuten vor Abfahrt.",
+    "requirements": "Das Meer kann unruhig sein; sagen Sie der Crew Bescheid, wenn Sie seekrank werden.\nKinder müssen im Wasser eine Weste tragen."
+   },
+   "demo-giftun-island": {
+    "title": "Schnorcheltag auf der Insel Giftun",
+    "summary": "Zwei Riffstopps, ein Strand auf der Insel Giftun und Mittagessen an Bord.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nHandtücher\nTrinkgelder",
+    "included": "Bootsfahrt mit Crew\nSchnorchelmaske, Flossen und Weste\nMittagessen an Bord, Wasser und Softdrinks\nGebühr für das Schutzgebiet",
+    "itinerary": "08:30 Abholung vom Hotel (falls gebucht)\n09:30 Das Boot verlässt die Marina\n10:30 Erster Riffstopp: Schnorcheln\n12:00 Strandzeit auf der Insel Giftun\n13:30 Mittagessen an Bord\n14:30 Zweiter Riffstopp\n16:00 Zurück an der Marina",
+    "description": "Ein entspannter ganzer Tag auf dem Wasser. Das Boot verlässt morgens die Marina von Hurghada und ankert an zwei Riffen im Schutzgebiet Giftun, wo die Crew Ihnen die besten Stellen für Korallen und Fische zeigt. Zwischen den Schnorchelstopps verbringen Sie Zeit am weißen Strand der Insel Giftun.\nSchnorchelausrüstung und eine Auftriebsweste werden gestellt; die Crew bleibt bei Anfängern im Wasser.",
+    "meeting_info": "Hurghada New Marina, Tor 2. Halten Sie 20 Minuten vor Abfahrt am Anleger nach dem WENRO-Schild Ausschau.",
+    "requirements": "Bringen Sie riffschonende Sonnencreme, ein Handtuch und eine Kopfbedeckung mit.\nNicht empfohlen für Personen, die gar nicht schwimmen können; Westen sind vorhanden."
+   },
+   "demo-luxor-balloon": {
+    "title": "Heißluftballon bei Sonnenaufgang in Luxor und die Westbank",
+    "summary": "Schweben Sie im Morgengrauen über das Tal der Könige und besuchen Sie danach die Gräber und den Tempel der Hatschepsut.",
+    "excluded": "Besondere Gräber (Extraticket)\nTrinkgelder",
+    "included": "Reisebus mit Abholung vom Hotel\nBallonfahrt\nGuide und Eintrittskarten\nMittagessen",
+    "itinerary": "01:00 Abholung vom Hotel\n05:30 Start des Ballons (etwa 45 Minuten)\n08:00 Tal der Könige\n10:30 Tempel der Hatschepsut\n12:30 Mittagessen\n13:30 Rückfahrt\n18:30 Zurück in Ihrem Hotel",
+    "description": "Sie verlassen Hurghada in der Nacht, um Luxor vor Sonnenaufgang zu erreichen. Während die Sonne aufgeht, gleitet Ihr Ballon über den Nil, die Felder und die Tempel der Westbank. Nach der Landung führt Sie Ihr Guide ins Tal der Könige und zum Tempel der Hatschepsut, mit Mittagessen am Nil.\nBallonfahrten sind windabhängig und werden vom Anbieter bestätigt.",
+    "meeting_info": "Abholung an Ihrer Hotelrezeption; die Uhrzeit wird am Vortag bestätigt.",
+    "requirements": "Mindestalter 7 Jahre.\nFalls der Ballon nicht starten kann, wird Ihnen der Ballonanteil erstattet."
+   },
+   "demo-old-town-walk": {
+    "title": "Rundgang durch die Altstadt El Dahar und den Markt",
+    "summary": "Erkunden Sie das alte Viertel mit einem einheimischen Guide: die Moschee, den Fischmarkt und einen Gewürzladen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nEinkäufe",
+    "included": "Einheimischer Guide\nTee im Gewürzladen",
+    "itinerary": "Treffen am Platz der El-Mina-Moschee\nGassen des alten Viertels\nFischmarkt und Obstmarkt\nTee in einem Gewürzladen\nEnde nahe der Hurghada Marina",
+    "description": "Ein Rundgang durch El Dahar, den ältesten Teil von Hurghada. Ihr Guide erzählt, wie aus dem Fischerort eine Urlaubsstadt wurde, führt Sie durch die Marktgassen und hält für einen Tee in einem familiengeführten Gewürzladen.",
+    "meeting_info": "Platz der El-Mina-Moschee, am Haupttor.",
+    "requirements": "Schultern und Knie müssen für den Moscheebesuch bedeckt sein."
+   },
+   "demo-private-yacht": {
+    "title": "Privater Yachttag für Ihre Gruppe",
+    "summary": "Ihre eigene Yacht mit Kapitän und Crew für sechs Stunden: Wählen Sie die Riffe und Strände, die Ihnen gefallen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nMeeresparkgebühr\nTrinkgelder",
+    "included": "Private Yacht mit Kapitän und Crew\nSchnorchelausrüstung\nMittagessen, Wasser und Softdrinks",
+    "itinerary": "09:00 Einschiffen an der Marina\nIhr eigenes Programm mit dem Kapitän\nMittagessen an Bord\n15:00 Zurück an der Marina",
+    "description": "Ideal für Familien und Freunde. Der Kapitän plant den Tag gemeinsam mit Ihnen: Schnorcheln an Riffen, ein ruhiger Strand oder einfach Sonne und Baden. Das Mittagessen wird an Bord gekocht.\nBuchen Sie pro Person oder die ganze Yacht als privaten Ausflug für Ihre Gruppe.",
+    "meeting_info": "Hurghada New Marina, Yachtsteg B.",
+    "requirements": "Die endgültige Route hängt von Wind und Seegang ab."
+   },
+   "demo-sunrise-camel": {
+    "title": "Kamelritt bei Sonnenaufgang",
+    "summary": "Ein gemächlicher Kamelritt in die Berge im Morgengrauen, danach Frühstück im Camp.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Kamelritt mit Guide\nFrühstück und Tee",
+    "itinerary": "05:30 Abholung\n06:00 Kamelritt zum Aussichtspunkt\nSonnenaufgang\n07:30 Frühstück im Camp\n08:30 Zurück in die Stadt",
+    "description": "Ein früher Start, belohnt mit der Wüste in ihrer stillsten Stunde. Sie reiten auf einem Kamel, geführt von einem Beduinen, zu einem Aussichtspunkt für den Sonnenaufgang und teilen danach ein einfaches Frühstück im Camp.",
+    "meeting_info": "Wüstencamp, Straße Hurghada–Safaga.",
+    "requirements": "Mindestalter 6 Jahre. Lange Hosen empfohlen."
+   },
+   "demo-two-tank-dive": {
+    "title": "Zwei Rifftauchgänge für zertifizierte Taucher",
+    "summary": "Zwei geführte Tauchgänge an den schönsten Riffen Hurghadas, mit kompletter Ausrüstung und Mittagessen an Bord.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nNitrox (bitte im Tauchzentrum erfragen)\nMeeresparkgebühr",
+    "included": "Zwei geführte Tauchgänge\nFlasche, Blei und komplette Ausrüstung\nMittagessen, Wasser und Tee",
+    "itinerary": "08:00 Check-in im Tauchzentrum\n09:00 Abfahrt des Bootes\n10:00 Erster Tauchgang (etwa 50 Minuten)\n11:00 Oberflächenpause und Mittagessen\n12:30 Zweiter Tauchgang\n14:00 Zurück an der Marina",
+    "description": "Für Taucher, die bereits ein Brevet haben. Der Tauchguide wählt zwei Riffe, die zu den Bedingungen des Tages und Ihrem Niveau passen, mit Oberflächenpause und Mittagessen zwischen den Tauchgängen.\nBringen Sie Ihre Brevetkarte und Ihr Logbuch mit.",
+    "meeting_info": "Tauchzentrum, Sheraton Road. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Open-Water-Brevet oder gleichwertige Qualifikation erforderlich.\nKein Fliegen innerhalb von 24 Stunden nach dem Tauchen."
+   },
+   "demo-bedouin-dinner": {
+    "title": "Beduinen-Abendessen und Sterne beobachten",
+    "summary": "Fahren Sie bei Sonnenuntergang in die Wüste – mit über dem Feuer gebackenem Brot, einem Beduinen-Abendessen und den Sternen.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nSoftdrinks im Camp",
+    "included": "4x4-Transfer zum Camp\nAbendessen, Tee und Wasser\nSterne beobachten mit Guide",
+    "itinerary": "16:30 Abholung oder Treffpunkt\n17:15 Sonnenuntergang in der Wüste\n18:00 Brotbacken und Tee\n19:00 Abendessen am Feuer\n20:00 Sterne beobachten\n20:45 Rückfahrt nach Hurghada",
+    "description": "Ein 4x4 bringt Sie zu einem ruhigen Camp in den Wüstenhügeln. Sie beobachten den Sonnenuntergang, erfahren, wie Beduinenbrot auf heißem Sand und Steinen gebacken wird, und essen dann gemeinsam am Feuer zu Abend. Nach dem Essen werden die Lichter für die Sterne gedimmt.",
+    "meeting_info": "Safari-Basis, Straße Hurghada–Safaga. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Bringen Sie eine warme Schicht mit: Von November bis März sind die Wüstennächte kühl."
+   },
+   "demo-discover-scuba": {
+    "title": "Schnuppertauchen: Ihr erster Tauchgang",
+    "summary": "Keine Erfahrung nötig: Übungen im flachen Wasser, danach ein geführter Tauchgang auf 6–12 m.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nTauchfotos",
+    "included": "Komplette Tauchausrüstung\nInstruktor (1 für 2 Gäste)\nBootsfahrt, Wasser und Snacks",
+    "itinerary": "08:30 Treffen im Tauchzentrum\n09:00 Briefing und Anpassen der Ausrüstung\n10:30 Übungen im flachen Wasser\n11:30 Geführter Tauchgang (etwa 30 Minuten)\n13:00 Zurück an Land",
+    "description": "Ein erster Eindruck vom Tauchen mit einem lizenzierten Instruktor – ein Instruktor für je zwei Gäste. Zuerst lernen Sie die Grundlagen im flachen Wasser; erst wenn Sie sich bereit fühlen, geht es hinab an ein ruhiges Riff.\nVor dem Ausflug füllen Sie einen kurzen medizinischen Fragebogen aus.",
+    "meeting_info": "Tauchzentrum, Sheraton Road. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Mindestalter 10 Jahre. Medizinischer Fragebogen erforderlich.\nKein Fliegen innerhalb von 24 Stunden nach dem Tauchen."
+   },
+   "demo-oriental-night": {
+    "title": "Orientalische Nacht: Abendessen und Tanoura-Show",
+    "summary": "Ägyptisches Abendessen, ein Tanoura-Tänzer, Folkloremusik und ein Bummel durch einen laternenbeleuchteten Basar.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nEinkäufe im Basar",
+    "included": "Abendessen und Softdrinks\nShow\nTee und Kaffee",
+    "itinerary": "19:00 Ankunft und Bummel durch den Basar\n19:45 Abendessen\n20:30 Tanoura-Show und Folkloremusik\n22:00 Ende des Abends",
+    "description": "Ein Abend mit ägyptischer Musik und Küche. Nach einem Spaziergang durch einen kleinen Basar voller Laternen und Gewürze wird das Abendessen serviert, während sich ein Tanoura-Tänzer in seinen bunten Röcken dreht und eine Folkloreband spielt.",
+    "meeting_info": "Veranstaltungsort, El Dahar. Standort-Pin auf Ihrem Voucher.",
+    "requirements": "Für alle Altersgruppen geeignet."
+   },
+   "demo-kitesurf-lesson": {
+    "title": "Kitesurf-Schnupperstunde in El Gouna",
+    "summary": "Drei Stunden mit einem zertifizierten Instruktor: Kitekontrolle an Land, dann Bodydragging im flachen Wasser.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Zertifizierter Instruktor (1 für 2 Schüler)\nKite, Board, Trapez, Helm, Neoprenanzug",
+    "itinerary": "Treffen mit dem Instruktor und Sicherheitseinweisung\nKitekontrolle an Land\nWassereinheit in der flachen Lagune\nNachbesprechung und nächste Schritte",
+    "description": "Die flachen, ruhigen Lagunen von El Gouna gehören zu den besten Orten zum Lernen. Ihr Instruktor beginnt mit der Kitekontrolle am Strand und nimmt Sie dann mit ins knietiefe Wasser, damit Sie den Zug des Kites spüren. Bei gutem Wind stehen manche Schüler am Ende schon auf dem Board.\nDer Unterricht ist windabhängig, daher bestätigt die Schule Ihre Uhrzeit auf Anfrage.",
+    "meeting_info": "Kitestation, Mangroovy Beach, El Gouna.",
+    "requirements": "Sie müssen schwimmen können.\nMindestalter 12 Jahre, Mindestgewicht 40 kg."
+   },
+   "demo-paradise-snorkel": {
+    "title": "Schnorcheltag an zwei Korallenriffen",
+    "summary": "Ein entspannter Bootstag mit zwei Schnorchelstopps, einer Strandpause und Mittagessen an Bord.",
+    "excluded": "Hoteltransfer (optional zubuchbar)\nMeeresparkgebühr\nTrinkgelder",
+    "included": "Boot, Crew und Guide\nMaske, Schnorchel, Flossen und Weste\nMittagessen, Wasser und Softdrinks",
+    "itinerary": "08:30 Das Boot verlässt die Marina\n10:00 Erstes Riff\n12:00 Strandstopp und Mittagessen\n14:00 Zweites Riff\n16:00 Zurück an der Marina",
+    "description": "Fahren Sie mit einer kleinen Crew hinaus zu den Riffen vor Hurghada. An jedem Stopp führt der Guide eine Gruppe im Wasser, während die anderen an Deck entspannen. Zwischen den Riffen ankert das Boot vor einem weißen Sandstrand zum Baden und Mittagessen.\nIdeal für alle, die zum ersten Mal schnorcheln: Westen und Masken in allen Größen sind an Bord.",
+    "meeting_info": "Hurghada New Marina, Tor 2, 20 Minuten vor Abfahrt.",
+    "requirements": "Kinder müssen im Wasser eine Weste tragen.\nVerwenden Sie riffschonende Sonnencreme."
+   },
+   "demo-watersports-pack": {
+    "title": "Wassersport-Paket: Jetski, Banane und Tube",
+    "summary": "15 Minuten auf dem Jetski mit Instruktor, danach eine Fahrt auf der Banane und dem Tube.",
+    "excluded": "Hoteltransfer (optional zubuchbar)",
+    "included": "Jetski (15 Min.) mit Instruktor\nFahrten auf Banane und Tube\nSchwimmwesten",
+    "itinerary": "Sicherheitseinweisung und Schwimmwesten\n15 Minuten Jetski\nFahrt auf der Banane\nFahrt auf dem Tube",
+    "description": "Drei Fahrten mit einer Buchung. Zuerst geht es 15 Minuten auf den Jetski (Sie fahren selbst, der Instruktor ist mit an Bord), dann heißt es auf der Banane und dem Tube gut festhalten, gezogen von einem Schnellboot.",
+    "meeting_info": "Wassersporthütte am öffentlichen Strand, Sheraton Road.",
+    "requirements": "Kinder von 8–11 Jahren fahren nur Banane und Tube, mit einem Erwachsenen.\nNicht geeignet während der Schwangerschaft."
+   }
+  },
+  "ru": {
+   "demo-spa-day": {
+    "title": "Спа-день с бассейном и массажем",
+    "summary": "Целый день спокойствия: бассейны, парная, 30-минутный массаж и лёгкий обед.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nДополнительные процедуры",
+    "included": "Доступ в спа на весь день\n30-минутный массаж\nЛёгкий обед и вода\nПолотенца, халат и тапочки",
+    "itinerary": "10:00 приветственный напиток\nБассейны, сауна и парная\n30-минутный массаж\nЛёгкий обед\n16:00 окончание дня",
+    "description": "Проведите день в тихом спа в Сахл-Хашише. Пользуйтесь крытым и открытым бассейнами, сауной и парной сколько захотите, насладитесь 30-минутным расслабляющим массажем в удобное для вас время и пообедайте у бассейна лёгкими блюдами.",
+    "meeting_info": "Ресепшен спа, старый город Сахл-Хашиша. Точка на карте — в вашем ваучере.",
+    "requirements": "Минимальный возраст — 16 лет."
+   },
+   "demo-flyboard": {
+    "title": "Полёт на флайборде над морем",
+    "summary": "Поднимитесь над водой на реактивных струях, пока инструктор подсказывает вам по радио. 15 минут полёта.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nВидео",
+    "included": "Полёт на флайборде с инструктором\nШлем, жилет и гидрокостюм",
+    "itinerary": "Инструктаж по безопасности на пляже\nЭкипировка\n15 минут на флайборде\nВозвращение на пляж",
+    "description": "После короткого инструктажа на берегу вы надеваете ботинки, шлем и жилет. Инструктор управляет мощностью гидроцикла и говорит с вами через радио в шлеме, поэтому большинство людей взлетают уже через несколько минут.",
+    "meeting_info": "Пункт водных видов спорта на городском пляже, улица Шератон.",
+    "requirements": "Минимальный возраст — 14 лет, вес — 45–110 кг.\nНеобходимо уметь плавать."
+   },
+   "demo-sup-tour": {
+    "title": "Сапбординг на рассвете или на закате",
+    "summary": "Прогулка на сапах с гидом вдоль побережья в спокойные часы, с короткой остановкой для купания.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nВодонепроницаемый чехол для телефона",
+    "included": "Доска, весло и лиш\nГид\nВода",
+    "itinerary": "Подбор доски и тренировка на пляже\nПрогулка с гидом вдоль побережья\nОстановка для купания\nВозвращение на пляж",
+    "description": "Рано утром и перед закатом море самое спокойное. После нескольких минут тренировки на песке гид ведёт вас в неспешную прогулку вдоль побережья с остановкой, чтобы искупаться и посмотреть на мелководный риф.",
+    "meeting_info": "Пункт водных видов спорта на городском пляже, улица Шератон.",
+    "requirements": "Необходимо уметь плавать. Минимальный возраст — 10 лет."
+   },
+   "demo-aqua-park": {
+    "title": "День в аквапарке с горками и бассейнами",
+    "summary": "Целый день горок, бассейна с волнами и ленивой реки, с обедом и безалкогольными напитками.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nШкафчики и полотенца",
+    "included": "Входной билет на день\nОбед и безалкогольные напитки\nЛежаки и зонтики",
+    "itinerary": "10:00 вход\nСвободное время на горках и в бассейнах\n13:00 обед\n17:00 закрытие парка",
+    "description": "День для всей семьи: большие горки для подростков и взрослых, игровая водная зона для малышей, ленивая река и лежаки в тени. Обед и безалкогольные напитки включены.",
+    "meeting_info": "Главный вход в аквапарк, трасса Хургада — Сафага. Точка на карте — в вашем ваучере.",
+    "requirements": "Дети ростом до 120 см пользуются детской зоной.\nНа некоторых горках есть ограничения по росту и весу."
+   },
+   "demo-cairo-day": {
+    "title": "Каир и пирамиды за один день",
+    "summary": "Ранний выезд на автобусе с кондиционером к пирамидам Гизы, Сфинксу и Египетскому музею, с обедом.",
+    "excluded": "Вход внутрь пирамиды Хеопса\nЧаевые",
+    "included": "Автобус с трансфером из отеля\nГид-египтолог\nВходные билеты\nОбед и вода",
+    "itinerary": "03:00 выезд из отеля\n09:30 пирамиды Гизы и Сфинкс\n12:30 обед\n14:00 Египетский музей\n16:30 обратная дорога\n23:00 возвращение в отель",
+    "description": "Долгий, но насыщенный день. Автобус выезжает из Хургады до рассвета и к концу утра прибывает в Гизу. Гид-египтолог проведёт вас к пирамидам и Сфинксу, а после обеда — в Египетский музей.\nОператор подтверждает каждую заявку, потому что места в автобусе и билеты в музей бронируются заранее.",
+    "meeting_info": "Трансфер от ресепшена вашего отеля; время подтверждается накануне.",
+    "requirements": "Возьмите с собой паспорт. Удобная обувь и головной убор.\nВсего около 12 часов в дороге."
+   },
+   "demo-city-tour": {
+    "title": "Обзорная экскурсия по Хургаде: мечеть, церковь и марина",
+    "summary": "Четыре часа с местным гидом по достопримечательностям города, старым улочкам и марине.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nПокупки\nЧаевые",
+    "included": "Местный гид\nМикроавтобус с кондиционером\nВода",
+    "itinerary": "Трансфер или место встречи\nМечеть Эль-Дахар\nКоптская церковь\nРыбный рынок и старые улочки\nПрогулка по марине и свободное время",
+    "description": "Увидьте Хургаду, которую пропускает большинство туристов. Гид покажет вам большую мечеть Эль-Дахара, коптскую церковь, рыбный рынок и оживлённые улицы старого города, а в конце вас ждёт прогулка по марине.\nДля входа в мечеть нужна закрытая одежда; платки выдаются.",
+    "meeting_info": "Главная площадь Эль-Дахара, напротив старого почтового отделения.",
+    "requirements": "Для посещения мечети плечи и колени должны быть закрыты."
+   },
+   "demo-gouna-day": {
+    "title": "Поездка в Эль-Гуну: лагуны, марина и прогулка на лодке",
+    "summary": "День в городе на лагунах к северу от Хургады: прогулка на лодке по каналам и свободное время в марине Абу-Тиг.",
+    "excluded": "Обед\nТрансфер из отеля (дополнительная опция)",
+    "included": "Гид и микроавтобус с кондиционером\nПрогулка на лодке по лагуне\nВода",
+    "itinerary": "09:30 трансфер или место встречи\n10:15 прибытие в Эль-Гуну\n10:30 прогулка на лодке по лагуне\n11:30 прогулка по центру\n12:30 свободное время в марине\n16:00 возвращение в Хургаду",
+    "description": "Эль-Гуна построена на лагунах и каналах. После поездки на север небольшая лодка провезёт вас по каналам мимо разноцветных домов, затем вы прогуляетесь по центру и проведёте вторую половину дня в марине — за обедом, покупками или чашкой кофе рядом с яхтами.",
+    "meeting_info": "Главная площадь Эль-Дахара, напротив старого почтового отделения.",
+    "requirements": "Наденьте удобную обувь."
+   },
+   "demo-luxor-day": {
+    "title": "Поездка в Луксор: храмы и Западный берег",
+    "summary": "Долгий день в дороге до Луксора с гидом-египтологом: Карнак, Долина царей и обед на берегу Нила.",
+    "excluded": "Особые гробницы и разрешения на фотосъёмку\nЧаевые",
+    "included": "Транспорт с кондиционером\nГид-египтолог\nВходные билеты на указанные объекты\nОбед и вода",
+    "itinerary": "05:00 выезд из отеля\n09:00 Карнакский храм\n11:30 Долина царей\n13:30 обед на берегу Нила\n15:00 храм Хатшепсут (осмотр снаружи)\n16:00 обратная дорога\n20:00 возвращение в отель",
+    "description": "Целый день: около четырёх часов в одну сторону на микроавтобусе с кондиционером. В Луксоре гид-египтолог проведёт вас по Карнакскому храму, переправит через Нил в Долину царей и на обед с видом на реку.\nВходные билеты на объекты из программы включены; особые гробницы оплачиваются дополнительно на месте.",
+    "meeting_info": "Трансфер из лобби вашего отеля (включая районы Хургады).",
+    "requirements": "Нужна копия паспорта. Долгий день: не лучший вариант для детей до 6 лет."
+   },
+   "demo-submarine": {
+    "title": "Прогулка на подводной лодке к коралловому рифу",
+    "summary": "Опуститесь примерно на 20 метров на настоящей туристической подводной лодке и смотрите на риф через большие иллюминаторы, не намокнув.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nФотографии",
+    "included": "Катер-трансфер и погружение на подводной лодке\nГид на борту\nВода",
+    "itinerary": "Катер до подводной лодки\nОколо 45 минут под водой\nКатер обратно в марину",
+    "description": "Идеально для семей и тех, кто не умеет плавать. Катер доставит вас к подводной лодке, которая медленно погружается вдоль рифа. У каждого места свой иллюминатор, а гид рассказывает о рыбах и кораллах, которых вы видите.",
+    "meeting_info": "Новая марина Хургады, причал подводной лодки, за 30 минут до отправления.",
+    "requirements": "Не подходит людям с сильной боязнью замкнутых пространств."
+   },
+   "demo-beach-yoga": {
+    "title": "Йога на пляже на рассвете или на закате",
+    "summary": "75-минутное мягкое занятие йогой на песке для любого уровня, а после — свежевыжатый сок.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Занятие йогой с сертифицированным преподавателем\nКоврик и полотенце\nСвежевыжатый сок",
+    "itinerary": "Знакомство и дыхательные упражнения\nМягкая практика\nРасслабление\nСвежевыжатый сок",
+    "description": "Спокойное занятие с сертифицированным преподавателем на тихом пляже в Сахл-Хашише. Дыхательные упражнения, мягкая практика и долгое расслабление под шум моря. Коврики предоставляются.",
+    "meeting_info": "Пляжная площадка спа, Сахл-Хашиш. Точка на карте — в вашем ваучере.",
+    "requirements": "Подходит для любого уровня. Расскажите преподавателю о травмах."
+   },
+   "demo-glass-boat": {
+    "title": "Лодка со стеклянным дном: рифы, не намокнув",
+    "summary": "Два часа наблюдения за кораллами и рыбами через стеклянное дно лодки.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Морская прогулка\nВода",
+    "itinerary": "Отправление из марины\nНеспешная прогулка над двумя рифами\nКороткая остановка: ничего не кормим и ничего не трогаем — просто смотрим\nВозвращение в марину",
+    "description": "Самый простой способ увидеть рифы Красного моря: садитесь на нижней палубе и наблюдайте за кораллами и рыбами через большие стеклянные окна. Подходит для маленьких детей, бабушек и дедушек и всех, кто предпочитает оставаться сухим.",
+    "meeting_info": "Новая марина Хургады, ворота 1, за 15 минут до отправления.",
+    "requirements": "Подходит для любого возраста."
+   },
+   "demo-hammam-spa": {
+    "title": "Ритуал хаммама и массажа",
+    "summary": "Парная, пилинг с чёрным мылом, пенное мытьё и 45-минутный массаж с маслом, а затем мятный чай.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Хаммам и массаж\nПолотенца, халат и тапочки\nМятный чай",
+    "itinerary": "Парная\nПилинг с чёрным мылом и пенное мытьё\n45-минутный массаж с маслом\nОтдых с мятным чаем",
+    "description": "Два часа неспешного отдыха. Вы начинаете в парной, затем мастер делает вам пилинг и пенное мытьё на тёплом мраморе, после чего следует 45-минутный массаж с аргановым маслом. В завершение — мятный чай в комнате отдыха.",
+    "meeting_info": "Ресепшен спа, старый город Сахл-Хашиша. Точка на карте — в вашем ваучере.",
+    "requirements": "Минимальный возраст — 16 лет. Сообщите нам о беременности или проблемах со здоровьем."
+   },
+   "demo-horse-ride": {
+    "title": "Конная прогулка по пляжу и пустыне",
+    "summary": "Два часа в седле от края пустыни до моря — для новичков и опытных наездников.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Лошадь и гид\nШлем\nЧай",
+    "itinerary": "Знакомство с лошадьми и короткий урок\nПрогулка по краю пустыни\nПляж и прогулка по воде\nВозвращение в конюшню, чай",
+    "description": "Отправляйтесь из конюшни по краю пустыни к тихому пляжу, где лошади идут по мелководью. Спокойные лошади для новичков и более резвые — для опытных наездников.",
+    "meeting_info": "Конюшня за Макади-Бей. Точка на карте — в вашем ваучере.",
+    "requirements": "Минимальный возраст — 8 лет. Максимальный вес — 100 кг.\nРекомендуются длинные брюки."
+   },
+   "demo-night-dive": {
+    "title": "Ночное погружение на домашнем рифе",
+    "summary": "Погружение с гидом после заката, с фонарями, когда на рифе начинается ночная жизнь.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Ночное погружение с гидом\nФонарь, баллон, грузы и полное снаряжение\nГорячий напиток",
+    "itinerary": "17:30 регистрация и брифинг\n18:15 снаряжение и вход в воду\n18:30 ночное погружение (около 45 минут)\n19:30 горячий напиток и запись в логбук",
+    "description": "Ночью риф полностью меняется: осьминоги и мурены выходят на охоту, рыбы-попугаи спят в своих коконах, а планктон светится. Вы погружаетесь с опытным гидом и фонарём в спокойном мелководном месте.\nПеред подтверждением центр проверяет ваш опыт.",
+    "meeting_info": "Дайвинг-центр на улице Шератон. Точная точка на карте — в вашем ваучере.",
+    "requirements": "Сертификат Open Water и не менее 10 записанных в логбук погружений.\nМинимальный возраст — 15 лет."
+   },
+   "demo-orange-bay": {
+    "title": "Пляжный день в Orange Bay",
+    "summary": "Долгая остановка на пляже в бухте с белым песком, одна остановка для снорклинга и обед.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nЛежаки (за доплату)",
+    "included": "Морская прогулка\nВход на пляж\nОбед и безалкогольные напитки\nСнаряжение для снорклинга",
+    "itinerary": "09:00 отправление лодки из марины\n10:30 прибытие в бухту: свободное время на пляже\n13:00 обед\n14:30 остановка для снорклинга\n16:30 возвращение в марину",
+    "description": "Неспешный день, построенный вокруг пляжа. Большую часть времени вы проводите в бухте с белым песком и мелкой бирюзовой водой — отлично подходит для семей и тех, кто не умеет плавать. На обратном пути — одна остановка для снорклинга.",
+    "meeting_info": "Новая марина Хургады, ворота 2, за 20 минут до отправления.",
+    "requirements": "Возьмите полотенце и солнцезащитный крем, безопасный для рифов."
+   },
+   "demo-wreck-dive": {
+    "title": "Дайвинг на затонувшем корабле у Хургады",
+    "summary": "Погружение на затонувший корабль, покрытый кораллами, с опытным гидом; второе погружение — на рифе.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nСбор морского парка",
+    "included": "Два погружения с гидом (затонувший корабль и риф)\nПолное снаряжение\nОбед и напитки",
+    "itinerary": "07:00 регистрация и брифинг\n08:00 отправление лодки\n09:30 погружение на затонувший корабль\n11:00 обед на борту\n12:30 погружение на рифе\n14:30 возвращение в марину",
+    "description": "Погружение на затонувший корабль для сертифицированных дайверов с некоторым опытом. После подробного брифинга вы спускаетесь по линю и осматриваете корабль снаружи — теперь это дом для кораллов и рыб. Проникновение внутрь в программу не входит.\nПеред подтверждением центр проверяет ваш логбук, поэтому эта поездка бронируется по запросу.",
+    "meeting_info": "Дайвинг-центр, улица Шератон. Точка на карте — в вашем ваучере.",
+    "requirements": "Сертификат Advanced или 20 записанных в логбук погружений.\nМинимальный возраст — 15 лет."
+   },
+   "demo-parasailing": {
+    "title": "Парасейлинг над бухтой",
+    "summary": "Около 10 минут в воздухе над морем, в одиночку или вдвоём, а под вами — пляж.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nФото и видео",
+    "included": "Полёт с подвесной системой и спасательным жилетом\nПрогулка на катере",
+    "itinerary": "Короткий инструктаж по безопасности на пляже\nПоездка на катере к месту полёта\nОколо 10 минут в воздухе\nВозвращение на пляж",
+    "description": "Взлетите с кормы катера и медленно поднимитесь над бухтой. Полёт спокойный и тихий, а приземляетесь вы обратно на катер сухими. Возможен полёт вдвоём, если общий вес не превышает лимит.",
+    "meeting_info": "Пункт водных видов спорта на городском пляже, улица Шератон.",
+    "requirements": "Минимальный возраст — 8 лет (дети летают в паре со взрослым).\nПри сильном ветре полёт отменяется: вам предложат другое время или полностью вернут деньги."
+   },
+   "demo-quad-safari": {
+    "title": "Поездка на квадроцикле в бедуинскую деревню",
+    "summary": "Час на собственном квадроцикле по пустыне и чай в бедуинской деревне.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nФотографии, которые продаются в лагере",
+    "included": "Квадроцикл и топливо\nШлем, очки и платок\nГид\nБедуинский чай и лепёшки",
+    "itinerary": "Инструктаж по безопасности и подбор шлема\n1 час на квадроцикле с гидом впереди и позади колонны\nБедуинская деревня: чай, лепёшки, короткая прогулка на верблюде\nВозвращение в лагерь",
+    "description": "После короткого инструктажа по безопасности вы едете на собственном квадроцикле в колонне за гидом по открытым пустынным трассам. На полпути — остановка в бедуинской деревне: чай, лепёшки, испечённые на огне, и короткая прогулка на верблюде.\nОператор подтверждает вашу заявку в течение 12 часов, потому что квадроциклы и шлемы распределяются заранее.",
+    "meeting_info": "Лагерь в пустыне на трассе Хургада — Сафага. Точная точка на карте придёт вместе с ваучером.",
+    "requirements": "Управлять квадроциклом можно с 16 лет. Рекомендуется закрытая обувь.\nНе подходит при беременности и проблемах со спиной."
+   },
+   "demo-sunset-sail": {
+    "title": "Парусная прогулка на закате",
+    "summary": "Два с половиной часа под парусом, пока садится солнце, с чаем и закусками.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Парусная прогулка со шкипером\nЧай, безалкогольные напитки и закуски",
+    "itinerary": "16:00 посадка\n16:15 прогулка под парусом вдоль побережья\nЗакат на палубе с чаем и закусками\n18:30 возвращение в марину",
+    "description": "Небольшая парусная лодка выходит из марины ближе к вечеру и идёт вдоль побережья, пока солнце садится за горы. Тихо, неспешно и отлично подходит для пар.",
+    "meeting_info": "Бульвар марины Хургады, причал C.",
+    "requirements": "Возьмите лёгкую куртку: после заката на воде становится прохладнее."
+   },
+   "demo-desert-stars": {
+    "title": "Звёзды в пустыне и ужин-барбекю",
+    "summary": "Закат в дюнах, ужин в бедуинском лагере и ночное небо в телескоп.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Трансфер от места встречи до лагеря\nУжин, чай и вода\nНаблюдение в телескоп с гидом",
+    "itinerary": "17:00 выезд и дорога в лагерь\nЗакат на дюне\nУжин-барбекю и чай\nНаблюдение за звёздами в телескоп\n22:00 возвращение в отель",
+    "description": "Ближе к вечеру вы выезжаете из города, чтобы до заката добраться до тихого лагеря в пустыне. После ужина-барбекю у костра свет гасят, и гид показывает вам звёзды и планеты в телескоп.",
+    "meeting_info": "Место встречи: офис сафари, улица Эль-Наср.",
+    "requirements": "Возьмите тёплую одежду: с ноября по март ночи в пустыне холодные."
+   },
+   "demo-fishing-trip": {
+    "title": "Утренняя рыбалка в Красном море",
+    "summary": "Донная рыбалка с небольшой лодки: удочки, наживка и обед из рыбы на гриле.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nЧаевые",
+    "included": "Лодка, капитан и команда\nУдочки, лески и наживка\nОбед из вашего улова\nВода и чай",
+    "itinerary": "07:30 отправление лодки из марины\n08:30 первое место для рыбалки\n10:30 второе место\n12:00 обед из улова на гриле\n12:30 возвращение в марину",
+    "description": "Отправляйтесь с местным капитаном к рыбным местам к северу от Хургады. Удочки, лески и наживка уже ждут на борту, а команда покажет новичкам, как забрасывать и вытаскивать снасть.\nВаш улов почистят и приготовят на гриле прямо на борту к обеду.",
+    "meeting_info": "Новая марина Хургады, ворота 2, за 20 минут до отправления.",
+    "requirements": "Прогулка проходит при спокойном море, но если нужно, всё же возьмите таблетки от укачивания."
+   },
+   "demo-island-beach": {
+    "title": "Пляжный день на острове у Гифтуна",
+    "summary": "День на острове с мягким песчаным пляжем: лежак и зонтик, снорклинг прямо с берега и обед.",
+    "excluded": "Аренда снаряжения для снорклинга\nСбор морского парка\nТрансфер из отеля (дополнительная опция)",
+    "included": "Трансфер на скоростном катере\nЛежак и зонтик\nОбед «шведский стол» и вода",
+    "itinerary": "08:30 отправление лодки из марины\n09:15 прибытие на остров\nСвободное время на пляже\n12:30 обед «шведский стол»\n16:00 возвращение в марину",
+    "description": "Скоростной катер доставит вас на охраняемый островной пляж в районе Гифтуна. Проведите день на лежаке под зонтиком, плавайте с маской прямо с пляжа над мелководным рифом и наслаждайтесь обедом «шведский стол».",
+    "meeting_info": "Новая марина Хургады, ворота 4, за 20 минут до отправления.",
+    "requirements": "Используйте солнцезащитный крем, безопасный для рифов. Трогать кораллы нельзя."
+   },
+   "demo-super-safari": {
+    "title": "Супер-сафари: джип, квадроцикл, верблюд и ужин",
+    "summary": "Полдня в пустыне: поездка на джипе, квадроцикл, верблюд, бедуинская деревня и ужин.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Поездки на джипе, квадроцикле и верблюде\nГид\nУжин и напитки",
+    "itinerary": "13:00 поездка на джипе в пустыню\nКвадроцикл (30 минут)\nПрогулка на верблюде и бедуинская деревня\nЗакат и ужин\n19:00 возвращение в город",
+    "description": "Всё за один день. Джип увезёт вас вглубь пустыни, вы прокатитесь на квадроцикле и верблюде, побываете в бедуинской деревне, а завершите день ужином и шоу под звёздами.",
+    "meeting_info": "Офис сафари, улица Эль-Наср.",
+    "requirements": "Дети едут на квадроцикле пассажирами вместе со взрослым."
+   },
+   "demo-cooking-class": {
+    "title": "Урок египетской кухни в местной семье",
+    "summary": "Закупитесь на рынке, приготовьте четыре классических блюда дома с принимающей семьёй, а затем поешьте вместе.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Продукты и кулинарный урок\nЕда и напитки\nКарточка с рецептами",
+    "itinerary": "Встреча с хозяевами на рынке\nПокупка продуктов\nСовместное приготовление четырёх блюд\nОбщая трапеза и рецепты",
+    "description": "Начните с местного рынка, где вы выберете овощи и специи, а затем готовьте на семейной кухне: фаршированные виноградные листья, кошари, хлеб балади и десерт. Вы съедите приготовленное за семейным столом и заберёте рецепты домой.\nМаленькая группа; семья подтверждает вашу дату по запросу.",
+    "meeting_info": "Овощной рынок Эль-Дахара, главный вход. Точка на карте — в вашем ваучере.",
+    "requirements": "При бронировании сообщите нам об аллергиях или вегетарианском питании."
+   },
+   "demo-dinner-cruise": {
+    "title": "Круиз с ужином и музыкой",
+    "summary": "Три часа на вечернем море: закат, ужин «шведский стол» и живая восточная музыка на палубе.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nАлкогольные напитки",
+    "included": "Круиз\nУжин «шведский стол»\nВода и безалкогольные напитки\nЖивая музыка",
+    "itinerary": "18:30 посадка\n19:00 отплытие на закате\n19:30 ужин «шведский стол»\n20:30 живая музыка на палубе\n21:30 возвращение в марину",
+    "description": "Поднимитесь на борт на закате и неспешно плывите вдоль побережья, пока зажигаются огни Хургады. На ужин — «шведский стол» с блюдами на гриле, салатами и египетской кухней; на верхней палубе играет группа.",
+    "meeting_info": "Новая марина Хургады, ворота 1, за 20 минут до отправления.",
+    "requirements": "Дресс-код: смарт-кэжуал. Возьмите лёгкую куртку: в море ветрено."
+   },
+   "demo-dolphin-house": {
+    "title": "Дом дельфинов на скоростном катере",
+    "summary": "Быстрый катер к рифу, где часто отдыхают дельфины-вертуны, и две остановки для снорклинга.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nЧаевые",
+    "included": "Скоростной катер с командой\nСнаряжение для снорклинга\nОбед, вода и безалкогольные напитки",
+    "itinerary": "08:00 отправление лодки из марины\n09:15 Дом дельфинов: наблюдение и бережный снорклинг\n11:30 остановка для снорклинга в коралловом саду\n12:30 обед на борту\n14:00 возвращение в марину",
+    "description": "Дом дельфинов — риф в форме подковы, куда дикие дельфины-вертуны часто приплывают отдохнуть. Команда держит уважительную дистанцию и соблюдает местные правила поведения: не преследовать, не кормить, не трогать.\nДельфины — дикие животные, поэтому встретить их вероятно, но никогда не гарантировано. Вторая остановка — коралловый сад для снорклинга.",
+    "meeting_info": "Новая марина Хургады, ворота 2, за 20 минут до отправления.",
+    "requirements": "Море может быть неспокойным; сообщите команде, если вас укачивает.\nДети должны быть в воде в жилете."
+   },
+   "demo-giftun-island": {
+    "title": "Снорклинг на острове Гифтун",
+    "summary": "Две остановки на рифах, пляж на острове Гифтун и обед на борту.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nПолотенца\nЧаевые",
+    "included": "Морская прогулка с командой\nМаска, ласты и жилет для снорклинга\nОбед на борту, вода и безалкогольные напитки\nСбор за посещение заповедной зоны",
+    "itinerary": "08:30 трансфер из отеля (если забронирован)\n09:30 отправление лодки из марины\n10:30 первая остановка на рифе: снорклинг\n12:00 время на пляже острова Гифтун\n13:30 обед на борту\n14:30 вторая остановка на рифе\n16:00 возвращение в марину",
+    "description": "Расслабленный день на воде. Утром лодка выходит из марины Хургады и встаёт на якорь у двух рифов в заповедной зоне Гифтун, где команда покажет вам лучшие места с кораллами и рыбами. Между остановками для снорклинга вы отдыхаете на белом пляже острова Гифтун.\nСнаряжение для снорклинга и жилет предоставляются; команда остаётся в воде рядом с новичками.",
+    "meeting_info": "Новая марина Хургады, ворота 2. Ищите табличку WENRO на причале за 20 минут до отправления.",
+    "requirements": "Возьмите солнцезащитный крем, безопасный для рифов, полотенце и головной убор.\nНе рекомендуется тем, кто совсем не умеет плавать; есть жилеты."
+   },
+   "demo-luxor-balloon": {
+    "title": "Луксор: воздушный шар на рассвете и Западный берег",
+    "summary": "Пролетите над Долиной царей на рассвете, а затем посетите гробницы и храм Хатшепсут.",
+    "excluded": "Особые гробницы (отдельный билет)\nЧаевые",
+    "included": "Автобус с трансфером из отеля\nПолёт на воздушном шаре\nГид и входные билеты\nОбед",
+    "itinerary": "01:00 выезд из отеля\n05:30 взлёт воздушного шара (около 45 минут)\n08:00 Долина царей\n10:30 храм Хатшепсут\n12:30 обед\n13:30 обратная дорога\n18:30 возвращение в отель",
+    "description": "Вы выезжаете из Хургады ночью, чтобы добраться до Луксора до рассвета. С восходом солнца ваш шар плывёт над Нилом, полями и храмами Западного берега. После приземления гид проведёт вас по Долине царей и храму Хатшепсут, а обед будет на берегу Нила.\nПолёты на шаре зависят от ветра и подтверждаются оператором.",
+    "meeting_info": "Трансфер от ресепшена вашего отеля; время подтверждается накануне.",
+    "requirements": "Минимальный возраст — 7 лет.\nЕсли шар не сможет взлететь, стоимость полёта вам вернут."
+   },
+   "demo-old-town-walk": {
+    "title": "Прогулка по старому городу Эль-Дахар и рынку",
+    "summary": "Прогуляйтесь по старому кварталу с местным гидом: мечеть, рыбный рынок и лавка специй.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nПокупки",
+    "included": "Местный гид\nЧай в лавке специй",
+    "itinerary": "Встреча на площади у мечети Эль-Мина\nУлочки старого квартала\nРыбный и фруктовый рынки\nЧай в лавке специй\nОкончание рядом с мариной Хургады",
+    "description": "Пешая экскурсия по Эль-Дахару, самой старой части Хургады. Гид расскажет, как рыбацкий посёлок превратился в курортный город, проведёт вас по рыночным улочкам и сделает остановку на чай в семейной лавке специй.",
+    "meeting_info": "Площадь у мечети Эль-Мина, у главных ворот.",
+    "requirements": "Для посещения мечети плечи и колени должны быть закрыты."
+   },
+   "demo-private-yacht": {
+    "title": "День на частной яхте для вашей компании",
+    "summary": "Собственная яхта, капитан и команда на шесть часов: выбирайте рифы и пляжи, которые вам нравятся.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nСбор морского парка\nЧаевые",
+    "included": "Частная яхта с капитаном и командой\nСнаряжение для снорклинга\nОбед, вода и безалкогольные напитки",
+    "itinerary": "09:00 посадка в марине\nВаша собственная программа вместе с капитаном\nОбед на борту\n15:00 возвращение в марину",
+    "description": "Идеально для семей и друзей. Капитан спланирует день вместе с вами: рифы для снорклинга, тихий пляж или просто солнце и купание. Обед готовят прямо на борту.\nБронируйте по количеству человек или всю яхту для вашей компании как частную поездку.",
+    "meeting_info": "Новая марина Хургады, яхтенный причал B.",
+    "requirements": "Окончательный маршрут зависит от ветра и состояния моря."
+   },
+   "demo-sunrise-camel": {
+    "title": "Прогулка на верблюде на рассвете",
+    "summary": "Неспешная прогулка на верблюде в горы на рассвете, а затем завтрак в лагере.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Прогулка на верблюде с гидом\nЗавтрак и чай",
+    "itinerary": "05:30 выезд\n06:00 прогулка на верблюде к смотровой площадке\nРассвет\n07:30 завтрак в лагере\n08:30 возвращение в город",
+    "description": "Ранний подъём, за который вас вознаградит пустыня в самый тихий час. Бедуин-проводник ведёт вашего верблюда к смотровой площадке, где вы встретите рассвет, а затем вас ждёт простой завтрак в лагере.",
+    "meeting_info": "Лагерь в пустыне, трасса Хургада — Сафага.",
+    "requirements": "Минимальный возраст — 6 лет. Рекомендуются длинные брюки."
+   },
+   "demo-two-tank-dive": {
+    "title": "Два погружения на рифах для сертифицированных дайверов",
+    "summary": "Два погружения с гидом на лучших рифах Хургады, с полным снаряжением и обедом на борту.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nНитрокс (уточняйте в центре)\nСбор морского парка",
+    "included": "Два погружения с гидом\nБаллон, грузы и полное снаряжение\nОбед, вода и чай",
+    "itinerary": "08:00 регистрация в дайвинг-центре\n09:00 отправление лодки\n10:00 первое погружение (около 50 минут)\n11:00 поверхностный интервал и обед\n12:30 второе погружение\n14:00 возвращение в марину",
+    "description": "Для дайверов, у которых уже есть сертификат. Гид выбирает два рифа с учётом условий дня и вашего уровня, а между погружениями — поверхностный интервал и обед.\nВозьмите с собой сертификат и логбук.",
+    "meeting_info": "Дайвинг-центр, улица Шератон. Точка на карте — в вашем ваучере.",
+    "requirements": "Требуется сертификат Open Water или аналогичный.\nНельзя летать в течение 24 часов после погружения."
+   },
+   "demo-bedouin-dinner": {
+    "title": "Бедуинский ужин и звёздное небо",
+    "summary": "Поездка в пустыню на закате: хлеб, испечённый на огне, бедуинский ужин и звёзды.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nБезалкогольные напитки в лагере",
+    "included": "Трансфер в лагерь на внедорожнике 4x4\nУжин, чай и вода\nНаблюдение за звёздами с гидом",
+    "itinerary": "16:30 трансфер или место встречи\n17:15 закат в пустыне\n18:00 выпечка хлеба и чай\n19:00 ужин у костра\n20:00 наблюдение за звёздами\n20:45 возвращение в Хургаду",
+    "description": "Внедорожник 4x4 отвезёт вас в тихий лагерь среди пустынных холмов. Вы полюбуетесь закатом, узнаете, как бедуины пекут хлеб на горячем песке и камнях, а затем поужинаете у костра. После ужина свет приглушают, чтобы смотреть на звёзды.",
+    "meeting_info": "База сафари, трасса Хургада — Сафага. Точка на карте — в вашем ваучере.",
+    "requirements": "Возьмите тёплую одежду: с ноября по март ночи в пустыне прохладные."
+   },
+   "demo-discover-scuba": {
+    "title": "Пробный дайвинг: ваше первое погружение",
+    "summary": "Опыт не нужен: тренировка на мелководье, а затем погружение с гидом на 6–12 м.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nФотографии с погружения",
+    "included": "Всё снаряжение для дайвинга\nИнструктор (1 на 2 гостей)\nМорская прогулка, вода и закуски",
+    "itinerary": "08:30 встреча в дайвинг-центре\n09:00 брифинг и подбор снаряжения\n10:30 тренировка на мелководье\n11:30 погружение с гидом (около 30 минут)\n13:00 возвращение на берег",
+    "description": "Первое знакомство с дайвингом с лицензированным инструктором — один инструктор на каждых двух гостей. Сначала вы осваиваете основы на мелководье и только когда почувствуете себя готовыми, опускаетесь к спокойному рифу.\nПеред поездкой вы заполняете короткую медицинскую анкету.",
+    "meeting_info": "Дайвинг-центр, улица Шератон. Точка на карте — в вашем ваучере.",
+    "requirements": "Минимальный возраст — 10 лет. Обязательна медицинская анкета.\nНельзя летать в течение 24 часов после погружения."
+   },
+   "demo-oriental-night": {
+    "title": "Восточная ночь: ужин и шоу танура",
+    "summary": "Египетский ужин, танцор танура, народная музыка и прогулка по базару, освещённому фонарями.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nПокупки на базаре",
+    "included": "Ужин и безалкогольные напитки\nШоу\nЧай и кофе",
+    "itinerary": "19:00 прибытие и прогулка по базару\n19:45 ужин\n20:30 шоу танура и народная музыка\n22:00 окончание вечера",
+    "description": "Вечер египетской музыки и кухни. После прогулки по небольшому базару с фонарями и специями подают ужин, а танцор танура кружится в своих разноцветных юбках под игру народного ансамбля.",
+    "meeting_info": "Площадка мероприятия, Эль-Дахар. Точка на карте — в вашем ваучере.",
+    "requirements": "Подходит для любого возраста."
+   },
+   "demo-kitesurf-lesson": {
+    "title": "Пробный урок кайтсёрфинга в Эль-Гуне",
+    "summary": "Три часа с сертифицированным инструктором: управление кайтом на суше, затем боди-драг на мелководье.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Сертифицированный инструктор (1 на 2 учеников)\nКайт, доска, трапеция, шлем, гидрокостюм",
+    "itinerary": "Встреча с инструктором и инструктаж по безопасности\nУправление кайтом на суше\nЗанятие на воде в мелкой лагуне\nРазбор занятия и дальнейшие шаги",
+    "description": "Ровные мелкие лагуны Эль-Гуны — одно из лучших мест для обучения. Инструктор начинает с управления кайтом на пляже, а затем заводит вас в воду по колено, чтобы вы почувствовали тягу кайта. При хорошем ветре некоторые ученики к концу занятия уже встают на доску.\nЗанятия зависят от ветра, поэтому школа подтверждает время по запросу.",
+    "meeting_info": "Кайт-станция, пляж Mangroovy, Эль-Гуна.",
+    "requirements": "Необходимо уметь плавать.\nМинимальный возраст — 12 лет, минимальный вес — 40 кг."
+   },
+   "demo-paradise-snorkel": {
+    "title": "Снорклинг на двух коралловых рифах",
+    "summary": "Расслабленный день на лодке: две остановки для снорклинга, отдых на пляже и обед на борту.",
+    "excluded": "Трансфер из отеля (дополнительная опция)\nСбор морского парка\nЧаевые",
+    "included": "Лодка, команда и гид\nМаска, трубка, ласты и жилет\nОбед, вода и безалкогольные напитки",
+    "itinerary": "08:30 отправление лодки из марины\n10:00 первый риф\n12:00 остановка на пляже и обед\n14:00 второй риф\n16:00 возвращение в марину",
+    "description": "Отправляйтесь к рифам у берегов Хургады с небольшой командой. На каждой остановке гид ведёт группу в воде, а остальные отдыхают на палубе. Между рифами лодка встаёт на якорь у пляжа с белым песком, где можно искупаться и пообедать.\nПодходит для тех, кто впервые пробует снорклинг: на борту есть жилеты и маски всех размеров.",
+    "meeting_info": "Новая марина Хургады, ворота 2, за 20 минут до отправления.",
+    "requirements": "Дети должны быть в воде в жилете.\nИспользуйте солнцезащитный крем, безопасный для рифов."
+   },
+   "demo-watersports-pack": {
+    "title": "Пакет водных развлечений: гидроцикл, банан и плюшка",
+    "summary": "15 минут на гидроцикле с инструктором, а затем катание на банане и на плюшке.",
+    "excluded": "Трансфер из отеля (дополнительная опция)",
+    "included": "Гидроцикл (15 мин) с инструктором\nКатание на банане и плюшке\nСпасательные жилеты",
+    "itinerary": "Инструктаж по безопасности и спасательные жилеты\n15 минут на гидроцикле\nКатание на банане\nКатание на плюшке",
+    "description": "Три развлечения в одном бронировании. Сначала 15 минут на гидроцикле (вы за рулём, инструктор на борту), а затем держитесь крепче на банане и плюшке, которые тянет скоростной катер.",
+    "meeting_info": "Пункт водных видов спорта на городском пляже, улица Шератон.",
+    "requirements": "Дети 8–11 лет катаются только на банане и плюшке, вместе со взрослым.\nНе подходит при беременности."
+   }
+  },
+  "fr": {
+   "demo-spa-day": {
+    "title": "Journée spa avec piscine et massage",
+    "summary": "Une journée entière de calme : piscines, hammam, un massage de 30 minutes et un déjeuner léger.",
+    "excluded": "Transfert depuis l’hôtel (option)\nSoins supplémentaires",
+    "included": "Accès au spa pour la journée\nMassage de 30 minutes\nDéjeuner léger et eau\nServiettes, peignoir et chaussons",
+    "itinerary": "10:00 boisson de bienvenue\nPiscines, sauna et hammam\nMassage de 30 minutes\nDéjeuner léger\n16:00 fin de la journée",
+    "description": "Passez la journée dans un spa paisible de Sahl Hasheesh. Profitez à votre guise des piscines intérieure et extérieure, du sauna et du hammam, savourez un massage relaxant de 30 minutes à l’heure de votre choix et prenez un déjeuner léger au bord de la piscine.",
+    "meeting_info": "Accueil du spa, vieille ville de Sahl Hasheesh. Localisation sur votre bon.",
+    "requirements": "Âge minimum : 16 ans."
+   },
+   "demo-flyboard": {
+    "title": "Séance de flyboard au-dessus de la mer",
+    "summary": "Élevez-vous au-dessus de l’eau grâce à des jets, guidé par un moniteur par radio. 15 minutes de vol.",
+    "excluded": "Transfert depuis l’hôtel (option)\nVidéo",
+    "included": "Séance de flyboard avec moniteur\nCasque, gilet et combinaison",
+    "itinerary": "Briefing sécurité sur la plage\nÉquipement\n15 minutes de flyboard\nRetour à la plage",
+    "description": "Après un court briefing à terre, vous enfilez les chaussures, le casque et le gilet. Le moniteur contrôle la puissance du jet-ski et vous parle via la radio du casque : la plupart des gens volent en quelques minutes.",
+    "meeting_info": "Cabane des sports nautiques sur la plage publique, Sheraton Road.",
+    "requirements": "Âge minimum : 14 ans, poids entre 45 et 110 kg.\nSavoir nager."
+   },
+   "demo-sup-tour": {
+    "title": "Stand-up paddle au lever ou au coucher du soleil",
+    "summary": "Une sortie guidée en paddle le long de la côte aux heures calmes, avec une courte pause baignade.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPochette étanche pour téléphone",
+    "included": "Planche, pagaie et leash\nGuide\nEau",
+    "itinerary": "Réglage de la planche et entraînement sur la plage\nPaddle guidé le long de la côte\nPause baignade\nRetour à la plage",
+    "description": "La mer est la plus plate tôt le matin et avant le coucher du soleil. Après quelques minutes d’entraînement sur le sable, votre guide vous emmène pour une balade tranquille le long de la côte, avec une pause pour nager et observer le récif peu profond.",
+    "meeting_info": "Cabane des sports nautiques sur la plage publique, Sheraton Road.",
+    "requirements": "Savoir nager. Âge minimum : 10 ans."
+   },
+   "demo-aqua-park": {
+    "title": "Journée au parc aquatique : toboggans et piscines",
+    "summary": "Une journée entière de toboggans, piscine à vagues et rivière lente, avec déjeuner et boissons sans alcool.",
+    "excluded": "Transfert depuis l’hôtel (option)\nCasiers et serviettes",
+    "included": "Billet pour la journée\nDéjeuner et boissons sans alcool\nTransats et parasols",
+    "itinerary": "10:00 entrée\nTemps libre sur les toboggans et dans les piscines\n13:00 déjeuner\n17:00 fermeture du parc",
+    "description": "Une journée pour toute la famille : grands toboggans pour les ados et les adultes, espace jeux d’eau pour les petits, rivière lente et transats à l’ombre. Le déjeuner et les boissons sans alcool sont inclus.",
+    "meeting_info": "Entrée principale du parc aquatique, route Hurghada–Safaga. Localisation sur votre bon.",
+    "requirements": "Les enfants de moins de 120 cm utilisent l’espace enfants.\nCertains toboggans ont des limites de taille et de poids."
+   },
+   "demo-cairo-day": {
+    "title": "Le Caire et les Pyramides en une journée",
+    "summary": "Départ matinal en car climatisé vers les Pyramides de Gizeh, le Sphinx et le Musée égyptien, avec déjeuner.",
+    "excluded": "Entrée à l’intérieur de la Grande Pyramide\nPourboires",
+    "included": "Car avec prise en charge à l’hôtel\nGuide égyptologue\nBillets d’entrée\nDéjeuner et eau",
+    "itinerary": "03:00 prise en charge à l’hôtel\n09:30 Pyramides de Gizeh et Sphinx\n12:30 déjeuner\n14:00 Musée égyptien\n16:30 trajet retour\n23:00 retour à votre hôtel",
+    "description": "Une longue journée, mais qui en vaut la peine. Le car quitte Hurghada avant l’aube et arrive à Gizeh en fin de matinée. Votre guide égyptologue vous fait découvrir les Pyramides et le Sphinx, puis le Musée égyptien après le déjeuner.\nLe prestataire confirme chaque demande, car les places dans le car et les billets du musée sont réservés à l’avance.",
+    "meeting_info": "Prise en charge à la réception de votre hôtel ; l’heure est confirmée la veille.",
+    "requirements": "Apportez votre passeport. Chaussures confortables et chapeau.\nEnviron 12 heures de route au total."
+   },
+   "demo-city-tour": {
+    "title": "Visite de Hurghada : mosquée, église et marina",
+    "summary": "Quatre heures avec un guide local à travers les monuments de la ville, ses vieilles rues et la marina.",
+    "excluded": "Transfert depuis l’hôtel (option)\nAchats\nPourboires",
+    "included": "Guide local\nMinibus climatisé\nEau",
+    "itinerary": "Prise en charge ou point de rendez-vous\nMosquée d’El Dahar\nÉglise copte\nMarché aux poissons et vieilles rues\nPromenade sur la marina et temps libre",
+    "description": "Découvrez le Hurghada que la plupart des visiteurs ne voient pas. Votre guide vous montre la grande mosquée d’El Dahar, l’église copte, le marché aux poissons et les rues animées de la vieille ville, puis termine par une promenade le long de la marina.\nUne tenue correcte est exigée pour entrer dans la mosquée ; des foulards sont fournis.",
+    "meeting_info": "Place principale d’El Dahar, devant l’ancienne poste.",
+    "requirements": "Épaules et genoux couverts pour la mosquée."
+   },
+   "demo-gouna-day": {
+    "title": "Journée à El Gouna : lagunes, marina et balade en bateau",
+    "summary": "Une journée dans la ville des lagunes au nord de Hurghada, avec une balade en bateau sur les canaux et du temps libre à la marina d’Abu Tig.",
+    "excluded": "Déjeuner\nTransfert depuis l’hôtel (option)",
+    "included": "Guide et minibus climatisé\nBalade en bateau sur la lagune\nEau",
+    "itinerary": "09:30 prise en charge ou point de rendez-vous\n10:15 arrivée à El Gouna\n10:30 balade en bateau sur la lagune\n11:30 promenade dans le centre\n12:30 temps libre à la marina\n16:00 retour à Hurghada",
+    "description": "El Gouna est construite sur des lagunes et des canaux. Après la route vers le nord, un petit bateau vous emmène sur les voies d’eau le long de maisons colorées, puis vous vous promenez dans le centre et passez l’après-midi à la marina pour déjeuner, faire du shopping ou prendre un café près des yachts.",
+    "meeting_info": "Place principale d’El Dahar, devant l’ancienne poste.",
+    "requirements": "Portez des chaussures confortables."
+   },
+   "demo-luxor-day": {
+    "title": "Journée à Louxor : temples et rive ouest",
+    "summary": "Une longue journée sur la route de Louxor avec un guide égyptologue : Karnak, la Vallée des Rois et déjeuner au bord du Nil.",
+    "excluded": "Tombes spéciales et permis photo\nPourboires",
+    "included": "Transport climatisé\nGuide égyptologue\nDroits d’entrée des sites mentionnés\nDéjeuner et eau",
+    "itinerary": "05:00 prise en charge à votre hôtel\n09:00 temple de Karnak\n11:30 Vallée des Rois\n13:30 déjeuner au bord du Nil\n15:00 temple d’Hatchepsout (vue extérieure)\n16:00 trajet retour\n20:00 retour à votre hôtel",
+    "description": "Une journée complète : environ quatre heures de trajet dans chaque sens en minibus climatisé. À Louxor, un guide égyptologue vous emmène au temple de Karnak, de l’autre côté du Nil à la Vallée des Rois, puis déjeuner avec vue sur le fleuve.\nLes droits d’entrée sont inclus pour les sites du programme ; les tombes spéciales sont payantes sur place.",
+    "meeting_info": "Prise en charge dans le hall de votre hôtel (secteur de Hurghada inclus).",
+    "requirements": "Copie du passeport obligatoire. Longue journée : peu adaptée aux enfants de moins de 6 ans."
+   },
+   "demo-submarine": {
+    "title": "Sortie en sous-marin jusqu’au récif corallien",
+    "summary": "Descendez à environ 20 mètres dans un vrai sous-marin touristique et observez le récif par de grands hublots, sans vous mouiller.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPhotos",
+    "included": "Bateau navette et plongée en sous-marin\nGuide à bord\nEau",
+    "itinerary": "Bateau navette jusqu’au sous-marin\nEnviron 45 minutes sous l’eau\nNavette retour vers la marina",
+    "description": "Idéal pour les familles et les personnes qui ne nagent pas. Un bateau navette vous conduit au sous-marin, qui plonge ensuite lentement le long du récif. Chaque siège a son propre hublot, et un guide vous présente les poissons et les coraux que vous voyez.",
+    "meeting_info": "Hurghada New Marina, ponton du sous-marin, 30 minutes avant le départ.",
+    "requirements": "Déconseillé aux personnes très claustrophobes."
+   },
+   "demo-beach-yoga": {
+    "title": "Yoga sur la plage au lever ou au coucher du soleil",
+    "summary": "Un cours de yoga doux de 75 minutes sur le sable, pour tous les niveaux, suivi d’un jus frais.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Cours de yoga avec professeur certifié\nTapis et serviette\nJus frais",
+    "itinerary": "Accueil et respiration\nEnchaînement doux\nRelaxation\nJus frais",
+    "description": "Un cours tranquille animé par un professeur certifié sur une plage paisible de Sahl Hasheesh. Respiration, enchaînement doux et longue relaxation au son de la mer. Les tapis sont fournis.",
+    "meeting_info": "Terrasse de plage du spa, Sahl Hasheesh. Localisation sur votre bon.",
+    "requirements": "Tous niveaux bienvenus. Signalez vos blessures au professeur."
+   },
+   "demo-glass-boat": {
+    "title": "Bateau à fond de verre : les récifs sans se mouiller",
+    "summary": "Deux heures à observer coraux et poissons à travers le fond vitré du bateau.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Sortie en bateau\nEau",
+    "itinerary": "Départ de la marina\nCroisière lente au-dessus de deux récifs\nCourt arrêt sans nourrir ni toucher quoi que ce soit : juste regarder\nRetour à la marina",
+    "description": "La façon la plus simple de voir les récifs de la mer Rouge : installez-vous sur le pont inférieur et observez coraux et poissons à travers de grandes vitres. Idéal pour les jeunes enfants, les grands-parents et tous ceux qui préfèrent rester au sec.",
+    "meeting_info": "Hurghada New Marina, porte 1, 15 minutes avant le départ.",
+    "requirements": "Convient à tous les âges."
+   },
+   "demo-hammam-spa": {
+    "title": "Rituel hammam et massage",
+    "summary": "Bain de vapeur, gommage au savon noir, lavage à la mousse et massage à l’huile de 45 minutes, puis thé à la menthe.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Hammam et massage\nServiettes, peignoir et chaussons\nThé à la menthe",
+    "itinerary": "Bain de vapeur\nGommage au savon noir et lavage à la mousse\nMassage à l’huile de 45 minutes\nDétente avec un thé à la menthe",
+    "description": "Deux heures pour prendre son temps. Vous commencez par le bain de vapeur, puis un praticien vous gomme et vous lave à la mousse sur le marbre chaud, avant un massage de 45 minutes à l’huile d’argan. Pour finir, un thé à la menthe dans la salle de repos.",
+    "meeting_info": "Accueil du spa, vieille ville de Sahl Hasheesh. Localisation sur votre bon.",
+    "requirements": "Âge minimum : 16 ans. Informez-nous en cas de grossesse ou de problème de santé."
+   },
+   "demo-horse-ride": {
+    "title": "Balade à cheval sur la plage et dans le désert",
+    "summary": "Deux heures à cheval de la lisière du désert jusqu’à la mer, pour débutants et cavaliers.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Cheval et guide\nCasque\nThé",
+    "itinerary": "Rencontre avec les chevaux et courte leçon\nBalade à la lisière du désert\nPlage et marche dans la mer\nRetour aux écuries, thé",
+    "description": "Partez des écuries, traversez la lisière du désert et descendez jusqu’à une plage tranquille, où les chevaux marchent dans l’eau peu profonde. Des chevaux calmes pour les débutants, d’autres plus vifs pour les cavaliers confirmés.",
+    "meeting_info": "Écuries, derrière Makadi Bay. Localisation sur votre bon.",
+    "requirements": "Âge minimum : 8 ans. Poids maximum : 100 kg.\nPantalon long recommandé."
+   },
+   "demo-night-dive": {
+    "title": "Plongée de nuit sur le récif de l’hôtel",
+    "summary": "Une plongée guidée après le coucher du soleil, à la lampe, quand la vie nocturne du récif se réveille.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Plongée de nuit guidée\nLampe, bouteille, plombs et équipement complet\nBoisson chaude",
+    "itinerary": "17:30 accueil et briefing\n18:15 équipement et mise à l’eau\n18:30 plongée de nuit (environ 45 minutes)\n19:30 boisson chaude et carnet de plongée",
+    "description": "La nuit, le récif change complètement : poulpes et murènes chassent, les poissons-perroquets dorment dans leur bulle et le plancton brille. Vous plongez avec un guide expérimenté et une lampe, dans une zone calme et peu profonde.\nLe centre vérifie votre expérience avant de confirmer.",
+    "meeting_info": "Centre de plongée sur Sheraton Road. Localisation exacte sur votre bon.",
+    "requirements": "Niveau Open Water et au moins 10 plongées enregistrées.\nÂge minimum : 15 ans."
+   },
+   "demo-orange-bay": {
+    "title": "Journée plage à Orange Bay",
+    "summary": "Une longue pause sur une baie de sable blanc, un arrêt snorkeling et le déjeuner.",
+    "excluded": "Transfert depuis l’hôtel (option)\nTransats (en supplément)",
+    "included": "Sortie en bateau\nEntrée à la plage\nDéjeuner et boissons sans alcool\nÉquipement de snorkeling",
+    "itinerary": "09:00 départ du bateau depuis la marina\n10:30 arrivée dans la baie : temps libre à la plage\n13:00 déjeuner\n14:30 arrêt snorkeling\n16:30 retour à la marina",
+    "description": "Une journée tranquille centrée sur la plage. Vous passez l’essentiel du temps dans une baie de sable blanc aux eaux turquoise peu profondes, idéale pour les familles et les personnes qui ne nagent pas. Un arrêt snorkeling sur le chemin du retour.",
+    "meeting_info": "Hurghada New Marina, porte 2, 20 minutes avant le départ.",
+    "requirements": "Apportez une serviette et une crème solaire sans danger pour les récifs."
+   },
+   "demo-wreck-dive": {
+    "title": "Plongée sur épave : un navire coulé près de Hurghada",
+    "summary": "Plongez sur une épave couverte de coraux avec un guide expérimenté ; deuxième plongée sur un récif.",
+    "excluded": "Transfert depuis l’hôtel (option)\nTaxe du parc marin",
+    "included": "Deux plongées guidées (épave et récif)\nÉquipement complet\nDéjeuner et boissons",
+    "itinerary": "07:00 accueil et briefing\n08:00 départ du bateau\n09:30 plongée sur l’épave\n11:00 déjeuner à bord\n12:30 plongée sur le récif\n14:30 retour à la marina",
+    "description": "Une plongée sur épave pour plongeurs certifiés ayant un peu d’expérience. Après un briefing détaillé, vous descendez le long du bout et explorez l’extérieur du navire, aujourd’hui habité par les coraux et les poissons. La pénétration ne fait pas partie de cette sortie.\nLe centre vérifie votre carnet de plongée avant de confirmer : cette sortie est donc réservée sur demande.",
+    "meeting_info": "Centre de plongée, Sheraton Road. Localisation sur votre bon.",
+    "requirements": "Niveau Advanced ou 20 plongées enregistrées.\nÂge minimum : 15 ans."
+   },
+   "demo-parasailing": {
+    "title": "Parachute ascensionnel au-dessus de la baie",
+    "summary": "Environ 10 minutes dans les airs au-dessus de la mer, seul ou en tandem, avec la plage en contrebas.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPhotos et vidéos",
+    "included": "Vol avec harnais et gilet de sauvetage\nSortie en bateau",
+    "itinerary": "Court briefing sécurité sur la plage\nTrajet en bateau jusqu’à la zone de vol\nEnviron 10 minutes dans les airs\nRetour à la plage",
+    "description": "Décollez depuis l’arrière du bateau et élevez-vous doucement au-dessus de la baie. Le vol est calme et silencieux ; vous atterrissez au sec sur le bateau. Les vols en tandem sont possibles à deux, dans la limite du poids total autorisé.",
+    "meeting_info": "Cabane des sports nautiques sur la plage publique, Sheraton Road.",
+    "requirements": "Âge minimum : 8 ans (les enfants volent en tandem avec un adulte).\nAnnulé en cas de vent fort : vous obtenez un autre créneau ou un remboursement intégral."
+   },
+   "demo-quad-safari": {
+    "title": "Quad jusqu’à un village bédouin",
+    "summary": "Une heure sur votre propre quad à travers le désert, thé dans un village bédouin.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPhotos vendues au camp",
+    "included": "Quad et carburant\nCasque, lunettes et foulard\nGuide\nThé et pain bédouins",
+    "itinerary": "Briefing sécurité et réglage du casque\n1 heure de quad avec un guide devant et un derrière\nVillage bédouin : thé, pain, courte balade à dos de chameau\nRetour au camp",
+    "description": "Après un court briefing sécurité, vous conduisez votre propre quad en file guidée sur des pistes ouvertes du désert. À mi-parcours, vous faites halte dans un village bédouin pour un thé, du pain cuit au feu de bois et une courte balade à dos de chameau.\nLe prestataire confirme votre demande sous 12 heures, car les pilotes et les casques sont attribués à l’avance.",
+    "meeting_info": "Camp dans le désert sur la route Hurghada–Safaga. La localisation exacte est envoyée avec votre bon.",
+    "requirements": "Âge minimum pour conduire : 16 ans. Chaussures fermées recommandées.\nDéconseillé pendant la grossesse ou en cas de problèmes de dos."
+   },
+   "demo-sunset-sail": {
+    "title": "Croisière à la voile au coucher du soleil",
+    "summary": "Deux heures et demie sous voiles pendant que le soleil se couche, avec thé et en-cas.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Sortie à la voile avec skipper\nThé, boissons sans alcool et en-cas",
+    "itinerary": "16:00 embarquement\n16:15 navigation le long de la côte\nCoucher de soleil sur le pont avec thé et en-cas\n18:30 retour à la marina",
+    "description": "Un petit voilier quitte la marina en fin d’après-midi et longe la côte pendant que le soleil se couche derrière les montagnes. Calme, paisible et parfait pour les couples.",
+    "meeting_info": "Boulevard de la marina de Hurghada, ponton C.",
+    "requirements": "Prévoyez une veste légère : il fait plus frais sur l’eau après le coucher du soleil."
+   },
+   "demo-desert-stars": {
+    "title": "Observation des étoiles et dîner barbecue dans le désert",
+    "summary": "Coucher de soleil dans les dunes, dîner dans un camp bédouin et ciel nocturne au télescope.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Transport du point de rendez-vous au camp\nDîner, thé et eau\nObservation au télescope avec un guide",
+    "itinerary": "17:00 prise en charge et route vers le camp\nCoucher de soleil depuis une dune\nDîner barbecue et thé\nObservation des étoiles au télescope\n22:00 retour à votre hôtel",
+    "description": "Vous quittez la ville en fin d’après-midi pour rejoindre un camp paisible dans le désert avant le coucher du soleil. Après un dîner barbecue autour du feu, les lumières s’éteignent et un guide vous montre les étoiles et les planètes au télescope.",
+    "meeting_info": "Point de rendez-vous : bureau Safari, El Nasr Road.",
+    "requirements": "Prévoyez une couche chaude : les nuits dans le désert sont froides de novembre à mars."
+   },
+   "demo-fishing-trip": {
+    "title": "Matinée de pêche en mer Rouge",
+    "summary": "Pêche au fond depuis un petit bateau, avec cannes, appâts et déjeuner de poisson grillé.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPourboires",
+    "included": "Bateau, capitaine et équipage\nCannes, lignes et appâts\nDéjeuner avec votre pêche\nEau et thé",
+    "itinerary": "07:30 départ du bateau depuis la marina\n08:30 premier coin de pêche\n10:30 deuxième coin\n12:00 votre pêche grillée au déjeuner\n12:30 retour à la marina",
+    "description": "Partez avec un capitaine local vers les zones de pêche au nord de Hurghada. Cannes, lignes et appâts vous attendent à bord, et l’équipage montre aux débutants comment descendre la ligne et remonter le poisson.\nVotre pêche est nettoyée et grillée à bord pour le déjeuner.",
+    "meeting_info": "Hurghada New Marina, porte 2, 20 minutes avant le départ.",
+    "requirements": "Sortie par mer calme ; prenez tout de même des comprimés contre le mal de mer si besoin."
+   },
+   "demo-island-beach": {
+    "title": "Journée plage sur une île près de Giftun",
+    "summary": "Une journée sur une plage de sable fin : transat et parasol, snorkeling depuis la plage et déjeuner.",
+    "excluded": "Location d’équipement de snorkeling\nTaxe du parc marin\nTransfert depuis l’hôtel (option)",
+    "included": "Transfert en bateau rapide\nTransat et parasol\nDéjeuner buffet et eau",
+    "itinerary": "08:30 départ du bateau depuis la marina\n09:15 arrivée sur l’île\nTemps libre à la plage\n12:30 déjeuner buffet\n16:00 retour à la marina",
+    "description": "Un bateau rapide vous emmène sur la plage protégée d’une île du secteur de Giftun. Passez la journée sur un transat sous un parasol, faites du snorkeling directement depuis la plage au-dessus du récif peu profond et profitez d’un déjeuner buffet.",
+    "meeting_info": "Hurghada New Marina, porte 4, 20 minutes avant le départ.",
+    "requirements": "Utilisez une crème solaire sans danger pour les récifs. Il est interdit de toucher les coraux."
+   },
+   "demo-super-safari": {
+    "title": "Super safari : jeep, quad, chameau et dîner",
+    "summary": "Une demi-journée dans le désert : jeep, quad, chameau, un village bédouin et le dîner.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Balades en jeep, en quad et à dos de chameau\nGuide\nDîner et boissons",
+    "itinerary": "13:00 jeep vers le désert\nQuad (30 minutes)\nBalade à dos de chameau et village bédouin\nCoucher de soleil et dîner\n19:00 retour en ville",
+    "description": "Tout en un après-midi. Une jeep vous emmène au cœur du désert, vous faites du quad et du chameau, visitez un village bédouin et terminez par un dîner et un spectacle sous les étoiles.",
+    "meeting_info": "Bureau Safari, El Nasr Road.",
+    "requirements": "Les enfants montent en passagers avec un adulte sur le quad."
+   },
+   "demo-cooking-class": {
+    "title": "Cours de cuisine égyptienne chez une famille locale",
+    "summary": "Faites le marché, cuisinez quatre plats classiques chez une famille d’accueil, puis mangez ensemble.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Ingrédients et cours de cuisine\nRepas et boissons\nFiche recette",
+    "itinerary": "Rencontre avec votre hôte au marché\nAchat des ingrédients\nPréparation de quatre plats ensemble\nRepas partagé et recettes",
+    "description": "Commencez au marché local pour choisir légumes et épices, puis cuisinez dans une cuisine familiale : feuilles de vigne farcies, koshari, pain baladi et un dessert. Vous dégustez ce que vous avez préparé autour de la table familiale et repartez avec les recettes.\nPetit groupe ; la famille confirme votre date sur demande.",
+    "meeting_info": "Marché aux légumes d’El Dahar, entrée principale. Localisation sur votre bon.",
+    "requirements": "Signalez vos allergies ou besoins végétariens lors de la réservation."
+   },
+   "demo-dinner-cruise": {
+    "title": "Croisière dîner en musique",
+    "summary": "Trois heures en mer le soir : coucher de soleil, dîner buffet et musique orientale live sur le pont.",
+    "excluded": "Transfert depuis l’hôtel (option)\nBoissons alcoolisées",
+    "included": "Croisière\nDîner buffet\nEau et boissons sans alcool\nMusique live",
+    "itinerary": "18:30 embarquement\n19:00 départ au coucher du soleil\n19:30 dîner buffet\n20:30 musique live sur le pont\n21:30 retour à la marina",
+    "description": "Embarquez au coucher du soleil et naviguez lentement le long de la côte pendant que les lumières de Hurghada s’allument. Le dîner est un buffet de grillades, salades et plats égyptiens ; un groupe joue sur le pont supérieur.",
+    "meeting_info": "Hurghada New Marina, porte 1, 20 minutes avant le départ.",
+    "requirements": "Tenue décontractée chic. Prévoyez une veste légère : il y a du vent en mer."
+   },
+   "demo-dolphin-house": {
+    "title": "Dolphin House en bateau rapide",
+    "summary": "Un bateau rapide jusqu’au récif où les dauphins à long bec viennent souvent se reposer, avec deux arrêts snorkeling.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPourboires",
+    "included": "Bateau rapide avec équipage\nÉquipement de snorkeling\nDéjeuner, eau et boissons sans alcool",
+    "itinerary": "08:00 départ du bateau depuis la marina\n09:15 Dolphin House : observation et snorkeling dans le respect des animaux\n11:30 arrêt snorkeling au jardin de corail\n12:30 déjeuner à bord\n14:00 retour à la marina",
+    "description": "Dolphin House est un récif en fer à cheval où des dauphins à long bec sauvages viennent souvent se reposer. L’équipage garde une distance respectueuse et suit le code de conduite local : pas de poursuite, pas de nourriture, pas de contact.\nLes dauphins sont des animaux sauvages : les observations sont probables mais jamais garanties. Le deuxième arrêt est un jardin de corail pour le snorkeling.",
+    "meeting_info": "Hurghada New Marina, porte 2, 20 minutes avant le départ.",
+    "requirements": "La mer peut être agitée ; prévenez l’équipage si vous avez le mal de mer.\nLes enfants doivent porter un gilet dans l’eau."
+   },
+   "demo-giftun-island": {
+    "title": "Journée snorkeling à l’île de Giftun",
+    "summary": "Deux arrêts sur des récifs, une plage sur l’île de Giftun et le déjeuner à bord.",
+    "excluded": "Transfert depuis l’hôtel (option)\nServiettes\nPourboires",
+    "included": "Sortie en bateau avec équipage\nMasque, palmes et gilet de snorkeling\nDéjeuner à bord, eau et boissons sans alcool\nDroit d’accès à la zone protégée",
+    "itinerary": "08:30 prise en charge à votre hôtel (si réservée)\n09:30 départ du bateau depuis la marina\n10:30 premier arrêt sur un récif : snorkeling\n12:00 temps libre sur la plage de l’île de Giftun\n13:30 déjeuner à bord\n14:30 deuxième arrêt sur un récif\n16:00 retour à la marina",
+    "description": "Une journée complète et détendue sur l’eau. Le bateau quitte la marina de Hurghada le matin et jette l’ancre sur deux récifs de la zone protégée de Giftun, où l’équipage vous montre les meilleurs spots pour les coraux et les poissons. Entre les arrêts snorkeling, vous profitez de la plage blanche de l’île de Giftun.\nL’équipement de snorkeling et un gilet de flottabilité sont fournis ; l’équipage reste avec les débutants dans l’eau.",
+    "meeting_info": "Hurghada New Marina, porte 2. Repérez le panneau WENRO sur le ponton 20 minutes avant le départ.",
+    "requirements": "Apportez une crème solaire sans danger pour les récifs, une serviette et un chapeau.\nDéconseillé aux personnes qui ne savent pas du tout nager ; des gilets sont disponibles."
+   },
+   "demo-luxor-balloon": {
+    "title": "Montgolfière au lever du soleil à Louxor et rive ouest",
+    "summary": "Survolez la Vallée des Rois à l’aube, puis visitez les tombes et le temple d’Hatchepsout.",
+    "excluded": "Tombes spéciales (billet en supplément)\nPourboires",
+    "included": "Car avec prise en charge à l’hôtel\nVol en montgolfière\nGuide et billets d’entrée\nDéjeuner",
+    "itinerary": "01:00 prise en charge à l’hôtel\n05:30 décollage de la montgolfière (environ 45 minutes)\n08:00 Vallée des Rois\n10:30 temple d’Hatchepsout\n12:30 déjeuner\n13:30 trajet retour\n18:30 retour à votre hôtel",
+    "description": "Quittez Hurghada dans la nuit pour arriver à Louxor avant l’aube. Au lever du soleil, votre montgolfière dérive au-dessus du Nil, des champs et des temples de la rive ouest. Après l’atterrissage, votre guide vous emmène à la Vallée des Rois et au temple d’Hatchepsout, avec déjeuner au bord du Nil.\nLes vols en montgolfière dépendent du vent et sont confirmés par le prestataire.",
+    "meeting_info": "Prise en charge à la réception de votre hôtel ; l’heure est confirmée la veille.",
+    "requirements": "Âge minimum : 7 ans.\nSi la montgolfière ne peut pas voler, la partie vol vous est remboursée."
+   },
+   "demo-old-town-walk": {
+    "title": "Balade dans la vieille ville et le marché d’El Dahar",
+    "summary": "Parcourez le vieux quartier avec un guide local : la mosquée, le marché aux poissons et une boutique d’épices.",
+    "excluded": "Transfert depuis l’hôtel (option)\nAchats",
+    "included": "Guide local\nThé à la boutique d’épices",
+    "itinerary": "Rendez-vous place de la mosquée El Mina\nRuelles du vieux quartier\nMarché aux poissons et marché aux fruits\nThé dans une boutique d’épices\nFin près de la marina de Hurghada",
+    "description": "Une visite à pied d’El Dahar, le plus ancien quartier de Hurghada. Votre guide vous explique comment le village de pêcheurs est devenu une ville balnéaire, vous emmène dans les ruelles du marché et fait une halte dans une boutique d’épices familiale pour un thé.",
+    "meeting_info": "Place de la mosquée El Mina, près de l’entrée principale.",
+    "requirements": "Épaules et genoux couverts pour la visite de la mosquée."
+   },
+   "demo-private-yacht": {
+    "title": "Journée en yacht privé pour votre groupe",
+    "summary": "Votre propre yacht, avec capitaine et équipage, pendant six heures : choisissez les récifs et les plages qui vous plaisent.",
+    "excluded": "Transfert depuis l’hôtel (option)\nTaxe du parc marin\nPourboires",
+    "included": "Yacht privé avec capitaine et équipage\nÉquipement de snorkeling\nDéjeuner, eau et boissons sans alcool",
+    "itinerary": "09:00 embarquement à la marina\nVotre propre programme avec le capitaine\nDéjeuner à bord\n15:00 retour à la marina",
+    "description": "Idéal pour les familles et les amis. Le capitaine organise la journée avec vous : récifs pour le snorkeling, plage tranquille ou simplement soleil et baignade. Le déjeuner est préparé à bord.\nRéservez par personne, ou le yacht entier pour votre groupe en sortie privée.",
+    "meeting_info": "Hurghada New Marina, ponton des yachts B.",
+    "requirements": "L’itinéraire final dépend du vent et de la mer."
+   },
+   "demo-sunrise-camel": {
+    "title": "Balade à dos de chameau au lever du soleil",
+    "summary": "Une balade tranquille à dos de chameau vers les montagnes à l’aube, puis petit-déjeuner au camp.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Balade à dos de chameau avec guide\nPetit-déjeuner et thé",
+    "itinerary": "05:30 prise en charge\n06:00 balade à dos de chameau jusqu’au point de vue\nLever du soleil\n07:30 petit-déjeuner au camp\n08:30 retour en ville",
+    "description": "Un départ matinal, récompensé par le désert à son moment le plus paisible. Vous montez un chameau mené par un guide bédouin jusqu’à un point de vue pour le lever du soleil, puis partagez un petit-déjeuner simple au camp.",
+    "meeting_info": "Camp dans le désert, route Hurghada–Safaga.",
+    "requirements": "Âge minimum : 6 ans. Pantalon long recommandé."
+   },
+   "demo-two-tank-dive": {
+    "title": "Deux plongées sur récif pour plongeurs certifiés",
+    "summary": "Deux plongées guidées sur les plus beaux récifs de Hurghada, avec équipement complet et déjeuner à bord.",
+    "excluded": "Transfert depuis l’hôtel (option)\nNitrox (renseignez-vous auprès du centre)\nTaxe du parc marin",
+    "included": "Deux plongées guidées\nBouteille, plombs et équipement complet\nDéjeuner, eau et thé",
+    "itinerary": "08:00 accueil au centre de plongée\n09:00 départ du bateau\n10:00 première plongée (environ 50 minutes)\n11:00 intervalle de surface et déjeuner\n12:30 deuxième plongée\n14:00 retour à la marina",
+    "description": "Pour les plongeurs déjà certifiés. Le guide de plongée choisit deux récifs adaptés aux conditions du jour et à votre niveau, avec un intervalle de surface et le déjeuner entre les plongées.\nApportez votre carte de certification et votre carnet de plongée.",
+    "meeting_info": "Centre de plongée, Sheraton Road. Localisation sur votre bon.",
+    "requirements": "Niveau Open Water ou équivalent obligatoire.\nPas de vol en avion dans les 24 heures suivant la plongée."
+   },
+   "demo-bedouin-dinner": {
+    "title": "Dîner bédouin et observation des étoiles",
+    "summary": "Partez dans le désert au coucher du soleil pour du pain cuit au feu de bois, un dîner bédouin et les étoiles.",
+    "excluded": "Transfert depuis l’hôtel (option)\nBoissons sans alcool au camp",
+    "included": "Transfert en 4x4 jusqu’au camp\nDîner, thé et eau\nObservation des étoiles avec un guide",
+    "itinerary": "16:30 prise en charge ou point de rendez-vous\n17:15 coucher de soleil dans le désert\n18:00 cuisson du pain et thé\n19:00 dîner autour du feu\n20:00 observation des étoiles\n20:45 retour à Hurghada",
+    "description": "Un 4x4 vous emmène dans un camp paisible au milieu des collines du désert. Vous admirez le coucher du soleil, découvrez comment le pain bédouin est cuit sur le sable et les pierres brûlants, puis partagez un dîner autour du feu. Après le dîner, les lumières baissent pour laisser place aux étoiles.",
+    "meeting_info": "Base safari, route Hurghada–Safaga. Localisation sur votre bon.",
+    "requirements": "Prévoyez une couche chaude : les nuits dans le désert sont fraîches de novembre à mars."
+   },
+   "demo-discover-scuba": {
+    "title": "Baptême de plongée : votre première plongée",
+    "summary": "Aucune expérience requise : entraînement en eau peu profonde, puis plongée guidée entre 6 et 12 m.",
+    "excluded": "Transfert depuis l’hôtel (option)\nPhotos de plongée",
+    "included": "Tout l’équipement de plongée\nMoniteur (1 pour 2 participants)\nSortie en bateau, eau et en-cas",
+    "itinerary": "08:30 rendez-vous au centre de plongée\n09:00 briefing et réglage de l’équipement\n10:30 exercices en eau peu profonde\n11:30 plongée guidée (environ 30 minutes)\n13:00 retour à terre",
+    "description": "Un premier aperçu de la plongée avec un moniteur diplômé, un moniteur pour deux participants. Vous apprenez d’abord les bases en eau peu profonde ; ce n’est que lorsque vous vous sentez prêt que vous descendez sur un récif calme.\nVous remplissez un court questionnaire médical avant la sortie.",
+    "meeting_info": "Centre de plongée, Sheraton Road. Localisation sur votre bon.",
+    "requirements": "Âge minimum : 10 ans. Questionnaire médical obligatoire.\nPas de vol en avion dans les 24 heures suivant la plongée."
+   },
+   "demo-oriental-night": {
+    "title": "Soirée orientale : dîner et spectacle de tanoura",
+    "summary": "Dîner égyptien, danseur de tanoura, musique folklorique et flânerie dans un bazar éclairé de lanternes.",
+    "excluded": "Transfert depuis l’hôtel (option)\nAchats au bazar",
+    "included": "Dîner et boissons sans alcool\nSpectacle\nThé et café",
+    "itinerary": "19:00 arrivée et flânerie dans le bazar\n19:45 dîner\n20:30 spectacle de tanoura et musique folklorique\n22:00 fin de la soirée",
+    "description": "Une soirée de musique et de cuisine égyptiennes. Après une promenade dans un petit bazar de lanternes et d’épices, le dîner est servi pendant qu’un danseur de tanoura tourbillonne dans ses jupes colorées et qu’un groupe folklorique joue.",
+    "meeting_info": "Lieu de la soirée, El Dahar. Localisation sur votre bon.",
+    "requirements": "Convient à tous les âges."
+   },
+   "demo-kitesurf-lesson": {
+    "title": "Cours d’initiation au kitesurf à El Gouna",
+    "summary": "Trois heures avec un moniteur certifié : maîtrise de l’aile à terre, puis body-drag en eau peu profonde.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Moniteur certifié (1 pour 2 élèves)\nAile, planche, harnais, casque, combinaison",
+    "itinerary": "Rencontre avec le moniteur et consignes de sécurité\nMaîtrise de l’aile à terre\nSéance dans l’eau peu profonde de la lagune\nBilan et prochaines étapes",
+    "description": "Les lagunes plates et peu profondes d’El Gouna comptent parmi les meilleurs endroits pour apprendre. Votre moniteur commence par la maîtrise de l’aile sur la plage, puis vous emmène dans l’eau jusqu’aux genoux pour sentir la traction de l’aile. Avec un bon vent, certains élèves tiennent debout sur la planche en fin de cours.\nLes cours dépendent du vent : l’école confirme donc votre horaire sur demande.",
+    "meeting_info": "Station de kite, plage Mangroovy, El Gouna.",
+    "requirements": "Savoir nager.\nÂge minimum : 12 ans, poids minimum : 40 kg."
+   },
+   "demo-paradise-snorkel": {
+    "title": "Journée snorkeling sur deux récifs coralliens",
+    "summary": "Une journée détendue en bateau avec deux arrêts snorkeling, une pause plage et le déjeuner à bord.",
+    "excluded": "Transfert depuis l’hôtel (option)\nTaxe du parc marin\nPourboires",
+    "included": "Bateau, équipage et guide\nMasque, tuba, palmes et gilet\nDéjeuner, eau et boissons sans alcool",
+    "itinerary": "08:30 départ du bateau depuis la marina\n10:00 premier récif\n12:00 pause plage et déjeuner\n14:00 deuxième récif\n16:00 retour à la marina",
+    "description": "Partez vers les récifs au large de Hurghada avec un petit équipage. À chaque arrêt, le guide accompagne un groupe dans l’eau pendant que d’autres se détendent sur le pont. Entre les récifs, le bateau jette l’ancre près d’une plage de sable blanc pour la baignade et le déjeuner.\nIdéal pour un premier snorkeling : gilets et masques de toutes tailles à bord.",
+    "meeting_info": "Hurghada New Marina, porte 2, 20 minutes avant le départ.",
+    "requirements": "Les enfants doivent porter un gilet dans l’eau.\nUtilisez une crème solaire sans danger pour les récifs."
+   },
+   "demo-watersports-pack": {
+    "title": "Pack sports nautiques : jet-ski, bouée banane et bouée tractée",
+    "summary": "15 minutes de jet-ski avec un moniteur, puis un tour de bouée banane et de bouée tractée.",
+    "excluded": "Transfert depuis l’hôtel (option)",
+    "included": "Jet-ski (15 min) avec moniteur\nTours de bouée banane et de bouée tractée\nGilets de sauvetage",
+    "itinerary": "Briefing sécurité et gilets de sauvetage\n15 minutes de jet-ski\nTour de bouée banane\nTour de bouée tractée",
+    "description": "Trois activités en une seule réservation. Vous commencez par 15 minutes de jet-ski (vous pilotez, le moniteur à bord), puis vous vous accrochez bien sur la bouée banane et la bouée tractée par un bateau rapide.",
+    "meeting_info": "Cabane des sports nautiques sur la plage publique, Sheraton Road.",
+    "requirements": "Les enfants de 8 à 11 ans font uniquement la bouée banane et la bouée tractée, avec un adulte.\nDéconseillé pendant la grossesse."
+   }
+  }
+ },
+ "extras": {
+  "de": {
+   "61000000-0000-0000-0000-000000000101": "Schnuppertauchgang (15 Min., mit Instruktor)",
+   "61000000-0000-0000-0000-000000000102": "Upgrade zum Mittagessen: gegrillter Fisch",
+   "61000000-0000-0000-0000-000000000201": "Zweite Person auf demselben Quad",
+   "61000000-0000-0000-0000-000000000401": "Sonnenliege und Sonnenschirm am Strand",
+   "61000000-0000-0000-0000-000000000501": "Zweiter geführter Tauchgang",
+   "61000000-0000-0000-0000-000000001201": "Heißluftballon bei Sonnenaufgang (wetterabhängig)"
+  },
+  "ru": {
+   "61000000-0000-0000-0000-000000000101": "Пробное погружение (15 мин, с инструктором)",
+   "61000000-0000-0000-0000-000000000102": "Улучшенный обед: рыба на гриле",
+   "61000000-0000-0000-0000-000000000201": "Второй человек на том же квадроцикле",
+   "61000000-0000-0000-0000-000000000401": "Лежак и зонтик на пляже",
+   "61000000-0000-0000-0000-000000000501": "Второе погружение с гидом",
+   "61000000-0000-0000-0000-000000001201": "Полёт на воздушном шаре на рассвете (зависит от погоды)"
+  },
+  "fr": {
+   "61000000-0000-0000-0000-000000000101": "Baptême de plongée (15 min, avec moniteur)",
+   "61000000-0000-0000-0000-000000000102": "Déjeuner amélioré : poisson grillé",
+   "61000000-0000-0000-0000-000000000201": "Deuxième passager sur le même quad",
+   "61000000-0000-0000-0000-000000000401": "Transat et parasol sur la plage",
+   "61000000-0000-0000-0000-000000000501": "Deuxième plongée guidée",
+   "61000000-0000-0000-0000-000000001201": "Montgolfière au lever du soleil (selon la météo)"
+  }
+ }
+}

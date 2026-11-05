@@ -39,6 +39,8 @@ const ALLOWED = new Set([
   "review_for_token", "submit_review_by_token", "experience_reviews", "admin_reviews", "moderate_review", "operator_reviews",
   "my_account", "set_username", "mark_password_set", "email_for_username",
   "set_experience_location", "experience_location", "public_location",
+  "set_translation_flags", "add_machine_translations", "experiences_missing_locales", "my_notifications", "unread_notifications",
+  "mark_notifications_read", "record_visit", "admin_visits", "operator_visits",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

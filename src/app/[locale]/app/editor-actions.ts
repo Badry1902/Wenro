@@ -31,7 +31,37 @@ const payloadSchema = z.object({
   }).passthrough()),
   extras: z.array(z.object({ id: guid.nullable(), net_minor: money, per: z.enum(["person", "booking"]), names: z.record(z.string(), z.string().max(80)) })).max(20),
   transport: z.array(z.object({ zone_id: guid, net_minor: money, per: z.enum(["vehicle", "person"]), vehicle_capacity: z.number().int().min(1).max(60).nullable() })).max(20),
+  touched: z.array(z.enum(["en", "de", "ru", "fr", "ar"])).optional(),
+  machine: z.array(z.enum(["en", "de", "ru", "fr", "ar"])).optional(),
 });
+
+const LANGS = ["en", "ar", "de", "ru", "fr"] as const;
+type L = (typeof LANGS)[number];
+
+/**
+ * Fills the other languages from the one the person wrote in (DeepL). A language a person wrote or edited
+ * is never overwritten; machine-filled languages are refreshed when the source text changes.
+ * Returns the languages that are machine translations after this save.
+ */
+async function autoTranslate(p: z.infer<typeof payloadSchema>): Promise<L[]> {
+  const { translateTrip, translationConfigured } = await import("@/lib/translate");
+  const has = (l: L) => !!p.translations[l]?.title?.trim();
+  const touched = new Set(p.touched ?? []);
+  const machine = new Set((p.machine ?? []).filter((l) => !touched.has(l)));
+  if (!translationConfigured()) return [...machine].filter(has);
+  // source: a language edited now (English first), otherwise any language a person wrote
+  const human = LANGS.filter((l) => has(l) && !machine.has(l));
+  const source = LANGS.find((l) => touched.has(l) && has(l) && l === "en") ?? LANGS.find((l) => touched.has(l) && has(l)) ?? (human.includes("en") ? "en" : human[0]);
+  if (!source) return [...machine].filter(has);
+  const sourceChanged = touched.has(source);
+  const targets = LANGS.filter((l) => l !== source && (!has(l) || (machine.has(l) && sourceChanged)));
+  const results = await Promise.all(targets.map((l) => translateTrip(p.translations[source] ?? {}, source, l)));
+  targets.forEach((l, i) => {
+    const r = results[i];
+    if (r) { p.translations[l] = { ...r }; machine.add(l); }
+  });
+  return [...machine].filter(has);
+}
 
 /** Saves the editor. Errors come back to the form (no reload), so nothing typed is lost. */
 export async function saveExperience(_: SaveState, form: FormData): Promise<SaveState> {
@@ -44,9 +74,13 @@ export async function saveExperience(_: SaveState, form: FormData): Promise<Save
   } catch {
     return { error: "invalid_input" };
   }
+  const machineLocales = await autoTranslate(p);
+  const { touched: _t, machine: _m, ...toSave } = p;
+  void _t; void _m;
   let id: string;
   try {
-    id = await rpc<string>("save_experience", { p }, "user");
+    id = await rpc<string>("save_experience", { p: toSave }, "user");
+    await rpc("set_translation_flags", { p_experience: id, p_machine: machineLocales }, "user").catch((e) => console.error("flags", e));
   } catch (e) {
     if (e instanceof RpcError) return { error: e.code };
     console.error("save_experience", e);
@@ -191,4 +225,34 @@ export async function saveLocation(form: FormData) {
   const l = locale.parse(form.get("locale"));
   const b = base.parse(form.get("base"));
   redirect({ href: `${b}/${id}?${result}#location`, locale: l });
+}
+
+
+/** WENRO team: translate up to 5 trips that miss languages (run again for the next ones). */
+export async function translateMissing(form: FormData) {
+  const { translateTrip, translationConfigured } = await import("@/lib/translate");
+  const l = locale.parse(form.get("locale"));
+  if (!translationConfigured()) redirect({ href: "/app/admin/experiences?err=translation_not_configured", locale: l });
+  let done = 0;
+  try {
+    const list = await rpc<{ id: string; missing: L[] | null }[]>("experiences_missing_locales", { p_limit: 5 }, "user");
+    for (const x of list) {
+      const ed = await rpc<{ translations: Partial<Record<L, Record<string, string | null> & { machine_translated?: boolean }>> }>("experience_editor", { p_experience: x.id }, "user");
+      const have = LANGS.filter((k) => ed.translations[k]?.title);
+      const src = have.find((k) => k === "en" && !ed.translations[k]?.machine_translated) ?? have.find((k) => !ed.translations[k]?.machine_translated) ?? have[0];
+      if (!src) continue;
+      const out: Record<string, unknown> = {};
+      for (const m of x.missing ?? []) {
+        const r = await translateTrip((ed.translations[src] ?? {}) as Record<string, string | null>, src, m);
+        if (r) out[m] = r;
+      }
+      if (Object.keys(out).length) done += await rpc<number>("add_machine_translations", { p_experience: x.id, p_translations: out }, "user");
+    }
+  } catch (e) {
+    console.error("translateMissing", e);
+    redirect({ href: "/app/admin/experiences?err=unexpected_error", locale: l });
+  }
+  const { revalidatePath } = await import("next/cache");
+  revalidatePath("/[locale]", "layout");
+  redirect({ href: `/app/admin/experiences?ok=translated&n=${done}`, locale: l });
 }

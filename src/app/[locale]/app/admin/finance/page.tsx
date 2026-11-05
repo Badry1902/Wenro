@@ -56,7 +56,8 @@ export default async function AdminFinance({ params, searchParams }: Props) {
       </nav>
 
       <section id="unsettled" className="mb-8">
-        <h2 className="mb-3 text-h3 font-bold">{t("unsettledTitle")}</h2>
+        <h2 className="mb-1 text-h3 font-bold">{t("unsettledTitle")}</h2>
+        <p className="mb-3 max-w-2xl text-small text-ink-muted">{t("unsettledHint")}</p>
         {f.unsettled.length === 0 ? <Empty>{t("unsettledNone")}</Empty> : (
           <ul className="mb-4 divide-y divide-line rounded-card border border-line">
             {f.unsettled.map((u) => (

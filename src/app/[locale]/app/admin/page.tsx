@@ -5,6 +5,7 @@ import { dayKey } from "@/lib/pricing";
 import { requirePlatform } from "@/lib/workspaces";
 import { Flash, PageTitle, Task, btn } from "@/components/ui";
 import { platformCan, type PlatformPerm } from "@/lib/permissions";
+import { SiteVisits, type Visits } from "@/components/VisitsPanel";
 import { Submit } from "@/components/Submit";
 import { demoJoinAll } from "../actions";
 
@@ -26,12 +27,13 @@ export default async function AdminOverview({ params, searchParams }: Props) {
   const ws = await requirePlatform(locale);
   const can = (p: PlatformPerm) => platformCan(ws.role, p);
   const t = await getTranslations("app.admin");
-  const [o, demo, pendingReviews] = await Promise.all([
+  const [o, demo, pendingReviews, visits] = await Promise.all([
     rpc<Overview>("admin_overview", {}, "user"),
     can("team")
       ? rpc<{ available: boolean; joined?: boolean }>("demo_status", {}, "user").catch(() => ({ available: false, joined: true }))
       : Promise.resolve({ available: false, joined: true }),
     can("reviews") ? rpc<unknown[]>("admin_reviews", { p_status: "pending" }, "user").then((r) => r.length).catch(() => 0) : Promise.resolve(0),
+    rpc<Visits>("admin_visits", { p_days: 7 }, "user").catch(() => null),
   ]);
   const base = `/${locale}/app/admin`;
   const money = (m: Record<string, number> = {}) =>
@@ -49,6 +51,7 @@ export default async function AdminOverview({ params, searchParams }: Props) {
           <Submit className={btn.primary}>{t("demoButton")}</Submit>
         </form>
       )}
+      {visits && <SiteVisits v={visits} />}
       <h2 className="mb-3 font-bold">{t("needsAction")}</h2>
       <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {can("bookings") && <Task tone="warn" count={o.tomorrow_unconfirmed} label={t("tomorrowUnconfirmed")} href={`${base}/bookings?d=${tomorrow}&r=sent`} />}

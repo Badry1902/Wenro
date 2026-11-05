@@ -341,7 +341,8 @@
         "review_hidden": "Review hidden.",
         "account_saved": "Saved. Use your username and password next time.",
         "location_saved": "Meeting point saved.",
-        "location_cleared": "Meeting point removed."
+        "location_cleared": "Meeting point removed.",
+        "translated": "Translations added. Press again for the next trips."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -390,7 +391,8 @@
         "password_same": "That is already your password.",
         "review_not_found": "That review no longer exists.",
         "location_unreadable": "We could not read a place from that link. In Google Maps tap the place, then Share → Copy link, and paste it here.",
-        "location_outside_egypt": "That point is outside Egypt. Check the link."
+        "location_outside_egypt": "That point is outside Egypt. Check the link.",
+        "translation_not_configured": "Automatic translation is not set up yet (DEEPL_API_KEY missing in Vercel)."
       }
     },
     "signin": {
@@ -540,7 +542,8 @@
       "withdraw": "Withdraw from review",
       "editorNote": "Drafts are reviewed by WENRO before they go live.",
       "new": "New experience",
-      "edit": "Edit"
+      "edit": "Edit",
+      "translateAll": "Translate missing languages"
     },
     "admin": {
       "overviewTitle": "Today at WENRO",
@@ -640,7 +643,7 @@
       "step2": "Monthly: create statements of what each operator owes.",
       "step3": "When an operator pays, mark it received.",
       "step4": "Then prepare partner payouts and send them via InstaPay.",
-      "unsettledTitle": "Trips done, not on a statement",
+      "unsettledTitle": "Trips done, not yet on a statement",
       "unsettledNone": "Nothing waiting.",
       "tripsDue": "{n, plural, one {# trip} other {# trips}}, owes",
       "generateTitle": "Create operator statements",
@@ -661,7 +664,8 @@
       "noInstapay": "missing, ask the partner",
       "reference": "InstaPay reference",
       "markPaid": "Mark paid",
-      "legalNote": "Amounts are in the collection currency. Record the exchange rate you used when paying in EGP. Invoices, tax and withholding rules need review by an Egyptian accountant before launch."
+      "legalNote": "Amounts are in the collection currency. Record the exchange rate you used when paying in EGP. Invoices, tax and withholding rules need review by an Egyptian accountant before launch.",
+      "unsettledHint": "Guests paid the operator in cash, so WENRO's and the partner's share is still with the operator. Create a statement for the month to collect it."
     },
     "partner": {
       "title": "Your partner page",
@@ -795,7 +799,7 @@
       "policy": "Free cancellation",
       "policyHours": "Up to {hours} hours before the start",
       "texts": "Texts",
-      "textsHint": "English is required. Arabic, German, Russian and French are optional; missing languages show the English text.",
+      "textsHint": "Write in any one language and save: the other languages are translated automatically. Then check them and edit as you like.",
       "filled": "has text",
       "field": {
         "title": "Title",
@@ -882,7 +886,9 @@
       "locationClear": "Remove meeting point",
       "locationOpen": "Open in Google Maps",
       "locationPublic": "Exact pin shown on the trip page",
-      "locationPrivate": "Trip page shows the area only; exact pin on the voucher"
+      "locationPrivate": "Trip page shows the area only; exact pin on the voucher",
+      "auto": "auto",
+      "autoNote": "Translated automatically. Read it through and change anything: once you edit this language it is yours and is no longer replaced."
     },
     "team": {
       "title": "Team",
@@ -1015,6 +1021,50 @@
       "opSub": "What guests said about your trips (published reviews).",
       "opNone": "No published reviews yet. Guests can review after you check them in.",
       "count": "{n, plural, one {# review} other {# reviews}}"
+    },
+    "notify": {
+      "title": "Notifications",
+      "sub": "What happened in your workspaces.",
+      "toDashboard": "Back to my dashboard",
+      "none": "Nothing new yet.",
+      "new": "New",
+      "bell": "{n, plural, =0 {Notifications} one {# new notification} other {# new notifications}}",
+      "kinds": {
+        "booking_new": "New booking {ref}: {title}, {when} ({seats} seats)",
+        "request_new": "New request {ref}: {title}, {when}. Accept or decline it.",
+        "booking_cancelled": "Booking {ref} was cancelled: {title}, {when}",
+        "partner_booking": "New booking through your link: {title}, {when}",
+        "partner_cancelled": "A booking through your link was cancelled: {title}, {when}",
+        "request_confirmed": "Request {ref} was accepted: {title}, {when}",
+        "request_declined": "Request {ref} was declined by the operator: {title}",
+        "request_expired": "Request {ref} expired without an answer: {title}",
+        "partner_executed": "Trip done: {title}. Your commission {amount} is on its way to the monthly payout.",
+        "review_pending": "New guest review to check ({rating}★): {title}",
+        "review_published": "A guest review of {title} was published ({rating}★)",
+        "org_applied": "New partner application: {name}",
+        "org_approved": "Your workspace {name} is approved. You can start now.",
+        "experience_review": "Trip waiting for review: {title}",
+        "experience_published": "Your trip is live: {title}",
+        "statement_created": "New statement: {amount} due to WENRO",
+        "statement_received": "WENRO received your payment of {amount}. Thank you!",
+        "payout_prepared": "Your payout for {month} is ready: {amount}",
+        "payout_paid": "Payout sent: {amount} via InstaPay"
+      }
+    },
+    "visits": {
+      "title": "Visits",
+      "sub": "People who opened the public site. Counted without cookies or personal data.",
+      "today": "Visitors today",
+      "todayViews": "Page views today",
+      "week": "Visitors, last 7 days",
+      "conversion": "Bookings per visitor (7 days)",
+      "chart": "Visitors per day, last 7 days",
+      "trip": "Trip",
+      "visitors": "Visitors",
+      "views": "Views",
+      "bookings": "Bookings",
+      "opTitle": "Views of your trips (last 7 days)",
+      "opSub": "How many people looked at each trip, and how many booked."
     }
   },
   "email": {

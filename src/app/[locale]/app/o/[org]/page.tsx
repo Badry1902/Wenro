@@ -4,6 +4,7 @@ import { rpc } from "@/lib/data/rpc";
 import { dayKey } from "@/lib/pricing";
 import { formatMoney } from "@/lib/money";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
+import { TripTable, type TripVisits } from "@/components/VisitsPanel";
 import { Badge, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { QrScanner } from "@/components/QrScanner";
@@ -38,10 +39,11 @@ export default async function OperatorToday({ params, searchParams }: Props) {
   const from = new Date(Date.parse(`${day}T00:00:00Z`) - 864e5).toISOString();
   const to = new Date(Date.parse(`${day}T00:00:00Z`) + 2 * 864e5).toISOString();
 
-  const [bookingsAll, slotsAll, upcoming] = await Promise.all([
+  const [bookingsAll, slotsAll, upcoming, views] = await Promise.all([
     rpc<OpBooking[]>("operator_bookings", { p_operator: org, p_from: from, p_to: to }, "user"),
     rpc<OpSlot[]>("operator_slots", { p_operator: org, p_from: from, p_to: to }, "user"),
     rpc<OpBooking[]>("operator_bookings", { p_operator: org, p_from: new Date().toISOString(), p_to: new Date(Date.now() + 90 * 864e5).toISOString() }, "user"),
+    ["owner", "manager"].includes(ws.role) ? rpc<TripVisits>("operator_visits", { p_operator: org, p_days: 7 }, "user").catch(() => [] as TripVisits) : Promise.resolve([] as TripVisits),
   ]);
   // The run sheet lists who is coming; cancelled, declined and expired bookings stay in the history only.
   const bookings = bookingsAll.filter((b) => dayKey(b.starts_at) === day && (b.status === "confirmed" || b.status === "pending_request"));
@@ -186,6 +188,13 @@ export default async function OperatorToday({ params, searchParams }: Props) {
         </div>
       )}
       <p className="mt-8 text-small text-ink-muted">{ta("timezoneNote")}</p>
+      {views.length > 0 && (
+        <section aria-labelledby="op-views" className="mt-10 rounded-card border border-line p-5">
+          <h2 id="op-views" className="mb-1 font-bold">{ta("visits.opTitle")}</h2>
+          <p className="mb-3 text-small text-ink-muted">{ta("visits.opSub")}</p>
+          <TripTable rows={views} />
+        </section>
+      )}
     </>
   );
 }
