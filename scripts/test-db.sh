@@ -17,4 +17,5 @@ psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/40_editor_tea
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/50_reviews_accounts_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/60_locations_identity_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/70_notifications_visits_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
+psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/80_growth_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 bash supabase/tests/20_concurrency_test.sh "$DB"

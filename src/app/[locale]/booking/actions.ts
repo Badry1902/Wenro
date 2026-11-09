@@ -1,5 +1,8 @@
 "use server";
 
+import { after } from "next/server";
+import { dispatchPushes } from "@/lib/push";
+
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { rpc, RpcError } from "@/lib/data/rpc";
@@ -14,6 +17,7 @@ export async function cancelBooking(form: FormData) {
   } catch (e) {
     if (!(e instanceof RpcError)) throw e; // already cancelled / started: the page shows the current state
   }
+  after(() => dispatchPushes().catch(() => undefined));
   revalidatePath("/[locale]/booking/[token]", "page");
 }
 
@@ -25,6 +29,7 @@ export async function reconfirmBooking(form: FormData) {
   } catch (e) {
     if (!(e instanceof RpcError)) throw e;
   }
+  after(() => dispatchPushes().catch(() => undefined));
   revalidatePath("/[locale]/booking/[token]", "page");
 }
 
@@ -41,6 +46,7 @@ export async function submitReview(form: FormData) {
     if (!(e instanceof RpcError)) throw e;
     return { error: e.code };
   }
+  after(() => dispatchPushes().catch(() => undefined));
   revalidatePath("/[locale]/booking/[token]", "page");
   return { ok: true as const };
 }

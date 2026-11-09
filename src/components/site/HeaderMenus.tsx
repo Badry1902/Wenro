@@ -9,7 +9,7 @@ import { IconCategory, IconClose } from "../Icons";
 import { AccountButton } from "./AccountButton";
 
 type Cat = { slug: string; name: string; blurb: string };
-type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string };
+type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string; explore: string; plan: string };
 
 const LANG: Record<string, string> = { en: "English", de: "Deutsch", ru: "Русский", fr: "Français", ar: "العربية" };
 const SHORT: Record<string, string> = { en: "EN", de: "DE", ru: "RU", fr: "FR", ar: "ع" };
@@ -53,6 +53,8 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
         <Link href="/experiences" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">
           {labels.allTrips}
         </Link>
+        <Link href="/explore" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">{labels.explore}</Link>
+        <Link href="/plan" className="nav-link hidden min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery lg:inline-flex">{labels.plan}</Link>
         <div ref={catRef} className="relative">
           <button type="button" aria-expanded={cats} onClick={() => setCats((v) => !v)}
             className="nav-link inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">
@@ -114,6 +116,8 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
             <div className="flex flex-col gap-1 p-3">
               <AccountButton labels={account} className="mb-2 flex min-h-12 justify-center text-[16px]" />
               <Link href="/experiences" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.allTrips}</Link>
+              <Link href="/explore" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.explore}</Link>
+              <Link href="/plan" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.plan}</Link>
               <p className="mt-3 px-3 text-small font-bold uppercase tracking-wider text-ink-muted">{labels.categories}</p>
               {categories.map((c) => (
                 <Link key={c.slug} href={{ pathname: "/experiences", query: { cat: c.slug } }} className="flex min-h-12 items-center gap-3 rounded-control px-3 hover:bg-discovery-tint">

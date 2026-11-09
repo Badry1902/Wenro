@@ -6,6 +6,7 @@ import { formatMoney } from "@/lib/money";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Empty } from "@/components/ui";
 import { TYPE_STYLE } from "@/components/WorkspaceShell";
+import { PushSetup } from "@/components/PushSetup";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false } };
@@ -44,6 +45,7 @@ export default async function Notifications({ params }: { params: Promise<{ loca
           <div><h1 className="text-h2 font-bold">{t("title")}</h1><p className="text-ink-muted">{t("sub")}</p></div>
           <Link href="/app" className="text-small font-semibold text-discovery hover:underline">{t("toDashboard")}</Link>
         </div>
+        <div className="mb-6 rounded-card bg-discovery-tint p-4"><p className="mb-2 text-small font-semibold">{t("pushHint")}</p><PushSetup /></div>
         {items.length === 0 ? <Empty>{t("none")}</Empty> : (
           <ul className="flex flex-col gap-2">
             {items.map((n) => {

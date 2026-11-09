@@ -1,4 +1,6 @@
 import QRCode from "qrcode";
+import { FirstSteps } from "@/components/growth/Steps";
+import { PartnerGrowth, type PartnerStats } from "@/components/growth/PartnerGrowth";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
 import type { ExperienceCard } from "@/lib/data/types";
@@ -30,11 +32,13 @@ export default async function PartnerHome({ params, searchParams }: Props) {
   const q = await searchParams;
   const ws = await requireWorkspace(locale, org, ["marketer", "agency"]);
   const t = await getTranslations("app.partner");
+  const tg = await getTranslations("app.growth");
   const format = await getFormatter();
-  const [s, experiences, bookings] = await Promise.all([
+  const [s, experiences, bookings, stats] = await Promise.all([
     rpc<Summary>("partner_summary", { p_partner: org }, "user"),
     rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]),
     rpc<{ status: string; execution_status: string }[]>("partner_bookings", { p_partner: org }, "user").catch(() => []),
+    rpc<PartnerStats>("partner_stats", { p_partner: org }, "user").catch(() => null),
   ]);
   const visits = s.codes.reduce((a, c) => a + Number(c.clicks), 0);
   const booked = bookings.filter((b) => !["cancelled", "expired", "declined"].includes(b.status)).length;
@@ -56,6 +60,13 @@ export default async function PartnerHome({ params, searchParams }: Props) {
       <PageTitle title={t(ws.type === "agency" ? "titleAgency" : "titleMarketer")} sub={t(ws.type === "agency" ? "subAgency" : "subMarketer")}
         actions={ws.type === "agency" ? <Link href={`/app/p/${org}/book`} className={btn.primary}>{t("bookNow")}</Link> : undefined} />
       <Flash ok={q.ok} err={q.err} />
+      <FirstSteps title={tg("stepsTitle")} sub={tg("stepsSub")} steps={[
+        { label: tg("pStep.payout"), done: !!s.org.instapay, href: `${back}#payout`, cta: tg("go") },
+        { label: tg(ws.type === "agency" ? "pStep.bookAgency" : "pStep.share"), done: visits > 0 || booked > 0, href: ws.type === "agency" ? `${back}/book` : `${back}/kit`, cta: tg("go") },
+        { label: tg("pStep.firstBooking"), done: booked > 0 },
+        { label: tg("pStep.firstTrip"), done: done > 0 },
+      ]} />
+      {stats && <PartnerGrowth s={stats} locale={locale} org={org} />}
 
       {/* At a glance */}
       <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -147,7 +158,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
           )}
           <p className="mt-2 text-small text-ink-muted">{t("clicksHint")}</p>
         </Card>
-        <Card title={t("payoutTitle")}>
+        <Card title={t("payoutTitle")} className="scroll-mt-6" id="payout">
           {canManage(ws) ? (
             <form action={setPayoutHandle} className="mb-4 flex flex-wrap items-end gap-2">
               <input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value={back} /><input type="hidden" name="org" value={org} />

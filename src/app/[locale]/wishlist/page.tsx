@@ -5,6 +5,7 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WishlistGrid } from "@/components/site/Recent";
+import { Link } from "@/i18n/navigation";
 
 export const revalidate = 300;
 
@@ -25,6 +26,7 @@ export default async function Wishlist({ params }: { params: Promise<{ locale: s
       <main className="mx-auto max-w-7xl px-4 pb-10 pt-8">
         <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{t("wishlist.title")}</h1>
         <p className="mb-8 mt-1 text-ink-muted">{t("wishlist.sub")}</p>
+        <Link href="/plan" className="btn-press mb-6 inline-flex min-h-11 items-center rounded-full bg-apricot px-5 font-bold text-ink">{t("plan.fromWishlist")}</Link>
         <WishlistGrid cards={cards} />
       </main>
       <SiteFooter />

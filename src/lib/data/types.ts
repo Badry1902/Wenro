@@ -60,6 +60,10 @@ export type ExperienceCard = {
   /** published guest reviews only */
   rating?: number | null;
   reviews?: number;
+  /** meeting point (rounded to ~1 km when exact is false) */
+  lat?: number | null;
+  lng?: number | null;
+  exact?: boolean;
 };
 
 export type ReviewSummary = {

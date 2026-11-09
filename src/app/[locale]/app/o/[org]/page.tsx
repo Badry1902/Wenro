@@ -5,6 +5,9 @@ import { dayKey } from "@/lib/pricing";
 import { formatMoney } from "@/lib/money";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
 import { TripTable, type TripVisits } from "@/components/VisitsPanel";
+import { FirstSteps } from "@/components/growth/Steps";
+import { OperatorTodo, type OpToday } from "@/components/growth/OperatorToday";
+import type { TripQuality } from "@/lib/quality";
 import { Badge, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { QrScanner } from "@/components/QrScanner";
@@ -39,12 +42,16 @@ export default async function OperatorToday({ params, searchParams }: Props) {
   const from = new Date(Date.parse(`${day}T00:00:00Z`) - 864e5).toISOString();
   const to = new Date(Date.parse(`${day}T00:00:00Z`) + 2 * 864e5).toISOString();
 
-  const [bookingsAll, slotsAll, upcoming, views] = await Promise.all([
+  const [bookingsAll, slotsAll, upcoming, views, todo, quality] = await Promise.all([
     rpc<OpBooking[]>("operator_bookings", { p_operator: org, p_from: from, p_to: to }, "user"),
     rpc<OpSlot[]>("operator_slots", { p_operator: org, p_from: from, p_to: to }, "user"),
     rpc<OpBooking[]>("operator_bookings", { p_operator: org, p_from: new Date().toISOString(), p_to: new Date(Date.now() + 90 * 864e5).toISOString() }, "user"),
     ["owner", "manager"].includes(ws.role) ? rpc<TripVisits>("operator_visits", { p_operator: org, p_days: 7 }, "user").catch(() => [] as TripVisits) : Promise.resolve([] as TripVisits),
+    rpc<OpToday>("operator_today", { p_operator: org }, "user").catch(() => null),
+    manager ? rpc<TripQuality[]>("operator_trip_quality", { p_operator: org }, "user").catch(() => [] as TripQuality[]) : Promise.resolve([] as TripQuality[]),
   ]);
+  const tg = await getTranslations("app.growth");
+  const firstTrip = quality[0];
   // The run sheet lists who is coming; cancelled, declined and expired bookings stay in the history only.
   const bookings = bookingsAll.filter((b) => dayKey(b.starts_at) === day && (b.status === "confirmed" || b.status === "pending_request"));
   const slots = slotsAll.filter((s) => dayKey(s.starts_at) === day);
@@ -69,6 +76,17 @@ export default async function OperatorToday({ params, searchParams }: Props) {
         }
       />
       <Flash ok={q.ok} err={q.err} />
+      {manager && (
+        <FirstSteps title={tg("stepsTitle")} sub={tg("opStepsSub")} steps={[
+          { label: tg("oStep.trip"), done: quality.length > 0, href: `${back}/experiences/new`, cta: tg("go") },
+          { label: tg("oStep.photos"), done: quality.some((x) => x.photos >= 5), href: firstTrip ? `${back}/experiences/${firstTrip.id}#photos` : undefined, cta: tg("go") },
+          { label: tg("oStep.map"), done: quality.some((x) => x.meeting), href: firstTrip ? `${back}/experiences/${firstTrip.id}#location` : undefined, cta: tg("go") },
+          { label: tg("oStep.departures"), done: quality.some((x) => x.departures > 0), href: `${back}/departures`, cta: tg("go") },
+          { label: tg("oStep.review"), done: quality.some((x) => x.status === "published"), href: `${back}/experiences`, cta: tg("go") },
+          { label: tg("oStep.firstBooking"), done: upcoming.length > 0 || bookingsAll.length > 0 },
+        ]} />
+      )}
+      {todo && <OperatorTodo d={todo} base={back} manager={manager} />}
 
       {/* The day at a glance, and the things operators do most */}
       <div className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -105,7 +123,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
       </section>
 
       {requests.length > 0 && (
-        <section className="mb-8">
+        <section id="requests" className="mb-8 scroll-mt-6">
           <h2 className="mb-3 text-h3 font-bold">{t("requests", { n: requests.length })}</h2>
           <ul className="flex flex-col gap-2">
             {requests.map((b) => (
@@ -127,7 +145,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
       )}
 
       {slots.length === 0 ? <Empty>{t("noDepartures")}</Empty> : (
-        <div className="flex flex-col gap-8">
+        <div id="run" className="flex scroll-mt-6 flex-col gap-8">
           {slots.map((s) => {
             const list = bookings.filter((b) => b.starts_at === s.starts_at && b.experience_id === s.experience_id);
             const people = list.filter((b) => b.status === "confirmed").reduce((n, b) => n + b.adults + b.children + b.infants, 0);

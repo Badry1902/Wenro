@@ -1,5 +1,8 @@
 "use server";
 
+import { after } from "next/server";
+import { dispatchPushes } from "@/lib/push";
+
 import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
@@ -21,6 +24,7 @@ async function run(form: FormData, name: string, fn: string, args: Record<string
   let result = `ok=${name}`;
   try {
     await rpc(fn, args, "user");
+    after(() => dispatchPushes().catch(() => undefined)); // alerts for whoever this action concerns
   } catch (e) {
     result = `err=${e instanceof RpcError ? e.code : "unexpected_error"}`;
     if (!(e instanceof RpcError)) console.error(fn, e);

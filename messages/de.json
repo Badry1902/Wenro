@@ -4,7 +4,7 @@
     "description": "Ausflüge und lokale Erlebnisse in Hurghada entdecken und buchen."
   },
   "nav": {
-    "explore": "Entdecken",
+    "explore": "Karte entdecken",
     "destinations": "Reiseziele",
     "myBookings": "Meine Buchungen",
     "signIn": "Anmelden",
@@ -14,7 +14,8 @@
     "dashboard": "Dashboard",
     "partners": "Für Partner",
     "menu": "Menü",
-    "categories": "Kategorien"
+    "categories": "Kategorien",
+    "plan": "Meine Woche planen"
   },
   "home": {
     "eyebrow": "Entdecken. Buchen. Erleben.",
@@ -55,7 +56,15 @@
     "freeCancel": "Kostenlose Stornierung ({h} Std.)",
     "pickup": "Abholung vom Hotel",
     "prev": "Zurück",
-    "next": "Weiter"
+    "next": "Weiter",
+    "exploreEyebrow": "Entdecken",
+    "exploreTitle": "Ihr nächstes Abenteuer auf der Karte",
+    "exploreText": "Riffe, Inseln, Wüstencamps und alte Gassen – sehen Sie, wo jeder Ausflug beginnt.",
+    "exploreCta": "Karte öffnen",
+    "planEyebrow": "Planen",
+    "planTitle": "Ihre Woche in einer Minute planen",
+    "planText": "Wählen Sie Ausflüge und Ihre Reisedaten; wir verteilen sie auf Tage mit freien Plätzen.",
+    "planCta": "Meine Woche planen"
   },
   "categories": {
     "sea": "Meer",
@@ -643,7 +652,8 @@
       "money": "Finanzen",
       "team": "Team",
       "coupons": "Rabattcodes",
-      "reviews": "Bewertungen"
+      "reviews": "Bewertungen",
+      "kit": "Content-Kit"
     },
     "op": {
       "todayTitle": "Tagesplan",
@@ -1143,7 +1153,8 @@
         "statement_received": "WENRO hat Ihre Zahlung von {amount} erhalten. Danke!",
         "payout_prepared": "Ihre Auszahlung für {month} ist bereit: {amount}",
         "payout_paid": "Auszahlung gesendet: {amount} per InstaPay"
-      }
+      },
+      "pushHint": "Erhalten Sie Hinweise auf diesem Handy oder Computer, auch wenn WENRO geschlossen ist."
     },
     "visits": {
       "title": "Besuche",
@@ -1159,6 +1170,132 @@
       "bookings": "Buchungen",
       "opTitle": "Aufrufe Ihrer Touren (letzte 7 Tage)",
       "opSub": "Wie viele Personen jede Tour angesehen und wie viele gebucht haben."
+    },
+    "push": {
+      "enable": "Hinweise auf diesem Gerät erhalten",
+      "on": "Hinweise auf diesem Gerät sind an",
+      "denied": "Hinweise sind in den Einstellungen dieses Browsers blockiert.",
+      "ios": "Auf dem iPhone: Teilen → Zum Home-Bildschirm, WENRO von dort öffnen und dann Hinweise einschalten.",
+      "install": "WENRO-App installieren"
+    },
+    "growth": {
+      "stepsTitle": "Ihre ersten Schritte",
+      "stepsSub": "Ein paar Schritte bis zu Ihrer ersten Provision.",
+      "opStepsSub": "Ein paar Schritte bis zu Ihrer ersten Buchung.",
+      "go": "Los",
+      "pStep": {
+        "payout": "InstaPay hinzufügen, damit wir Sie bezahlen können",
+        "share": "Ersten Ausflugslink oder Story teilen",
+        "bookAgency": "Ersten Kunden buchen",
+        "firstBooking": "Erste Buchung erhalten",
+        "firstTrip": "Erster Gast reist über Ihren Link"
+      },
+      "oStep": {
+        "trip": "Ersten Ausflug anlegen",
+        "photos": "Mindestens 5 Fotos hinzufügen",
+        "map": "Treffpunkt auf der Karte markieren",
+        "departures": "Termine hinzufügen",
+        "review": "Zur Prüfung senden und live gehen",
+        "firstBooking": "Ihre erste Buchung"
+      },
+      "levelTitle": "Ihr Level diesen Monat",
+      "levels": {
+        "explorer": "Entdecker",
+        "bronze": "Bronze",
+        "silver": "Silber",
+        "gold": "Gold"
+      },
+      "toNext": "Noch {n, plural, one {# durchgeführter Ausflug} other {# durchgeführte Ausflüge}} diesen Monat bis {level}.",
+      "top": "Höchstes Level. Starker Monat!",
+      "levelNote": "Levels zählen die diesen Monat durchgeführten Ausflüge und starten jeden Monat neu. Ihre Provision ändern sie nicht.",
+      "badges": "Abzeichen",
+      "badge": {
+        "first": {
+          "name": "Erster Ausflug",
+          "hint": "Ihr erster Gast ist gereist"
+        },
+        "ten": {
+          "name": "10 Ausflüge",
+          "hint": "10 Gäste reisten über Ihren Link"
+        },
+        "fifty": {
+          "name": "50 Ausflüge",
+          "hint": "50 Ausflüge durchgeführt"
+        },
+        "variety": {
+          "name": "Entdecker der Fünf",
+          "hint": "Buchungen für 5 verschiedene Ausflüge"
+        },
+        "reach": {
+          "name": "100 Besuche",
+          "hint": "100 Link-Besuche diesen Monat"
+        }
+      },
+      "earnTitle": "Ihre Einnahmen diesen Monat",
+      "earned": "Verdient",
+      "coming": "Unterwegs",
+      "paid": "Ausgezahlt",
+      "forecast": "Wenn alle kommenden Ausflüge stattfinden: {amount} diesen Monat.",
+      "forecastNote": "Verdient = durchgeführte Ausflüge. Unterwegs = bestätigte, noch nicht durchgeführte Ausflüge. Auszahlung monatlich per InstaPay.",
+      "tip": "{title} macht aus Ihren Besuchen die meisten Buchungen. Teilen Sie ihn öfter!",
+      "kitCta": "Texte und Story-Bilder holen",
+      "bestTitle": "Ihre besten Ausflüge (90 Tage)",
+      "bestSub": "Besuche über Ihren Link, Buchungen und Provision pro Ausflug.",
+      "trip": "Ausflug",
+      "clicks": "Besuche",
+      "bookings": "Buchungen",
+      "commission": "Provision"
+    },
+    "kit": {
+      "title": "Content-Kit",
+      "sub": "Fertige Texte und Story-Bilder mit Ihrem eigenen Link und QR-Code für jeden Ausflug. Kopieren, herunterladen, posten.",
+      "noCode": "Sie haben noch keinen Partnercode. Bitten Sie WENRO, Ihren Arbeitsbereich zu aktivieren.",
+      "language": "Sprache",
+      "caption": "🌊 {title}\n{summary}\nAb {price} pro Person · Barzahlung beim Start, kostenlose Stornierung.\nHier buchen 👉 {link}\nCode: {code}",
+      "from": "ab {price}",
+      "storyCta": "Scannen und bei WENRO buchen",
+      "copyCaption": "Text kopieren",
+      "copyLink": "Link kopieren",
+      "copied": "Kopiert",
+      "makeStory": "Story-Bild erstellen (9:16)",
+      "making": "Wird erstellt…",
+      "download": "Herunterladen",
+      "share": "Teilen"
+    },
+    "quality": {
+      "score": "Qualitätswert {n} von 100",
+      "great": "Sehr gute Ausflugsseite. Gäste finden alles, was sie brauchen.",
+      "improve": "Ergänzen Sie dies für mehr Buchungen:",
+      "tips": {
+        "photos": "5+ Fotos",
+        "languages": "alle 5 Sprachen",
+        "description": "längere Beschreibung",
+        "itinerary": "Ablauf",
+        "included": "Leistungen",
+        "meeting": "Treffpunkt-Karte",
+        "departures": "mehr Termine",
+        "video": "ein Video",
+        "reviews": "erste Bewertung"
+      }
+    },
+    "today": {
+      "todo": "Jetzt zu tun",
+      "allDone": "Nichts offen. Schönen Tag!",
+      "items": {
+        "requests": "{n, plural, one {# Anfrage wartet} other {# Anfragen warten}} auf Ihre Antwort",
+        "checkin": "{n, plural, one {# Buchung} other {# Buchungen}} bald einchecken",
+        "unmarked": "{n, plural, one {# vergangener Ausflug} other {# vergangene Ausflüge}} nicht als durchgeführt oder nicht erschienen markiert",
+        "noDepartures": "{n, plural, one {# Ausflug hat} other {# Ausflüge haben}} keine Termine in den nächsten 7 Tagen"
+      },
+      "responseTitle": "Ihre Antwortzeit",
+      "responseNone": "Noch keine Anfragen beantwortet.",
+      "hours": "{n} Std.",
+      "speed": {
+        "fast": "Ausgezeichnet – Gäste lieben schnelle Antworten.",
+        "ok": "Gut. Unter 1 Stunde bringt mehr Buchungen.",
+        "slow": "Langsam. Antworten Sie innerhalb einer Stunde für mehr Buchungen."
+      },
+      "responseNote": "Durchschnitt der letzten 60 Tage ({n} Anfragen)."
     }
   },
   "share": {
@@ -1288,5 +1425,30 @@
     "pickup": "Abholung vom Hotel bei den meisten Ausflügen",
     "rights": "© {year} WENRO. Alle Rechte vorbehalten.",
     "demoNote": "Testseite: Die gezeigten Ausflüge sind Demo-Inhalte und die Fotos Stockbilder."
+  },
+  "explore": {
+    "title": "Hurghada auf der Karte entdecken",
+    "sub": "Jeder Ausflug dort, wo er startet. Tippen Sie auf eine Markierung.",
+    "all": "Alle",
+    "see": "Zum Ausflug",
+    "group": "{n} Ausflüge hier"
+  },
+  "plan": {
+    "title": "Meine Woche planen",
+    "sub": "Wählen Sie Ausflüge und Ihre Urlaubsdaten. Wir legen jeden Ausflug auf einen Tag mit freien Plätzen, ohne Überschneidungen, und Sie buchen jeden mit einem Tippen.",
+    "from": "Erster Tag",
+    "to": "Letzter Tag",
+    "people": "Personen",
+    "pickTitle": "{n, plural, =0 {Ausflüge wählen} one {# Ausflug gewählt} other {# Ausflüge gewählt}}",
+    "pickHint": "Ihre Merkliste ist schon ausgewählt. Tippen zum Hinzufügen oder Entfernen (bis zu 12).",
+    "planning": "Wird geplant…",
+    "make": "{days} Tage planen",
+    "yourPlan": "Ihr Plan",
+    "empty": "Wählen Sie Ausflüge und tippen Sie auf Planen.",
+    "free": "Freier Tag: Der Strand gehört Ihnen.",
+    "seats": "{n, plural, one {# Platz frei} other {# Plätze frei}}",
+    "book": "Buchen",
+    "noRoom": "Keine freien Plätze an Ihren Daten für:",
+    "fromWishlist": "Meine Woche mit diesen Ausflügen planen"
   }
 }

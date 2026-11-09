@@ -1,5 +1,8 @@
 "use server";
 
+import { after } from "next/server";
+import { dispatchPushes } from "@/lib/push";
+
 import { cookies, headers } from "next/headers";
 import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
@@ -85,6 +88,7 @@ export async function placeBooking(_: PlaceBookingState, form: FormData): Promis
     );
     token = res.manage_token;
     await keepLinkForMessages(res.booking_id, token);
+    after(() => dispatchPushes().catch(() => undefined)); // alert the operator (and partner) right away
   } catch (e) {
     if (e instanceof RpcError) return { error: e.code };
     console.error("create_booking failed", e);

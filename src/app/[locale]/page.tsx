@@ -93,6 +93,23 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
           <RecentRail cards={cards} />
 
+          <Reveal as="section" className="mt-14 grid gap-4 md:grid-cols-2">
+            <Link href="/explore" className="group relative overflow-hidden rounded-[24px] bg-discovery p-6 text-white md:p-8">
+              <span className="pointer-events-none absolute -end-10 -top-10 size-48 rounded-full bg-white/10 transition-transform duration-500 group-hover:scale-125" aria-hidden="true" />
+              <span className="relative block text-small font-bold uppercase tracking-wider text-white/80">{t("home.exploreEyebrow")}</span>
+              <span className="relative mt-1 block text-[24px] font-extrabold leading-tight md:text-[28px]">{t("home.exploreTitle")}</span>
+              <span className="relative mt-2 block max-w-sm text-white/85">{t("home.exploreText")}</span>
+              <span className="relative mt-4 inline-flex min-h-11 items-center rounded-full bg-white px-5 font-bold text-discovery">{t("home.exploreCta")}</span>
+            </Link>
+            <Link href="/plan" className="group relative overflow-hidden rounded-[24px] bg-apricot p-6 text-ink md:p-8">
+              <span className="pointer-events-none absolute -end-10 -top-10 size-48 rounded-full bg-white/25 transition-transform duration-500 group-hover:scale-125" aria-hidden="true" />
+              <span className="relative block text-small font-bold uppercase tracking-wider text-ink/70">{t("home.planEyebrow")}</span>
+              <span className="relative mt-1 block text-[24px] font-extrabold leading-tight md:text-[28px]">{t("home.planTitle")}</span>
+              <span className="relative mt-2 block max-w-sm text-ink/80">{t("home.planText")}</span>
+              <span className="relative mt-4 inline-flex min-h-11 items-center rounded-full bg-ink px-5 font-bold text-white">{t("home.planCta")}</span>
+            </Link>
+          </Reveal>
+
           {picks.length > 0 && (
             <Reveal as="section" className="mt-16">
               <SectionHead title={t("home.topPicks")} sub={t("home.topPicksSub")} href="/experiences" />

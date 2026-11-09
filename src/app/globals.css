@@ -299,3 +299,13 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 .brand-loader { opacity: 0; animation: brand-loader-in 240ms ease-out 180ms forwards; }
 @keyframes brand-loader-in { to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .brand-loader { animation-duration: 1ms; } }
+
+/* Explore map pins: price bubbles in brand colours; dashed for "area only" points */
+.map-pin { position: absolute; transform: translate(-50%, -100%); white-space: nowrap; background: var(--color-discovery); color: #fff;
+  font: 700 12px/1 var(--font-sans, system-ui); padding: 6px 9px; border-radius: 999px; border: 2px solid #fff;
+  box-shadow: 0 6px 14px -6px rgb(18 24 48 / 0.6); cursor: pointer; transition: transform .15s ease; }
+.map-pin:hover { transform: translate(-50%, -100%) scale(1.08); background: var(--color-apricot); color: var(--color-ink); }
+.map-pin-area { background: #fff; color: var(--color-discovery); border-style: dashed; border-color: var(--color-discovery); }
+.map-pin-group { background: var(--color-ink); color: #fff; padding-inline: 12px; }
+.map-pin-group b { font-weight: 800; }
+.leaflet-container { font-family: inherit; }

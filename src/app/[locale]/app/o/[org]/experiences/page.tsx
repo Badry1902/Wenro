@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { QualityBadge } from "@/components/growth/QualityBadge";
+import type { TripQuality } from "@/lib/quality";
 import { Link } from "@/i18n/navigation";
 import { rpc } from "@/lib/data/rpc";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
@@ -19,7 +21,10 @@ export default async function OperatorExperiences({ params, searchParams }: Prop
   const ws = await requireWorkspace(locale, org, ["operator"]);
   if (!canManage(ws)) notFound();
   const t = await getTranslations("app.exp");
-  const list = await rpc<OpExperience[]>("operator_experiences", { p_operator: org }, "user");
+  const [list, quality] = await Promise.all([
+    rpc<OpExperience[]>("operator_experiences", { p_operator: org }, "user"),
+    rpc<TripQuality[]>("operator_trip_quality", { p_operator: org }, "user").catch(() => [] as TripQuality[]),
+  ]);
   const back = `/app/o/${org}/experiences`;
   const hidden = (<><input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value={back} /></>);
 
@@ -45,6 +50,7 @@ export default async function OperatorExperiences({ params, searchParams }: Prop
                   <form action={setExperienceStatus}>{hidden}<input type="hidden" name="experience" value={e.id} /><input type="hidden" name="status" value="draft" /><Submit className={btn.quiet}>{t("withdraw")}</Submit></form>
                 )}
               </div>
+              {quality.find((x) => x.id === e.id) && <QualityBadge q={quality.find((x) => x.id === e.id)!} editHref={`/app/o/${org}/experiences/${e.id}`} />}
             </li>
           ))}
         </ul>

@@ -1,6 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { runTick } from "@/lib/messaging/deliver";
+import { dispatchPushes } from "@/lib/push";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -22,7 +23,9 @@ function authorized(req: Request) {
 async function handle(req: Request) {
   if (!authorized(req)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   try {
-    return NextResponse.json(await runTick());
+    const r = await runTick();
+    const pushed = await dispatchPushes().catch(() => 0);
+    return NextResponse.json({ ...r, pushed });
   } catch (e) {
     console.error("cron tick failed", e);
     return NextResponse.json({ error: "tick_failed" }, { status: 500 });

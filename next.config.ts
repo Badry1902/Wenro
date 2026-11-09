@@ -11,7 +11,7 @@ const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://vercel.live",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.unsplash.com https://res.cloudinary.com https://*.supabase.co",
+  "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://images.unsplash.com https://res.cloudinary.com https://*.supabase.co",
   "media-src 'self' blob: https://res.cloudinary.com https://*.supabase.co",
   "font-src 'self' data:",
   `connect-src 'self' ${supabase} https://*.supabase.co https://api.cloudinary.com https://vercel.live ${cloudApi}`.trim(),

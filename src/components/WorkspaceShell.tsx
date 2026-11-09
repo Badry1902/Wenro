@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getWorkspaces, homeOf, type Workspace } from "@/lib/workspaces";
 import { signOut } from "@/app/[locale]/signin/actions";
 import { NavLink } from "./NavLink";
+import { PushSetup } from "./PushSetup";
 import { rpc } from "@/lib/data/rpc";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
@@ -100,6 +101,7 @@ export async function WorkspaceShell({
             <div className="hidden px-3 pt-4 md:block"><Switcher open={others.length <= 6} /></div>
           </>
         )}
+        <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
         <div className="mt-auto hidden px-5 pb-6 pt-6 md:block">
           <Link href="/app/account" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
           <Link href="/" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>

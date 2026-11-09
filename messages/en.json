@@ -4,7 +4,7 @@
     "description": "Discover and book trips and local experiences in Hurghada."
   },
   "nav": {
-    "explore": "Explore",
+    "explore": "Explore map",
     "destinations": "Destinations",
     "myBookings": "My bookings",
     "signIn": "Sign in",
@@ -14,7 +14,8 @@
     "dashboard": "Dashboard",
     "partners": "For partners",
     "menu": "Menu",
-    "categories": "Categories"
+    "categories": "Categories",
+    "plan": "Plan my week"
   },
   "home": {
     "eyebrow": "Discover. Book. Explore.",
@@ -55,7 +56,15 @@
     "freeCancel": "Free cancellation ({h} h)",
     "pickup": "Hotel pickup",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "exploreEyebrow": "Explore",
+    "exploreTitle": "Find your next adventure on the map",
+    "exploreText": "Reefs, islands, desert camps and old streets — see where every trip starts.",
+    "exploreCta": "Open the map",
+    "planEyebrow": "Plan",
+    "planTitle": "Plan your week in one minute",
+    "planText": "Pick the trips you like and your dates; we fit them into your days with free seats.",
+    "planCta": "Plan my week"
   },
   "categories": {
     "sea": "Sea",
@@ -465,7 +474,8 @@
       "money": "Money",
       "team": "Team",
       "coupons": "Discount codes",
-      "reviews": "Reviews"
+      "reviews": "Reviews",
+      "kit": "Content kit"
     },
     "op": {
       "todayTitle": "Run sheet",
@@ -1049,7 +1059,8 @@
         "statement_received": "WENRO received your payment of {amount}. Thank you!",
         "payout_prepared": "Your payout for {month} is ready: {amount}",
         "payout_paid": "Payout sent: {amount} via InstaPay"
-      }
+      },
+      "pushHint": "Get alerts on this phone or computer, even when WENRO is closed."
     },
     "visits": {
       "title": "Visits",
@@ -1065,6 +1076,132 @@
       "bookings": "Bookings",
       "opTitle": "Views of your trips (last 7 days)",
       "opSub": "How many people looked at each trip, and how many booked."
+    },
+    "push": {
+      "enable": "Get alerts on this device",
+      "on": "Alerts on this device are on",
+      "denied": "Alerts are blocked in this browser's settings.",
+      "ios": "On iPhone: tap Share → Add to Home Screen, open WENRO from there, then turn on alerts.",
+      "install": "Install the WENRO app"
+    },
+    "growth": {
+      "stepsTitle": "Your first steps",
+      "stepsSub": "A few steps to your first commission.",
+      "opStepsSub": "A few steps to your first booking.",
+      "go": "Do it",
+      "pStep": {
+        "payout": "Add your InstaPay so we can pay you",
+        "share": "Share your first trip link or story",
+        "bookAgency": "Book your first client",
+        "firstBooking": "Get your first booking",
+        "firstTrip": "First guest travels with your link"
+      },
+      "oStep": {
+        "trip": "Create your first trip",
+        "photos": "Add at least 5 photos",
+        "map": "Pin the meeting point on the map",
+        "departures": "Add departures",
+        "review": "Send it for review and go live",
+        "firstBooking": "Your first booking"
+      },
+      "levelTitle": "Your level this month",
+      "levels": {
+        "explorer": "Explorer",
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold"
+      },
+      "toNext": "{n, plural, one {# more trip} other {# more trips}} done this month to reach {level}.",
+      "top": "Top level. Amazing month!",
+      "levelNote": "Levels count trips done this month and start again each month. They do not change your commission.",
+      "badges": "Badges",
+      "badge": {
+        "first": {
+          "name": "First trip",
+          "hint": "Your first guest travelled"
+        },
+        "ten": {
+          "name": "10 trips",
+          "hint": "10 guests travelled with your link"
+        },
+        "fifty": {
+          "name": "50 trips",
+          "hint": "50 trips done"
+        },
+        "variety": {
+          "name": "Explorer of 5",
+          "hint": "Bookings on 5 different trips"
+        },
+        "reach": {
+          "name": "100 visits",
+          "hint": "100 link visits this month"
+        }
+      },
+      "earnTitle": "Your earnings this month",
+      "earned": "Earned",
+      "coming": "On the way",
+      "paid": "Paid",
+      "forecast": "If all upcoming trips take place: {amount} this month.",
+      "forecastNote": "Earned = trips done. On the way = confirmed trips not done yet. Paid monthly via InstaPay.",
+      "tip": "{title} turns visits into bookings best for you. Share it more!",
+      "kitCta": "Get captions and story images",
+      "bestTitle": "Your best trips (90 days)",
+      "bestSub": "Visits through your link, bookings and commission per trip.",
+      "trip": "Trip",
+      "clicks": "Visits",
+      "bookings": "Bookings",
+      "commission": "Commission"
+    },
+    "kit": {
+      "title": "Content kit",
+      "sub": "Ready captions and story images with your own link and QR code for every trip. Copy, download, post.",
+      "noCode": "You don't have a partner code yet. Ask WENRO to activate your workspace.",
+      "language": "Language",
+      "caption": "🌊 {title}\n{summary}\nFrom {price} per person · pay cash at the start, free cancellation.\nBook here 👉 {link}\nCode: {code}",
+      "from": "from {price}",
+      "storyCta": "Scan to book on WENRO",
+      "copyCaption": "Copy caption",
+      "copyLink": "Copy link",
+      "copied": "Copied",
+      "makeStory": "Make story image (9:16)",
+      "making": "Making…",
+      "download": "Download",
+      "share": "Share"
+    },
+    "quality": {
+      "score": "Quality score {n} out of 100",
+      "great": "Great trip page. Guests have everything they need.",
+      "improve": "Add these to get more bookings:",
+      "tips": {
+        "photos": "5+ photos",
+        "languages": "all 5 languages",
+        "description": "longer description",
+        "itinerary": "itinerary",
+        "included": "what's included",
+        "meeting": "meeting point map",
+        "departures": "more departures",
+        "video": "a video",
+        "reviews": "first review"
+      }
+    },
+    "today": {
+      "todo": "To do now",
+      "allDone": "Nothing waiting. Enjoy the day!",
+      "items": {
+        "requests": "{n, plural, one {# request} other {# requests}} waiting for your answer",
+        "checkin": "{n, plural, one {# booking} other {# bookings}} to check in soon",
+        "unmarked": "{n, plural, one {# past trip} other {# past trips}} not marked done or no-show",
+        "noDepartures": "{n, plural, one {# trip has} other {# trips have}} no departures in the next 7 days"
+      },
+      "responseTitle": "Your answer time",
+      "responseNone": "No requests answered yet.",
+      "hours": "{n} h",
+      "speed": {
+        "fast": "Excellent — guests love fast answers.",
+        "ok": "Good. Under 1 hour gets more bookings.",
+        "slow": "Slow. Answer within an hour to win more bookings."
+      },
+      "responseNote": "Average over the last 60 days ({n} requests)."
     }
   },
   "email": {
@@ -1288,5 +1425,30 @@
     "close": "Close",
     "note": "Your code {code} also works when typed at checkout.",
     "as": "Share as"
+  },
+  "explore": {
+    "title": "Explore Hurghada on the map",
+    "sub": "Every trip where it starts. Tap a pin to see it.",
+    "all": "All",
+    "see": "See the trip",
+    "group": "{n} trips here"
+  },
+  "plan": {
+    "title": "Plan my week",
+    "sub": "Choose trips and your holiday dates. We place each trip on a day with free seats, without overlaps, and you book each one in a tap.",
+    "from": "First day",
+    "to": "Last day",
+    "people": "People",
+    "pickTitle": "{n, plural, =0 {Choose trips} one {# trip chosen} other {# trips chosen}}",
+    "pickHint": "Your wishlist is already selected. Tap to add or remove (up to 12).",
+    "planning": "Planning…",
+    "make": "Plan {days} days",
+    "yourPlan": "Your plan",
+    "empty": "Choose trips and press Plan.",
+    "free": "Free day: the beach is yours.",
+    "seats": "{n, plural, one {# seat left} other {# seats left}}",
+    "book": "Book",
+    "noRoom": "No free seats on your dates for:",
+    "fromWishlist": "Plan my week with these trips"
   }
 }

@@ -12,9 +12,9 @@ export function PageTitle({ title, sub, actions }: { title: string; sub?: string
   );
 }
 
-export function Card({ title, children, className = "" }: { title?: string; children: React.ReactNode; className?: string }) {
+export function Card({ title, children, className = "", id }: { title?: string; children: React.ReactNode; className?: string; id?: string }) {
   return (
-    <section className={`rounded-card border border-line bg-surface p-5 ${className}`}>
+    <section id={id} className={`rounded-card border border-line bg-surface p-5 ${className}`}>
       {title && <h2 className="mb-3 text-h3 font-bold">{title}</h2>}
       {children}
     </section>
