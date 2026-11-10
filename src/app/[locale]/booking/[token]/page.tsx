@@ -13,6 +13,8 @@ import { CalendarButton } from "./CalendarButton";
 import { ReviewForm } from "./ReviewForm";
 import { MeetingMap } from "@/components/site/MeetingMap";
 import { siteUrl } from "@/lib/env";
+import { patternStyle, themeFor } from "@/lib/themes";
+import { ThemeBadge } from "@/components/brand/ThemeArt";
 
 export const dynamic = "force-dynamic";
 
@@ -47,8 +49,9 @@ export default async function BookingPage({ params, searchParams }: Props) {
   const freeHours = b.terms.cancellation_policy?.free_cancel_hours ?? 0;
   const free = start.getTime() - Date.now() >= freeHours * 3600_000;
   const first = b.customer.full_name.split(" ")[0];
+  const theme = themeFor({ theme: await rpc<string | null>("trip_theme", { p_slug: b.experience.slug }, "anon").catch(() => null), slug: b.experience.slug, title: b.experience.title });
   const qr = b.status === "confirmed"
-    ? await QRCode.toString(b.qr_token, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#232B45", light: "#FFFFFF" } })
+    ? await QRCode.toString(b.qr_token, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#19244E", light: "#FFFFFF" } })
     : null;
   const count = (kind: string) => b.lines.find((l) => l.kind === kind)?.quantity ?? 0;
   const travelers = [
@@ -73,7 +76,7 @@ export default async function BookingPage({ params, searchParams }: Props) {
               ? <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="check-draw"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>
               : <IconCheck size={16} />)}{t(`voucher.${b.status}`)}
           </span>
-          <h1 className="font-display text-[32px] leading-tight rtl:font-sans rtl:font-bold">
+          <h1 className="font-display text-[32px] leading-tight">
             {b.status === "confirmed" ? t("voucher.headline", { name: first })
               : b.status === "pending_request" ? t("voucher.headlinePending", { name: first })
               : t("voucher.headlineCancelled")}
@@ -111,6 +114,9 @@ export default async function BookingPage({ params, searchParams }: Props) {
         )}
 
         <section aria-label={t("voucher.label")} className={`${fresh ? "ticket-in " : ""}mt-4 overflow-hidden rounded-card border border-line bg-surface`}>
+          <div className="relative h-14 print:hidden" style={patternStyle(theme, "feature", 220)} aria-hidden="true">
+            <ThemeBadge theme={theme} label="" className="absolute -bottom-4 end-4 z-10 ring-4 ring-white" size={26} />
+          </div>
           <div className="flex items-center justify-between bg-discovery px-4 py-3 text-white">
             <span className="font-bold uppercase tracking-wide">{t("voucher.label")}</span>
             <span className="font-bold" dir="ltr">{b.ref}</span>

@@ -10,6 +10,7 @@ import { cardImages } from "@/lib/catalog";
 import { Empty, PageTitle } from "@/components/ui";
 import { CopyButton } from "@/components/CopyButton";
 import { StoryMaker } from "@/components/growth/StoryMaker";
+import { themeFor } from "@/lib/themes";
 
 export const dynamic = "force-dynamic";
 const LANGS = ["ar", "en", "de", "ru", "fr"] as const;
@@ -35,7 +36,7 @@ export default async function Kit({ params, searchParams }: { params: Promise<{ 
     const link = `${siteUrl()}/${lang}/experiences/${c.slug}?ref=${code}`;
     const price = c.from_minor != null ? formatMoney({ minor: c.from_minor, currency: c.currency }, lang) : "";
     const caption = tc("caption", { title: c.title ?? "", summary: c.summary ?? "", price, link, code });
-    const qr = await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#232B45", light: "#FFFFFF" } });
+    const qr = await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#19244E", light: "#FFFFFF" } });
     return { c, link, price, caption, qr, img: cardImages(c)[0] ?? null };
   }));
 
@@ -63,7 +64,7 @@ export default async function Kit({ params, searchParams }: { params: Promise<{ 
               <a href={`https://wa.me/?text=${encodeURIComponent(caption)}`} target="_blank" rel="noopener noreferrer"
                 className="btn-press inline-flex min-h-11 items-center rounded-control bg-[#1F7A4D] px-3 text-small font-bold text-white">WhatsApp</a>
             </div>
-            <StoryMaker photo={img ? mediaSrc(img, { w: 1080, h: 1920 }) : null} title={c.title ?? ""} price={price ? tc("from", { price }) : ""} qrSvg={qr} code={code}
+            <StoryMaker photo={img ? mediaSrc(img, { w: 1080, h: 1920 }) : null} theme={themeFor(c)} title={c.title ?? ""} price={price ? tc("from", { price }) : ""} qrSvg={qr} code={code}
               cta={tc("storyCta")} rtl={lang === "ar"} fileName={`wenro-${c.slug}-${code}`}
               labels={{ make: t("makeStory"), making: t("making"), download: t("download"), share: t("share") }} />
           </li>

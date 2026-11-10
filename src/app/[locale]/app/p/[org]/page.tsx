@@ -49,7 +49,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
   const code = s.codes.find((c) => c.active)?.code ?? null;
   const target = experiences.find((e) => e.slug === q.x) ?? null;
   const link = code ? `${base}/${locale}${target ? `/experiences/${target.slug}` : ""}?ref=${code}` : null;
-  const qr = link ? await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#232B45", light: "#FFFFFF" } }) : null;
+  const qr = link ? await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#19244E", light: "#FFFFFF" } }) : null;
 
   const currencies = [...new Set(Object.keys(s.totals).map((k) => k.split(":")[0]))];
   const m = (minor: number, c: string) => formatMoney({ minor: Number(minor), currency: c as "EUR" }, locale);

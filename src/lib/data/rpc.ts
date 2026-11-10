@@ -19,6 +19,7 @@ type As = "anon" | "user" | "service";
 const ALLOWED = new Set([
   // public site
   "experience_page", "experience_list", "create_booking", "booking_by_token",
+  "experience_theme", "set_experience_theme", "trip_theme",
   "cancel_booking_by_token", "reconfirm_by_token", "record_click",
   // workspaces
   "my_workspaces", "claim_platform_owner", "platform_has_owner", "apply_organization",

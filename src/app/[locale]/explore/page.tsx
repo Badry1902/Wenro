@@ -5,6 +5,7 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { CATEGORIES } from "@/lib/catalog";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ExploreMapLoader } from "@/components/site/ExploreMapLoader";
+import { hasSlogans } from "@/lib/slogans";
 
 type Props = { params: Promise<{ locale: string }> };
 export const revalidate = 300;
@@ -25,8 +26,17 @@ export default async function Explore({ params }: Props) {
   return (
     <>
       <SiteHeader />
-      <h1 className="sr-only">{t("explore.title")}</h1>
-      <ExploreMapLoader cards={cards} categories={cats} />
+      <div className="flex h-[calc(100dvh-64px)] flex-col">
+        {/* Discovery intro, right above the map where the traveller picks an area */}
+        <div className="reef reef-aqua reef-small relative overflow-hidden border-b border-line">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-aqua)_40%,rgb(196_231_229/0.6))] rtl:bg-[linear-gradient(270deg,var(--color-aqua)_40%,rgb(196_231_229/0.6))]" aria-hidden="true" />
+          <div className="relative mx-auto flex max-w-7xl flex-col gap-0.5 px-4 py-4 md:py-5">
+            <h1 className="font-display text-[24px] font-black leading-tight md:text-[32px]">{hasSlogans(locale) ? t("explore.slogan") : t("explore.title")}</h1>
+            <p className="text-small text-ink/80 md:text-body">{t("explore.sub")}</p>
+          </div>
+        </div>
+        <div className="min-h-0 flex-1"><ExploreMapLoader cards={cards} categories={cats} /></div>
+      </div>
     </>
   );
 }

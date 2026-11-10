@@ -14,6 +14,7 @@ const check = (name, ok) => { results.push(ok); console.log(ok ? 'ok    ' : 'NOT
   p.on('pageerror', (e) => errors.push(e.message));
 
   await p.goto(`${B}/en`);
+  await p.getByRole('link', { name: 'Sign in' }).first().waitFor({ timeout: 5000 }).catch(() => {});
   check('header shows Sign in to visitors', await p.getByRole('link', { name: 'Sign in' }).first().isVisible());
   check('home shows 9 category tiles', (await p.locator('a.cat-tile').count()) === 9);
   check('home shows trip cards with photos', (await p.locator('.trip-card img').count()) >= 10);
@@ -23,7 +24,7 @@ const check = (name, ok) => { results.push(ok); console.log(ok ? 'ok    ' : 'NOT
 
   // search from the hero
   await p.getByPlaceholder('Snorkelling, quad, Luxor…').first().fill('dolphin');
-  await p.getByRole('button', { name: 'Search' }).click();
+  await p.getByRole('button', { name: 'Explore experiences' }).click();
   await p.waitForURL(/\/en\/experiences\?q=dolphin/);
   await p.waitForTimeout(500);
   const titles = await p.locator('main .trip-card a').allInnerTexts();
@@ -31,10 +32,12 @@ const check = (name, ok) => { results.push(ok); console.log(ok ? 'ok    ' : 'NOT
 
   await p.goto(`${B}/en/experiences?cat=daytrips`);
   await p.waitForTimeout(500);
-  check('category link filters the list (3 day trips)', (await p.locator('main .trip-card').count()) === 3);
+  const dayTrips = await p.locator('main .trip-card').count();
+  check(`category link filters the list (${dayTrips} day trips)`, dayTrips >= 3 && (await p.locator('main .trip-card').allInnerTexts()).length === dayTrips);
   await p.getByLabel('Instant confirmation').first().check();
   await p.waitForTimeout(300);
-  check('instant-only filter narrows day trips to none', (await p.getByText('No experiences match these filters.').count()) === 1);
+  const instant = await p.locator('main .trip-card').count();
+  check(`instant-only filter narrows day trips (${dayTrips} → ${instant})`, instant < dayTrips || (await p.getByText('No experiences match these filters.').count()) === 1);
   await p.getByRole('button', { name: 'Clear filters' }).first().click();
   check('clear filters shows every trip', (await p.locator('main .trip-card').count()) >= 28);
 

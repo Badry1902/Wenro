@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     const code = s?.codes.find((c) => c.active)?.code;
     if (!code) continue;
     const link = `${siteUrl()}/${locale}/experiences/${slug}?ref=${encodeURIComponent(code)}`;
-    const qr = await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#232B45", light: "#FFFFFF" } });
+    const qr = await QRCode.toString(link, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#19244E", light: "#FFFFFF" } });
     out.push({ org: w.org_id, name: w.name, type: w.type, code, link, qr });
   }
   return NextResponse.json({ partners: out }, { headers: { "cache-control": "private, no-store" } });

@@ -228,6 +228,24 @@ export async function saveLocation(form: FormData) {
 }
 
 
+/** A trip's collection design (patterns and motifs); empty = automatic. */
+export async function saveTheme(form: FormData) {
+  const id = guid.parse(form.get("experience"));
+  const raw = String(form.get("theme") ?? "");
+  const { isTheme } = await import("@/lib/themes");
+  let result = "ok=theme_saved";
+  try {
+    await rpc("set_experience_theme", { p_experience: id, p_theme: isTheme(raw) ? raw : null }, "user");
+  } catch (e) {
+    result = `err=${e instanceof RpcError ? e.code : "unexpected_error"}`;
+    if (!(e instanceof RpcError)) console.error("saveTheme", e);
+  }
+  const l = locale.parse(form.get("locale"));
+  const b = base.parse(form.get("base"));
+  redirect({ href: `${b}/${id}?${result}#design`, locale: l });
+}
+
+
 /** WENRO team: translate up to 5 trips that miss languages (run again for the next ones). */
 export async function translateMissing(form: FormData) {
   const { translateTrip, translationConfigured } = await import("@/lib/translate");

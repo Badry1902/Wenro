@@ -24,7 +24,7 @@ export default async function Plan({ params }: Props) {
     <>
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-4 py-8">
-        <h1 className="font-display text-[34px] leading-tight md:text-[44px] rtl:font-sans rtl:font-extrabold">{t("plan.title")}</h1>
+        <h1 className="font-display text-[34px] leading-tight md:text-[44px]">{t("plan.title")}</h1>
         <p className="mb-6 mt-1 max-w-2xl text-ink-muted">{t("plan.sub")}</p>
         <PlanWeek cards={cards} />
       </main>

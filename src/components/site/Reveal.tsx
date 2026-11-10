@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /** Fades a section up the first time it scrolls into view (skipped with reduced motion). */
-export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }: { children: React.ReactNode; className?: string; as?: "div" | "section"; delay?: number }) {
+export function Reveal({ children, className = "", as: Tag = "div", delay = 0, ...rest }: { children: React.ReactNode; className?: string; as?: "div" | "section"; delay?: number; "aria-label"?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -13,5 +13,5 @@ export function Reveal({ children, className = "", as: Tag = "div", delay = 0 }:
     io.observe(el);
     return () => io.disconnect();
   }, []);
-  return <Tag ref={ref} data-shown={shown} style={{ transitionDelay: `${delay}ms` }} className={`reveal ${className}`}>{children}</Tag>;
+  return <Tag ref={ref} {...rest} data-shown={shown} style={{ transitionDelay: `${delay}ms` }} className={`reveal ${className}`}>{children}</Tag>;
 }

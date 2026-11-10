@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -7,6 +6,7 @@ import { HeaderMenus } from "./site/HeaderMenus";
 import { AccountButton } from "./site/AccountButton";
 import { WishCount } from "./site/Recent";
 import { IconHeart } from "./Icons";
+import { Wordmark } from "./brand/Logo";
 
 /**
  * Site header: logo, catalogue links, language and the account button. Signed-in people see a
@@ -18,11 +18,10 @@ export async function SiteHeader() {
   const cats = CATEGORIES.map((c) => ({ slug: c, name: t(`categories.${c}` as "categories.sea"), blurb: t(`catBlurb.${c}` as "catBlurb.sea") }));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-surface/90 backdrop-blur-md print:static print:hidden">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-surface/90 backdrop-blur-md print:static print:hidden">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4">
         <Link href="/" aria-label="WENRO" className="flex min-h-11 shrink-0 items-center">
-          {/* Temporary PNG export of the original logo. Replace with the SVG master before launch. */}
-          <Image src="/brand/logo-horizontal-temp.png" alt="WENRO" width={132} height={25} priority />
+          <Wordmark width={128} priority />
         </Link>
 
         <Suspense fallback={<div className="flex-1" />}>

@@ -22,6 +22,8 @@ import { RefBeacon } from "@/components/site/RefBeacon";
 import { ReviewsSection, Stars } from "@/components/site/Reviews";
 import { MeetingMap } from "@/components/site/MeetingMap";
 import { PartnerShareBar } from "@/components/site/PartnerShareBar";
+import { patternStyle, themeFor } from "@/lib/themes";
+import { ThemeBadge, ThemeMotif } from "@/components/brand/ThemeArt";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconClock, IconClose, IconPin } from "@/components/Icons";
 
 // Cached for a minute and refreshed in the background, so visitors get it from the CDN. Seats are
@@ -79,9 +81,13 @@ export default async function ExperiencePageView({ params }: Params) {
   const catName = page.category ? t(`categories.${page.category}` as "categories.sea") : "";
   const fromPrice = adult ? formatMoney({ minor: adult.price_minor, currency: page.currency }, locale) : null;
 
-  const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
+  const theme = themeFor(page);
+  const Section = ({ id, title, motif, children }: { id: string; title: string; motif?: number; children: React.ReactNode }) => (
     <section aria-labelledby={id} className="border-t border-line py-7">
-      <h2 id={id} className="mb-3 text-h3 font-bold">{title}</h2>
+      <h2 id={id} className="mb-3 flex items-center gap-2.5 text-h3 font-bold">
+        {motif != null && <span className="grid size-9 place-items-center rounded-xl bg-aqua-tint" aria-hidden="true"><ThemeMotif theme={theme} index={motif} size={22} /></span>}
+        {title}
+      </h2>
       {children}
     </section>
   );
@@ -90,7 +96,15 @@ export default async function ExperiencePageView({ params }: Params) {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto max-w-7xl px-4 pb-16 pt-5">
+      {/* The trip's collection design: a printed band above the page (no text on the pattern) */}
+      <div className="relative h-16 md:h-24" style={patternStyle(theme, "feature", 260)}>
+        <div className="mx-auto flex h-full max-w-7xl items-end px-4">
+          <Link href={{ pathname: "/experiences", query: { theme } }} className="btn-press translate-y-1/2 rounded-full ring-4 ring-white">
+            <ThemeBadge theme={theme} label={t("themes.partOf", { name: t(`themes.${theme}.name`) })} showLabel size={24} />
+          </Link>
+        </div>
+      </div>
+      <main className="mx-auto max-w-7xl px-4 pb-16 pt-8">
         <nav aria-label={t("experience.breadcrumb")} className="flex flex-wrap items-center gap-1 text-small text-ink-muted">
           <Link href="/" className="hover:text-discovery">{t("nav.home")}</Link>
           <IconChevron size={14} />
@@ -99,7 +113,7 @@ export default async function ExperiencePageView({ params }: Params) {
         </nav>
         <div className="mt-3 flex items-start justify-between gap-4">
           <div>
-            <h1 className="font-display text-[32px] leading-tight md:text-[44px] rtl:font-sans rtl:font-extrabold">{page.title}</h1>
+            <h1 className="font-display text-[28px] leading-tight md:text-[44px]">{page.title}</h1>
             {isDemo && <p className="mt-1 text-small font-semibold text-warning">{t("common.demo")}</p>}
           </div>
           <div className="mt-1 flex shrink-0 gap-2">
@@ -146,7 +160,7 @@ export default async function ExperiencePageView({ params }: Params) {
             {page.summary && <p className="mb-6 text-[18px]">{page.summary}</p>}
             {page.description && <div className="mb-6 whitespace-pre-line">{page.description}</div>}
 
-            <Section id="inc" title={t("experience.included")}>
+            <Section id="inc" title={t("experience.included")} motif={2}>
               {included.length || excluded.length || hasTransfer ? (
                 <div className="grid gap-x-8 sm:grid-cols-2">
                   <ul className="flex flex-col gap-2">
@@ -160,15 +174,15 @@ export default async function ExperiencePageView({ params }: Params) {
               ) : <Pending />}
             </Section>
 
-            <Section id="itin" title={t("experience.itinerary")}>
+            <Section id="itin" title={t("experience.itinerary")} motif={1}>
               {itinerary.length ? (
                 <ol className="flex flex-col gap-3">
-                  {itinerary.map((l, i) => <li key={i} className="flex gap-4"><span className="font-bold text-discovery">{i + 1}</span><span>{l}</span></li>)}
+                  {itinerary.map((l, i) => <li key={i} className="flex gap-4"><span className="grid size-7 shrink-0 place-items-center rounded-full bg-apricot-tint text-small font-extrabold text-ink">{i + 1}</span><span className="pt-0.5">{l}</span></li>)}
                 </ol>
               ) : <Pending />}
             </Section>
 
-            <Section id="meet" title={t("experience.meeting")}>
+            <Section id="meet" title={t("experience.meeting")} motif={3}>
               {hasTransfer && <p className="mb-3">{t("experience.meetingTransfer")}</p>}
               {page.meeting_info ? <p className="whitespace-pre-line">{page.meeting_info}</p> : !location && <Pending />}
               {location && (
@@ -178,7 +192,7 @@ export default async function ExperiencePageView({ params }: Params) {
             </Section>
 
             {page.requirements && (
-              <Section id="know" title={t("experience.goodToKnow")}>
+              <Section id="know" title={t("experience.goodToKnow")} motif={4}>
                 <ul className="flex list-disc flex-col gap-1 ps-5">{lines(page.requirements).map((l) => <li key={l}>{l}</li>)}</ul>
               </Section>
             )}

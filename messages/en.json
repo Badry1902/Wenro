@@ -28,13 +28,13 @@
     "more": "More",
     "demoTag": "Demo",
     "heroEyebrow": "Hurghada · Red Sea",
-    "heroTitle": "Experiences worth the trip, around the Red Sea.",
-    "heroSubtitle": "Reefs, dunes, temples and quiet evenings — clear prices, free cancellation windows and pay on the day.",
+    "heroTitle": "Good days start with a pin.",
+    "heroSubtitle": "Discover boat trips, snorkeling, and desert adventures in Hurghada.",
     "searchLabel": "What would you like to do?",
     "searchPlaceholder": "Snorkelling, quad, Luxor…",
     "searchCategory": "Category",
     "allCategories": "All categories",
-    "searchButton": "Search",
+    "searchButton": "Explore experiences",
     "topPicks": "Hand-picked around Hurghada",
     "topPicksSub": "One standout trip from every category.",
     "browseCategories": "Explore by category",
@@ -64,7 +64,25 @@
     "planEyebrow": "Plan",
     "planTitle": "Plan your week in one minute",
     "planText": "Pick the trips you like and your dates; we fit them into your days with free seats.",
-    "planCta": "Plan my week"
+    "planCta": "Plan my week",
+    "campaignTitle": "Your next adventure starts with Wenro.",
+    "campaignSubtitle": "Hurghada, on the Red Sea: boat trips, snorkeling, and desert adventures with local hosts.",
+    "campaignButton": "Explore Hurghada",
+    "howLabel": "How it works",
+    "how": {
+      "pin": {
+        "title": "A pin.",
+        "text": "Explore experiences in your destination."
+      },
+      "plan": {
+        "title": "A plan.",
+        "text": "Pick an activity and an available date."
+      },
+      "day": {
+        "title": "A day out.",
+        "text": "Meet your local host and enjoy the experience."
+      }
+    }
   },
   "categories": {
     "sea": "Sea",
@@ -351,7 +369,8 @@
         "account_saved": "Saved. Use your username and password next time.",
         "location_saved": "Meeting point saved.",
         "location_cleared": "Meeting point removed.",
-        "translated": "Translations added. Press again for the next trips."
+        "translated": "Translations added. Press again for the next trips.",
+        "theme_saved": "Trip design saved."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -1202,6 +1221,12 @@
         "slow": "Slow. Answer within an hour to win more bookings."
       },
       "responseNote": "Average over the last 60 days ({n} requests)."
+    },
+    "editorTheme": {
+      "title": "Trip design",
+      "hint": "Sets the patterns and drawings on the trip card, trip page, voucher and story images. Automatic picks one from the category and the trip name.",
+      "auto": "Automatic: {name}",
+      "save": "Save design"
     }
   },
   "email": {
@@ -1306,7 +1331,7 @@
     "wellness": "Hammam, massage and beach yoga"
   },
   "list": {
-    "title": "All experiences",
+    "title": "Experiences in Hurghada",
     "subtitle": "Trips and activities around Hurghada",
     "results": "{n, plural, =0 {No experiences} one {# experience} other {# experiences}}",
     "filters": "Filters",
@@ -1431,7 +1456,8 @@
     "sub": "Every trip where it starts. Tap a pin to see it.",
     "all": "All",
     "see": "See the trip",
-    "group": "{n} trips here"
+    "group": "{n} trips here",
+    "slogan": "Drop a pin. Make a day of it."
   },
   "plan": {
     "title": "Plan my week",
@@ -1450,5 +1476,39 @@
     "book": "Book",
     "noRoom": "No free seats on your dates for:",
     "fromWishlist": "Plan my week with these trips"
+  },
+  "themes": {
+    "label": "Collection",
+    "all": "All collections",
+    "title": "Pick your kind of day",
+    "sub": "Every trip belongs to a collection with its own look — from reef days to temple mornings.",
+    "tripsCount": "{n, plural, one {# trip} other {# trips}}",
+    "partOf": "{name} collection",
+    "see": "See the trips",
+    "remove": "Show all trips",
+    "reef": {
+      "name": "Red Sea reefs",
+      "blurb": "Snorkelling, diving and boat days on the reef."
+    },
+    "desert": {
+      "name": "Desert safari",
+      "blurb": "Dune drives, palm groves and nights at camp."
+    },
+    "trail": {
+      "name": "Mountain trails",
+      "blurb": "Ridge walks and guided hikes in the Red Sea hills."
+    },
+    "heritage": {
+      "name": "Ancient Egypt",
+      "blurb": "Temple visits, museum tours and archaeological sites."
+    },
+    "souk": {
+      "name": "Souk walks",
+      "blurb": "Market stalls, local craft and afternoon tea."
+    },
+    "nile": {
+      "name": "Life on the Nile",
+      "blurb": "Felucca rides and slow afternoons on the river."
+    }
   }
 }

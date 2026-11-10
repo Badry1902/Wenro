@@ -3,6 +3,7 @@ import { createTranslator } from "next-intl";
 import { loadMessages } from "@/i18n/merge";
 import { routing } from "@/i18n/routing";
 import { formatMoney } from "@/lib/money";
+import { siteUrl } from "@/lib/env";
 
 export type MessageKind =
   | "booking_confirmed" | "request_received" | "request_accepted" | "request_declined" | "request_expired"
@@ -115,10 +116,10 @@ export async function renderMessage(
   ].join("\n");
 
   const html = `<!doctype html><html lang="${locale}" dir="${dir}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${esc(subject)}</title></head>
-<body style="margin:0;background:#ffffff;font-family:${locale === "ar" ? "'IBM Plex Sans Arabic'," : ""}Manrope,Segoe UI,Arial,sans-serif;color:#232B45">
+<body style="margin:0;background:#ffffff;font-family:${locale === "ar" ? "'IBM Plex Sans Arabic'," : ""}Manrope,Segoe UI,Arial,sans-serif;color:#19244E">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;text-align:${dir === "rtl" ? "right" : "left"}" dir="${dir}">
-<tr><td style="padding:0 0 16px;font-family:'DM Serif Display',Georgia,serif;font-size:28px;color:#3046D9">wenro</td></tr>
+<tr><td style="padding:0 0 20px"><img src="${siteUrl()}/brand/coast/wordmark-primary-480.png" width="132" height="25" alt="WENRO" style="display:block;border:0"></td></tr>
 <tr><td style="font-size:16px;line-height:1.55">
 <p style="margin:0 0 12px">${esc(greeting)}</p>
 <p style="margin:0 0 20px;font-size:18px;font-weight:700">${esc(intro)}</p>
@@ -126,7 +127,7 @@ export async function renderMessage(
 ${rows.map(([k, v], i) => `<tr><td style="padding:10px 14px;${i ? "border-top:1px solid #E3E6EF;" : ""}color:#5B6178;font-size:14px;width:38%;vertical-align:top">${esc(k)}</td><td style="padding:10px 14px;${i ? "border-top:1px solid #E3E6EF;" : ""}font-weight:600">${esc(v)}</td></tr>`).join("\n")}
 </table>
 ${extra.map((e) => `<p style="margin:14px 0 0;font-size:14px;color:#5B6178">${esc(e)}</p>`).join("\n")}
-${button && href ? `<p style="margin:24px 0 0"><a href="${esc(href)}" style="display:inline-block;background:#3046D9;color:#ffffff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:10px">${esc(button)}</a></p>` : ""}
+${button && href ? `<p style="margin:24px 0 0"><a href="${esc(href)}" style="display:inline-block;background:#253C96;color:#ffffff;text-decoration:none;font-weight:700;padding:14px 22px;border-radius:12px">${esc(button)}</a></p>` : ""}
 <p style="margin:32px 0 0;font-size:12px;color:#8A90A6">${esc(footer)}</p>
 </td></tr></table></td></tr></table></body></html>`;
 

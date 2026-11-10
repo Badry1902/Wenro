@@ -34,6 +34,7 @@ export type ExperiencePage = {
   requirements: string | null;
   meeting_info: string | null;
   category: string | null;
+  theme?: string | null;
   policy: { code: string; free_cancel_hours: number } | null;
   prices: PriceRow[];
   extras: ExtraRow[];
@@ -49,6 +50,7 @@ export type ExperienceCard = {
   title: string | null;
   summary: string | null;
   category: string | null;
+  theme?: string | null;
   currency: Currency;
   duration_minutes: number | null;
   from_minor: number | null;

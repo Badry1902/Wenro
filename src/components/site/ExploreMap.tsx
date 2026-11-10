@@ -81,7 +81,7 @@ export function ExploreMap({ cards, categories }: { cards: ExperienceCard[]; cat
   const img = one ? cardImages(one)[0] : null;
 
   return (
-    <div className="relative flex h-[calc(100dvh-64px)] flex-col">
+    <div className="relative flex h-full flex-col">
       <div className="rail z-[500] flex gap-2 overflow-x-auto border-b border-line bg-surface px-4 py-2">
         <button type="button" className={chip(!cat)} onClick={() => setCat(null)}>{t("explore.all")} · {cards.filter((c) => c.lat != null).length}</button>
         {categories.map((c) => (

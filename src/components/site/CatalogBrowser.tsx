@@ -8,6 +8,8 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
 import { IconCategory, IconClose, IconSearch } from "../Icons";
 import { TripCard } from "./TripCard";
+import { THEMES, isTheme, patternStyle, themeFor, type Theme } from "@/lib/themes";
+import { ThemeMotif } from "../brand/ThemeArt";
 
 type Cat = { slug: string; name: string };
 type Dur = "short" | "mid" | "long";
@@ -20,7 +22,7 @@ const norm = (s: string) => s.toLocaleLowerCase().normalize("NFKD").replace(/[̀
 /** All trips with live filters. The category and search text are kept in the address so results can be shared. */
 export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[]; categories: Cat[] }) {
   const sp = useSearchParams();
-  const initial = { q: (sp.get("q") ?? "").slice(0, 80), cat: isCategory(sp.get("cat")) ? sp.get("cat") : null };
+  const initial = { q: (sp.get("q") ?? "").slice(0, 80), cat: isCategory(sp.get("cat")) ? sp.get("cat") : null, theme: isTheme(sp.get("theme")) ? (sp.get("theme") as Theme) : null };
   const t = useTranslations();
   const locale = useLocale();
   const maxAll = Math.max(0, ...cards.map((c) => c.from_minor ?? 0));
@@ -33,14 +35,17 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
   const [pickup, setPickup] = useState(false);
   const [sort, setSort] = useState<Sort>("rec");
   const [sheet, setSheet] = useState(false);
+  const [theme, setTheme] = useState<Theme | null>(initial.theme);
+  const themeCount = useMemo(() => Object.fromEntries(THEMES.map((th) => [th, cards.filter((c) => themeFor(c) === th).length])) as Record<Theme, number>, [cards]);
 
   // keep ?q= and ?cat= in the address bar (single category only, like the links that lead here)
   useEffect(() => {
     const u = new URL(location.href);
     if (q) u.searchParams.set("q", q); else u.searchParams.delete("q");
     if (cats.length === 1) u.searchParams.set("cat", cats[0]); else u.searchParams.delete("cat");
+    if (theme) u.searchParams.set("theme", theme); else u.searchParams.delete("theme");
     history.replaceState(history.state, "", u);
-  }, [q, cats]);
+  }, [q, cats, theme]);
   useEffect(() => {
     document.documentElement.style.overflow = sheet ? "hidden" : "";
     return () => { document.documentElement.style.overflow = ""; };
@@ -49,6 +54,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
   const results = useMemo(() => {
     const words = norm(q).split(/\s+/).filter(Boolean);
     const list = cards.filter((c) => {
+      if (theme && themeFor(c) !== theme) return false;
       if (cats.length && !cats.includes(c.category ?? "")) return false;
       if (durs.length && !durs.includes(durOf(c.duration_minutes))) return false;
       if (max < ceil && (c.from_minor ?? 0) > max) return false;
@@ -65,12 +71,12 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
     if (sort === "high") list.sort((a, b) => p(b) - p(a));
     if (sort === "short") list.sort((a, b) => (a.duration_minutes ?? 0) - (b.duration_minutes ?? 0));
     return list;
-  }, [cards, q, cats, durs, max, ceil, instant, pickup, sort, t]);
+  }, [cards, q, cats, theme, durs, max, ceil, instant, pickup, sort, t]);
 
-  const active = (q ? 1 : 0) + cats.length + durs.length + (max < ceil ? 1 : 0) + (instant ? 1 : 0) + (pickup ? 1 : 0);
-  const clear = () => { setQ(""); setCats([]); setDurs([]); setMax(ceil); setInstant(false); setPickup(false); };
+  const active = (q ? 1 : 0) + (theme ? 1 : 0) + cats.length + durs.length + (max < ceil ? 1 : 0) + (instant ? 1 : 0) + (pickup ? 1 : 0);
+  const clear = () => { setQ(""); setTheme(null); setCats([]); setDurs([]); setMax(ceil); setInstant(false); setPickup(false); };
   const toggle = <T,>(list: T[], v: T) => list.includes(v) ? list.filter((x) => x !== v) : [...list, v];
-  const sig = JSON.stringify([q, cats, durs, max, instant, pickup, sort]);
+  const sig = JSON.stringify([q, theme, cats, durs, max, instant, pickup, sort]);
 
   const box = "size-5 shrink-0 accent-[var(--color-discovery)]";
   const Filters = (
@@ -122,10 +128,16 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
 
   return (
     <div>
+      {theme && <div className="mb-6 h-20 rounded-card md:h-28" style={patternStyle(theme, "feature", 280)} aria-hidden="true" />}
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{t("list.title")}</h1>
-          <p className="mt-1 text-ink-muted">{t("list.subtitle")}</p>
+        <div className="flex items-center gap-4">
+          {theme && (
+            <span className="grid size-16 shrink-0 place-items-center rounded-2xl border border-line bg-surface" aria-hidden="true"><ThemeMotif theme={theme} size={40} /></span>
+          )}
+          <div>
+            <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{theme ? t(`themes.${theme}.name`) : t("list.title")}</h1>
+            <p className="mt-1 text-ink-muted">{theme ? t(`themes.${theme}.blurb`) : t("list.subtitle")}</p>
+          </div>
         </div>
         <label className="flex min-h-12 w-full items-center gap-2 rounded-full border border-line bg-surface px-4 focus-within:border-discovery md:w-96">
           <IconSearch size={20} className="text-discovery" />
@@ -134,6 +146,21 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
           {q && <button type="button" onClick={() => setQ("")} aria-label={t("list.clear")} className="grid size-8 place-items-center rounded-full hover:bg-discovery-tint"><IconClose size={16} /></button>}
         </label>
       </div>
+
+      {/* collections: each with its own look */}
+      {THEMES.filter((th) => themeCount[th] > 0).length > 1 && (
+        <div role="group" aria-label={t("themes.label")} className="rail -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1">
+          <button type="button" aria-pressed={!theme} onClick={() => setTheme(null)}
+            className={`btn-press inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-small font-bold ${!theme ? "border-ink bg-ink text-white" : "border-line bg-surface hover:border-ink"}`}>{t("themes.all")}</button>
+          {THEMES.filter((th) => themeCount[th] > 0).map((th) => (
+            <button key={th} type="button" aria-pressed={theme === th} onClick={() => setTheme(theme === th ? null : th)}
+              className={`btn-press inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border ps-1.5 pe-4 text-small font-bold ${theme === th ? "border-ink bg-ink text-white" : "border-line bg-surface hover:border-ink"}`}>
+              <span className="grid size-8 place-items-center rounded-full bg-white"><ThemeMotif theme={th} size={22} /></span>
+              {t(`themes.${th}.name`)}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* quick category chips */}
       <div className="rail -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1">

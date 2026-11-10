@@ -1,32 +1,41 @@
 @import "tailwindcss";
 
 /*
- * WENRO design tokens — from the WENRO Visual Design System v1.0.
- * Exact hex values from the guide are authoritative. Logo artwork keeps its own colours.
- * Light surfaces dominate; orange (apricot) is an accent, never body-text background.
+ * WENRO design tokens — "Coast Club" identity (Nov 2026).
+ * Midnight for text and dark surfaces, Cobalt for actions, Persimmon as the warm accent, Aqua and Sand
+ * as calm backgrounds. Token names stay the same as before so every screen picks up the new palette:
+ *   discovery = Cobalt, apricot = Persimmon, ink = Midnight, ivory = Sand.
+ * Text on Persimmon is always Midnight (white on Persimmon is too faint to read).
  */
 @theme {
-  --color-discovery: #3046d9;        /* Discovery Blue: primary actions, links */
-  --color-discovery-hover: #2a3cc0;
-  --color-discovery-pressed: #1f2d96;
-  --color-discovery-tint: #eef0fd;
-  --color-apricot: #f59a6b;          /* Sunlit Apricot: accent; ink text on it, never white body text */
-  --color-apricot-tint: #fdeee5;
-  --color-ivory: #fff9f1;            /* Warm Ivory: page background */
-  --color-ink: #232b45;              /* Deep Ink: text, admin sidebar */
-  --color-ink-muted: #5b627a;
-  --color-line: #e2e4ec;
+  --color-discovery: #253c96;        /* Cobalt: primary actions, links */
+  --color-discovery-hover: #1f3283;
+  --color-discovery-pressed: #19244e;
+  --color-discovery-tint: #ebeffa;
+  --color-apricot: #f36b2e;          /* Persimmon: accent, highlights, pins; Midnight text on it */
+  --color-apricot-hover: #e45a1c;
+  --color-apricot-tint: #fdece3;
+  --color-aqua: #c4e7e5;             /* Aqua: calm panels, chips */
+  --color-aqua-tint: #e9f6f5;
+  --color-teal: #77b9b9;             /* decoration only */
+  --color-teal-ink: #1d6668;         /* readable teal text on Aqua or white */
+  --color-ivory: #fbf8f2;            /* Sand: soft page bands, dashboards */
+  --color-sand-deep: #f3ede1;
+  --color-ink: #19244e;              /* Midnight: text, dark surfaces */
+  --color-ink-muted: #545c7a;
+  --color-line: #e4e3ea;
   --color-surface: #ffffff;
   --color-success: #1d7a4d;
-  --color-success-tint: #eaf6ef;
+  --color-success-tint: #e7f5ee;
   --color-warning: #8a5a00;
-  --color-warning-tint: #fff4d6;
+  --color-warning-tint: #fff3d6;
   --color-critical: #b42318;
   --color-critical-tint: #fdecea;
 
-  --font-display: "DM Serif Display", "Times New Roman", serif;
+  --font-display: "Nunito Variable", "Baloo Bhaijaan 2 Variable", "Manrope Variable", system-ui, sans-serif;
   --font-sans: "Manrope Variable", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-arabic: "IBM Plex Sans Arabic", "Manrope Variable", system-ui, sans-serif;
+  --font-arabic-display: "Baloo Bhaijaan 2 Variable", "IBM Plex Sans Arabic", system-ui, sans-serif;
 
   /* Type scale 64 / 40 / 28 / 20 / 16 / 13 */
   --text-display: 4rem;
@@ -36,20 +45,21 @@
   --text-body: 1rem;
   --text-small: 0.8125rem;
 
-  /* Radii: controls 10, cards 16, images 20 */
-  --radius-control: 10px;
-  --radius-card: 16px;
-  --radius-image: 20px;
+  /* Radii: controls 12, cards 20, images 24 — rounder, like the wordmark */
+  --radius-control: 12px;
+  --radius-card: 20px;
+  --radius-image: 24px;
 }
 
 html {
-  background: #ffffff; /* owner's choice (Nov 2026): white page background */
+  background: #ffffff; /* owner's choice (Nov 2026): white page background; Sand is used for bands */
   color: var(--color-ink);
 }
 
 body {
   font-family: var(--font-sans);
   line-height: 1.6;
+  overflow-x: clip; /* rail arrows and drifting motifs may overhang the edge; never a sideways scroll */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -57,6 +67,31 @@ body {
 html[dir="rtl"] body {
   font-family: var(--font-arabic);
 }
+
+/* Headings use the rounded display face everywhere (base layer, so utilities can still adjust them) */
+@layer base {
+  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  h1, h2 { font-weight: 800; }
+  html[dir="rtl"] :is(h1, h2, h3, .font-display) { font-family: var(--font-arabic-display); letter-spacing: 0; line-height: 1.35; }
+}
+
+/* ---------------------------------------------------------------------------
+ * Coast Club surfaces: seamless reef tiles (640px files shown at 320px) and single marine motifs.
+ * Patterns stay outside reading areas: bands, edges, dark panels behind short headlines.
+ * ------------------------------------------------------------------------ */
+.reef { background-repeat: repeat; background-size: 320px 320px; }
+.reef-midnight { background-color: var(--color-ink); background-image: url("/brand/coast/patterns/reef-midnight.webp"); }
+.reef-cobalt { background-color: var(--color-discovery); background-image: url("/brand/coast/patterns/reef-cobalt.webp"); }
+.reef-aqua { background-color: var(--color-aqua); background-image: url("/brand/coast/patterns/reef-aqua.webp"); }
+.reef-colour { background-color: var(--color-ivory); background-image: url("/brand/coast/patterns/reef-colour.webp"); }
+.reef-small { background-size: 220px 220px; }
+.motif { position: absolute; pointer-events: none; user-select: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .motif-drift { animation: motif-drift 9s ease-in-out infinite alternate; }
+  .motif-drift-slow { animation: motif-drift 13s ease-in-out infinite alternate-reverse; }
+}
+@keyframes motif-drift { from { transform: translate(0, 0) rotate(-3deg); } to { transform: translate(6px, -10px) rotate(4deg); } }
+
 
 /* Visible 2px focus ring everywhere (keyboard users) */
 :focus-visible {
@@ -114,7 +149,7 @@ html[dir="rtl"] body {
 .card-lift { transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out); }
 .card-img { transition: transform 300ms var(--ease-out); }
 @media (hover: hover) and (pointer: fine) {
-  .card-lift:hover { transform: translateY(-2px); border-color: var(--color-discovery); box-shadow: 0 10px 30px -12px rgb(35 43 69 / 0.25); }
+  .card-lift:hover { transform: translateY(-2px); border-color: var(--color-discovery); box-shadow: 0 10px 30px -12px rgb(25 36 78 / 0.25); }
   .card-lift:hover .card-img { transform: scale(1.03); }
   .chip-link:hover { border-color: var(--color-discovery); color: var(--color-discovery); }
 }
@@ -162,7 +197,7 @@ html[dir="rtl"] body {
 @keyframes scan { from { transform: translateY(0); } to { transform: translateY(calc(var(--scan-h, 300px) - 2px)); } }
 
 /* Loading placeholders while a page is fetched */
-.skeleton { background: linear-gradient(90deg, #eef0f5 0%, #f7f8fb 40%, #eef0f5 80%); background-size: 200% 100%; animation: shimmer 1400ms linear infinite; border-radius: 10px; }
+.skeleton { background: linear-gradient(90deg, #efece4 0%, #f8f5ee 40%, #efece4 80%); background-size: 200% 100%; animation: shimmer 1400ms linear infinite; border-radius: 10px; }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -200,7 +235,7 @@ html[dir="rtl"] body {
 .card-photo:first-child, .card-photo.is-on { opacity: 1; }
 .card-dot { transition: width 300ms var(--ease-out), opacity 300ms ease; }
 @media (hover: hover) and (pointer: fine) {
-  .trip-card:hover { transform: translateY(-3px); border-color: transparent; box-shadow: 0 18px 40px -18px rgb(35 43 69 / 0.35); }
+  .trip-card:hover { transform: translateY(-3px); border-color: transparent; box-shadow: 0 18px 40px -18px rgb(25 36 78 / 0.35); }
   .trip-card:hover .card-photo.is-on, .trip-card:hover .card-photo:first-child { transform: scale(1.04); }
 }
 
@@ -220,7 +255,7 @@ html[dir="rtl"] body {
 
 /* Phone menu */
 .sheet-scrim { transition: opacity 250ms ease; }
-.sheet-panel { transition: transform 300ms var(--ease-out); box-shadow: -20px 0 50px -20px rgb(35 43 69 / 0.4); }
+.sheet-panel { transition: transform 300ms var(--ease-out); box-shadow: -20px 0 50px -20px rgb(25 36 78 / 0.4); }
 @starting-style {
   .sheet-scrim { opacity: 0; }
   .sheet-panel { transform: translateX(100%); }
@@ -303,9 +338,41 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 /* Explore map pins: price bubbles in brand colours; dashed for "area only" points */
 .map-pin { position: absolute; transform: translate(-50%, -100%); white-space: nowrap; background: var(--color-discovery); color: #fff;
   font: 700 12px/1 var(--font-sans, system-ui); padding: 6px 9px; border-radius: 999px; border: 2px solid #fff;
-  box-shadow: 0 6px 14px -6px rgb(18 24 48 / 0.6); cursor: pointer; transition: transform .15s ease; }
+  box-shadow: 0 6px 14px -6px rgb(25 36 78 / 0.6); cursor: pointer; transition: transform .15s ease; }
 .map-pin:hover { transform: translate(-50%, -100%) scale(1.08); background: var(--color-apricot); color: var(--color-ink); }
 .map-pin-area { background: #fff; color: var(--color-discovery); border-style: dashed; border-color: var(--color-discovery); }
 .map-pin-group { background: var(--color-ink); color: #fff; padding-inline: 12px; }
 .map-pin-group b { font-weight: 800; }
 .leaflet-container { font-family: inherit; }
+
+/* Coast Club loader: the pin mark lands and ripples spread on the water */
+.pin-drop { transform-origin: 50% 100%; animation: pin-drop 1600ms cubic-bezier(0.34, 1.4, 0.64, 1) infinite; }
+@keyframes pin-drop {
+  0% { transform: translateY(-38%) scale(0.92); opacity: 0; }
+  18% { opacity: 1; }
+  38% { transform: translateY(0) scaleY(0.94) scaleX(1.03); }
+  48% { transform: translateY(0) scale(1); }
+  82% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-6%) scale(1); opacity: 0; }
+}
+.pin-ripple { position: absolute; bottom: -4px; left: 50%; width: 70%; height: 16%; margin-left: -35%;
+  border: 2px solid var(--color-teal); border-radius: 50%; opacity: 0; animation: pin-ripple 1600ms ease-out infinite; }
+.pin-ripple-2 { animation-delay: 220ms; border-color: var(--color-aqua); }
+@keyframes pin-ripple { 0%, 34% { transform: scale(0.3); opacity: 0; } 42% { opacity: 0.9; } 100% { transform: scale(1.5); opacity: 0; } }
+
+/* Greeting logo: floats over a slowly moving wave */
+.logo-bob { animation: logo-bob 3200ms ease-in-out infinite; }
+@keyframes logo-bob { 50% { transform: translateY(-5px); } }
+.logo-wave-fill { animation: logo-wave 2400ms linear infinite; }
+@keyframes logo-wave { to { transform: translateX(40px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pin-drop, .logo-bob, .logo-wave-fill { animation: none; }
+  .pin-drop { opacity: 1; }
+  .pin-ripple { display: none; }
+}
+
+/* Campaign arrivals (?ref= / utm_campaign) see the campaign headline; set before first paint by the hero */
+.campaign-only { display: none; }
+html[data-campaign] .campaign-only { display: revert; }
+html[data-campaign] .campaign-hide { display: none; }

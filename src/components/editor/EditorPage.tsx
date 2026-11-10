@@ -5,7 +5,9 @@ import { Badge, Flash, PageTitle, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { MeetingMap } from "@/components/site/MeetingMap";
 import { Link } from "@/i18n/navigation";
-import { makeCover, removePhoto, saveLocation, uploadPhoto } from "@/app/[locale]/app/editor-actions";
+import { makeCover, removePhoto, saveLocation, saveTheme, uploadPhoto } from "@/app/[locale]/app/editor-actions";
+import { THEMES, patternStyle, themeFor } from "@/lib/themes";
+import { ThemeMotif } from "@/components/brand/ThemeArt";
 import { ExperienceEditor } from "./ExperienceEditor";
 import { PhotoUpload } from "./PhotoUpload";
 import { MediaUpload } from "./MediaUpload";
@@ -18,6 +20,7 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
   locale: string; base: string; id: string | null; operatorId: string | null; ok?: string; err?: string;
 }) {
   const t = await getTranslations("app.editor");
+  const tt = await getTranslations();
   const [options, data, location] = await Promise.all([
     rpc<EditorOptions>("editor_options", { p_locale: locale }, "user"),
     id ? rpc<EditorData>("experience_editor", { p_experience: id }, "user").catch((e) => {
@@ -26,6 +29,8 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
     }) : Promise.resolve(emptyEditor(operatorId)),
     id ? rpc<{ lat: number; lng: number; place: string | null; exact_public: boolean; url: string | null } | null>("experience_location", { p_experience: id }, "user").catch(() => null) : Promise.resolve(null),
   ]);
+  const chosenTheme = id ? await rpc<string | null>("experience_theme", { p_experience: id }, "user").catch(() => null) : null;
+  const autoTheme = themeFor({ category: options.categories.find((c) => c.id === data.category_id)?.slug, slug: data.slug, title: data.translations.en?.title });
   const cloud = !!cloudinaryConfig();
   const hidden = (<><input type="hidden" name="locale" value={locale} /><input type="hidden" name="base" value={base} /><input type="hidden" name="experience" value={id ?? ""} /></>);
 
@@ -114,6 +119,35 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
           {location && (
             <form action={saveLocation}>{hidden}<input type="hidden" name="clear" value="1" /><Submit className={btn.quiet}>{t("locationClear")}</Submit></form>
           )}
+        </section>
+      )}
+
+      {id && (
+        <section id="design" aria-labelledby="ed-design" className="mb-10 flex flex-col gap-4">
+          <h2 id="ed-design" className="text-h3 font-bold">{tt("app.editorTheme.title")}</h2>
+          <p className="text-small text-ink-muted">{tt("app.editorTheme.hint")}</p>
+          <form action={saveTheme} className="flex flex-col gap-3">
+            {hidden}
+            <fieldset className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <legend className="sr-only">{tt("app.editorTheme.title")}</legend>
+              {(["", ...THEMES] as const).map((th) => {
+                const shown = th || autoTheme;
+                return (
+                  <label key={th || "auto"} className="group cursor-pointer overflow-hidden rounded-card border-2 border-line bg-surface has-[:checked]:border-discovery has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-discovery">
+                    <input type="radio" name="theme" value={th} defaultChecked={(chosenTheme ?? "") === th} className="sr-only" />
+                    <span className="relative block h-20" style={patternStyle(shown, "feature", 200)} aria-hidden="true">
+                      <span className="absolute bottom-2 start-2 grid size-10 place-items-center rounded-xl bg-white"><ThemeMotif theme={shown} size={26} /></span>
+                    </span>
+                    <span className="flex items-center justify-between gap-2 p-3 text-small font-bold">
+                      {th ? tt(`themes.${th}.name`) : tt("app.editorTheme.auto", { name: tt(`themes.${autoTheme}.name`) })}
+                      <span className="size-4 shrink-0 rounded-full border-2 border-line group-has-[:checked]:border-[5px] group-has-[:checked]:border-discovery" aria-hidden="true" />
+                    </span>
+                  </label>
+                );
+              })}
+            </fieldset>
+            <div><Submit className={btn.primary}>{tt("app.editorTheme.save")}</Submit></div>
+          </form>
         </section>
       )}
 

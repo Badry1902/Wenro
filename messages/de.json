@@ -483,7 +483,8 @@
         "coupon_saved": "Code gespeichert.",
         "booking_cancelled": "Buchung storniert. Der Gast erhält eine E-Mail.",
         "demo_joined": "Erledigt. Öffnen Sie jedes Dashboard über „Arbeitsbereich wechseln“ im Menü.",
-        "translated": "Übersetzungen hinzugefügt. Erneut drücken für die nächsten Touren."
+        "translated": "Übersetzungen hinzugefügt. Erneut drücken für die nächsten Touren.",
+        "theme_saved": "Design des Ausflugs gespeichert."
       }
     },
     "dep": {
@@ -1296,6 +1297,12 @@
         "slow": "Langsam. Antworten Sie innerhalb einer Stunde für mehr Buchungen."
       },
       "responseNote": "Durchschnitt der letzten 60 Tage ({n} Anfragen)."
+    },
+    "editorTheme": {
+      "title": "Design des Ausflugs",
+      "hint": "Bestimmt Muster und Zeichnungen auf Karte, Ausflugsseite, Voucher und Story-Bildern. Automatisch wählt anhand von Kategorie und Name.",
+      "auto": "Automatisch: {name}",
+      "save": "Design speichern"
     }
   },
   "share": {
@@ -1450,5 +1457,39 @@
     "book": "Buchen",
     "noRoom": "Keine freien Plätze an Ihren Daten für:",
     "fromWishlist": "Meine Woche mit diesen Ausflügen planen"
+  },
+  "themes": {
+    "label": "Kollektion",
+    "all": "Alle Kollektionen",
+    "title": "Wählen Sie Ihre Art von Tag",
+    "sub": "Jeder Ausflug gehört zu einer Kollektion mit eigenem Look – von Rifftagen bis zu Tempelmorgen.",
+    "tripsCount": "{n, plural, one {# Ausflug} other {# Ausflüge}}",
+    "partOf": "Kollektion {name}",
+    "see": "Ausflüge ansehen",
+    "remove": "Alle Ausflüge zeigen",
+    "reef": {
+      "name": "Riffe im Roten Meer",
+      "blurb": "Schnorcheln, Tauchen und Bootstage am Riff."
+    },
+    "desert": {
+      "name": "Wüstensafari",
+      "blurb": "Fahrten durch Dünen, Palmenhaine und Nächte im Camp."
+    },
+    "trail": {
+      "name": "Bergpfade",
+      "blurb": "Gratwanderungen und geführte Touren in den Bergen am Roten Meer."
+    },
+    "heritage": {
+      "name": "Altes Ägypten",
+      "blurb": "Tempel, Museumsführungen und archäologische Stätten."
+    },
+    "souk": {
+      "name": "Souk-Spaziergänge",
+      "blurb": "Marktstände, lokales Handwerk und Tee am Nachmittag."
+    },
+    "nile": {
+      "name": "Leben am Nil",
+      "blurb": "Feluken-Fahrten und ruhige Nachmittage auf dem Fluss."
+    }
   }
 }

@@ -5,7 +5,7 @@ self.addEventListener("push", (event) => {
   let d = {};
   try { d = event.data ? event.data.json() : {}; } catch (_) { d = { body: event.data && event.data.text() }; }
   event.waitUntil(self.registration.showNotification(d.title || "WENRO", {
-    body: d.body || "", tag: d.tag, icon: "/icons/icon-192.png", badge: "/icons/icon-192.png", data: { url: d.url || "/" },
+    body: d.body || "", tag: d.tag, icon: "/icons/icon-192.png", badge: "/icons/badge-96.png", data: { url: d.url || "/" },
   }));
 });
 self.addEventListener("notificationclick", (event) => {

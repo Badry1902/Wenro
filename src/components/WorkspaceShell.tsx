@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getWorkspaces, homeOf, type Workspace } from "@/lib/workspaces";
@@ -6,11 +5,12 @@ import { signOut } from "@/app/[locale]/signin/actions";
 import { NavLink } from "./NavLink";
 import { PushSetup } from "./PushSetup";
 import { rpc } from "@/lib/data/rpc";
+import { Wordmark } from "./brand/Logo";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
 export const TYPE_STYLE: Record<Workspace["type"], { dot: string; pill: string; bar: string }> = {
-  platform: { dot: "bg-white", pill: "bg-white text-ink", bar: "bg-ink" },
-  operator: { dot: "bg-[#6f83ff]", pill: "bg-discovery text-white", bar: "bg-discovery" },
+  platform: { dot: "bg-white", pill: "bg-white text-ink", bar: "bg-discovery" },
+  operator: { dot: "bg-aqua", pill: "bg-aqua text-ink", bar: "bg-aqua" },
   agency: { dot: "bg-[#3fbf86]", pill: "bg-success text-white", bar: "bg-success" },
   marketer: { dot: "bg-apricot", pill: "bg-apricot text-ink", bar: "bg-apricot" },
 };
@@ -74,11 +74,11 @@ export async function WorkspaceShell({
 
   return (
     <div className="flex min-h-dvh flex-col md:flex-row">
-      <aside className="bg-ink text-white md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
+      <aside className="relative bg-ink text-white md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
         <div className={`h-1 ${style.bar}`} aria-hidden="true" />
         <div className="relative flex items-center justify-between gap-3 px-4 py-3 md:block md:px-5 md:pt-6">
-          <Link href="/" className="flex min-h-11 items-center gap-2 rounded-control bg-white px-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
-            <Image src="/brand/logo-horizontal-temp.png" alt="WENRO" width={110} height={21} />
+          <Link href="/" className="flex min-h-11 items-center gap-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
+            <Wordmark tone="reverse" width={118} />
           </Link>
           <Link href="/app/notifications" aria-label={t("notify.bell", { n: unread })} title={t("notify.bell", { n: unread })}
             className="relative order-last grid size-11 shrink-0 place-items-center rounded-full text-white/90 hover:bg-white/10 md:absolute md:end-4 md:top-7">
@@ -102,13 +102,14 @@ export async function WorkspaceShell({
           </>
         )}
         <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
-        <div className="mt-auto hidden px-5 pb-6 pt-6 md:block">
-          <Link href="/app/account" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
-          <Link href="/" className="block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
-          <SignOut className="" />
+        <div className="relative mt-auto hidden px-5 pb-6 pt-16 md:block">
+          <div className="reef reef-midnight reef-small pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,#000_70%)]" aria-hidden="true" />
+          <Link href="/app/account" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
+          <Link href="/" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
+          <SignOut className="relative" />
         </div>
       </aside>
-      <main className="min-w-0 flex-1 bg-surface px-4 py-6 md:px-10 md:py-8">
+      <main className="min-w-0 flex-1 bg-ivory px-4 py-6 md:px-10 md:py-8">
         {current.status === "pending" && (
           <p role="status" className="mb-6 rounded-card bg-warning-tint p-4 text-warning">{t("pendingNotice")}</p>
         )}

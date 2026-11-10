@@ -5,7 +5,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 // Fonts are self-hosted (no request to Google from the visitor's browser — better for privacy/GDPR).
 import "@fontsource-variable/manrope";
-import "@fontsource/dm-serif-display/400.css";
+import "@fontsource-variable/nunito/wght.css";
+import "@fontsource-variable/baloo-bhaijaan-2/wght.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
@@ -13,14 +14,14 @@ import { routing, isRtl } from "@/i18n/routing";
 import { VisitBeacon } from "@/components/site/VisitBeacon";
 import "../globals.css";
 
-// Font choices follow the design guide's proposals (DM Serif Display / Manrope).
-// IBM Plex Sans Arabic covers Arabic, which Manrope does not support.
+// Coast Club type: rounded Nunito (Latin, Cyrillic) and Baloo Bhaijaan 2 (Arabic) for headings, echoing the
+// rounded wordmark; Manrope and IBM Plex Sans Arabic for reading text.
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const viewport: Viewport = { themeColor: "#3046d9" };
+export const viewport: Viewport = { themeColor: "#19244E" };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
