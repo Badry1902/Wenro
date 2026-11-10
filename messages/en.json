@@ -234,7 +234,8 @@
       "not_agency_member": "Your account cannot book for this agency.",
       "too_many_attempts": "Too many attempts in a short time. Please wait a few minutes and try again."
     },
-    "agencyBanner": "Booking for a client of {name}. Enter the client's own name and WhatsApp."
+    "agencyBanner": "Booking for a client of {name}. Enter the client's own name and WhatsApp.",
+    "whatsappOptIn": "Also send my trip details on WhatsApp"
   },
   "voucher": {
     "title": "Your booking",
@@ -370,7 +371,11 @@
         "location_saved": "Meeting point saved.",
         "location_cleared": "Meeting point removed.",
         "translated": "Translations added. Press again for the next trips.",
-        "theme_saved": "Trip design saved."
+        "theme_saved": "Trip design saved.",
+        "payment_submitted": "Payment sent for review. We'll let you know once it's confirmed.",
+        "payment_approved": "Payment approved; the statements are marked paid.",
+        "payment_rejected": "Payment rejected; the operator was told why.",
+        "method_saved": "Payment method saved."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -420,7 +425,16 @@
         "review_not_found": "That review no longer exists.",
         "location_unreadable": "We could not read a place from that link. In Google Maps tap the place, then Share → Copy link, and paste it here.",
         "location_outside_egypt": "That point is outside Egypt. Check the link.",
-        "translation_not_configured": "Automatic translation is not set up yet (DEEPL_API_KEY missing in Vercel)."
+        "translation_not_configured": "Automatic translation is not set up yet (DEEPL_API_KEY missing in Vercel).",
+        "proof_required": "Please add the receipt or a screenshot.",
+        "file_too_large": "The file is too big (max 4 MB).",
+        "unsupported_file": "Use a photo, screenshot (JPG, PNG, WebP) or PDF.",
+        "already_in_review": "This statement already has a payment being checked.",
+        "reason_required": "Write a short reason before rejecting.",
+        "already_reviewed": "This payment was already checked.",
+        "statement_not_found": "That statement is not open any more.",
+        "invalid_input": "Please check the details and try again.",
+        "not_found": "Not found."
       }
     },
     "signin": {
@@ -649,7 +663,12 @@
       "approve": "Approve",
       "reactivate": "Reactivate",
       "suspend": "Suspend",
-      "note": "Suspending stops new bookings and links. Existing bookings stay valid."
+      "note": "Suspending stops new bookings and links. Existing bookings stay valid.",
+      "search": "Search by name, phone, email or code…",
+      "statusFilter": "Status",
+      "anyStatus": "Any status",
+      "noMatch": "No partners match.",
+      "typeFilter": "Type"
     },
     "adminExp": {
       "title": "Experiences",
@@ -1077,7 +1096,10 @@
         "statement_created": "New statement: {amount} due to WENRO",
         "statement_received": "WENRO received your payment of {amount}. Thank you!",
         "payout_prepared": "Your payout for {month} is ready: {amount}",
-        "payout_paid": "Payout sent: {amount} via InstaPay"
+        "payout_paid": "Payout sent: {amount} via InstaPay",
+        "payment_submitted": "{name} reported a payment of {amount}. Check the receipt.",
+        "payment_approved": "WENRO confirmed your payment of {amount}. Thank you!",
+        "payment_rejected": "WENRO could not confirm your payment of {amount}. Open Money to see why."
       },
       "pushHint": "Get alerts on this phone or computer, even when WENRO is closed."
     },
@@ -1227,6 +1249,139 @@
       "hint": "Sets the patterns and drawings on the trip card, trip page, voucher and story images. Automatic picks one from the category and the trip name.",
       "auto": "Automatic: {name}",
       "save": "Save design"
+    },
+    "language": "Language",
+    "filter": {
+      "search": "Search trips by name…",
+      "all": "All",
+      "clear": "Clear",
+      "shown": "Showing: {n}",
+      "none": "No trips match. Try another word or filter.",
+      "group": "Activity type"
+    },
+    "acc": {
+      "title": "Accounts",
+      "sub": "Who owes whom, what came in this month, and what to do next.",
+      "tabs": {
+        "overview": "Overview",
+        "operators": "Collect from operators",
+        "partners": "Pay partners",
+        "review": "Payments to check",
+        "methods": "Payment methods",
+        "history": "History"
+      },
+      "todo": {
+        "review": "{n, plural, one {# operator payment waits} other {# operator payments wait}} for your check",
+        "statements": "{n, plural, one {# operator has} other {# operators have}} trips done but not on a statement yet",
+        "payouts": "{n, plural, one {# partner is} other {# partners are}} ready to be paid"
+      },
+      "groupMonth": "This month ({month})",
+      "groupNow": "Right now",
+      "guestsPaid": "Guests paid for trips done",
+      "guestsPaidHint": "Cash collected by operators at the trip.",
+      "wenroShare": "WENRO's income",
+      "wenroShareHint": "Our share after operators and partner commissions.",
+      "received": "Received from operators",
+      "receivedHint": "Statements marked paid this month.",
+      "paidPartners": "Paid to partners",
+      "paidPartnersHint": "Payouts sent this month.",
+      "operatorsOwe": "Operators owe WENRO",
+      "operatorsOweHint": "Open statements plus trips not on a statement yet.",
+      "inReview": "Payments to check",
+      "inReviewHint": "Operators say they paid; check the receipt.",
+      "partnersOwed": "WENRO owes partners",
+      "partnersOwedHint": "Commissions on trips done, not paid yet.",
+      "partnersReady": "Ready to pay partners",
+      "partnersReadyHint": "The operator already paid us for these trips.",
+      "howTitle": "How the money moves",
+      "how1": "The guest pays the operator in cash at the trip.",
+      "how2": "Monthly, WENRO makes a statement of what each operator owes (our share + the partner's).",
+      "how3": "The operator pays by InstaPay or another method and uploads the receipt; you check it here.",
+      "how4": "Once paid, the partner commissions become ready and you pay them by InstaPay.",
+      "operator": "Operator",
+      "notOnStatement": "Not on a statement yet",
+      "openStatements": "Open statements",
+      "totalOwed": "Total owed",
+      "lastPayment": "Last payment",
+      "never": "never",
+      "details": "Trips and statements",
+      "operatorsNote": "“Total owed” = open statements + trips done that are not on a statement yet. Create statements above to collect them.",
+      "noOperators": "No operators yet.",
+      "noPartners": "No partner commissions yet.",
+      "partner": "Partner",
+      "pWaiting": "Trip not done yet",
+      "pEarned": "Earned, operator not paid yet",
+      "pReady": "Ready to pay",
+      "pPaid": "Paid",
+      "partnersNote": "A commission becomes “ready” only after the operator has paid WENRO for that trip. Prepare payouts to group them by month.",
+      "reviewNone": "No operator payments yet.",
+      "receipt": "Payment receipt",
+      "openReceipt": "Open receipt",
+      "ref": "Reference",
+      "reviewNote": "Your note",
+      "noteLabel": "Note to the operator",
+      "notePlaceholder": "Required when rejecting (e.g. amount does not match)",
+      "approve": "Approve: money received",
+      "reject": "Reject",
+      "methodsHint": "These are shown to operators when they pay WENRO. Put InstaPay first (lowest number). Add the account name, the address or number, and a payment link if you have one.",
+      "addMethod": "Add a payment method",
+      "mKind": "Type",
+      "mLabel": "Name shown",
+      "mAccount": "Account holder",
+      "mValue": "InstaPay address / account number / IBAN / wallet / link",
+      "mExtra": "More details (bank, branch, SWIFT, notes)",
+      "mUrl": "Payment link (optional)",
+      "mUrlHint": "Opens InstaPay or the payment page for the operator.",
+      "mSort": "Order",
+      "mActive": "Shown to operators",
+      "save": "Save",
+      "add": "Add method",
+      "kinds": {
+        "instapay": "InstaPay",
+        "bank": "Bank transfer",
+        "wallet": "Mobile wallet",
+        "link": "Payment link"
+      },
+      "movements": "Latest money movements",
+      "noMovements": "No movements yet.",
+      "movementsNote": "Every amount is recorded once and never edited (ledger).",
+      "ledger": {
+        "receivable_from_operator": "Trip done: operator owes WENRO",
+        "commission_accrued": "Partner commission earned",
+        "operator_settlement_received": "Operator payment received",
+        "partner_payout": "Partner payout sent"
+      },
+      "needsUpdate": "The accounts page needs the latest database update. Ask your developer to run the SQL update file in Supabase."
+    },
+    "pay": {
+      "title": "Pay WENRO",
+      "sub": "Pay what you owe WENRO in a few taps: choose the statements, pay by InstaPay or another method, then upload the receipt. Our finance team confirms it.",
+      "nothing": "You owe nothing right now.",
+      "nothingYet": "{trips, plural, one {# trip is} other {# trips are}} done and will appear on your next statement.",
+      "choose": "What do you want to pay?",
+      "total": "Total",
+      "payNow": "Pay now",
+      "methodTitle": "Choose how to pay",
+      "methodHint": "Copy the details or open the app, pay the exact amount, then come back and confirm.",
+      "accountName": "Account holder",
+      "valueLabel": "Send to",
+      "extra": "Details",
+      "copy": "Copy",
+      "copied": "Copied",
+      "open": "Open {name}",
+      "paidConfirm": "I paid: confirm payment",
+      "confirmTitle": "Confirm your payment",
+      "confirmHint": "Upload the receipt or a screenshot of the transfer. Your payment shows as “In review” until WENRO's finance team checks it.",
+      "proof": "Receipt or screenshot",
+      "proofHint": "Photo, screenshot or PDF, up to 4 MB.",
+      "reference": "Transfer reference (optional)",
+      "referenceHint": "The number shown by InstaPay or the bank.",
+      "note": "Note (optional)",
+      "submit": "Send for review",
+      "back": "Back",
+      "inReview": "A payment you sent is being checked by WENRO. Those statements are locked until then.",
+      "noMethods": "WENRO has not added payment methods yet. Contact the WENRO team.",
+      "history": "Your payments"
     }
   },
   "email": {
@@ -1511,5 +1666,22 @@
       "blurb": "Felucca rides and slow afternoons on the river."
     },
     "soon": "Coming soon"
+  },
+  "whatsapp": {
+    "head": {
+      "booking_confirmed": "Your WENRO booking is confirmed",
+      "request_received": "We received your booking request",
+      "request_accepted": "Good news: your request is accepted",
+      "operator_booking": "New booking on WENRO",
+      "operator_request": "New booking request on WENRO: accept or decline it in your dashboard"
+    },
+    "adults": "{n, plural, one {# adult} other {# adults}}",
+    "children": "{n, plural, one {# child} other {# children}}",
+    "infants": "{n, plural, one {# infant} other {# infants}}",
+    "pickup": "Hotel pickup: {hotel}",
+    "meetingSoon": "We'll send the meeting point before the trip",
+    "atMeeting": "At the meeting point",
+    "guestText": "{v1}\nHi {v2},\nTrip: {v3}\nWhen: {v4}\nGuests: {v5}\nMeeting: {v6}\nYour booking: {v7}",
+    "operatorText": "{v1}\nRef: {v2}\nTrip: {v3}\nWhen: {v4}\nGuests: {v5}\nName: {v6}\nPhone: {v7}\nPickup: {v8}"
   }
 }

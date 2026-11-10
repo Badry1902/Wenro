@@ -22,7 +22,7 @@ const tick = (auth = true) => fetch(`${B}/api/cron/tick`, { headers: auth ? { Au
   const g = await b.newPage({ viewport: { width: 1280, height: 900 } });
   g.on('pageerror', (e) => errors.push(e.message));
   await g.goto(`${B}/de/experiences/demo-giftun-island`);
-  await g.getByRole('button', { name: 'Weiter' }).click();
+  await g.locator('button:not([aria-label])', { hasText: 'Weiter' }).click();
   await g.waitForURL(/\/de\/book\//);
   await g.getByLabel('Vollständiger Name').fill(guestName);
   await g.getByLabel('E-Mail').fill('mia@example.com');

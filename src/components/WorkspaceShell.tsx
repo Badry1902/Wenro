@@ -5,7 +5,9 @@ import { signOut } from "@/app/[locale]/signin/actions";
 import { NavLink } from "./NavLink";
 import { PushSetup } from "./PushSetup";
 import { rpc } from "@/lib/data/rpc";
+import { Suspense } from "react";
 import { Wordmark } from "./brand/Logo";
+import { LanguageMenu } from "./LanguageMenu";
 import { patternStyle, themeOfTheDay } from "@/lib/themes";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
@@ -81,6 +83,7 @@ export async function WorkspaceShell({
           <Link href="/" className="flex min-h-11 items-center gap-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
             <Wordmark tone="reverse" width={118} />
           </Link>
+          <div className="order-last md:hidden"><Suspense><LanguageMenu label={t("language")} tone="dark" compact /></Suspense></div>
           <Link href="/app/notifications" aria-label={t("notify.bell", { n: unread })} title={t("notify.bell", { n: unread })}
             className="relative order-last grid size-11 shrink-0 place-items-center rounded-full text-white/90 hover:bg-white/10 md:absolute md:end-4 md:top-7">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M6 8a6 6 0 1112 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 004 0" /></svg>
@@ -105,6 +108,7 @@ export async function WorkspaceShell({
         <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
         <div className="relative mt-auto hidden px-5 pb-6 pt-16 md:block">
           <div className="pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,#000_70%)]" style={patternStyle(themeOfTheDay(), "midnight", 220)} aria-hidden="true" />
+          <div className="relative -ms-2.5 mb-1"><Suspense><LanguageMenu label={t("language")} tone="dark" align="start" up /></Suspense></div>
           <Link href="/app/account" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
           <Link href="/" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
           <SignOut className="relative" />

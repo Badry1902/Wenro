@@ -1,18 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Link, usePathname } from "@/i18n/navigation";
-import { routing } from "@/i18n/routing";
 import { IconCategory, IconClose } from "../Icons";
 import { AccountButton } from "./AccountButton";
+import { LanguageMenu, LanguageRow } from "../LanguageMenu";
 
 type Cat = { slug: string; name: string; blurb: string };
 type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string; explore: string; plan: string };
 
-const LANG: Record<string, string> = { en: "English", de: "Deutsch", ru: "Русский", fr: "Français", ar: "العربية" };
-const SHORT: Record<string, string> = { en: "EN", de: "DE", ru: "RU", fr: "FR", ar: "ع" };
 
 /** Closes a popover on outside click and Escape. */
 function useDismiss(open: boolean, close: () => void) {
@@ -29,18 +26,14 @@ function useDismiss(open: boolean, close: () => void) {
 }
 
 export function HeaderMenus({ categories, labels, account }: { categories: Cat[]; labels: Labels; account: { signIn: string; dashboard: string } }) {
-  const locale = useLocale();
   const pathname = usePathname();
   const search = useSearchParams();
-  const query = Object.fromEntries(search.entries());
   const [cats, setCats] = useState(false);
-  const [lang, setLang] = useState(false);
   const [sheet, setSheet] = useState(false);
   const catRef = useDismiss(cats, () => setCats(false));
-  const langRef = useDismiss(lang, () => setLang(false));
 
   // Close menus after navigating
-  useEffect(() => { setCats(false); setLang(false); setSheet(false); }, [pathname, search]);
+  useEffect(() => { setCats(false); setSheet(false); }, [pathname, search]);
   // Lock page scroll behind the phone menu
   useEffect(() => {
     document.documentElement.style.overflow = sheet ? "hidden" : "";
@@ -82,23 +75,8 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
       </nav>
       <div className="flex-1 md:hidden" />
 
-      <div ref={langRef} className="relative hidden sm:block">
-        <button type="button" aria-expanded={lang} aria-label={labels.language} onClick={() => setLang((v) => !v)}
-          className="nav-link inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-small font-bold text-ink hover:bg-discovery-tint">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18" /></svg>
-          {SHORT[locale]}
-        </button>
-        {lang && (
-          <div className="popover-panel end-0 absolute top-full mt-2 w-44 rounded-card border border-line bg-surface p-1.5 shadow-[0_20px_50px_-20px_rgb(35_43_69/0.35)]">
-            {routing.locales.map((l) => (
-              <Link key={l} href={{ pathname, query }} locale={l} lang={l} aria-current={l === locale ? "true" : undefined}
-                className={`flex min-h-11 items-center justify-between rounded-control px-3 text-[15px] ${l === locale ? "bg-discovery-tint font-bold text-discovery" : "hover:bg-discovery-tint"}`}>
-                {LANG[l]} <span className="text-small text-ink-muted">{SHORT[l]}</span>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
+      <div className="hidden sm:block"><LanguageMenu label={labels.language} /></div>
+      <div className="sm:hidden"><LanguageMenu label={labels.language} compact /></div>
 
       <button type="button" onClick={() => setSheet(true)} aria-label={labels.menu} aria-expanded={sheet}
         className="btn-press inline-flex size-11 items-center justify-center rounded-full border border-line md:hidden">
@@ -125,14 +103,7 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
                 </Link>
               ))}
               <p className="mt-3 px-3 text-small font-bold uppercase tracking-wider text-ink-muted">{labels.language}</p>
-              <div className="flex flex-wrap gap-2 px-3">
-                {routing.locales.map((l) => (
-                  <Link key={l} href={{ pathname, query }} locale={l} lang={l} aria-current={l === locale ? "true" : undefined}
-                    className={`inline-flex min-h-11 items-center rounded-full border px-4 text-small font-bold ${l === locale ? "border-discovery bg-discovery text-white" : "border-line"}`}>
-                    {LANG[l]}
-                  </Link>
-                ))}
-              </div>
+              <div className="px-3"><LanguageRow /></div>
             </div>
           </div>
         </div>

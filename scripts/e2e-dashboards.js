@@ -22,7 +22,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
     p.on('pageerror', (e) => errors.push(`${who}: ${e.message}`));
     await p.goto(`${B}/en/signin`);
     await p.locator(`form:has(input[name="uid"][value$="${U[who]}"]) button`).click();
-    await p.waitForURL(/\/en\/app\/(admin|o|p)\b/);
+    await p.waitForURL(/\/en\/app\/(admin|o|p)\b/, { waitUntil: 'commit' });
     return p;
   }
   const flash = async (p) => { const l = p.locator('main p[role="status"], main p[role="alert"]').first(); await l.waitFor({ timeout: 10000 }).catch(() => {}); return l.innerText().catch(() => ''); };
@@ -105,21 +105,28 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
   await ad.getByRole('link', { name: 'Bookings', exact: true }).click();
   check('admin sees the agency booking with its split', (await ad.locator('li', { hasText: ref }).innerText()).includes('Via agency'));
   await ad.getByRole('link', { name: 'Money' }).click();
+  await ad.waitForURL(/admin\/finance/, { waitUntil: 'commit' });
+  await ad.getByRole('link', { name: 'Collect from operators' }).click();
+  await ad.waitForURL(/tab=operators/, { waitUntil: 'commit' });
   await ad.locator('input[name="from"]').fill(today);
   await ad.locator('input[name="to"]').fill(today);
   await ad.getByRole('button', { name: 'Create statements' }).click();
-  await ad.waitForURL(/(ok|err)=/);
+  await ad.waitForURL(/(ok|err)=/, { waitUntil: 'commit' });
   check(`admin creates statements (${new URL(ad.url()).search})`, ad.url().includes('ok=statements_generated'));
-  const stmt = ad.locator('#statements li', { hasText: 'Red Sea Boats' }).filter({ has: ad.getByRole('button', { name: 'Mark received' }) }).first();
+  await ad.goto(`${B}/en/app/admin/finance/operators`, { waitUntil: 'commit' });
+  const stmt = ad.locator('details', { hasText: 'Red Sea Boats' }).first();
+  await stmt.waitFor();
+  if (!(await stmt.getAttribute('open') !== null)) await stmt.locator('summary').click();
   await stmt.getByRole('button', { name: 'Mark received' }).click();
-  await ad.waitForURL(/ok=statement_received/);
+  await ad.waitForURL(/ok=statement_received/, { waitUntil: 'commit' });
   check('admin marks the statement received', (await flash(ad)).includes('received'));
+  await ad.goto(`${B}/en/app/admin/finance?tab=partners`, { waitUntil: 'commit' });
   await ad.getByRole('button', { name: 'Prepare payouts' }).click();
-  await ad.waitForURL(/ok=payouts_created/);
-  const po = ad.locator('#payouts li', { hasText: 'Sun Agency' }).filter({ has: ad.getByRole('button', { name: 'Mark paid' }) }).first();
+  await ad.waitForURL(/ok=payouts_created/, { waitUntil: 'commit' });
+  const po = ad.locator('li', { hasText: 'Sun Agency' }).filter({ has: ad.getByRole('button', { name: 'Mark paid' }) }).first();
   await po.getByLabel('InstaPay reference').fill('IPN-TEST-001');
   await po.getByRole('button', { name: 'Mark paid' }).click();
-  await ad.waitForURL(/ok=payout_paid/);
+  await ad.waitForURL(/ok=payout_paid/, { waitUntil: 'commit' });
   check('admin pays the agency payout', (await flash(ad)).includes('paid'));
   await ad.screenshot({ path: `${SHOTS}/d7-admin-finance.png`, fullPage: true });
 

@@ -216,7 +216,8 @@
       "too_many_attempts": "Zu viele Versuche in kurzer Zeit. Bitte warte ein paar Minuten.",
       "not_agency_member": "Mit Ihrem Konto können Sie nicht für diese Agentur buchen."
     },
-    "agencyBanner": "Buchung für einen Kunden von {name}. Geben Sie den Namen und die WhatsApp-Nummer des Kunden ein."
+    "agencyBanner": "Buchung für einen Kunden von {name}. Geben Sie den Namen und die WhatsApp-Nummer des Kunden ein.",
+    "whatsappOptIn": "Meine Ausflugsdetails auch per WhatsApp senden"
   },
   "voucher": {
     "title": "Deine Buchung",
@@ -439,7 +440,16 @@
         "booking_not_cancellable": "Diese Buchung kann nicht mehr storniert werden.",
         "too_many_videos": "Höchstens 3 Videos pro Erlebnis.",
         "no_access": "Diese Seite gehört nicht zu Ihrer Rolle. Hier sehen Sie, woran Sie arbeiten können.",
-        "translation_not_configured": "Die automatische Übersetzung ist noch nicht eingerichtet (DEEPL_API_KEY fehlt in Vercel)."
+        "translation_not_configured": "Die automatische Übersetzung ist noch nicht eingerichtet (DEEPL_API_KEY fehlt in Vercel).",
+        "proof_required": "Bitte Beleg oder Screenshot hinzufügen.",
+        "file_too_large": "Die Datei ist zu groß (max. 4 MB).",
+        "unsupported_file": "Bitte Foto, Screenshot (JPG, PNG, WebP) oder PDF verwenden.",
+        "already_in_review": "Für diese Abrechnung wird bereits eine Zahlung geprüft.",
+        "reason_required": "Bitte vor dem Ablehnen kurz begründen.",
+        "already_reviewed": "Diese Zahlung wurde bereits geprüft.",
+        "statement_not_found": "Diese Abrechnung ist nicht mehr offen.",
+        "invalid_input": "Bitte Angaben prüfen und erneut versuchen.",
+        "not_found": "Nicht gefunden."
       },
       "ok": {
         "review_published": "Bewertung veröffentlicht.",
@@ -484,7 +494,11 @@
         "booking_cancelled": "Buchung storniert. Der Gast erhält eine E-Mail.",
         "demo_joined": "Erledigt. Öffnen Sie jedes Dashboard über „Arbeitsbereich wechseln“ im Menü.",
         "translated": "Übersetzungen hinzugefügt. Erneut drücken für die nächsten Touren.",
-        "theme_saved": "Design des Ausflugs gespeichert."
+        "theme_saved": "Design des Ausflugs gespeichert.",
+        "payment_submitted": "Zahlung zur Prüfung gesendet. Wir melden uns nach der Bestätigung.",
+        "payment_approved": "Zahlung bestätigt; die Abrechnungen sind als bezahlt markiert.",
+        "payment_rejected": "Zahlung abgelehnt; der Anbieter wurde informiert.",
+        "method_saved": "Zahlungsweg gespeichert."
       }
     },
     "dep": {
@@ -753,7 +767,12 @@
       "approve": "Freigeben",
       "reactivate": "Reaktivieren",
       "suspend": "Sperren",
-      "note": "Eine Sperre stoppt neue Buchungen und Links. Bestehende Buchungen bleiben gültig."
+      "note": "Eine Sperre stoppt neue Buchungen und Links. Bestehende Buchungen bleiben gültig.",
+      "search": "Nach Name, Telefon, E-Mail oder Code suchen…",
+      "statusFilter": "Status",
+      "anyStatus": "Jeder Status",
+      "noMatch": "Keine passenden Partner.",
+      "typeFilter": "Typ"
     },
     "adminExp": {
       "title": "Erlebnisse",
@@ -1153,7 +1172,10 @@
         "statement_created": "Neue Abrechnung: {amount} an WENRO fällig",
         "statement_received": "WENRO hat Ihre Zahlung von {amount} erhalten. Danke!",
         "payout_prepared": "Ihre Auszahlung für {month} ist bereit: {amount}",
-        "payout_paid": "Auszahlung gesendet: {amount} per InstaPay"
+        "payout_paid": "Auszahlung gesendet: {amount} per InstaPay",
+        "payment_submitted": "{name} hat eine Zahlung von {amount} gemeldet. Beleg prüfen.",
+        "payment_approved": "WENRO hat Ihre Zahlung von {amount} bestätigt. Danke!",
+        "payment_rejected": "WENRO konnte Ihre Zahlung von {amount} nicht bestätigen. Unter Geld sehen Sie den Grund."
       },
       "pushHint": "Erhalten Sie Hinweise auf diesem Handy oder Computer, auch wenn WENRO geschlossen ist."
     },
@@ -1303,6 +1325,139 @@
       "hint": "Bestimmt Muster und Zeichnungen auf Karte, Ausflugsseite, Voucher und Story-Bildern. Automatisch wählt anhand von Kategorie und Name.",
       "auto": "Automatisch: {name}",
       "save": "Design speichern"
+    },
+    "language": "Sprache",
+    "filter": {
+      "search": "Ausflüge nach Namen suchen…",
+      "all": "Alle",
+      "clear": "Löschen",
+      "shown": "Angezeigt: {n}",
+      "none": "Keine passenden Ausflüge. Versuchen Sie ein anderes Wort oder einen anderen Filter.",
+      "group": "Art der Aktivität"
+    },
+    "acc": {
+      "title": "Buchhaltung",
+      "sub": "Wer wem was schuldet, was diesen Monat eingegangen ist und was als Nächstes zu tun ist.",
+      "tabs": {
+        "overview": "Übersicht",
+        "operators": "Von Anbietern einziehen",
+        "partners": "Partner auszahlen",
+        "review": "Zahlungen prüfen",
+        "methods": "Zahlungswege",
+        "history": "Verlauf"
+      },
+      "todo": {
+        "review": "{n, plural, one {# Anbieterzahlung wartet} other {# Anbieterzahlungen warten}} auf Ihre Prüfung",
+        "statements": "{n, plural, one {# Anbieter hat} other {# Anbieter haben}} durchgeführte Ausflüge, die noch auf keiner Abrechnung stehen",
+        "payouts": "{n, plural, one {# Partner ist} other {# Partner sind}} bereit zur Auszahlung"
+      },
+      "groupMonth": "Dieser Monat ({month})",
+      "groupNow": "Aktuell",
+      "guestsPaid": "Von Gästen bezahlt (durchgeführt)",
+      "guestsPaidHint": "Bar beim Anbieter am Ausflug.",
+      "wenroShare": "Einnahmen von WENRO",
+      "wenroShareHint": "Unser Anteil nach Anbietern und Partnerprovisionen.",
+      "received": "Von Anbietern erhalten",
+      "receivedHint": "Diesen Monat als bezahlt markierte Abrechnungen.",
+      "paidPartners": "An Partner gezahlt",
+      "paidPartnersHint": "Diesen Monat gesendete Auszahlungen.",
+      "operatorsOwe": "Anbieter schulden WENRO",
+      "operatorsOweHint": "Offene Abrechnungen plus Ausflüge ohne Abrechnung.",
+      "inReview": "Zu prüfende Zahlungen",
+      "inReviewHint": "Anbieter melden eine Zahlung; Beleg prüfen.",
+      "partnersOwed": "WENRO schuldet Partnern",
+      "partnersOwedHint": "Provisionen für durchgeführte Ausflüge, noch nicht gezahlt.",
+      "partnersReady": "Bereit zur Auszahlung",
+      "partnersReadyHint": "Der Anbieter hat uns für diese Ausflüge bereits bezahlt.",
+      "howTitle": "So fließt das Geld",
+      "how1": "Der Gast zahlt den Anbieter bar beim Ausflug.",
+      "how2": "Monatlich erstellt WENRO eine Abrechnung, was jeder Anbieter schuldet (unser Anteil + Partneranteil).",
+      "how3": "Der Anbieter zahlt per InstaPay oder anderem Weg und lädt den Beleg hoch; Sie prüfen ihn hier.",
+      "how4": "Danach sind die Partnerprovisionen bereit, und Sie zahlen sie per InstaPay aus.",
+      "operator": "Anbieter",
+      "notOnStatement": "Noch ohne Abrechnung",
+      "openStatements": "Offene Abrechnungen",
+      "totalOwed": "Gesamt geschuldet",
+      "lastPayment": "Letzte Zahlung",
+      "never": "nie",
+      "details": "Ausflüge und Abrechnungen",
+      "operatorsNote": "„Gesamt geschuldet“ = offene Abrechnungen + durchgeführte Ausflüge ohne Abrechnung. Erstellen Sie oben Abrechnungen, um sie einzuziehen.",
+      "noOperators": "Noch keine Anbieter.",
+      "noPartners": "Noch keine Partnerprovisionen.",
+      "partner": "Partner",
+      "pWaiting": "Ausflug noch nicht durchgeführt",
+      "pEarned": "Verdient, Anbieter hat noch nicht gezahlt",
+      "pReady": "Bereit zur Auszahlung",
+      "pPaid": "Ausgezahlt",
+      "partnersNote": "Eine Provision ist erst „bereit“, wenn der Anbieter WENRO für diesen Ausflug bezahlt hat. Bereiten Sie Auszahlungen vor, um sie monatlich zu bündeln.",
+      "reviewNone": "Noch keine Anbieterzahlungen.",
+      "receipt": "Zahlungsbeleg",
+      "openReceipt": "Beleg öffnen",
+      "ref": "Referenz",
+      "reviewNote": "Ihre Notiz",
+      "noteLabel": "Notiz an den Anbieter",
+      "notePlaceholder": "Pflicht bei Ablehnung (z. B. Betrag stimmt nicht)",
+      "approve": "Bestätigen: Geld erhalten",
+      "reject": "Ablehnen",
+      "methodsHint": "Diese Wege sehen Anbieter, wenn sie WENRO bezahlen. InstaPay zuerst (niedrigste Zahl). Kontoinhaber, Adresse oder Nummer und ggf. einen Zahlungslink angeben.",
+      "addMethod": "Zahlungsweg hinzufügen",
+      "mKind": "Art",
+      "mLabel": "Angezeigter Name",
+      "mAccount": "Kontoinhaber",
+      "mValue": "InstaPay-Adresse / Kontonummer / IBAN / Wallet / Link",
+      "mExtra": "Weitere Angaben (Bank, Filiale, SWIFT, Hinweise)",
+      "mUrl": "Zahlungslink (optional)",
+      "mUrlHint": "Öffnet InstaPay oder die Zahlungsseite für den Anbieter.",
+      "mSort": "Reihenfolge",
+      "mActive": "Für Anbieter sichtbar",
+      "save": "Speichern",
+      "add": "Hinzufügen",
+      "kinds": {
+        "instapay": "InstaPay",
+        "bank": "Banküberweisung",
+        "wallet": "Mobile Wallet",
+        "link": "Zahlungslink"
+      },
+      "movements": "Letzte Geldbewegungen",
+      "noMovements": "Noch keine Bewegungen.",
+      "movementsNote": "Jeder Betrag wird einmal erfasst und nie geändert (Hauptbuch).",
+      "ledger": {
+        "receivable_from_operator": "Ausflug durchgeführt: Anbieter schuldet WENRO",
+        "commission_accrued": "Partnerprovision verdient",
+        "operator_settlement_received": "Anbieterzahlung erhalten",
+        "partner_payout": "Partnerauszahlung gesendet"
+      },
+      "needsUpdate": "Die Buchhaltung benötigt das neueste Datenbank-Update. Bitte die SQL-Update-Datei in Supabase ausführen."
+    },
+    "pay": {
+      "title": "An WENRO zahlen",
+      "sub": "Begleichen Sie Ihre Schuld bei WENRO in wenigen Schritten: Abrechnungen wählen, per InstaPay oder anderem Weg zahlen, Beleg hochladen. Unser Finanzteam bestätigt.",
+      "nothing": "Sie schulden derzeit nichts.",
+      "nothingYet": "{trips, plural, one {# Ausflug ist} other {# Ausflüge sind}} durchgeführt und erscheinen auf Ihrer nächsten Abrechnung.",
+      "choose": "Was möchten Sie zahlen?",
+      "total": "Gesamt",
+      "payNow": "Jetzt zahlen",
+      "methodTitle": "Zahlungsweg wählen",
+      "methodHint": "Daten kopieren oder App öffnen, genauen Betrag zahlen, dann zurückkommen und bestätigen.",
+      "accountName": "Kontoinhaber",
+      "valueLabel": "Senden an",
+      "extra": "Angaben",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "open": "{name} öffnen",
+      "paidConfirm": "Bezahlt: Zahlung bestätigen",
+      "confirmTitle": "Zahlung bestätigen",
+      "confirmHint": "Laden Sie den Beleg oder einen Screenshot der Überweisung hoch. Ihre Zahlung steht auf „In Prüfung“, bis das WENRO-Finanzteam sie prüft.",
+      "proof": "Beleg oder Screenshot",
+      "proofHint": "Foto, Screenshot oder PDF, bis 4 MB.",
+      "reference": "Überweisungsreferenz (optional)",
+      "referenceHint": "Die Nummer aus InstaPay oder der Bank.",
+      "note": "Notiz (optional)",
+      "submit": "Zur Prüfung senden",
+      "back": "Zurück",
+      "inReview": "Eine gesendete Zahlung wird von WENRO geprüft. Diese Abrechnungen sind bis dahin gesperrt.",
+      "noMethods": "WENRO hat noch keine Zahlungswege hinterlegt. Bitte das WENRO-Team kontaktieren.",
+      "history": "Ihre Zahlungen"
     }
   },
   "share": {
@@ -1492,5 +1647,22 @@
       "blurb": "Feluken-Fahrten und ruhige Nachmittage auf dem Fluss."
     },
     "soon": "Bald verfügbar"
+  },
+  "whatsapp": {
+    "head": {
+      "booking_confirmed": "Ihre WENRO-Buchung ist bestätigt",
+      "request_received": "Wir haben Ihre Buchungsanfrage erhalten",
+      "request_accepted": "Gute Nachricht: Ihre Anfrage wurde angenommen",
+      "operator_booking": "Neue Buchung auf WENRO",
+      "operator_request": "Neue Buchungsanfrage auf WENRO: im Dashboard annehmen oder ablehnen"
+    },
+    "adults": "{n, plural, one {# Erwachsener} other {# Erwachsene}}",
+    "children": "{n, plural, one {# Kind} other {# Kinder}}",
+    "infants": "{n, plural, one {# Kleinkind} other {# Kleinkinder}}",
+    "pickup": "Hotelabholung: {hotel}",
+    "meetingSoon": "Den Treffpunkt senden wir vor dem Ausflug",
+    "atMeeting": "Am Treffpunkt",
+    "guestText": "{v1}\nHallo {v2},\nAusflug: {v3}\nWann: {v4}\nGäste: {v5}\nTreffpunkt: {v6}\nIhre Buchung: {v7}",
+    "operatorText": "{v1}\nRef.: {v2}\nAusflug: {v3}\nWann: {v4}\nGäste: {v5}\nName: {v6}\nTelefon: {v7}\nAbholung: {v8}"
   }
 }

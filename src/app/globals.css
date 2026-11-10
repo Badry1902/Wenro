@@ -345,21 +345,6 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 .map-pin-group b { font-weight: 800; }
 .leaflet-container { font-family: inherit; }
 
-/* Coast Club loader: the pin mark lands and ripples spread on the water */
-.pin-drop { transform-origin: 50% 100%; animation: pin-drop 1600ms cubic-bezier(0.34, 1.4, 0.64, 1) infinite; }
-@keyframes pin-drop {
-  0% { transform: translateY(-38%) scale(0.92); opacity: 0; }
-  18% { opacity: 1; }
-  38% { transform: translateY(0) scaleY(0.94) scaleX(1.03); }
-  48% { transform: translateY(0) scale(1); }
-  82% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-6%) scale(1); opacity: 0; }
-}
-.pin-ripple { position: absolute; bottom: -4px; left: 50%; width: 70%; height: 16%; margin-left: -35%;
-  border: 2px solid var(--color-teal); border-radius: 50%; opacity: 0; animation: pin-ripple 1600ms ease-out infinite; }
-.pin-ripple-2 { animation-delay: 220ms; border-color: var(--color-aqua); }
-@keyframes pin-ripple { 0%, 34% { transform: scale(0.3); opacity: 0; } 42% { opacity: 0.9; } 100% { transform: scale(1.5); opacity: 0; } }
-
 /* Greeting logo: floats over a slowly moving wave */
 .logo-bob { animation: logo-bob 3200ms ease-in-out infinite; }
 @keyframes logo-bob { 50% { transform: translateY(-5px); } }
@@ -367,9 +352,7 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 @keyframes logo-wave { to { transform: translateX(40px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .pin-drop, .logo-bob, .logo-wave-fill { animation: none; }
-  .pin-drop { opacity: 1; }
-  .pin-ripple { display: none; }
+  .logo-bob, .logo-wave-fill { animation: none; }
 }
 
 /* Campaign arrivals (?ref= / utm_campaign) see the campaign headline; set before first paint by the hero */

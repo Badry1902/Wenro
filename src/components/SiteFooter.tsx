@@ -5,6 +5,7 @@ import { CATEGORIES } from "@/lib/catalog";
 import { IconCar, IconCash, IconCheck } from "./Icons";
 import { Wordmark } from "./brand/Logo";
 import { THEMES, patternStyle } from "@/lib/themes";
+import { Flag } from "./LanguageMenu";
 
 const LANG: Record<string, string> = { en: "English", de: "Deutsch", ru: "Русский", fr: "Français", ar: "العربية" };
 
@@ -58,7 +59,7 @@ export async function SiteFooter() {
         <nav aria-label={t("nav.language")} className={col}>
           <p className={head}>{t("nav.language")}</p>
           {routing.locales.map((l) => (
-            <Link key={l} href="/" locale={l} lang={l} className={link}>{LANG[l]}</Link>
+            <Link key={l} href="/" locale={l} lang={l} className={`${link} inline-flex items-center gap-2`}><Flag locale={l} size={20} />{LANG[l]}</Link>
           ))}
         </nav>
       </div>

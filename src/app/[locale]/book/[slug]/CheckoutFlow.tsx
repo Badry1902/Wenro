@@ -201,6 +201,10 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
             <input type="checkbox" name="accept" checked={f.accept} onChange={(e) => setF({ ...f, accept: e.target.checked })} className="mt-0.5 h-5 w-5 shrink-0 accent-discovery" />
             <span>{t("booking.accept")}</span>
           </label>
+          <label className="flex items-start gap-3 text-[14px]">
+            <input type="checkbox" name="whatsapp" defaultChecked className="mt-0.5 h-5 w-5 shrink-0 accent-discovery" />
+            <span>{t("booking.whatsappOptIn")}</span>
+          </label>
         </div>
 
         <div className="fixed inset-x-0 bottom-0 border-t border-line bg-surface px-4 py-3">

@@ -216,7 +216,8 @@
       "too_many_attempts": "Trop de tentatives. Patientez quelques minutes.",
       "not_agency_member": "Votre compte ne peut pas réserver pour cette agence."
     },
-    "agencyBanner": "Réservation pour un client de {name}. Saisissez le nom et le numéro WhatsApp du client lui-même."
+    "agencyBanner": "Réservation pour un client de {name}. Saisissez le nom et le numéro WhatsApp du client lui-même.",
+    "whatsappOptIn": "Envoyer aussi les détails de mon excursion sur WhatsApp"
   },
   "voucher": {
     "title": "Votre réservation",
@@ -439,7 +440,16 @@
         "booking_not_cancellable": "Cette réservation ne peut plus être annulée.",
         "too_many_videos": "3 vidéos maximum par expérience.",
         "no_access": "Cette page ne fait pas partie de votre rôle. Voici ce sur quoi vous pouvez travailler.",
-        "translation_not_configured": "La traduction automatique n’est pas encore configurée (DEEPL_API_KEY manquante dans Vercel)."
+        "translation_not_configured": "La traduction automatique n’est pas encore configurée (DEEPL_API_KEY manquante dans Vercel).",
+        "proof_required": "Ajoutez le reçu ou une capture d'écran.",
+        "file_too_large": "Fichier trop volumineux (4 Mo max.).",
+        "unsupported_file": "Utilisez une photo, une capture (JPG, PNG, WebP) ou un PDF.",
+        "already_in_review": "Un paiement est déjà en vérification pour ce relevé.",
+        "reason_required": "Indiquez un motif avant de refuser.",
+        "already_reviewed": "Ce paiement a déjà été vérifié.",
+        "statement_not_found": "Ce relevé n'est plus ouvert.",
+        "invalid_input": "Vérifiez les informations et réessayez.",
+        "not_found": "Introuvable."
       },
       "ok": {
         "review_published": "Avis publié.",
@@ -484,7 +494,11 @@
         "booking_cancelled": "Réservation annulée. Le voyageur est prévenu par e-mail.",
         "demo_joined": "C’est fait. Utilisez « Changer d’espace » dans le menu pour ouvrir chaque tableau de bord.",
         "translated": "Traductions ajoutées. Appuyez à nouveau pour les sorties suivantes.",
-        "theme_saved": "Design de l'excursion enregistré."
+        "theme_saved": "Design de l'excursion enregistré.",
+        "payment_submitted": "Paiement envoyé pour vérification. Nous vous préviendrons une fois confirmé.",
+        "payment_approved": "Paiement validé ; les relevés sont marqués payés.",
+        "payment_rejected": "Paiement refusé ; le prestataire a été informé du motif.",
+        "method_saved": "Moyen de paiement enregistré."
       }
     },
     "dep": {
@@ -753,7 +767,12 @@
       "approve": "Approuver",
       "reactivate": "Réactiver",
       "suspend": "Suspendre",
-      "note": "La suspension bloque les nouvelles réservations et les liens. Les réservations existantes restent valables."
+      "note": "La suspension bloque les nouvelles réservations et les liens. Les réservations existantes restent valables.",
+      "search": "Rechercher par nom, téléphone, e-mail ou code…",
+      "statusFilter": "Statut",
+      "anyStatus": "Tous les statuts",
+      "noMatch": "Aucun partenaire ne correspond.",
+      "typeFilter": "Type"
     },
     "adminExp": {
       "title": "Expériences",
@@ -1153,7 +1172,10 @@
         "statement_created": "Nouveau relevé : {amount} dû à WENRO",
         "statement_received": "WENRO a reçu votre paiement de {amount}. Merci !",
         "payout_prepared": "Votre versement de {month} est prêt : {amount}",
-        "payout_paid": "Versement envoyé : {amount} via InstaPay"
+        "payout_paid": "Versement envoyé : {amount} via InstaPay",
+        "payment_submitted": "{name} a déclaré un paiement de {amount}. Vérifiez le reçu.",
+        "payment_approved": "WENRO a confirmé votre paiement de {amount}. Merci !",
+        "payment_rejected": "WENRO n'a pas pu confirmer votre paiement de {amount}. Ouvrez Argent pour voir pourquoi."
       },
       "pushHint": "Recevez des alertes sur ce téléphone ou cet ordinateur, même quand WENRO est fermé."
     },
@@ -1303,6 +1325,139 @@
       "hint": "Définit les motifs et dessins sur la carte, la page, le bon et les images story. L'option automatique choisit d'après la catégorie et le nom.",
       "auto": "Automatique : {name}",
       "save": "Enregistrer le design"
+    },
+    "language": "Langue",
+    "filter": {
+      "search": "Rechercher une excursion…",
+      "all": "Tout",
+      "clear": "Effacer",
+      "shown": "Affichées : {n}",
+      "none": "Aucune excursion ne correspond. Essayez un autre mot ou filtre.",
+      "group": "Type d'activité"
+    },
+    "acc": {
+      "title": "Comptabilité",
+      "sub": "Qui doit quoi à qui, ce qui est entré ce mois-ci et la prochaine étape.",
+      "tabs": {
+        "overview": "Vue d'ensemble",
+        "operators": "Encaisser les prestataires",
+        "partners": "Payer les partenaires",
+        "review": "Paiements à vérifier",
+        "methods": "Moyens de paiement",
+        "history": "Historique"
+      },
+      "todo": {
+        "review": "{n, plural, one {# paiement de prestataire attend} other {# paiements de prestataires attendent}} votre vérification",
+        "statements": "{n, plural, one {# prestataire a} other {# prestataires ont}} des excursions réalisées sans relevé",
+        "payouts": "{n, plural, one {# partenaire est prêt} other {# partenaires sont prêts}} à être payés"
+      },
+      "groupMonth": "Ce mois-ci ({month})",
+      "groupNow": "En ce moment",
+      "guestsPaid": "Payé par les voyageurs (réalisé)",
+      "guestsPaidHint": "En espèces au prestataire le jour de l'excursion.",
+      "wenroShare": "Revenu de WENRO",
+      "wenroShareHint": "Notre part après prestataires et commissions partenaires.",
+      "received": "Reçu des prestataires",
+      "receivedHint": "Relevés marqués payés ce mois-ci.",
+      "paidPartners": "Payé aux partenaires",
+      "paidPartnersHint": "Versements envoyés ce mois-ci.",
+      "operatorsOwe": "Les prestataires doivent à WENRO",
+      "operatorsOweHint": "Relevés ouverts + excursions sans relevé.",
+      "inReview": "Paiements à vérifier",
+      "inReviewHint": "Des prestataires déclarent avoir payé ; vérifiez le reçu.",
+      "partnersOwed": "WENRO doit aux partenaires",
+      "partnersOwedHint": "Commissions sur excursions réalisées, non payées.",
+      "partnersReady": "Prêt à payer aux partenaires",
+      "partnersReadyHint": "Le prestataire nous a déjà payé ces excursions.",
+      "howTitle": "Comment circule l'argent",
+      "how1": "Le voyageur paie le prestataire en espèces lors de l'excursion.",
+      "how2": "Chaque mois, WENRO établit un relevé de ce que doit chaque prestataire (notre part + celle du partenaire).",
+      "how3": "Le prestataire paie par InstaPay ou autre et envoie le reçu ; vous le vérifiez ici.",
+      "how4": "Ensuite, les commissions partenaires sont prêtes et vous les payez par InstaPay.",
+      "operator": "Prestataire",
+      "notOnStatement": "Pas encore sur un relevé",
+      "openStatements": "Relevés ouverts",
+      "totalOwed": "Total dû",
+      "lastPayment": "Dernier paiement",
+      "never": "jamais",
+      "details": "Excursions et relevés",
+      "operatorsNote": "« Total dû » = relevés ouverts + excursions réalisées sans relevé. Créez les relevés ci-dessus pour les encaisser.",
+      "noOperators": "Aucun prestataire pour l'instant.",
+      "noPartners": "Aucune commission partenaire pour l'instant.",
+      "partner": "Partenaire",
+      "pWaiting": "Excursion pas encore réalisée",
+      "pEarned": "Gagnée, prestataire pas encore payé",
+      "pReady": "Prête à payer",
+      "pPaid": "Payée",
+      "partnersNote": "Une commission devient « prête » seulement après que le prestataire a payé WENRO pour cette excursion. Préparez les versements pour les regrouper par mois.",
+      "reviewNone": "Aucun paiement de prestataire pour l'instant.",
+      "receipt": "Reçu de paiement",
+      "openReceipt": "Ouvrir le reçu",
+      "ref": "Référence",
+      "reviewNote": "Votre note",
+      "noteLabel": "Note au prestataire",
+      "notePlaceholder": "Obligatoire en cas de refus (ex. montant différent)",
+      "approve": "Valider : argent reçu",
+      "reject": "Refuser",
+      "methodsHint": "Ces moyens s'affichent aux prestataires lorsqu'ils paient WENRO. Mettez InstaPay en premier (plus petit numéro). Indiquez le titulaire, l'adresse ou le numéro, et un lien de paiement si vous en avez un.",
+      "addMethod": "Ajouter un moyen de paiement",
+      "mKind": "Type",
+      "mLabel": "Nom affiché",
+      "mAccount": "Titulaire du compte",
+      "mValue": "Adresse InstaPay / n° de compte / IBAN / portefeuille / lien",
+      "mExtra": "Détails (banque, agence, SWIFT, remarques)",
+      "mUrl": "Lien de paiement (facultatif)",
+      "mUrlHint": "Ouvre InstaPay ou la page de paiement pour le prestataire.",
+      "mSort": "Ordre",
+      "mActive": "Visible des prestataires",
+      "save": "Enregistrer",
+      "add": "Ajouter",
+      "kinds": {
+        "instapay": "InstaPay",
+        "bank": "Virement bancaire",
+        "wallet": "Portefeuille mobile",
+        "link": "Lien de paiement"
+      },
+      "movements": "Derniers mouvements",
+      "noMovements": "Aucun mouvement pour l'instant.",
+      "movementsNote": "Chaque montant est enregistré une fois et jamais modifié (grand livre).",
+      "ledger": {
+        "receivable_from_operator": "Excursion réalisée : le prestataire doit à WENRO",
+        "commission_accrued": "Commission partenaire gagnée",
+        "operator_settlement_received": "Paiement du prestataire reçu",
+        "partner_payout": "Versement au partenaire envoyé"
+      },
+      "needsUpdate": "La comptabilité nécessite la dernière mise à jour de la base de données. Exécutez le fichier SQL dans Supabase."
+    },
+    "pay": {
+      "title": "Payer WENRO",
+      "sub": "Réglez ce que vous devez à WENRO en quelques étapes : choisissez les relevés, payez par InstaPay ou autre, puis envoyez le reçu. Notre équipe financière le confirme.",
+      "nothing": "Vous ne devez rien pour le moment.",
+      "nothingYet": "{trips, plural, one {# excursion réalisée apparaîtra} other {# excursions réalisées apparaîtront}} sur votre prochain relevé.",
+      "choose": "Que voulez-vous payer ?",
+      "total": "Total",
+      "payNow": "Payer maintenant",
+      "methodTitle": "Choisissez comment payer",
+      "methodHint": "Copiez les coordonnées ou ouvrez l'application, payez le montant exact, puis revenez confirmer.",
+      "accountName": "Titulaire du compte",
+      "valueLabel": "Envoyer à",
+      "extra": "Détails",
+      "copy": "Copier",
+      "copied": "Copié",
+      "open": "Ouvrir {name}",
+      "paidConfirm": "J'ai payé : confirmer",
+      "confirmTitle": "Confirmer votre paiement",
+      "confirmHint": "Envoyez le reçu ou une capture du virement. Votre paiement reste « En vérification » jusqu'au contrôle par l'équipe financière de WENRO.",
+      "proof": "Reçu ou capture d'écran",
+      "proofHint": "Photo, capture ou PDF, jusqu'à 4 Mo.",
+      "reference": "Référence du virement (facultatif)",
+      "referenceHint": "Le numéro affiché par InstaPay ou la banque.",
+      "note": "Note (facultatif)",
+      "submit": "Envoyer pour vérification",
+      "back": "Retour",
+      "inReview": "Un paiement envoyé est en cours de vérification par WENRO. Ces relevés sont bloqués d'ici là.",
+      "noMethods": "WENRO n'a pas encore ajouté de moyens de paiement. Contactez l'équipe WENRO.",
+      "history": "Vos paiements"
     }
   },
   "share": {
@@ -1492,5 +1647,22 @@
       "blurb": "Balades en felouque et après-midi tranquilles sur le fleuve."
     },
     "soon": "Bientôt"
+  },
+  "whatsapp": {
+    "head": {
+      "booking_confirmed": "Votre réservation WENRO est confirmée",
+      "request_received": "Nous avons bien reçu votre demande",
+      "request_accepted": "Bonne nouvelle : votre demande est acceptée",
+      "operator_booking": "Nouvelle réservation sur WENRO",
+      "operator_request": "Nouvelle demande sur WENRO : acceptez-la ou refusez-la dans votre tableau de bord"
+    },
+    "adults": "{n, plural, one {# adulte} other {# adultes}}",
+    "children": "{n, plural, one {# enfant} other {# enfants}}",
+    "infants": "{n, plural, one {# bébé} other {# bébés}}",
+    "pickup": "Prise en charge à l'hôtel : {hotel}",
+    "meetingSoon": "Nous enverrons le point de rendez-vous avant l'excursion",
+    "atMeeting": "Au point de rendez-vous",
+    "guestText": "{v1}\nBonjour {v2},\nExcursion : {v3}\nQuand : {v4}\nVoyageurs : {v5}\nRendez-vous : {v6}\nVotre réservation : {v7}",
+    "operatorText": "{v1}\nRéf. : {v2}\nExcursion : {v3}\nQuand : {v4}\nVoyageurs : {v5}\nNom : {v6}\nTéléphone : {v7}\nPrise en charge : {v8}"
   }
 }

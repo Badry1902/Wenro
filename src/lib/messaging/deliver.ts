@@ -4,9 +4,10 @@ import { siteUrl } from "@/lib/env";
 import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type InvitePayload, type MessageKind } from "./render";
 import { sendEmail } from "./send";
 import { unseal } from "./seal";
+import { buildWhatsApp, sendWhatsApp, waNumber, type WaContext } from "./whatsapp";
 
 type Claimed = {
-  id: string; kind: MessageKind; recipient: "guest" | "operator" | "platform" | "invitee"; locale: string;
+  id: string; kind: MessageKind; recipient: "guest" | "operator" | "platform" | "invitee"; channel?: "email" | "whatsapp"; locale: string;
   payload: AlertPayload | InvitePayload | Record<string, never>; attempts: number; booking: BookingContext | null;
 };
 
@@ -23,6 +24,21 @@ export async function deliverDue(limit = 50) {
     let providerId: string | null = null;
     try {
       const b = m.booking;
+      if (m.channel === "whatsapp") {
+        // Trip details on WhatsApp (guest: only if they agreed in the booking form; operator: always)
+        const who = m.recipient === "operator" ? "operator" : "guest";
+        const to = waNumber(who === "guest" ? b?.customer.phone : (b as WaContext | null)?.operator_phone);
+        if (!b || !to) { status = "skipped"; error = "no WhatsApp number"; }
+        else {
+          const token = unseal(b.sealed_link);
+          const msg = await buildWhatsApp(m.kind, who, b as WaContext, who === "guest" ? m.locale : "ar", who === "guest" && token ? manageLink(m.locale, token) : null);
+          const r = await sendWhatsApp(to, who, msg);
+          status = r.status; error = r.error ?? null; providerId = r.providerId ?? null;
+        }
+        summary[status] += 1;
+        await rpc("outbox_result", { p_id: m.id, p_status: status, p_error: error, p_provider_id: providerId }, "service");
+        continue;
+      }
       const to =
         m.recipient === "guest" ? b?.customer.email :
         m.recipient === "operator" ? b?.operator_email :

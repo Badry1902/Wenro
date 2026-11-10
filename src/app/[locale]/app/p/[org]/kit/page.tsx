@@ -11,6 +11,9 @@ import { Empty, PageTitle } from "@/components/ui";
 import { CopyButton } from "@/components/CopyButton";
 import { StoryMaker } from "@/components/growth/StoryMaker";
 import { themeFor } from "@/lib/themes";
+import { CATEGORIES } from "@/lib/catalog";
+import { ListFilter } from "@/components/ListFilter";
+import { Flag } from "@/components/LanguageMenu";
 
 export const dynamic = "force-dynamic";
 const LANGS = ["ar", "en", "de", "ru", "fr"] as const;
@@ -26,6 +29,8 @@ export default async function Kit({ params, searchParams }: { params: Promise<{ 
   const t = await getTranslations("app.kit");
   const tc = await getTranslations({ locale: lang, namespace: "app.kit" });
   const tl = await getTranslations("languages");
+  const tf = await getTranslations("app.filter");
+  const tcat = await getTranslations("categories");
   const [s, cards] = await Promise.all([
     rpc<Summary>("partner_summary", { p_partner: org }, "user"),
     rpc<ExperienceCard[]>("experience_list", { p_locale: lang }, "anon").catch(() => [] as ExperienceCard[]),
@@ -46,12 +51,15 @@ export default async function Kit({ params, searchParams }: { params: Promise<{ 
       <nav className="mb-5 flex flex-wrap gap-2" aria-label={t("language")}>
         {LANGS.map((l) => (
           <a key={l} href={`?l=${l}`} aria-current={l === lang ? "true" : undefined}
-            className={`btn-press inline-flex min-h-10 items-center rounded-full border px-4 text-small font-bold ${l === lang ? "border-discovery bg-discovery text-white" : "border-line hover:border-discovery"}`}>{tl(l)}</a>
+            className={`btn-press inline-flex min-h-10 items-center gap-2 rounded-full border ps-1.5 pe-4 text-small font-bold ${l === lang ? "border-discovery bg-discovery text-white" : "border-line bg-surface hover:border-discovery"}`}><Flag locale={l} size={24} />{tl(l)}</a>
         ))}
       </nav>
-      <ul className="grid gap-4 xl:grid-cols-2">
+      <ListFilter target="kit-list"
+        chips={CATEGORIES.map((k) => ({ value: k, label: tcat(k), icon: k, count: cards.filter((c) => c.category === k).length }))}
+        labels={{ search: tf("search"), all: tf("all"), clear: tf("clear"), results: tf.raw("shown") as string, none: tf("none"), group: tf("group") }} />
+      <ul id="kit-list" className="grid gap-4 xl:grid-cols-2">
         {items.map(({ c, link, price, caption, qr, img }) => (
-          <li key={c.id} className="flex flex-col gap-3 rounded-card border border-line p-4">
+          <li key={c.id} data-filter-item data-group={c.category ?? ""} data-text={`${c.title ?? ""} ${c.summary ?? ""} ${c.category ? tcat(c.category as "sea") : ""}`} className="flex flex-col gap-3 rounded-card border border-line bg-surface p-4">
             <div className="flex gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               {img && <img src={mediaSrc(img, { w: 160, h: 160 })} alt="" className="size-20 shrink-0 rounded-[12px] object-cover" loading="lazy" />}

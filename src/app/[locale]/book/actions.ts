@@ -8,6 +8,7 @@ import { z } from "zod";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { seal } from "@/lib/messaging/seal";
+import { deliverDue } from "@/lib/messaging/deliver";
 import { allow, clientKey } from "@/lib/ratelimit";
 
 export type PlaceBookingState = { error?: string } | undefined;
@@ -31,6 +32,7 @@ const schema = z.object({
   display_currency: z.string().max(3).optional(),
   agency_id: z.guid().optional(),
   accept: z.literal("on"),
+  whatsapp: z.literal("on").optional(),
   website: z.string().max(0).optional(), // honeypot: real people leave it empty
 });
 
@@ -88,7 +90,10 @@ export async function placeBooking(_: PlaceBookingState, form: FormData): Promis
     );
     token = res.manage_token;
     await keepLinkForMessages(res.booking_id, token);
+    // Trip details on WhatsApp: to the guest if they ticked the box, and always to the operator
+    await rpc("queue_booking_whatsapp", { p_booking: res.booking_id, p_guest_opt_in: d.whatsapp === "on" }, "service").catch((e) => console.error("queue_booking_whatsapp", e));
     after(() => dispatchPushes().catch(() => undefined)); // alert the operator (and partner) right away
+    after(() => deliverDue(10).catch((e) => console.error("deliverDue", e))); // send emails and WhatsApp now, not at the next scheduled run
   } catch (e) {
     if (e instanceof RpcError) return { error: e.code };
     console.error("create_booking failed", e);
