@@ -3,7 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { CATEGORIES } from "@/lib/catalog";
 import { IconCar, IconCash, IconCheck } from "./Icons";
-import { MotifImg, Wordmark } from "./brand/Logo";
+import { Wordmark } from "./brand/Logo";
+import { THEMES, patternStyle } from "@/lib/themes";
 
 const LANG: Record<string, string> = { en: "English", de: "Deutsch", ru: "Русский", fr: "Français", ar: "العربية" };
 
@@ -22,10 +23,10 @@ export async function SiteFooter() {
       </svg>
       <div className="bg-ink">
       {/* Reef band: pattern kept above the reading area */}
-      <div className="reef reef-midnight relative h-28 overflow-hidden md:h-32" aria-hidden="true">
+      {/* All six collections side by side: reef, desert, mountains, ancient Egypt, souk, Nile */}
+      <div className="relative grid h-28 grid-cols-3 overflow-hidden md:h-32 md:grid-cols-6" aria-hidden="true">
+        {THEMES.map((th, i) => <div key={th} className={i > 2 ? "max-md:hidden" : undefined} style={patternStyle(th, "midnight", 220)} />)}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink" />
-        <MotifImg name="turtle" tone="persimmon" size={70} className="motif-drift end-[12%] top-6 opacity-95" />
-        <MotifImg name="fish" tone="white" size={44} className="motif-drift-slow start-[18%] top-10 opacity-70" />
       </div>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-4 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-4">

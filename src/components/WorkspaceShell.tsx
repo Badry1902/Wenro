@@ -6,6 +6,7 @@ import { NavLink } from "./NavLink";
 import { PushSetup } from "./PushSetup";
 import { rpc } from "@/lib/data/rpc";
 import { Wordmark } from "./brand/Logo";
+import { patternStyle, themeOfTheDay } from "@/lib/themes";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
 export const TYPE_STYLE: Record<Workspace["type"], { dot: string; pill: string; bar: string }> = {
@@ -103,7 +104,7 @@ export async function WorkspaceShell({
         )}
         <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
         <div className="relative mt-auto hidden px-5 pb-6 pt-16 md:block">
-          <div className="reef reef-midnight reef-small pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,#000_70%)]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,#000_70%)]" style={patternStyle(themeOfTheDay(), "midnight", 220)} aria-hidden="true" />
           <Link href="/app/account" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
           <Link href="/" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
           <SignOut className="relative" />

@@ -14,7 +14,7 @@ import { RecentRail } from "@/components/site/Recent";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconShield } from "@/components/Icons";
 import { Mark, MotifImg } from "@/components/brand/Logo";
 import { hasSlogans } from "@/lib/slogans";
-import { CATEGORY_THEME, THEMES, patternStyle, themeFor } from "@/lib/themes";
+import { CATEGORY_THEME, THEMES, THEME_PHOTO, patternStyle, themeFor, type Theme } from "@/lib/themes";
 import { ThemeMotif } from "@/components/brand/ThemeArt";
 
 export const revalidate = 300;
@@ -33,12 +33,24 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const catName = (c: string) => t(`categories.${c}` as "categories.sea");
   const byCat = CATEGORIES.map((c) => ({ c, items: cards.filter((x) => x.category === c) })).filter((g) => g.items.length);
   // One standout trip per category, then the rest, so the first row shows the range
-  const picks = [...byCat.map((g) => g.items[0]), ...cards.filter((x) => !byCat.some((g) => g.items[0] === x))].slice(0, 10);
-  const heroPhotos = byCat.slice(0, 6).map((g) => ({ src: cardImages(g.items[0])[0], alt: g.items[0].title ?? "" })).filter((p) => p.src);
+  // Mix the kinds of day: one category from each collection first (sea, desert, ancient Egypt, souk…), then the rest
+  const mixed = [...byCat].sort((x, y) => {
+    const tx = CATEGORY_THEME[x.c] ?? "reef", ty = CATEGORY_THEME[y.c] ?? "reef";
+    return (byCat.findIndex((g) => (CATEGORY_THEME[g.c] ?? "reef") === tx) === byCat.indexOf(x) ? 0 : 1)
+      - (byCat.findIndex((g) => (CATEGORY_THEME[g.c] ?? "reef") === ty) === byCat.indexOf(y) ? 0 : 1);
+  });
+  const tops = mixed.map((g) => g.items.find((x) => !mixed.some((h) => h !== g && h.items[0] === x)) ?? g.items[0]);
+  const byTheme = THEMES.map((th) => cards.filter((x) => themeFor(x) === th));
+  const picks = [...new Set([...byTheme.flatMap((l) => l.slice(0, 1)), ...tops, ...cards])].slice(0, 10);
+  // Hero: one photo per collection that has trips (desert first, so the page never reads as "sea only")
+  const HERO_ORDER: Theme[] = ["desert", "reef", "heritage", "souk", "nile", "trail"];
   const railLabels = { prev: t("home.prev"), next: t("home.next") };
-  const rails = byCat.filter((g) => g.items.length >= 3).slice(0, 5);
+  const rails = mixed.filter((g) => g.items.length >= 3).slice(0, 5);
   const slogans = hasSlogans(locale);
-  const collections = THEMES.map((th) => ({ th, n: cards.filter((c) => themeFor(c) === th).length })).filter((x) => x.n > 0);
+  const collections = THEMES.map((th) => ({ th, n: cards.filter((c) => themeFor(c) === th).length }));
+  const live = HERO_ORDER.filter((th) => collections.some((x) => x.th === th && x.n > 0));
+  const heroPhotos = (live.length ? live : HERO_ORDER.slice(0, 1)).map((th) => ({ src: THEME_PHOTO[th], alt: "" }));
+  collections.sort((a, b) => Number(b.n > 0) - Number(a.n > 0)); // collections with trips first
 
   const SectionHead = ({ title, sub, href }: { title: string; sub?: string; href?: string | { pathname: string; query: Record<string, string> } }) => (
     <div className="mb-5 flex items-end justify-between gap-4">
@@ -110,7 +122,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 {(["pin", "plan", "day"] as const).map((k, n) => (
                   <li key={k} className="relative flex items-start gap-4 rounded-card border border-line bg-surface p-5 md:flex-col md:items-center md:text-center">
                     <span className={`grid size-14 shrink-0 place-items-center rounded-2xl ${["bg-apricot-tint", "bg-aqua", "bg-discovery-tint"][n]}`}>
-                      {n === 0 ? <Mark width={40} /> : <MotifImg name={n === 1 ? "starfish" : "turtle"} tone={n === 1 ? "persimmon" : "cobalt"} size={34} className="!static" />}
+                      {n === 0 ? <Mark width={40} /> : <MotifImg name={n === 1 ? "compass" : "daypack"} tone={n === 1 ? "persimmon" : "cobalt"} size={34} className="!static" />}
                     </span>
                     <span>
                       <h3 className="font-display text-[24px] font-black leading-tight">{t(`home.how.${k}.title`)}</h3>
@@ -125,19 +137,19 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <RecentRail cards={cards} />
 
           <Reveal as="section" className="mt-14 grid gap-4 md:grid-cols-2">
-            <Link href="/explore" className="reef reef-cobalt card-lift group relative min-h-[240px] overflow-hidden rounded-[28px] p-6 text-white md:p-8">
+            <Link href="/explore" style={patternStyle("trail", "cobalt", 300)} className="card-lift group relative min-h-[240px] overflow-hidden rounded-[28px] p-6 text-white md:p-8">
               <span className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-discovery)_45%,rgb(37_60_150/0.35))] rtl:bg-[linear-gradient(270deg,var(--color-discovery)_45%,rgb(37_60_150/0.35))]" aria-hidden="true" />
-              <MotifImg name="turtle" tone="persimmon" size={120} className="motif-drift -bottom-3 end-4 md:end-8" />
-              <MotifImg name="fish" tone="white" size={48} className="motif-drift-slow end-36 top-8 opacity-90 max-md:hidden" />
+              <MotifImg name="compass" tone="persimmon" size={104} className="motif-drift bottom-4 end-6 md:end-10" />
+              <MotifImg name="temple-gate" tone="white" size={54} className="motif-drift-slow end-40 top-8 opacity-90 max-md:hidden" />
               <span className="relative inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-small font-bold uppercase tracking-wider">{t("home.exploreEyebrow")}</span>
               <span className="relative mt-3 block max-w-sm font-display text-[26px] font-extrabold leading-tight md:text-[30px]">{t("home.exploreTitle")}</span>
               <span className="relative mt-2 block max-w-xs text-white/90">{t("home.exploreText")}</span>
               <span className="btn-press relative mt-5 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-5 font-bold text-discovery">{t("home.exploreCta")}<IconChevron size={18} className="rtl:rotate-180" /></span>
             </Link>
-            <Link href="/plan" className="reef reef-aqua card-lift group relative min-h-[240px] overflow-hidden rounded-[28px] p-6 text-ink md:p-8">
+            <Link href="/plan" style={patternStyle("nile", "aqua", 300)} className="card-lift group relative min-h-[240px] overflow-hidden rounded-[28px] p-6 text-ink md:p-8">
               <span className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-aqua)_45%,rgb(196_231_229/0.3))] rtl:bg-[linear-gradient(270deg,var(--color-aqua)_45%,rgb(196_231_229/0.3))]" aria-hidden="true" />
-              <MotifImg name="starfish" tone="persimmon" size={92} className="motif-drift -bottom-2 end-6 md:end-10" />
-              <MotifImg name="seagrass" tone="cobalt" size={70} className="motif-drift-slow end-32 top-6 max-md:hidden" />
+              <MotifImg name="dromedary" tone="persimmon" size={110} className="motif-drift -bottom-1 end-6 md:end-10" />
+              <MotifImg name="felucca" tone="cobalt" size={64} className="motif-drift-slow end-36 top-6 max-md:hidden" />
               <span className="relative inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-small font-bold uppercase tracking-wider text-teal-ink">{t("home.planEyebrow")}</span>
               <span className="relative mt-3 block max-w-sm font-display text-[26px] font-extrabold leading-tight md:text-[30px]">{t("home.planTitle")}</span>
               <span className="relative mt-2 block max-w-xs text-ink/85">{t("home.planText")}</span>
@@ -159,32 +171,46 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <Reveal as="section" className="mx-auto mt-20 max-w-7xl px-4">
             <SectionHead title={t("themes.title")} sub={t("themes.sub")} />
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {collections.map(({ th, n }) => (
-                <li key={th}>
-                  <Link href={{ pathname: "/experiences", query: { theme: th } }} className="card-lift group flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface">
-                    <span className="relative block h-36 overflow-hidden md:h-40" style={patternStyle(th, "feature", 300)} aria-hidden="true">
-                      <span className="absolute -bottom-7 start-5 grid size-16 place-items-center rounded-2xl bg-white shadow-[0_10px_24px_-12px_rgb(25_36_78/0.5)]">
+              {collections.map(({ th, n }) => {
+                const inner = (
+                  <>
+                    <span className="relative block aspect-[16/10] overflow-hidden bg-ink" aria-hidden="true">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={mediaSrc(THEME_PHOTO[th], { w: 720, h: 450 })} alt="" loading="lazy" className="card-img h-full w-full object-cover" />
+                      <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+                      {/* the collection's own print as a ribbon along the bottom edge */}
+                      <span className="absolute inset-x-0 bottom-0 h-4" style={patternStyle(th, "feature", 160)} />
+                      <span className="absolute -bottom-0 start-5 grid size-16 translate-y-1/2 place-items-center rounded-2xl bg-white shadow-[0_10px_24px_-12px_rgb(25_36_78/0.5)]">
                         <ThemeMotif theme={th} size={40} />
                       </span>
                     </span>
-                    <span className="flex flex-1 flex-col gap-1 p-5 pt-10">
+                    <span className="flex flex-1 flex-col gap-1 p-5 pt-11">
                       <span className="font-display text-[22px] font-extrabold leading-tight">{t(`themes.${th}.name`)}</span>
                       <span className="text-ink-muted">{t(`themes.${th}.blurb`)}</span>
                       <span className="mt-auto flex items-center justify-between pt-3 text-small font-bold">
-                        <span className="text-teal-ink">{t("themes.tripsCount", { n })}</span>
-                        <span className="inline-flex items-center gap-1 text-discovery">{t("themes.see")}<IconChevron size={16} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" /></span>
+                        {n > 0 ? <>
+                          <span className="text-teal-ink">{t("themes.tripsCount", { n })}</span>
+                          <span className="inline-flex items-center gap-1 text-discovery">{t("themes.see")}<IconChevron size={16} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" /></span>
+                        </> : <span className="rounded-full bg-apricot-tint px-2.5 py-0.5 text-ink">{t("themes.soon")}</span>}
                       </span>
                     </span>
-                  </Link>
-                </li>
-              ))}
+                  </>
+                );
+                return (
+                  <li key={th}>
+                    {n > 0
+                      ? <Link href={{ pathname: "/experiences", query: { theme: th } }} className="card-lift group flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface">{inner}</Link>
+                      : <div className="flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface">{inner}</div>}
+                  </li>
+                );
+              })}
             </ul>
           </Reveal>
         )}
 
         <Reveal as="section" className="relative mt-24 overflow-hidden bg-ivory">
-          <MotifImg name="coral" tone="persimmon" size={150} className="-bottom-8 -end-6 opacity-90 max-md:hidden" />
-          <MotifImg name="seagrass" tone="aqua" size={110} className="motif-drift-slow -start-4 top-6 max-md:hidden" />
+          <MotifImg name="date-palm" tone="persimmon" size={140} className="-bottom-6 -end-4 opacity-90 max-md:hidden" />
+          <MotifImg name="lotus" tone="aqua" size={100} className="motif-drift-slow -start-3 top-6 max-md:hidden" />
           <div className="relative mx-auto max-w-7xl px-4 py-16">
             <h2 className="text-[28px] font-extrabold md:text-[34px]">{t("home.whyTitle")}</h2>
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -209,7 +235,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </Reveal>
           ))}
 
-          <Reveal as="section" className="reef reef-midnight relative mt-20 overflow-hidden rounded-[32px] px-6 py-12 text-white md:px-14 md:py-16">
+          <Reveal as="section" style={patternStyle("souk", "midnight", 300)} className="relative mt-20 overflow-hidden rounded-[32px] px-6 py-12 text-white md:px-14 md:py-16">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,var(--color-ink)_35%,transparent)] rtl:bg-[linear-gradient(270deg,var(--color-ink)_35%,transparent)]" aria-hidden="true" />
             <div className="relative flex flex-col items-start gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">

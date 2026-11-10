@@ -21,8 +21,8 @@ export default function NotFound() {
         </div>
       </header>
       <main className="relative mx-auto flex min-h-[70dvh] max-w-xl flex-col items-center justify-center gap-4 px-4 py-16 text-center">
-        <MotifImg name="turtle" tone="aqua" size={90} className="motif-drift start-2 top-16 opacity-80" />
-        <MotifImg name="starfish" tone="persimmon" size={44} className="motif-drift-slow bottom-20 end-6" />
+        <MotifImg name="compass" tone="aqua" size={84} className="motif-drift start-2 top-16 opacity-80" />
+        <MotifImg name="dromedary" tone="persimmon" size={60} className="motif-drift-slow bottom-20 end-6" />
         <LogoLoop width={220} />
         <h1 className="text-h2 font-bold">{t("notFoundTitle")}</h1>
         <p className="text-ink-muted">{t("notFoundText")}</p>

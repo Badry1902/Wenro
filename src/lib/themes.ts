@@ -63,3 +63,19 @@ export const CATEGORY_THEME: Record<string, Theme> = {
   sea: "reef", diving: "reef", watersports: "reef", family: "reef", evening: "desert", wellness: "reef",
   desert: "desert", culture: "souk", daytrips: "heritage",
 };
+
+/**
+ * One photo that captures each collection (Unsplash, free licence — same source as the demo trips).
+ * Used on the home page collection cards and hero; trips keep their own photos.
+ */
+export const THEME_PHOTO: Record<Theme, string> = {
+  reef: "https://images.unsplash.com/photo-1682687981630-cefe9cd73072",     // snorkeller over a purple coral reef
+  desert: "https://images.unsplash.com/photo-1709620220232-12ecd7ca33a8",   // camel and guide against a desert sunset
+  trail: "https://images.unsplash.com/photo-1744733881352-b6b4789f93c5",    // first light on the mountains
+  heritage: "https://images.unsplash.com/photo-1587975844610-40f1ad10d07e", // looking up between carved temple columns
+  souk: "https://images.unsplash.com/photo-1574936293035-134adffbeb6f",     // lit lanterns in a souk at night
+  nile: "https://images.unsplash.com/photo-1684100096410-fd39cdff91a3",     // felucca sail backlit on the river
+};
+
+/** A different collection print each day for brand surfaces (footer, sidebars), so no one place dominates. */
+export const themeOfTheDay = (offset = 0) => THEMES[(Math.floor(Date.now() / 86_400_000) + offset) % THEMES.length];
