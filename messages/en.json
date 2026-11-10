@@ -1381,7 +1381,11 @@
       "back": "Back",
       "inReview": "A payment you sent is being checked by WENRO. Those statements are locked until then.",
       "noMethods": "WENRO has not added payment methods yet. Contact the WENRO team.",
-      "history": "Your payments"
+      "history": "Your payments",
+      "owedOffline": "You owe WENRO {amount}. Paying from this page will open shortly; until then please contact the WENRO team to pay.",
+      "unsettledItem": "Trips done (not on a statement yet)",
+      "inStatements": "{n, plural, one {# open statement} other {# open statements}}",
+      "payLink": "Pay now ↑"
     }
   },
   "email": {

@@ -1457,7 +1457,11 @@
       "back": "Zurück",
       "inReview": "Eine gesendete Zahlung wird von WENRO geprüft. Diese Abrechnungen sind bis dahin gesperrt.",
       "noMethods": "WENRO hat noch keine Zahlungswege hinterlegt. Bitte das WENRO-Team kontaktieren.",
-      "history": "Ihre Zahlungen"
+      "history": "Ihre Zahlungen",
+      "owedOffline": "Sie schulden WENRO {amount}. Die Zahlung auf dieser Seite wird bald freigeschaltet; bis dahin bitte das WENRO-Team kontaktieren.",
+      "unsettledItem": "Durchgeführte Ausflüge (noch ohne Abrechnung)",
+      "inStatements": "{n, plural, one {# offene Abrechnung} other {# offene Abrechnungen}}",
+      "payLink": "Jetzt zahlen ↑"
     }
   },
   "share": {

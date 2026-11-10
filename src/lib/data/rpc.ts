@@ -21,7 +21,7 @@ const ALLOWED = new Set([
   "experience_page", "experience_list", "create_booking", "booking_by_token",
   "experience_theme", "set_experience_theme", "trip_theme",
   "payment_methods_list", "save_payment_method", "operator_dues", "submit_operator_payment", "admin_operator_payments",
-  "payment_proof", "review_operator_payment", "finance_dashboard", "queue_booking_whatsapp",
+  "payment_proof", "review_operator_payment", "finance_dashboard", "queue_booking_whatsapp", "operator_settle_now",
   "cancel_booking_by_token", "reconfirm_by_token", "record_click",
   // workspaces
   "my_workspaces", "claim_platform_owner", "platform_has_owner", "apply_organization",

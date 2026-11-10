@@ -1457,7 +1457,11 @@
       "back": "Retour",
       "inReview": "Un paiement envoyé est en cours de vérification par WENRO. Ces relevés sont bloqués d'ici là.",
       "noMethods": "WENRO n'a pas encore ajouté de moyens de paiement. Contactez l'équipe WENRO.",
-      "history": "Vos paiements"
+      "history": "Vos paiements",
+      "owedOffline": "Vous devez {amount} à WENRO. Le paiement depuis cette page ouvrira bientôt ; d'ici là, contactez l'équipe WENRO pour payer.",
+      "unsettledItem": "Excursions réalisées (pas encore sur un relevé)",
+      "inStatements": "{n, plural, one {# relevé ouvert} other {# relevés ouverts}}",
+      "payLink": "Payer maintenant ↑"
     }
   },
   "share": {

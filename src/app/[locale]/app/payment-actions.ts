@@ -23,7 +23,9 @@ export async function submitOperatorPayment(form: FormData) {
   let result = "ok=payment_submitted";
   try {
     if (!(await allow(`pay:${await clientKey()}`, 10, 3600))) throw new RpcError("too_many_attempts");
-    const statements = z.array(id).min(1).max(24).parse(form.getAll("statement").map(String));
+    const statements = z.array(id).max(24).parse(form.getAll("statement").map(String));
+    const settle = z.array(z.enum(["EUR", "USD", "EGP"])).max(3).parse(form.getAll("settle").map(String));
+    if (!statements.length && !settle.length) throw new RpcError("invalid_input");
     const method = id.parse(form.get("method"));
     const file = form.get("proof");
     if (!(file instanceof File) || file.size === 0) throw new RpcError("proof_required");
@@ -32,6 +34,8 @@ export async function submitOperatorPayment(form: FormData) {
     const kind = sniffProof(buf);
     if (!kind) throw new RpcError("unsupported_file");
     const name = await storeProof(org, buf, kind);
+    // Trips done but not on a statement yet: make the statement now so the operator can pay without waiting
+    for (const c of settle) statements.push(await rpc<string>("operator_settle_now", { p_operator: org, p_currency: c }, "user"));
     await rpc("submit_operator_payment", {
       p_operator: org, p_statements: statements, p_method: method,
       p_reference: String(form.get("reference") ?? "").trim().slice(0, 80) || null,

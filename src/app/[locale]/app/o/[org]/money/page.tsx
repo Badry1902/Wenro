@@ -36,7 +36,7 @@ export default async function OperatorMoney({ params, searchParams }: { params: 
   const tp = await getTranslations("app.pay");
   const [f, dues, methods] = await Promise.all([
     rpc<Finance>("operator_finance", { p_operator: org }, "user"),
-    rpc<Dues>("operator_dues", { p_operator: org }, "user").catch(() => ({ statements: [], unsettled: {}, payments: [] }) as Dues),
+    rpc<Dues>("operator_dues", { p_operator: org }, "user").catch(() => null),
     rpc<PayMethod[]>("payment_methods_list", {}, "user").catch(() => [] as PayMethod[]),
   ]);
   const m = (minor: number | undefined, c: string) => formatMoney({ minor: Number(minor ?? 0), currency: c as "EUR" }, locale);
@@ -53,10 +53,19 @@ export default async function OperatorMoney({ params, searchParams }: { params: 
       <section id="pay" className="mb-8 scroll-mt-6">
         <h2 className="mb-1 text-h3 font-bold">{tp("title")}</h2>
         <p className="mb-3 max-w-2xl text-small text-ink-muted">{tp("sub")}</p>
-        {dues.statements.length === 0 ? (
-          <Empty>{Object.keys(dues.unsettled).length ? tp("nothingYet", { trips: Object.values(dues.unsettled).reduce((a, u) => a + u.trips, 0) }) : tp("nothing")}</Empty>
+        {!dues ? (
+          // Online payment not switched on yet (database update pending): still show what is owed, never "nothing"
+          (() => {
+            const owed = currencies.map((c) => ({ c, v: Number(f.unsettled[c]?.to_wenro ?? 0) + f.statements.filter((st) => st.status === "open" && st.currency === c).reduce((a, st) => a + Number(st.due_minor), 0) })).filter((x) => x.v > 0);
+            return owed.length
+              ? <p className="rounded-card border border-apricot bg-apricot-tint p-4">{tp("owedOffline", { amount: owed.map((x) => m(x.v, x.c)).join(" + ") })}</p>
+              : <Empty>{tp("nothing")}</Empty>;
+          })()
+        ) : dues.statements.length === 0 && Object.keys(dues.unsettled).length === 0 ? (
+          <Empty>{tp("nothing")}</Empty>
         ) : (
           <PayDues org={org} locale={locale} methods={methods}
+            unsettled={Object.entries(dues.unsettled).filter(([, u]) => Number(u.due_minor) > 0).map(([c, u]) => ({ currency: c as "EUR", trips: u.trips, due_minor: Number(u.due_minor), label: tp("unsettledItem") }))}
             statements={dues.statements.map((st): DueStatement => ({ id: st.id, currency: st.currency, period: `${d(st.period_start)} – ${d(st.period_end)}`, trips: st.bookings_count, due_minor: Number(st.due_minor), in_review: st.in_review }))}
             labels={{
               choose: tp("choose"), total: tp("total"), payNow: tp("payNow"), methodTitle: tp("methodTitle"), methodHint: tp("methodHint"),
@@ -66,7 +75,7 @@ export default async function OperatorMoney({ params, searchParams }: { params: 
               noMethods: tp("noMethods"), valueLabel: tp("valueLabel"), extra: tp("extra"),
             }} />
         )}
-        {dues.payments.length > 0 && (
+        {dues && dues.payments.length > 0 && (
           <Card title={tp("history")} className="mt-4">
             <ul className="divide-y divide-line">
               {dues.payments.map((p) => (
@@ -88,7 +97,13 @@ export default async function OperatorMoney({ params, searchParams }: { params: 
             <div className="rounded-card border border-line p-4"><div className="text-small font-semibold text-ink-muted">{t("trips")}</div><div className="text-h2 font-bold tabular-nums">{s?.trips ?? 0}</div><div className="text-small text-ink-muted">{t("guests", { n: s?.guests ?? 0 })}</div></div>
             <div className="rounded-card border border-line p-4"><div className="text-small font-semibold text-ink-muted">{t("collected")}</div><div className="text-h2 font-bold tabular-nums">{m(s?.collected, c)}</div></div>
             <div className="rounded-card border border-success bg-success-tint p-4"><div className="text-small font-semibold text-success">{t("kept")}</div><div className="text-h2 font-bold tabular-nums text-success">{m(s?.kept, c)}</div></div>
-            <div className="rounded-card border border-apricot bg-apricot-tint p-4"><div className="text-small font-semibold">{t("toWenro")}</div><div className="text-h2 font-bold tabular-nums">{m(u?.to_wenro, c)}</div><div className="text-small">{t("toWenroHint", { n: u?.trips ?? 0 })}</div></div>
+            <div className="rounded-card border border-apricot bg-apricot-tint p-4"><div className="text-small font-semibold">{t("toWenro")}</div><div className="text-h2 font-bold tabular-nums">{m(Number(u?.to_wenro ?? 0) + f.statements.filter((st) => st.status === "open" && st.currency === c).reduce((x, st) => x + Number(st.due_minor), 0), c)}</div>
+              <div className="text-small">{(() => {
+                const open = f.statements.filter((st) => st.status === "open" && st.currency === c).length;
+                const trips = u?.trips ?? 0;
+                return [trips > 0 || open === 0 ? t("toWenroHint", { n: trips }) : null, open > 0 ? tp("inStatements", { n: open }) : null].filter(Boolean).join(" · ");
+              })()}</div>
+              <a href="#pay" className="mt-1 inline-block text-small font-bold text-discovery hover:underline">{tp("payLink")}</a></div>
           </div>
         );
       })}

@@ -46,6 +46,20 @@ select t.ok((select status = 'received' from operator_statements where id = '990
 select t.ok(exists (select 1 from notifications where kind = 'payment_approved'), 'operator is told');
 select t.ok(exists (select 1 from notifications where kind = 'payment_submitted'), 'WENRO finance was told');
 
+-- Trips done but not on a statement: the operator can turn them into a statement and pay right away
+select t.login('00000000-0000-0000-0000-0000000000b2');
+select t.fails($$select operator_settle_now('10000000-0000-0000-0000-000000000002', 'EUR')$$, 'forbidden', 'staff cannot create statements');
+select t.reset();
+select t.login('00000000-0000-0000-0000-0000000000c1');
+select t.fails($$select operator_settle_now('10000000-0000-0000-0000-000000000002', 'EUR')$$, 'forbidden', 'no settling another operator''s trips');
+select t.reset();
+update bookings set execution_status = 'executed', executed_at = now(), settled_statement_id = null
+ where id = (select id from bookings where operator_id = '10000000-0000-0000-0000-000000000002' and status = 'confirmed' order by created_at desc limit 1);
+select t.login('00000000-0000-0000-0000-0000000000b1');
+select t.ok(operator_settle_now('10000000-0000-0000-0000-000000000002', 'EUR') is not null, 'operator turns trips done into a statement');
+select t.fails($$select operator_settle_now('10000000-0000-0000-0000-000000000002', 'EUR')$$, 'nothing_due', 'nothing left to settle');
+select t.reset();
+
 -- WhatsApp: queued for the operator always, for the guest only with their agreement
 select t.service();
 select queue_booking_whatsapp((select id from bookings where status = 'confirmed' order by created_at desc limit 1), false);

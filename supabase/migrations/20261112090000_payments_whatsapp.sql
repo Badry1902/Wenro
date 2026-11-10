@@ -167,6 +167,28 @@ begin
     jsonb_build_object('amount_minor', op.amount_minor, 'currency', op.currency, 'note', nullif(trim(p_note), '')), '/app/o/' || op.operator_id || '/money');
 end $$;
 
+
+-- Operators can pay right away: their trips done (not on a statement yet) become a statement on demand
+create or replace function operator_settle_now(p_operator uuid, p_currency text) returns uuid
+language plpgsql security definer set search_path = public as $$
+declare tz text := coalesce((app.settings()).business_timezone, 'Africa/Cairo'); r record; v_id uuid;
+begin
+  if not app.has_role(p_operator, array['owner','manager']::member_role[]) then raise exception 'forbidden'; end if;
+  select count(*) cnt, sum(paid_minor) collected, sum(paid_minor - operator_net_minor) due,
+         min((coalesce(executed_at, starts_at) at time zone tz)::date) d0, max((coalesce(executed_at, starts_at) at time zone tz)::date) d1
+    into r from bookings
+   where operator_id = p_operator and currency::text = p_currency and execution_status = 'executed' and settled_statement_id is null;
+  if coalesce(r.cnt, 0) = 0 or coalesce(r.due, 0) <= 0 then raise exception 'nothing_due'; end if;
+  insert into operator_statements (operator_id, currency, period_start, period_end, bookings_count, collected_minor, due_minor)
+  values (p_operator, p_currency::collect_currency, r.d0, r.d1, r.cnt, r.collected, r.due)
+  returning id into v_id;
+  update bookings set settled_statement_id = v_id
+   where operator_id = p_operator and currency::text = p_currency and execution_status = 'executed' and settled_statement_id is null;
+  return v_id;
+end $$;
+revoke execute on function operator_settle_now(uuid, text) from public, anon;
+grant execute on function operator_settle_now(uuid, text) to authenticated, service_role;
+
 -- 3. Finance dashboard: one call with everything the accounts page shows -----------------------------------------
 create or replace function finance_dashboard() returns jsonb
 language plpgsql stable security definer set search_path = public as $$

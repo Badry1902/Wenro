@@ -8,6 +8,7 @@ import { submitOperatorPayment } from "@/app/[locale]/app/payment-actions";
 
 export type DueStatement = { id: string; currency: "EUR" | "USD" | "EGP"; period: string; trips: number; due_minor: number; in_review: boolean };
 export type PayMethod = { id: string; kind: "instapay" | "bank" | "wallet" | "link"; label: string; account_name: string | null; value: string; extra: string | null; pay_url: string | null };
+export type Unsettled = { currency: "EUR" | "USD" | "EGP"; trips: number; due_minor: number; label: string };
 type L = Record<"choose" | "total" | "payNow" | "methodTitle" | "methodHint" | "accountName" | "copy" | "copied" | "open" | "paidConfirm" | "confirmTitle" | "confirmHint"
   | "reference" | "referenceHint" | "proof" | "proofHint" | "note" | "submit" | "back" | "inReview" | "noMethods" | "valueLabel" | "extra", string>;
 
@@ -27,7 +28,9 @@ const MethodIcon = ({ kind }: { kind: PayMethod["kind"] }) => (
  * Operator pays WENRO in three steps: pick the statements → pick a method (copy the details or open the app)
  * → confirm with a receipt. The payment then waits for WENRO's finance team to check it.
  */
-export function PayDues({ org, locale, statements, methods, labels }: { org: string; locale: string; statements: DueStatement[]; methods: PayMethod[]; labels: L }) {
+export function PayDues({ org, locale, statements: real, unsettled = [], methods, labels }: { org: string; locale: string; statements: DueStatement[]; unsettled?: Unsettled[]; methods: PayMethod[]; labels: L }) {
+  // Trips done but not on a statement yet can be paid too: the server turns them into a statement first
+  const statements: DueStatement[] = [...real, ...unsettled.map((u) => ({ id: `unsettled:${u.currency}`, currency: u.currency, period: u.label, trips: u.trips, due_minor: u.due_minor, in_review: false }))];
   const open = statements.filter((s) => !s.in_review);
   const currencies = [...new Set(open.map((s) => s.currency))];
   const [cur, setCur] = useState(currencies[0] ?? "EUR");
@@ -115,7 +118,9 @@ export function PayDues({ org, locale, statements, methods, labels }: { org: str
       {step === 3 && chosen && (
         <form action={submitOperatorPayment} encType="multipart/form-data" className={`${box} flex flex-col gap-3`}>
           <input type="hidden" name="locale" value={locale} /><input type="hidden" name="org" value={org} /><input type="hidden" name="method" value={chosen.id} />
-          {picked.map((p) => <input key={p} type="hidden" name="statement" value={p} />)}
+          {picked.map((p) => p.startsWith("unsettled:")
+            ? <input key={p} type="hidden" name="settle" value={p.slice(10)} />
+            : <input key={p} type="hidden" name="statement" value={p} />)}
           <p className="font-bold">{labels.confirmTitle} · {chosen.label} · <span className="tabular-nums">{m(total)}</span></p>
           <p className="text-small text-ink-muted">{labels.confirmHint}</p>
           <label className="flex flex-col gap-1 text-small font-bold">{labels.proof}
