@@ -124,7 +124,7 @@ export function search(index: Indexed[], q: string) {
     // a city: trips that start within ~90 km of it, or that go there ("Luxor day trip" from Hurghada)
     let score = 0;
     if (u.city) {
-      const near = it.card.lat != null && it.card.lng != null && km(u.city.lat, u.city.lng, Number(it.card.lat), Number(it.card.lng)) <= 90;
+      const near = (tripDistance(u.city, it.card).km ?? 9999) <= 90;
       const named = u.cityWords.some((w) => it.words.some((t) => t.startsWith(w)) || it.text.includes(w));
       if (!near && !named) continue;
       score += named ? 4 : 2;
@@ -142,4 +142,31 @@ export function search(index: Indexed[], q: string) {
     if (ok) out.push({ card: it.card, score });
   }
   return out.sort((a, b) => b.score - a.score).map((x) => x.card);
+}
+
+/**
+ * Where a trip actually goes. A "Luxor day trip" usually meets in Hurghada, so its meeting point alone says
+ * "0 km". If the title or summary names a city more than 120 km from the meeting point, that city is the
+ * destination (the farthest one when several are named).
+ */
+export function destinationOf(c: { title?: string | null; summary?: string | null; slug?: string; lat?: number | null; lng?: number | null }): { city: City; km: number } | null {
+  const text = ` ${norm(`${c.title ?? ""} ${c.summary ?? ""} ${(c.slug ?? "").replace(/-/g, " ")}`)} `;
+  let best: { city: City; km: number } | null = null;
+  for (const [slug, ws] of CITY_WORDS) {
+    if (!ws.some((w) => text.includes(` ${w}`))) continue;
+    const city = CITIES.find((x) => x.slug === slug);
+    if (!city || c.lat == null || c.lng == null) continue;
+    const d = km(Number(c.lat), Number(c.lng), city.lat, city.lng);
+    if (d > 120 && (!best || d > best.km)) best = { city, km: d };
+  }
+  return best;
+}
+
+/** How far a trip really takes the guest from their city: the meeting point, or the destination when it's farther. */
+export function tripDistance(from: City, c: Parameters<typeof destinationOf>[0]) {
+  if (c.lat == null || c.lng == null) return { km: null as number | null, dest: null as City | null };
+  const meet = km(from.lat, from.lng, Number(c.lat), Number(c.lng));
+  const dest = destinationOf(c);
+  if (!dest) return { km: meet, dest: null };
+  return { km: Math.max(meet, km(from.lat, from.lng, dest.city.lat, dest.city.lng)), dest: dest.city };
 }

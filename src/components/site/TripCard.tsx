@@ -8,7 +8,8 @@ import { formatMoney } from "@/lib/money";
 import { mediaSrc } from "@/lib/media";
 import { cardImages } from "@/lib/catalog";
 import { IconCar, IconCheck, IconClock, IconPin, IconStar } from "../Icons";
-import { distanceTo, nearestCity, nearness, type City } from "@/lib/places";
+import { nearestCity, nearness, type City } from "@/lib/places";
+import { destinationOf, tripDistance } from "@/lib/search";
 import { WishButton } from "./WishButton";
 import { themeFor, patternStyle } from "@/lib/themes";
 import { ThemeBadge } from "../brand/ThemeArt";
@@ -40,12 +41,18 @@ export function TripCard({ c, size = "md", priority = false, city = null }: { c:
   const w = size === "sm" ? 480 : 640;
   const theme = themeFor(c);
   // where the trip starts: distance from the chosen city, or the city it starts in
-  const d = city ? distanceTo(city, c) : null;
-  const near = nearness(d);
+  // a day trip to another city says so ("Day trip to Luxor"), with the real distance when a city is chosen
+  const far = city ? tripDistance(city, c) : null;
+  const dest = far ? far.dest : destinationOf(c)?.city ?? null;
+  const d = far?.km ?? null;
+  const near = dest ? "far" : nearness(d);
   const home = nearestCity(c.lat, c.lng);
-  const where = city && d != null
-    ? near === "in" ? t("places.in", { city: t(`places.city.${city.slug}` as "places.city.hurghada") }) : t(near === "near" ? "places.near" : "places.far", { km: Math.round(d) })
-    : home && home.km < 60 ? t(`places.city.${home.city.slug}` as "places.city.hurghada") : null;
+  const cityLabel = (slug: string) => t(`places.city.${slug}` as "places.city.hurghada");
+  const where = dest
+    ? t("places.dayTripTo", { city: cityLabel(dest.slug) }) + (d != null ? ` · ${Math.round(d)} km` : "")
+    : city && d != null
+      ? near === "in" ? t("places.in", { city: cityLabel(city.slug) }) : t(near === "near" ? "places.near" : "places.far", { km: Math.round(d) })
+      : home && home.km < 60 ? cityLabel(home.city.slug) : null;
 
   return (
     <article className="trip-card group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface"

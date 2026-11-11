@@ -1718,7 +1718,8 @@
     "change": "Ändern",
     "search": "Stadt suchen…",
     "tripsHere": "{n, plural, =0 {Noch keine Ausflüge} one {# Ausflug} other {# Ausflüge}}",
-    "noneNear": "In der Nähe von {city} starten noch keine Ausflüge. Die nächsten findest du in der Liste."
+    "noneNear": "In der Nähe von {city} starten noch keine Ausflüge. Die nächsten findest du in der Liste.",
+    "dayTripTo": "Tagesausflug nach {city}"
   },
   "search": {
     "popular": "Beliebte Ausflüge",
@@ -1798,7 +1799,11 @@
       "couple": "Schön zu zweit",
       "friends": "Spaß mit Freunden",
       "budget": "Passt zum Budget",
-      "loved": "Gäste geben {r}"
-    }
+      "loved": "Gäste geben {r}",
+      "longTrip": "Langer Tag nach {city} · {km} km"
+    },
+    "longTrips": "Lange Tagesausflüge einbeziehen",
+    "longTripsHint": "Ausflüge weit weg von deiner Stadt, z. B. Luxor oder Kairo vom Roten Meer. Meist 10–18 Stunden mit früher Abholung.",
+    "longTripsOn": "Mit langen Tagesausflügen"
   }
 }

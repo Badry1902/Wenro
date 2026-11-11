@@ -1718,7 +1718,8 @@
     "change": "Changer",
     "search": "Rechercher une ville…",
     "tripsHere": "{n, plural, =0 {Pas encore d'excursions} one {# excursion} other {# excursions}}",
-    "noneNear": "Aucune excursion ne part encore près de {city}. Voyez les plus proches dans la liste."
+    "noneNear": "Aucune excursion ne part encore près de {city}. Voyez les plus proches dans la liste.",
+    "dayTripTo": "Excursion d'un jour à {city}"
   },
   "search": {
     "popular": "Excursions populaires",
@@ -1798,7 +1799,11 @@
       "couple": "Parfait à deux",
       "friends": "Fun entre amis",
       "budget": "Dans votre budget",
-      "loved": "Note des voyageurs {r}"
-    }
+      "loved": "Note des voyageurs {r}",
+      "longTrip": "Longue journée à {city} · {km} km"
+    },
+    "longTrips": "Inclure les longues excursions",
+    "longTripsHint": "Des excursions loin de votre ville, comme Louxor ou Le Caire depuis la mer Rouge. Souvent 10 à 18 heures, départ tôt.",
+    "longTripsOn": "Avec longues excursions"
   }
 }

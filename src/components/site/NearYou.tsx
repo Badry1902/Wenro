@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import type { ExperienceCard } from "@/lib/data/types";
-import { distanceTo } from "@/lib/places";
+import { tripDistance } from "@/lib/search";
 import { IconPin } from "../Icons";
 import { openCityPicker, useCity } from "./CityPicker";
 import { Rail, RailItem } from "./Rail";
@@ -26,7 +26,7 @@ export function NearYou({ cards }: { cards: ExperienceCard[] }) {
     );
   }
   const name = t(`places.city.${city.slug}` as "places.city.hurghada");
-  const list = cards.map((c) => ({ c, d: distanceTo(city, c) })).filter((x) => x.d != null && x.d <= 90).sort((a, b) => a.d! - b.d!).map((x) => x.c);
+  const list = cards.map((c) => ({ c, d: tripDistance(city, c).km })).filter((x) => x.d != null && x.d <= 90).sort((a, b) => a.d! - b.d!).map((x) => x.c);
   return (
     <section className="pop-in mt-14">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">

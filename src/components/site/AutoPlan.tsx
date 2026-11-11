@@ -7,8 +7,8 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { cardImages } from "@/lib/catalog";
 import { mediaSrc } from "@/lib/media";
 import { formatMoney } from "@/lib/money";
-import { CITIES, GOVERNORATES, distanceTo, type City } from "@/lib/places";
-import { indexCards } from "@/lib/search";
+import { CITIES, GOVERNORATES, type City } from "@/lib/places";
+import { destinationOf, indexCards, tripDistance } from "@/lib/search";
 import { themeFor } from "@/lib/themes";
 import { IconCalendar, IconCheck, IconClock, IconPin, IconSpark } from "../Icons";
 import { useCity } from "./CityPicker";
@@ -58,6 +58,7 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
   const [pace, setPace] = useState<Pace>("balanced");
   const [budget, setBudget] = useState<Budget>("any");
   const [busy, setBusy] = useState(false);
+  const [longTrips, setLongTrips] = useState(false);
   const [plan, setPlan] = useState<{ days: Record<string, Placed[]>; spare: Scored[] } | null>(null);
   const index = useMemo(() => indexCards(cards), [cards]);
   const nights = Math.max(1, Math.round((Date.parse(to) - Date.parse(from)) / 864e5) + 1);
@@ -69,14 +70,17 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
     let s = 0; const why: string[] = [];
     const hits = likes.filter((l) => MEANS[l].some((k) => ideas.has(k)));
     if (likes.length) { s += hits.length * 5; if (hits.length) why.push(p("why.likes", { what: hits.map((h) => p(`likes.${h}`)).join(" · ") })); else s -= 4; }
-    const km = city ? distanceTo(city, card) : null;
+    // distance = where the trip really goes (a "Luxor day trip" from Hurghada is ~300 km, not 0)
+    const far = city ? tripDistance(city, card) : { km: null, dest: destinationOf(card)?.city ?? null };
+    const km = far.km;
+    if (far.dest && !longTrips) return { card, score: -100, why, km };
     if (city) {
       if (km == null) s -= 2;
       else if (km <= 25) { s += 5; why.push(p("why.inCity", { city: cityName(city) })); }
       else if (km <= 90) { s += 3; why.push(p("why.near", { km: Math.round(km) })); }
-      else if (km <= 300) { s -= 1; why.push(p("why.dayTrip", { km: Math.round(km) })); }
-      else s -= 12;
-    }
+      else if (km <= 450 && (far.dest || longTrips)) { s -= 2; why.push(p("why.longTrip", { city: far.dest ? cityName(far.dest) : "", km: Math.round(km) })); }
+      else return { card, score: -100, why, km };
+    } else if (far.dest) { s -= 2; why.push(p("why.longTrip", { city: cityName(far.dest), km: Math.round(destinationOf(card)?.km ?? 0) })); }
     if (group === "family" || kids > 0) {
       if (ideas.has("family") || card.category === "family") { s += 3; why.push(p("why.family")); }
       if (ideas.has("dive") || ideas.has("quad")) s -= 2;
@@ -148,7 +152,7 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-card bg-aqua p-4">
           <div>
             <p className="text-h3 font-extrabold">{p("resultTitle", { n: count, days: nights })}</p>
-            <p className="text-small text-ink/80">{[city ? cityName(city) : t("places.egypt"), p(`groups.${group}`), p(`paces.${pace}`), ...likes.map((l) => p(`likes.${l}`))].join(" · ")}</p>
+            <p className="text-small text-ink/80">{[city ? cityName(city) : t("places.egypt"), ...(longTrips ? [p("longTripsOn")] : []), p(`groups.${group}`), p(`paces.${pace}`), ...likes.map((l) => p(`likes.${l}`))].join(" · ")}</p>
           </div>
           <button type="button" onClick={() => setStep(0)} className="btn-press min-h-11 rounded-full border border-ink px-4 font-bold">{p("edit")}</button>
         </div>
@@ -217,6 +221,10 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
             </div>
           ))}
           <button type="button" aria-pressed={!city} onClick={() => setCity(null)} className={chip(!city)}>{t("places.all")}</button>
+          <label className="flex cursor-pointer items-start gap-3 rounded-control border border-line p-3">
+            <input type="checkbox" checked={longTrips} onChange={(e) => setLongTrips(e.target.checked)} className="mt-0.5 size-5 shrink-0 accent-[var(--color-discovery)]" />
+            <span><b className="block">{p("longTrips")}</b><span className="text-small text-ink-muted">{p("longTripsHint")}</span></span>
+          </label>
         </div>
       )}
       {key === "when" && (

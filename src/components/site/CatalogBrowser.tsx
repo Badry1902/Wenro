@@ -10,8 +10,7 @@ import { IconCategory, IconClose, IconPin, IconSearch } from "../Icons";
 import { TripCard } from "./TripCard";
 import { THEMES, isTheme, patternStyle, themeFor, type Theme } from "@/lib/themes";
 import { ThemeMotif } from "../brand/ThemeArt";
-import { indexCards, search } from "@/lib/search";
-import { distanceTo } from "@/lib/places";
+import { indexCards, search, tripDistance } from "@/lib/search";
 import { useCity, openCityPicker } from "./CityPicker";
 
 type Cat = { slug: string; name: string };
@@ -72,7 +71,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
     if (sort === "short") list.sort((a, b) => (a.duration_minutes ?? 0) - (b.duration_minutes ?? 0));
     // recommended + a chosen city: nearest first (search ranking wins while typing; ties keep the original order)
     if (sort === "rec" && city && !ranked) {
-      const d = (c: ExperienceCard) => distanceTo(city, c) ?? 9999;
+      const d = (c: ExperienceCard) => tripDistance(city, c).km ?? 9999;
       list.sort((a, b) => Math.round(d(a) / 25) - Math.round(d(b) / 25));
     }
     return list;

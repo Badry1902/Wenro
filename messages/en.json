@@ -1737,7 +1737,8 @@
     "change": "Change",
     "search": "Search a city…",
     "tripsHere": "{n, plural, =0 {No trips yet} one {# trip} other {# trips}}",
-    "noneNear": "No trips start near {city} yet. See the closest ones in the full list."
+    "noneNear": "No trips start near {city} yet. See the closest ones in the full list.",
+    "dayTripTo": "Day trip to {city}"
   },
   "search": {
     "popular": "Popular trips",
@@ -1817,7 +1818,11 @@
       "couple": "Great for two",
       "friends": "Fun with friends",
       "budget": "Fits your budget",
-      "loved": "Guests rate it {r}"
-    }
+      "loved": "Guests rate it {r}",
+      "longTrip": "Long day to {city} · {km} km"
+    },
+    "longTrips": "Include long day trips",
+    "longTripsHint": "Trips that go far from your city, like Luxor or Cairo from the Red Sea. Usually 10–18 hours with early pickup.",
+    "longTripsOn": "With long day trips"
   }
 }

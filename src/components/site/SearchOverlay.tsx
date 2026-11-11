@@ -8,8 +8,8 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { CATEGORIES } from "@/lib/catalog";
 import { mediaSrc } from "@/lib/media";
 import { formatMoney } from "@/lib/money";
-import { CITIES, distanceTo } from "@/lib/places";
-import { CATEGORY_IDEAS, indexCards, norm, search, understand } from "@/lib/search";
+import { CITIES } from "@/lib/places";
+import { CATEGORY_IDEAS, indexCards, norm, search, tripDistance, understand } from "@/lib/search";
 import { THEMES, themeFor } from "@/lib/themes";
 import { IconCategory, IconClose, IconPin, IconSearch } from "../Icons";
 import { ThemeMotif } from "../brand/ThemeArt";
@@ -55,7 +55,7 @@ export function SearchOverlay() {
     if (!cards) return [];
     const found = q.trim() ? search(index, q) ?? [] : [...cards];
     // nothing typed + a chosen city: what's close first
-    if (!q.trim() && city) found.sort((a, b) => (distanceTo(city, a) ?? 9999) - (distanceTo(city, b) ?? 9999));
+    if (!q.trim() && city) found.sort((a, b) => (tripDistance(city, a).km ?? 9999) - (tripDistance(city, b).km ?? 9999));
     return found.slice(0, 8);
   }, [index, cards, q, city]);
   const n = norm(q);
@@ -111,7 +111,7 @@ export function SearchOverlay() {
               <ul>
                 {trips.map((c) => {
                   const img = c.images?.[0] ?? (c.cover?.kind !== "video" ? c.cover?.path : undefined);
-                  const d = city ? distanceTo(city, c) : null;
+                  const d = city ? tripDistance(city, c).km : null;
                   return (
                     <li key={c.id}>
                       <Link href={`/experiences/${c.slug}`} onClick={() => setOpen(false)} className={row}>
