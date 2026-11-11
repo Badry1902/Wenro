@@ -1,5 +1,5 @@
 import type { ExperienceCard } from "@/lib/data/types";
-import { CITIES, km, type City } from "@/lib/places";
+import { CITIES, km, nearestCity, type City } from "@/lib/places";
 import { themeFor } from "@/lib/themes";
 
 /**
@@ -144,29 +144,47 @@ export function search(index: Indexed[], q: string) {
   return out.sort((a, b) => b.score - a.score).map((x) => x.card);
 }
 
+type Placed = { title?: string | null; summary?: string | null; slug?: string; lat?: number | null; lng?: number | null;
+  city?: string | null; alat?: number | null; alng?: number | null };
+
+/** Where the trip starts: its meeting point, else the centre of the city the operator chose. */
+function startOf(c: Placed): { lat: number; lng: number } | null {
+  if (c.lat != null && c.lng != null) return { lat: Number(c.lat), lng: Number(c.lng) };
+  const city = c.city ? CITIES.find((x) => x.slug === c.city) : null;
+  return city ? { lat: city.lat, lng: city.lng } : null;
+}
+
 /**
- * Where a trip actually goes. A "Luxor day trip" usually meets in Hurghada, so its meeting point alone says
- * "0 km". If the title or summary names a city more than 120 km from the meeting point, that city is the
- * destination (the farthest one when several are named).
+ * Where a trip actually goes, when that's far (> 120 km) from where it starts. The operator's activity pin
+ * decides; without one, a city named in the title or summary does (a "Luxor day trip" meeting in Hurghada).
  */
-export function destinationOf(c: { title?: string | null; summary?: string | null; slug?: string; lat?: number | null; lng?: number | null }): { city: City; km: number } | null {
+export function destinationOf(c: Placed): { city: City; km: number } | null {
+  const start = startOf(c);
+  if (!start) return null;
+  if (c.alat != null && c.alng != null) {
+    const d = km(start.lat, start.lng, Number(c.alat), Number(c.alng));
+    const n = nearestCity(Number(c.alat), Number(c.alng));
+    return d > 120 && n ? { city: n.city, km: d } : null;
+  }
   const text = ` ${norm(`${c.title ?? ""} ${c.summary ?? ""} ${(c.slug ?? "").replace(/-/g, " ")}`)} `;
   let best: { city: City; km: number } | null = null;
   for (const [slug, ws] of CITY_WORDS) {
     if (!ws.some((w) => text.includes(` ${w}`))) continue;
     const city = CITIES.find((x) => x.slug === slug);
-    if (!city || c.lat == null || c.lng == null) continue;
-    const d = km(Number(c.lat), Number(c.lng), city.lat, city.lng);
+    if (!city) continue;
+    const d = km(start.lat, start.lng, city.lat, city.lng);
     if (d > 120 && (!best || d > best.km)) best = { city, km: d };
   }
   return best;
 }
 
-/** How far a trip really takes the guest from their city: the meeting point, or the destination when it's farther. */
-export function tripDistance(from: City, c: Parameters<typeof destinationOf>[0]) {
-  if (c.lat == null || c.lng == null) return { km: null as number | null, dest: null as City | null };
-  const meet = km(from.lat, from.lng, Number(c.lat), Number(c.lng));
+/** How far a trip really takes the guest from their city: where it starts, or where it goes when that's farther. */
+export function tripDistance(from: City, c: Placed) {
+  const start = startOf(c);
+  if (!start) return { km: null as number | null, dest: null as City | null };
+  const meet = km(from.lat, from.lng, start.lat, start.lng);
+  const far = c.alat != null && c.alng != null ? km(from.lat, from.lng, Number(c.alat), Number(c.alng)) : 0;
   const dest = destinationOf(c);
-  if (!dest) return { km: meet, dest: null };
-  return { km: Math.max(meet, km(from.lat, from.lng, dest.city.lat, dest.city.lng)), dest: dest.city };
+  const toDest = dest ? km(from.lat, from.lng, dest.city.lat, dest.city.lng) : 0;
+  return { km: Math.max(meet, far, toDest), dest: dest?.city ?? null };
 }

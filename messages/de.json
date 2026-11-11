@@ -131,7 +131,12 @@
     "map": "Karte folgt",
     "pending": "Details folgen vom Anbieter.",
     "breadcrumb": "Navigationspfad",
-    "hurghada": "Ägypten"
+    "hurghada": "Ägypten",
+    "place": {
+      "tripCity": "Ausflug ab {city}",
+      "goesTo": "Findet statt in",
+      "far": "{km} km vom Start"
+    }
   },
   "widget": {
     "label": "Dieses Erlebnis buchen",
@@ -498,7 +503,8 @@
         "payment_submitted": "Zahlung zur Prüfung gesendet. Wir melden uns nach der Bestätigung.",
         "payment_approved": "Zahlung bestätigt; die Abrechnungen sind als bezahlt markiert.",
         "payment_rejected": "Zahlung abgelehnt; der Anbieter wurde informiert.",
-        "method_saved": "Zahlungsweg gespeichert."
+        "method_saved": "Zahlungsweg gespeichert.",
+        "place_saved": "Stadt und Ort gespeichert."
       }
     },
     "dep": {
@@ -1462,6 +1468,21 @@
       "unsettledItem": "Durchgeführte Ausflüge (noch ohne Abrechnung)",
       "inStatements": "{n, plural, one {# offene Abrechnung} other {# offene Abrechnungen}}",
       "payLink": "Jetzt zahlen ↑"
+    },
+    "editorPlace": {
+      "title": "Stadt und Ort des Ausflugs",
+      "hint": "Wähle die Stadt, in der der Ausflug verkauft wird und startet. Findet die Aktivität woanders statt (ein Tempel in Luxor, eine Insel, ein Tauchplatz), setze auch dafür einen Pin, damit Gäste die echte Entfernung sehen.",
+      "city": "Stadt des Ausflugs",
+      "cityPick": "Stadt wählen",
+      "cityHint": "Wo die Gäste wohnen und abgeholt werden. Der Ausflug erscheint unter dieser Stadt.",
+      "activityLink": "Ort der Aktivität: Google-Maps-Link (optional)",
+      "activityLinkHint": "Öffne den Ort in Google Maps, tippe auf Teilen, kopiere den Link und füge ihn hier ein. Leer lassen, wenn er dem Treffpunkt entspricht.",
+      "activityPlace": "Name des Ortes",
+      "activityPlaceExample": "z. B. Karnak-Tempel, Insel Giftun",
+      "activity": "Ort der Aktivität",
+      "fromMeeting": "{km} km vom Treffpunkt",
+      "clearActivity": "Pin des Aktivitätsorts entfernen",
+      "save": "Stadt und Ort speichern"
     }
   },
   "share": {

@@ -52,7 +52,7 @@ export function TripCard({ c, size = "md", priority = false, city = null }: { c:
     ? t("places.dayTripTo", { city: cityLabel(dest.slug) }) + (d != null ? ` · ${Math.round(d)} km` : "")
     : city && d != null
       ? near === "in" ? t("places.in", { city: cityLabel(city.slug) }) : t(near === "near" ? "places.near" : "places.far", { km: Math.round(d) })
-      : home && home.km < 60 ? cityLabel(home.city.slug) : null;
+      : c.city ? cityLabel(c.city) : home && home.km < 60 ? cityLabel(home.city.slug) : null;
 
   return (
     <article className="trip-card group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface"

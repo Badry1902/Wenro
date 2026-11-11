@@ -131,7 +131,12 @@
     "map": "Carte bientôt",
     "pending": "Détails à venir de l'organisateur.",
     "breadcrumb": "Fil d'Ariane",
-    "hurghada": "Égypte"
+    "hurghada": "Égypte",
+    "place": {
+      "tripCity": "Excursion au départ de {city}",
+      "goesTo": "A lieu à",
+      "far": "À {km} km du départ"
+    }
   },
   "widget": {
     "label": "Réserver cette expérience",
@@ -498,7 +503,8 @@
         "payment_submitted": "Paiement envoyé pour vérification. Nous vous préviendrons une fois confirmé.",
         "payment_approved": "Paiement validé ; les relevés sont marqués payés.",
         "payment_rejected": "Paiement refusé ; le prestataire a été informé du motif.",
-        "method_saved": "Moyen de paiement enregistré."
+        "method_saved": "Moyen de paiement enregistré.",
+        "place_saved": "Ville et lieu enregistrés."
       }
     },
     "dep": {
@@ -1462,6 +1468,21 @@
       "unsettledItem": "Excursions réalisées (pas encore sur un relevé)",
       "inStatements": "{n, plural, one {# relevé ouvert} other {# relevés ouverts}}",
       "payLink": "Payer maintenant ↑"
+    },
+    "editorPlace": {
+      "title": "Ville et lieu de l'excursion",
+      "hint": "Choisissez la ville où l'excursion est vendue et d'où elle part. Si l'activité a lieu ailleurs (un temple à Louxor, une île, un site de plongée), épinglez-le aussi, pour que les voyageurs voient la vraie distance.",
+      "city": "Ville de l'excursion",
+      "cityPick": "Choisir une ville",
+      "cityHint": "Là où logent les voyageurs et où on vient les chercher. L'excursion apparaît sous cette ville.",
+      "activityLink": "Lieu de l'activité : lien Google Maps (facultatif)",
+      "activityLinkHint": "Ouvrez le lieu dans Google Maps, touchez Partager, copiez le lien et collez-le ici. Laissez vide si c'est le point de rendez-vous.",
+      "activityPlace": "Nom du lieu",
+      "activityPlaceExample": "ex. Temple de Karnak, île de Giftun",
+      "activity": "Lieu de l'activité",
+      "fromMeeting": "À {km} km du point de rendez-vous",
+      "clearActivity": "Retirer l'épingle du lieu",
+      "save": "Enregistrer la ville et le lieu"
     }
   },
   "share": {

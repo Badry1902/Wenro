@@ -5,7 +5,8 @@ import { Badge, Flash, PageTitle, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { MeetingMap } from "@/components/site/MeetingMap";
 import { Link } from "@/i18n/navigation";
-import { makeCover, removePhoto, saveLocation, saveTheme, uploadPhoto } from "@/app/[locale]/app/editor-actions";
+import { makeCover, removePhoto, saveLocation, savePlace, saveTheme, uploadPhoto } from "@/app/[locale]/app/editor-actions";
+import { CITIES, GOVERNORATES, km } from "@/lib/places";
 import { THEMES, patternStyle, themeFor } from "@/lib/themes";
 import { ThemeMotif } from "@/components/brand/ThemeArt";
 import { ExperienceEditor } from "./ExperienceEditor";
@@ -14,6 +15,9 @@ import { MediaUpload } from "./MediaUpload";
 import { cloudinaryConfig } from "@/lib/cloudinary";
 import { mediaSrc, videoPoster } from "@/lib/media";
 import { emptyEditor, type EditorData, type EditorOptions } from "./types";
+
+type Loc = { lat: number | null; lng: number | null; place: string | null; exact_public: boolean; url: string | null;
+  city?: string | null; activity?: { lat: number; lng: number; place: string | null; url: string | null } | null };
 
 /** Shared by the operator workspace and the WENRO admin. `base` is the list page path (no locale). */
 export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
@@ -27,8 +31,11 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
       if (e instanceof RpcError && (e.code === "forbidden" || e.code === "experience_not_found")) notFound();
       throw e;
     }) : Promise.resolve(emptyEditor(operatorId)),
-    id ? rpc<{ lat: number; lng: number; place: string | null; exact_public: boolean; url: string | null } | null>("experience_location", { p_experience: id }, "user").catch(() => null) : Promise.resolve(null),
+    id ? rpc<Loc | null>("experience_location", { p_experience: id }, "user").catch(() => null) : Promise.resolve(null),
   ]);
+  const meet = location && location.lat != null && location.lng != null ? { lat: location.lat, lng: location.lng } : null;
+  const act = location?.activity ?? null;
+  const cityName = (slug: string) => tt(`places.city.${slug}` as "places.city.hurghada");
   const chosenTheme = id ? await rpc<string | null>("experience_theme", { p_experience: id }, "user").catch(() => null) : null;
   const autoTheme = themeFor({ category: options.categories.find((c) => c.id === data.category_id)?.slug, slug: data.slug, title: data.translations.en?.title });
   const cloud = !!cloudinaryConfig();
@@ -85,15 +92,59 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
       )}
 
       {id && (
+        <section id="place" aria-labelledby="ed-place" className="mb-10 flex flex-col gap-4">
+          <h2 id="ed-place" className="text-h3 font-bold">{tt("app.editorPlace.title")}</h2>
+          <p className="text-small text-ink-muted">{tt("app.editorPlace.hint")}</p>
+          {act && (
+            <div className="grid gap-3 md:grid-cols-[1fr_1.2fr]">
+              <MeetingMap point={{ lat: act.lat, lng: act.lng }} exact label={act.place ?? tt("app.editorPlace.activity")} openLabel={t("locationOpen")} />
+              <div className="flex flex-col gap-1 text-small">
+                <span><b>{act.place ?? "—"}</b></span>
+                <span dir="ltr" className="text-ink-muted">{act.lat}, {act.lng}</span>
+                {meet && <span>{tt("app.editorPlace.fromMeeting", { km: Math.round(km(meet.lat, meet.lng, act.lat, act.lng)) })}</span>}
+              </div>
+            </div>
+          )}
+          <form action={savePlace} className="flex flex-col gap-3 rounded-card border border-line p-4">
+            {hidden}
+            <label className="flex flex-col gap-1 text-small font-bold">{tt("app.editorPlace.city")}
+              <select name="city" defaultValue={location?.city ?? ""} required className={field}>
+                <option value="" disabled>{tt("app.editorPlace.cityPick")}</option>
+                {GOVERNORATES.map((g) => (
+                  <optgroup key={g} label={tt(`places.gov.${g}` as "places.gov.redsea")}>
+                    {CITIES.filter((c) => c.gov === g).map((c) => <option key={c.slug} value={c.slug}>{cityName(c.slug)}</option>)}
+                  </optgroup>
+                ))}
+              </select>
+              <span className="font-normal text-ink-muted">{tt("app.editorPlace.cityHint")}</span>
+            </label>
+            <label className="flex flex-col gap-1 text-small font-bold">{tt("app.editorPlace.activityLink")}
+              <input name="maps" defaultValue="" placeholder="https://maps.app.goo.gl/…" dir="ltr" inputMode="url" className={field} />
+              <span className="font-normal text-ink-muted">{tt("app.editorPlace.activityLinkHint")}</span>
+            </label>
+            <label className="flex flex-col gap-1 text-small font-bold">{tt("app.editorPlace.activityPlace")}
+              <input name="place" defaultValue={act?.place ?? ""} maxLength={120} placeholder={tt("app.editorPlace.activityPlaceExample")} className={field} />
+            </label>
+            {act && (
+              <label className="flex items-center gap-2 text-small">
+                <input type="checkbox" name="clear_activity" value="1" className="size-4" />{tt("app.editorPlace.clearActivity")}
+              </label>
+            )}
+            <div className="flex flex-wrap gap-2"><Submit className={btn.primary}>{tt("app.editorPlace.save")}</Submit></div>
+          </form>
+        </section>
+      )}
+
+      {id && (
         <section id="location" aria-labelledby="ed-location" className="mb-10 flex flex-col gap-4">
           <h2 id="ed-location" className="text-h3 font-bold">{t("location")}</h2>
           <p className="text-small text-ink-muted">{t("locationHint")}</p>
-          {location && (
+          {location && meet && (
             <div className="grid gap-3 md:grid-cols-[1fr_1.2fr]">
-              <MeetingMap point={{ lat: location.lat, lng: location.lng }} exact label={location.place ?? t("location")} openLabel={t("locationOpen")} />
+              <MeetingMap point={meet} exact label={location.place ?? t("location")} openLabel={t("locationOpen")} />
               <div className="flex flex-col gap-1 text-small">
                 <span><b>{location.place ?? "—"}</b></span>
-                <span dir="ltr" className="text-ink-muted">{location.lat}, {location.lng}</span>
+                <span dir="ltr" className="text-ink-muted">{meet.lat}, {meet.lng}</span>
                 <span className={location.exact_public ? "text-success" : "text-warning"}>{location.exact_public ? t("locationPublic") : t("locationPrivate")}</span>
               </div>
             </div>
@@ -101,7 +152,7 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
           <form action={saveLocation} className="flex flex-col gap-3 rounded-card border border-line p-4">
             {hidden}
             <label className="flex flex-col gap-1 text-small font-bold">{t("locationLink")}
-              <input name="maps" required={!location} defaultValue="" placeholder="https://maps.app.goo.gl/…" dir="ltr" inputMode="url" className={field} />
+              <input name="maps" required={!meet} defaultValue="" placeholder="https://maps.app.goo.gl/…" dir="ltr" inputMode="url" className={field} />
               <span className="font-normal text-ink-muted">{t("locationLinkHint")}</span>
             </label>
             <label className="flex flex-col gap-1 text-small font-bold">{t("locationPlace")}
@@ -116,7 +167,7 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
               <Submit className={btn.primary}>{t("locationSave")}</Submit>
             </div>
           </form>
-          {location && (
+          {meet && (
             <form action={saveLocation}>{hidden}<input type="hidden" name="clear" value="1" /><Submit className={btn.quiet}>{t("locationClear")}</Submit></form>
           )}
         </section>

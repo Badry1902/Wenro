@@ -149,7 +149,12 @@
     "map": "Map coming soon",
     "pending": "Details coming soon from the operator.",
     "breadcrumb": "Breadcrumb",
-    "hurghada": "Egypt"
+    "hurghada": "Egypt",
+    "place": {
+      "tripCity": "Trip from {city}",
+      "goesTo": "Takes place at",
+      "far": "{km} km from the start"
+    }
   },
   "widget": {
     "label": "Book this experience",
@@ -375,7 +380,8 @@
         "payment_submitted": "Payment sent for review. We'll let you know once it's confirmed.",
         "payment_approved": "Payment approved; the statements are marked paid.",
         "payment_rejected": "Payment rejected; the operator was told why.",
-        "method_saved": "Payment method saved."
+        "method_saved": "Payment method saved.",
+        "place_saved": "City and place saved."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -1386,6 +1392,21 @@
       "unsettledItem": "Trips done (not on a statement yet)",
       "inStatements": "{n, plural, one {# open statement} other {# open statements}}",
       "payLink": "Pay now ↑"
+    },
+    "editorPlace": {
+      "title": "City and where the trip happens",
+      "hint": "Choose the city the trip is sold in and starts from. If the activity happens somewhere else (a temple in Luxor, an island, a dive site), pin it too, so guests see how far it really goes.",
+      "city": "Trip city",
+      "cityPick": "Choose a city",
+      "cityHint": "Where guests stay and are picked up. Trips are listed under this city.",
+      "activityLink": "Where it happens: Google Maps link (optional)",
+      "activityLinkHint": "Open the place in Google Maps, press Share, copy the link and paste it here. Leave empty if it's the same as the meeting point.",
+      "activityPlace": "Name of the place",
+      "activityPlaceExample": "e.g. Karnak Temple, Giftun Island",
+      "activity": "Where it happens",
+      "fromMeeting": "{km} km from the meeting point",
+      "clearActivity": "Remove the activity pin",
+      "save": "Save city and place"
     }
   },
   "email": {

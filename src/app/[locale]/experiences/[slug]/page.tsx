@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { nearestCity } from "@/lib/places";
+import { cityBySlug, km, nearestCity } from "@/lib/places";
 import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
 import type { ExperienceCard, ExperiencePage, ReviewSummary } from "@/lib/data/types";
@@ -67,13 +67,18 @@ export default async function ExperiencePageView({ params }: Params) {
   const noReviews: ReviewSummary = { count: 0, average: null, stars: {}, items: [] };
   const [reviews, location] = await Promise.all([
     rpc<ReviewSummary>("experience_reviews", { p_experience: page.id, p_limit: 12 }, "anon").catch(() => noReviews),
-    rpc<{ lat: number; lng: number; place: string | null; exact: boolean } | null>("public_location", { p_experience: page.id }, "anon").catch(() => null),
+    rpc<{ lat: number | null; lng: number | null; place: string | null; exact: boolean; city?: string | null;
+      activity?: { lat: number; lng: number; place: string | null } | null } | null>("public_location", { p_experience: page.id }, "anon").catch(() => null),
   ]);
   const similar = similarTo(all, page, 8);
   const t = await getTranslations();
-  // the city the trip starts in (closest to its meeting point); "Egypt" until the operator sets a point
-  const home = location ? nearestCity(Number(location.lat), Number(location.lng)) : null;
-  const where = home && home.km < 60 ? t(`places.city.${home.city.slug}` as "places.city.hurghada") : t("experience.hurghada");
+  // the trip's city: the operator's choice, else the city closest to the meeting point; "Egypt" until either is set
+  const meet = location && location.lat != null && location.lng != null ? { lat: Number(location.lat), lng: Number(location.lng) } : null;
+  const home = meet ? nearestCity(meet.lat, meet.lng) : null;
+  const citySlug = cityBySlug(location?.city)?.slug ?? (home && home.km < 60 ? home.city.slug : null);
+  const where = citySlug ? t(`places.city.${citySlug}` as "places.city.hurghada") : t("experience.hurghada");
+  const act = location?.activity ?? null;
+  const actKm = act && meet ? Math.round(km(meet.lat, meet.lng, Number(act.lat), Number(act.lng))) : null;
 
   const included = lines(page.included);
   const excluded = lines(page.excluded);
@@ -188,10 +193,16 @@ export default async function ExperiencePageView({ params }: Params) {
 
             <Section id="meet" title={t("experience.meeting")} motif={3}>
               {hasTransfer && <p className="mb-3">{t("experience.meetingTransfer")}</p>}
-              {page.meeting_info ? <p className="whitespace-pre-line">{page.meeting_info}</p> : !location && <Pending />}
-              {location && (
-                <MeetingMap className="mt-4" point={{ lat: Number(location.lat), lng: Number(location.lng) }} exact={location.exact}
+              {page.meeting_info ? <p className="whitespace-pre-line">{page.meeting_info}</p> : !meet && <Pending />}
+              {location && meet && (
+                <MeetingMap className="mt-4" point={meet} exact={location.exact}
                   label={location.place ?? t("experience.meeting")} openLabel={t("map.open")} note={location.exact ? t("map.exactNote") : t("map.areaNote")} />
+              )}
+              {act && (
+                <div className="mt-5">
+                  <p className="mb-2 font-bold">{t("experience.place.goesTo")}: {act.place ?? ""}{actKm != null && actKm > 3 && <span className="font-normal text-ink-muted"> · {t("experience.place.far", { km: actKm })}</span>}</p>
+                  <MeetingMap point={{ lat: Number(act.lat), lng: Number(act.lng) }} exact label={act.place ?? t("experience.place.goesTo")} openLabel={t("map.open")} />
+                </div>
               )}
             </Section>
 

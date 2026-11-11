@@ -66,6 +66,11 @@ export type ExperienceCard = {
   lat?: number | null;
   lng?: number | null;
   exact?: boolean;
+  /** the city the trip is sold in and starts from (operator's choice) */
+  city?: string | null;
+  /** where the trip takes place, when the operator pinned it */
+  alat?: number | null;
+  alng?: number | null;
 };
 
 export type ReviewSummary = {

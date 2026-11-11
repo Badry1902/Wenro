@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
     id: c.id, slug: c.slug, title: c.title, summary: c.summary, category: c.category, theme: c.theme ?? null,
     lat: c.lat ?? null, lng: c.lng ?? null, from_minor: c.from_minor, currency: c.currency, cover: c.cover ?? null,
     images: cardImagesSlim(c), duration_minutes: c.duration_minutes,
+    city: c.city ?? null, alat: c.alat ?? null, alng: c.alng ?? null,
   }));
   return NextResponse.json(slim, { headers: { "cache-control": "public, max-age=300, s-maxage=300" } });
 }

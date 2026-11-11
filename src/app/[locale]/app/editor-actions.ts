@@ -228,6 +228,37 @@ export async function saveLocation(form: FormData) {
 }
 
 
+/** The trip's city and where it happens (a Google Maps link to the activity place). */
+export async function savePlace(form: FormData) {
+  const { resolveMapsLink } = await import("@/lib/maps");
+  const { cityBySlug } = await import("@/lib/places");
+  const id = guid.parse(form.get("experience"));
+  const city = String(form.get("city") ?? "");
+  const link = String(form.get("maps") ?? "").trim().slice(0, 600);
+  const place = String(form.get("place") ?? "").trim().slice(0, 120);
+  const clear = form.get("clear_activity") === "1";
+  let result = "ok=place_saved";
+  try {
+    if (city && !cityBySlug(city)) throw new RpcError("invalid_input");
+    let point: { lat: number; lng: number } | null = null, url: string | null = null;
+    if (link && !clear) {
+      const found = await resolveMapsLink(link);
+      if (!found) throw new RpcError("location_unreadable");
+      point = found.point; url = found.url && /^https:\/\//.test(found.url) ? found.url : null;
+    }
+    await rpc("set_experience_place", {
+      p_experience: id, p_city: city || null, p_lat: point?.lat ?? null, p_lng: point?.lng ?? null,
+      p_place: place || null, p_url: url, p_clear_activity: clear,
+    }, "user");
+  } catch (e) {
+    result = `err=${e instanceof RpcError ? e.code : "unexpected_error"}`;
+    if (!(e instanceof RpcError)) console.error("savePlace", e);
+  }
+  const l = locale.parse(form.get("locale"));
+  const b = base.parse(form.get("base"));
+  redirect({ href: `${b}/${id}?${result}#place`, locale: l });
+}
+
 /** A trip's collection design (patterns and motifs); empty = automatic. */
 export async function saveTheme(form: FormData) {
   const id = guid.parse(form.get("experience"));
