@@ -93,9 +93,12 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
     setBusy(true);
     try {
       const ranked = score().filter((x) => x.score > -6);
-      const short = ranked.slice(0, 12);
-      const trips: Trip[] = await (await fetch(`/api/plan?ids=${short.map((x) => x.card.id).join(",")}&from=${from}&to=${to}&locale=${locale}`)).json().catch(() => []);
-      const byId = new Map((Array.isArray(trips) ? trips : []).map((x) => [x.id, x]));
+      // the best 36 matches, asked in groups of 12 (the most the seats lookup takes at once)
+      const short = ranked.slice(0, 36);
+      const groups = Array.from({ length: Math.ceil(short.length / 12) }, (_, i) => short.slice(i * 12, i * 12 + 12));
+      const lists = await Promise.all(groups.map((g) => fetch(`/api/plan?ids=${g.map((x) => x.card.id).join(",")}&from=${from}&to=${to}&locale=${locale}`)
+        .then((r) => r.json()).catch(() => [])));
+      const byId = new Map(lists.flatMap((l: Trip[]) => (Array.isArray(l) ? l : [])).map((x) => [x.id, x]));
       const days: Record<string, Placed[]> = {};
       const used: Record<string, { start: number; end: number; long: boolean }[]> = {};
       const themeOn: Record<string, string> = {};
