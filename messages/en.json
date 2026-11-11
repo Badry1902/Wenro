@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "WENRO — Local experiences in Hurghada",
-    "description": "Discover and book trips and local experiences in Hurghada."
+    "title": "WENRO — Local experiences across Egypt",
+    "description": "Discover and book trips and local experiences across Egypt: the Red Sea, Sinai, Luxor, Aswan, Cairo and more."
   },
   "nav": {
     "explore": "Explore map",
@@ -20,22 +20,22 @@
   "home": {
     "eyebrow": "Discover. Book. Explore.",
     "title": "Find your next experience.",
-    "subtitle": "Sea, desert and culture around Hurghada — clear prices, easy booking.",
+    "subtitle": "Sea, desert and culture across Egypt — clear prices, easy booking.",
     "cta": "Explore experiences",
-    "listTitle": "Experiences around Hurghada",
+    "listTitle": "Experiences across Egypt",
     "from": "From {price}",
     "empty": "No experiences published yet.",
     "more": "More",
     "demoTag": "Demo",
-    "heroEyebrow": "Hurghada · Red Sea",
+    "heroEyebrow": "Egypt · Red Sea, Sinai & the Nile",
     "heroTitle": "Good days start with a pin.",
-    "heroSubtitle": "Discover boat trips, snorkeling, and desert adventures in Hurghada.",
+    "heroSubtitle": "Discover boat trips, snorkeling, and desert adventures across Egypt.",
     "searchLabel": "What would you like to do?",
     "searchPlaceholder": "Snorkelling, quad, Luxor…",
     "searchCategory": "Category",
     "allCategories": "All categories",
     "searchButton": "Explore experiences",
-    "topPicks": "Hand-picked around Hurghada",
+    "topPicks": "Hand-picked across Egypt",
     "topPicksSub": "One standout trip from every category.",
     "browseCategories": "Explore by category",
     "tripsCount": "{n, plural, one {# experience} other {# experiences}}",
@@ -46,7 +46,7 @@
     "why2Title": "Free cancellation",
     "why2Text": "Every trip shows how long you can cancel for free, before you book.",
     "why3Title": "Local operators",
-    "why3Text": "Trips are run by licensed operators based in Hurghada.",
+    "why3Text": "Trips are run by licensed local operators.",
     "why4Title": "Hotel pickup",
     "why4Text": "Add a transfer from your hotel in the same booking.",
     "partnerTitle": "Run trips, or send guests our way?",
@@ -66,8 +66,8 @@
     "planText": "Pick the trips you like and your dates; we fit them into your days with free seats.",
     "planCta": "Plan my week",
     "campaignTitle": "Your next adventure starts with Wenro.",
-    "campaignSubtitle": "Hurghada, on the Red Sea: boat trips, snorkeling, and desert adventures with local hosts.",
-    "campaignButton": "Explore Hurghada",
+    "campaignSubtitle": "Egypt, from the Red Sea to the Nile: boat trips, snorkeling, and desert adventures with local hosts.",
+    "campaignButton": "Explore Egypt",
     "howLabel": "How it works",
     "how": {
       "pin": {
@@ -110,7 +110,7 @@
     "edit": "Edit",
     "total": "Total",
     "approx": "≈ {amount} · approximate",
-    "hurghadaTime": "Hurghada time",
+    "hurghadaTime": "Egypt time",
     "adults": "Adults",
     "children": "Children",
     "infants": "Infants",
@@ -144,12 +144,12 @@
     "cancellation": "Cancellation policy",
     "cancellationText": "Free cancellation up to {hours} hours before the start. If the trip is cancelled for weather or a port closure, you are offered another date at no cost.",
     "operatedBy": "Operated by",
-    "operatorGeneric": "A licensed local operator in Hurghada. Their name and phone appear on your voucher shortly before the trip.",
+    "operatorGeneric": "A licensed local operator. Their name and phone appear on your voucher shortly before the trip.",
     "photo": "Photo coming soon",
     "map": "Map coming soon",
     "pending": "Details coming soon from the operator.",
     "breadcrumb": "Breadcrumb",
-    "hurghada": "Hurghada"
+    "hurghada": "Egypt"
   },
   "widget": {
     "label": "Book this experience",
@@ -157,7 +157,7 @@
     "perAdult": "per adult",
     "payIn": "you pay in {currency}",
     "date": "Date",
-    "departure": "Departure · Hurghada time",
+    "departure": "Departure · Egypt time",
     "full": "Full",
     "travelers": "Travelers",
     "ageFrom": "{min}+",
@@ -282,7 +282,7 @@
     "menu": "Workspace menu",
     "switch": "Switch workspace",
     "pendingNotice": "Your account is waiting for approval by the WENRO team. You can look around; bookings and payouts start once it is approved.",
-    "timezoneNote": "All times are Hurghada time (Africa/Cairo).",
+    "timezoneNote": "All times are Egypt time (Africa/Cairo).",
     "types": {
       "platform": "WENRO admin",
       "operator": "Trip operator",
@@ -1391,11 +1391,11 @@
   "email": {
     "greeting": "Hello {name},",
     "greetingTeam": "Hello,",
-    "footer": "WENRO · local experiences in Hurghada. You receive this email because of a booking made with this address.",
+    "footer": "WENRO · local experiences across Egypt. You receive this email because of a booking made with this address.",
     "labels": {
       "experience": "Experience",
       "when": "When",
-      "hurghadaTime": "Hurghada time",
+      "hurghadaTime": "Egypt time",
       "guests": "Guests",
       "where": "Pickup / meeting",
       "pickupAt": "Pickup from {hotel}",
@@ -1436,7 +1436,7 @@
     },
     "reconfirm": {
       "subject": "Tomorrow: please confirm your {title}",
-      "intro": "Your trip is tomorrow. Please confirm you are coming before 22:00 Hurghada time, or your seats will be released.",
+      "intro": "Your trip is tomorrow. Please confirm you are coming before 22:00 Egypt time, or your seats will be released.",
       "button": "Confirm I am coming"
     },
     "cancelled_by_guest": {
@@ -1490,8 +1490,8 @@
     "wellness": "Hammam, massage and beach yoga"
   },
   "list": {
-    "title": "Experiences in Hurghada",
-    "subtitle": "Trips and activities around Hurghada",
+    "title": "Experiences in {city}",
+    "subtitle": "Trips and activities across Egypt",
     "results": "{n, plural, =0 {No experiences} one {# experience} other {# experiences}}",
     "filters": "Filters",
     "category": "Category",
@@ -1532,7 +1532,7 @@
     "rail": "You might also like"
   },
   "footer": {
-    "tagline": "Local experiences around Hurghada and the Red Sea, booked in minutes.",
+    "tagline": "Local experiences across Egypt — the Red Sea, Sinai and the Nile — booked in minutes.",
     "explore": "Explore",
     "partners": "Partners",
     "operators": "For operators",
@@ -1611,7 +1611,7 @@
     "as": "Share as"
   },
   "explore": {
-    "title": "Explore Hurghada on the map",
+    "title": "Explore Egypt on the map",
     "sub": "Every trip where it starts. Tap a pin to see it.",
     "all": "All",
     "see": "See the trip",
@@ -1620,7 +1620,7 @@
   },
   "plan": {
     "title": "Plan my week",
-    "sub": "Choose trips and your holiday dates. We place each trip on a day with free seats, without overlaps, and you book each one in a tap.",
+    "sub": "Answer a few questions and we'll plan the days for you, or pick trips yourself. Each trip lands on a day with free seats, and you book each one in a tap.",
     "from": "First day",
     "to": "Last day",
     "people": "People",
@@ -1687,5 +1687,137 @@
     "atMeeting": "At the meeting point",
     "guestText": "{v1}\nHi {v2},\nTrip: {v3}\nWhen: {v4}\nGuests: {v5}\nMeeting: {v6}\nYour booking: {v7}",
     "operatorText": "{v1}\nRef: {v2}\nTrip: {v3}\nWhen: {v4}\nGuests: {v5}\nName: {v6}\nPhone: {v7}\nPickup: {v8}"
+  },
+  "places": {
+    "gov": {
+      "redsea": "Red Sea",
+      "southsinai": "South Sinai",
+      "luxor": "Luxor",
+      "aswan": "Aswan",
+      "cairo": "Cairo",
+      "giza": "Giza",
+      "alexandria": "Alexandria",
+      "matrouh": "Matrouh"
+    },
+    "city": {
+      "hurghada": "Hurghada",
+      "el-gouna": "El Gouna",
+      "makadi": "Makadi Bay",
+      "sahl-hasheesh": "Sahl Hasheesh",
+      "soma-bay": "Soma Bay",
+      "safaga": "Safaga",
+      "el-quseir": "El Quseir",
+      "marsa-alam": "Marsa Alam",
+      "sharm": "Sharm El Sheikh",
+      "dahab": "Dahab",
+      "nuweiba": "Nuweiba",
+      "st-catherine": "Saint Catherine",
+      "luxor": "Luxor",
+      "aswan": "Aswan",
+      "abu-simbel": "Abu Simbel",
+      "cairo": "Cairo",
+      "giza": "Giza",
+      "alexandria": "Alexandria",
+      "marsa-matrouh": "Marsa Matrouh",
+      "siwa": "Siwa"
+    },
+    "pick": "Where are you staying?",
+    "pickSub": "We'll show trips in your city first, then the nearest ones.",
+    "choose": "Choose city",
+    "all": "All of Egypt",
+    "egypt": "Egypt",
+    "useLocation": "Use my location",
+    "locating": "Finding you…",
+    "locFailed": "Couldn't get your location. Pick a city instead.",
+    "in": "In {city}",
+    "near": "{km} km away",
+    "far": "Day trip · {km} km",
+    "nearYou": "Close to {city}",
+    "nearYouSub": "Trips that start in {city} or a short ride away.",
+    "change": "Change",
+    "search": "Search a city…",
+    "tripsHere": "{n, plural, =0 {No trips yet} one {# trip} other {# trips}}",
+    "noneNear": "No trips start near {city} yet. See the closest ones in the full list."
+  },
+  "search": {
+    "popular": "Popular trips",
+    "loading": "Loading trips…",
+    "none": "No trips match yet. Try another word, or a city.",
+    "all": "See all results for “{q}”"
+  },
+  "planner": {
+    "tabsLabel": "How to plan",
+    "tabAuto": "Plan it for me",
+    "tabManual": "I'll pick the trips",
+    "stepOf": "Step {n} of {of}",
+    "q": {
+      "where": "Where are you staying?",
+      "when": "When, and how many of you?",
+      "who": "Who's coming?",
+      "likes": "What do you enjoy?",
+      "pace": "How full should your days be?",
+      "budget": "Budget per person"
+    },
+    "adults": "Adults",
+    "kids": "Children (under 12)",
+    "likesHint": "Pick as many as you like.",
+    "groups": {
+      "couple": "Couple",
+      "family": "Family with kids",
+      "friends": "Friends",
+      "solo": "Just me"
+    },
+    "likes": {
+      "sea": "Sea & islands",
+      "diving": "Diving & snorkelling",
+      "desert": "Desert & safari",
+      "history": "Temples & history",
+      "souk": "Markets & food",
+      "nile": "The Nile",
+      "wellness": "Spa & relax",
+      "water": "Water sports",
+      "evening": "Evenings & shows",
+      "nature": "Mountains & stars"
+    },
+    "paces": {
+      "relaxed": "Relaxed",
+      "balanced": "Balanced",
+      "full": "Make the most of it"
+    },
+    "paceHint": {
+      "relaxed": "A trip every other day, rest in between.",
+      "balanced": "One trip a day, with a free day now and then.",
+      "full": "Up to two trips a day when they don't clash."
+    },
+    "budgets": {
+      "value": "Good value",
+      "mid": "Mid-range",
+      "any": "No limit"
+    },
+    "budgetHint": {
+      "value": "Around €35 or less",
+      "mid": "Around €75 or less",
+      "any": "Show me the best, whatever the price"
+    },
+    "back": "Back",
+    "next": "Next",
+    "make": "Plan my {days} days",
+    "edit": "Change answers",
+    "resultTitle": "{n, plural, =0 {No trips placed yet} one {# trip over {days} days} other {# trips over {days} days}}",
+    "free": "Free day: rest, swim, explore on your own.",
+    "nothing": "We couldn't find free seats that match on these dates. Try other dates, another city or more interests.",
+    "alsoLike": "You might also like",
+    "note": "Nothing is booked yet. Seats are held only when you book. Prices and seats can change.",
+    "why": {
+      "likes": "You like: {what}",
+      "inCity": "In {city}",
+      "near": "{km} km away",
+      "dayTrip": "Day trip · {km} km",
+      "family": "Good for kids",
+      "couple": "Great for two",
+      "friends": "Fun with friends",
+      "budget": "Fits your budget",
+      "loved": "Guests rate it {r}"
+    }
   }
 }

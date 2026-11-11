@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { nearestCity } from "@/lib/places";
 import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
 import type { ExperienceCard, ExperiencePage, ReviewSummary } from "@/lib/data/types";
@@ -70,6 +71,9 @@ export default async function ExperiencePageView({ params }: Params) {
   ]);
   const similar = similarTo(all, page, 8);
   const t = await getTranslations();
+  // the city the trip starts in (closest to its meeting point); "Egypt" until the operator sets a point
+  const home = location ? nearestCity(Number(location.lat), Number(location.lng)) : null;
+  const where = home && home.km < 60 ? t(`places.city.${home.city.slug}` as "places.city.hurghada") : t("experience.hurghada");
 
   const included = lines(page.included);
   const excluded = lines(page.excluded);
@@ -108,7 +112,7 @@ export default async function ExperiencePageView({ params }: Params) {
         <nav aria-label={t("experience.breadcrumb")} className="flex flex-wrap items-center gap-1 text-small text-ink-muted">
           <Link href="/" className="hover:text-discovery">{t("nav.home")}</Link>
           <IconChevron size={14} />
-          <Link href="/experiences" className="hover:text-discovery">{t("experience.hurghada")}</Link>
+          <Link href="/experiences" className="hover:text-discovery">{where}</Link>
           {page.category && (<><IconChevron size={14} /><Link href={{ pathname: "/experiences", query: { cat: page.category } }} className="hover:text-discovery">{catName}</Link></>)}
         </nav>
         <div className="mt-3 flex items-start justify-between gap-4">
@@ -126,7 +130,7 @@ export default async function ExperiencePageView({ params }: Params) {
           {page.category && <span className="inline-flex items-center gap-1.5"><IconCategory name={page.category} size={18} className="text-discovery" />{catName}</span>}
           {hours && <span className="inline-flex items-center gap-1.5"><IconClock size={18} className="text-discovery" />{Number.isInteger(hours) ? t("experience.hours", { n: hours }) : t("experience.minutes", { n: page.duration_minutes! })}</span>}
           {hasTransfer && <span className="inline-flex items-center gap-1.5"><IconCar size={18} className="text-discovery" />{t("experience.hotelPickup")}</span>}
-          <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-discovery" />{t("experience.hurghada")}</span>
+          <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-discovery" />{where}</span>
           {reviews.count > 0 ? (
             <a href="#reviews-list" className="inline-flex items-center gap-1.5 font-semibold text-ink hover:underline">
               <Stars value={Number(reviews.average)} /> {Number(reviews.average).toFixed(1)} <span className="font-normal text-ink-muted">({t("reviews.count", { n: reviews.count })})</span>

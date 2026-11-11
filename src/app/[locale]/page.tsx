@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { rpc } from "@/lib/data/rpc";
+import { withCoords } from "@/lib/data/coords";
 import type { ExperienceCard } from "@/lib/data/types";
 import { mediaSrc } from "@/lib/media";
 import { CATEGORIES, cardImages } from "@/lib/catalog";
@@ -11,6 +12,7 @@ import { Rail, RailItem } from "@/components/site/Rail";
 import { Reveal } from "@/components/site/Reveal";
 import { TripCard } from "@/components/site/TripCard";
 import { RecentRail } from "@/components/site/Recent";
+import { NearYou } from "@/components/site/NearYou";
 import { IconCar, IconCash, IconCategory, IconCheck, IconChevron, IconShield } from "@/components/Icons";
 import { Mark, MotifImg } from "@/components/brand/Logo";
 import { hasSlogans } from "@/lib/slogans";
@@ -25,7 +27,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const t = await getTranslations();
   let cards: ExperienceCard[] = [];
   try {
-    cards = await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon");
+    cards = await withCoords(await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon"));
   } catch (e) {
     console.error("experience_list failed", e); // e.g. build without database access; refreshed later
   }
@@ -134,6 +136,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </Reveal>
           )}
 
+          <NearYou cards={cards} />
           <RecentRail cards={cards} />
 
           <Reveal as="section" className="mt-14 grid gap-4 md:grid-cols-2">

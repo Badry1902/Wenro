@@ -6,18 +6,19 @@ import { useSearchParams } from "next/navigation";
 import { isCategory } from "@/lib/catalog";
 import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
-import { IconCategory, IconClose, IconSearch } from "../Icons";
+import { IconCategory, IconClose, IconPin, IconSearch } from "../Icons";
 import { TripCard } from "./TripCard";
 import { THEMES, isTheme, patternStyle, themeFor, type Theme } from "@/lib/themes";
 import { ThemeMotif } from "../brand/ThemeArt";
+import { indexCards, search } from "@/lib/search";
+import { distanceTo } from "@/lib/places";
+import { useCity, openCityPicker } from "./CityPicker";
 
 type Cat = { slug: string; name: string };
 type Dur = "short" | "mid" | "long";
 type Sort = "rec" | "low" | "high" | "short";
 
 const durOf = (m: number | null): Dur => (m ?? 0) <= 180 ? "short" : (m ?? 0) <= 360 ? "mid" : "long";
-// Search ignores case and Arabic/Latin accents
-const norm = (s: string) => s.toLocaleLowerCase().normalize("NFKD").replace(/[̀-ًͯ-ْ]/g, "");
 
 /** All trips with live filters. The category and search text are kept in the address so results can be shared. */
 export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[]; categories: Cat[] }) {
@@ -36,6 +37,9 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
   const [sort, setSort] = useState<Sort>("rec");
   const [sheet, setSheet] = useState(false);
   const [theme, setTheme] = useState<Theme | null>(initial.theme);
+  const [city] = useCity();
+  // words, synonyms and themes for every trip, in this language (category names included)
+  const index = useMemo(() => indexCards(cards, (c) => `${c.category ? t(`categories.${c.category}` as "categories.sea") : ""} ${t(`themes.${themeFor(c)}.name`)}`), [cards, t]);
   const themeCount = useMemo(() => Object.fromEntries(THEMES.map((th) => [th, cards.filter((c) => themeFor(c) === th).length])) as Record<Theme, number>, [cards]);
 
   // keep ?q= and ?cat= in the address bar (single category only, like the links that lead here)
@@ -52,26 +56,28 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
   }, [sheet]);
 
   const results = useMemo(() => {
-    const words = norm(q).split(/\s+/).filter(Boolean);
-    const list = cards.filter((c) => {
+    const ranked = q.trim() ? search(index, q) : null;
+    const list = (ranked ?? cards).filter((c) => {
       if (theme && themeFor(c) !== theme) return false;
       if (cats.length && !cats.includes(c.category ?? "")) return false;
       if (durs.length && !durs.includes(durOf(c.duration_minutes))) return false;
       if (max < ceil && (c.from_minor ?? 0) > max) return false;
       if (instant && c.booking_mode !== "instant") return false;
       if (pickup && !c.pickup) return false;
-      if (words.length) {
-        const hay = norm(`${c.title ?? ""} ${c.summary ?? ""} ${c.category ? t(`categories.${c.category}` as "categories.sea") : ""}`);
-        if (!words.every((w) => hay.includes(w))) return false;
-      }
       return true;
     });
     const p = (c: ExperienceCard) => c.from_minor ?? 0;
     if (sort === "low") list.sort((a, b) => p(a) - p(b));
     if (sort === "high") list.sort((a, b) => p(b) - p(a));
     if (sort === "short") list.sort((a, b) => (a.duration_minutes ?? 0) - (b.duration_minutes ?? 0));
+    // recommended + a chosen city: nearest first (search ranking wins while typing; ties keep the original order)
+    if (sort === "rec" && city && !ranked) {
+      const d = (c: ExperienceCard) => distanceTo(city, c) ?? 9999;
+      list.sort((a, b) => Math.round(d(a) / 25) - Math.round(d(b) / 25));
+    }
     return list;
-  }, [cards, q, cats, theme, durs, max, ceil, instant, pickup, sort, t]);
+  }, [cards, index, q, cats, theme, durs, max, ceil, instant, pickup, sort, city]);
+  const cityName = city ? t(`places.city.${city.slug}` as "places.city.hurghada") : t("places.egypt");
 
   const active = (q ? 1 : 0) + (theme ? 1 : 0) + cats.length + durs.length + (max < ceil ? 1 : 0) + (instant ? 1 : 0) + (pickup ? 1 : 0);
   const clear = () => { setQ(""); setTheme(null); setCats([]); setDurs([]); setMax(ceil); setInstant(false); setPickup(false); };
@@ -135,8 +141,11 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
             <span className="grid size-16 shrink-0 place-items-center rounded-2xl border border-line bg-surface" aria-hidden="true"><ThemeMotif theme={theme} size={40} /></span>
           )}
           <div>
-            <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{theme ? t(`themes.${theme}.name`) : t("list.title")}</h1>
-            <p className="mt-1 text-ink-muted">{theme ? t(`themes.${theme}.blurb`) : t("list.subtitle")}</p>
+            <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{theme ? t(`themes.${theme}.name`) : t("list.title", { city: cityName })}</h1>
+            <p className="mt-1 text-ink-muted">{theme ? t(`themes.${theme}.blurb`) : city ? t("places.nearYouSub", { city: cityName }) : t("list.subtitle")}</p>
+            <button type="button" onClick={openCityPicker} className="mt-2 inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-small font-bold hover:border-discovery">
+              <IconPin size={16} className="text-apricot" />{cityName} · <span className="text-discovery">{t("places.change")}</span>
+            </button>
           </div>
         </div>
         <label className="flex min-h-12 w-full items-center gap-2 rounded-full border border-line bg-surface px-4 focus-within:border-discovery md:w-96">
@@ -213,7 +222,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
             </div>
           ) : (
             <ul key={sig} className="stagger grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {results.map((c, k) => <li key={c.id}><TripCard c={c} priority={k < 3} /></li>)}
+              {results.map((c, k) => <li key={c.id}><TripCard c={c} priority={k < 3} city={city} /></li>)}
             </ul>
           )}
         </section>

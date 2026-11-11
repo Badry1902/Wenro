@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "WENRO — Lokale Erlebnisse in Hurghada",
-    "description": "Ausflüge und lokale Erlebnisse in Hurghada entdecken und buchen."
+    "title": "WENRO — Lokale Erlebnisse in ganz Ägypten",
+    "description": "Ausflüge und lokale Erlebnisse in Ägypten entdecken und buchen: Rotes Meer, Sinai, Luxor, Assuan, Kairo und mehr."
   },
   "nav": {
     "explore": "Karte entdecken",
@@ -20,21 +20,21 @@
   "home": {
     "eyebrow": "Entdecken. Buchen. Erleben.",
     "title": "Finde dein nächstes Erlebnis.",
-    "subtitle": "Meer, Wüste und Kultur rund um Hurghada – klare Preise, einfache Buchung.",
+    "subtitle": "Meer, Wüste und Kultur in ganz Ägypten – klare Preise, einfache Buchung.",
     "cta": "Erlebnisse entdecken",
-    "listTitle": "Erlebnisse rund um Hurghada",
+    "listTitle": "Erlebnisse in ganz Ägypten",
     "from": "Ab {price}",
     "empty": "Noch keine Erlebnisse veröffentlicht.",
     "more": "Mehr",
     "demoTag": "Demo",
     "heroTitle": "Erlebnisse am Roten Meer, die sich lohnen.",
     "searchButton": "Suchen",
-    "topPicks": "Unsere Auswahl rund um Hurghada",
+    "topPicks": "Unsere Auswahl aus ganz Ägypten",
     "browseCategories": "Nach Kategorie entdecken",
     "seeAll": "Alle ansehen",
     "perPerson": "pro Person",
-    "heroEyebrow": "Hurghada · Rotes Meer",
-    "heroSubtitle": "Riffe, Dünen, Tempel und ruhige Abende – klare Preise, kostenlose Stornierungsfristen und Bezahlung am Tag selbst.",
+    "heroEyebrow": "Ägypten · Rotes Meer, Sinai & Nil",
+    "heroSubtitle": "Riffe, Dünen, Tempel und ruhige Abende in ganz Ägypten – klare Preise, kostenlose Stornierungsfristen und Bezahlung am Tag selbst.",
     "searchLabel": "Was möchten Sie unternehmen?",
     "searchPlaceholder": "Schnorcheln, Quad, Luxor…",
     "searchCategory": "Kategorie",
@@ -47,7 +47,7 @@
     "why2Title": "Kostenlose Stornierung",
     "why2Text": "Bei jedem Ausflug sehen Sie vor der Buchung, wie lange Sie kostenlos stornieren können.",
     "why3Title": "Lokale Anbieter",
-    "why3Text": "Die Ausflüge werden von lizenzierten Anbietern aus Hurghada durchgeführt.",
+    "why3Text": "Die Ausflüge werden von lizenzierten lokalen Anbietern durchgeführt.",
     "why4Title": "Abholung vom Hotel",
     "why4Text": "Buchen Sie den Transfer von Ihrem Hotel gleich mit.",
     "partnerTitle": "Sie bieten Ausflüge an oder vermitteln Gäste?",
@@ -92,7 +92,7 @@
     "edit": "Ändern",
     "total": "Gesamt",
     "approx": "≈ {amount} · ungefähr",
-    "hurghadaTime": "Ortszeit Hurghada",
+    "hurghadaTime": "Ortszeit Ägypten",
     "adults": "Erwachsene",
     "children": "Kinder",
     "infants": "Kleinkinder",
@@ -126,12 +126,12 @@
     "cancellation": "Stornierungsbedingungen",
     "cancellationText": "Kostenlose Stornierung bis {hours} Stunden vor Beginn. Fällt der Ausflug wegen Wetter oder Hafenschließung aus, bekommst du kostenlos einen anderen Termin angeboten.",
     "operatedBy": "Anbieter",
-    "operatorGeneric": "Ein lizenzierter lokaler Anbieter in Hurghada. Name und Telefon erscheinen kurz vor der Tour auf Ihrem Voucher.",
+    "operatorGeneric": "Ein lizenzierter lokaler Anbieter. Name und Telefon erscheinen kurz vor der Tour auf Ihrem Voucher.",
     "photo": "Fotos folgen",
     "map": "Karte folgt",
     "pending": "Details folgen vom Anbieter.",
     "breadcrumb": "Navigationspfad",
-    "hurghada": "Hurghada"
+    "hurghada": "Ägypten"
   },
   "widget": {
     "label": "Dieses Erlebnis buchen",
@@ -139,7 +139,7 @@
     "perAdult": "pro Erwachsenem",
     "payIn": "Zahlung in {currency}",
     "date": "Datum",
-    "departure": "Abfahrt · Ortszeit Hurghada",
+    "departure": "Abfahrt · Ortszeit Ägypten",
     "full": "Ausgebucht",
     "travelers": "Reisende",
     "ageFrom": "{min}+",
@@ -263,11 +263,11 @@
   "email": {
     "greeting": "Hallo {name},",
     "greetingTeam": "Hallo,",
-    "footer": "WENRO · Erlebnisse vor Ort in Hurghada. Sie erhalten diese E-Mail wegen einer Buchung mit dieser Adresse.",
+    "footer": "WENRO · Erlebnisse vor Ort in Ägypten. Sie erhalten diese E-Mail wegen einer Buchung mit dieser Adresse.",
     "labels": {
       "experience": "Erlebnis",
       "when": "Wann",
-      "hurghadaTime": "Ortszeit Hurghada",
+      "hurghadaTime": "Ortszeit Ägypten",
       "guests": "Gäste",
       "where": "Abholung / Treffpunkt",
       "pickupAt": "Abholung im {hotel}",
@@ -588,7 +588,7 @@
     "menu": "Arbeitsbereich-Menü",
     "switch": "Arbeitsbereich wechseln",
     "pendingNotice": "Ihr Konto wartet auf die Freigabe durch das WENRO-Team. Sie können sich schon umsehen; Buchungen und Auszahlungen starten nach der Freigabe.",
-    "timezoneNote": "Alle Zeiten in Ortszeit Hurghada (Africa/Cairo).",
+    "timezoneNote": "Alle Zeiten in Ortszeit Ägypten (Africa/Cairo).",
     "roles": {
       "owner": "Inhaber",
       "manager": "Manager",
@@ -1541,8 +1541,8 @@
     "wellness": "Hamam, Massage und Strandyoga"
   },
   "list": {
-    "title": "Alle Erlebnisse",
-    "subtitle": "Ausflüge und Aktivitäten rund um Hurghada",
+    "title": "Erlebnisse in {city}",
+    "subtitle": "Ausflüge und Aktivitäten in ganz Ägypten",
     "results": "{n, plural, =0 {Keine Erlebnisse} one {# Erlebnis} other {# Erlebnisse}}",
     "filters": "Filter",
     "category": "Kategorie",
@@ -1579,7 +1579,7 @@
     "saved": "Auf der Merkliste"
   },
   "footer": {
-    "tagline": "Lokale Erlebnisse rund um Hurghada und das Rote Meer, in wenigen Minuten gebucht.",
+    "tagline": "Lokale Erlebnisse in ganz Ägypten – Rotes Meer, Sinai und Nil – in wenigen Minuten gebucht.",
     "explore": "Entdecken",
     "partners": "Partner",
     "operators": "Für Anbieter",
@@ -1593,7 +1593,7 @@
     "demoNote": "Testseite: Die gezeigten Ausflüge sind Demo-Inhalte und die Fotos Stockbilder."
   },
   "explore": {
-    "title": "Hurghada auf der Karte entdecken",
+    "title": "Ägypten auf der Karte entdecken",
     "sub": "Jeder Ausflug dort, wo er startet. Tippen Sie auf eine Markierung.",
     "all": "Alle",
     "see": "Zum Ausflug",
@@ -1601,7 +1601,7 @@
   },
   "plan": {
     "title": "Meine Woche planen",
-    "sub": "Wählen Sie Ausflüge und Ihre Urlaubsdaten. Wir legen jeden Ausflug auf einen Tag mit freien Plätzen, ohne Überschneidungen, und Sie buchen jeden mit einem Tippen.",
+    "sub": "Beantworte ein paar Fragen und wir planen deine Tage, oder wähle die Ausflüge selbst. Jeder Ausflug landet an einem Tag mit freien Plätzen, gebucht wird mit einem Tipp.",
     "from": "Erster Tag",
     "to": "Letzter Tag",
     "people": "Personen",
@@ -1668,5 +1668,137 @@
     "atMeeting": "Am Treffpunkt",
     "guestText": "{v1}\nHallo {v2},\nAusflug: {v3}\nWann: {v4}\nGäste: {v5}\nTreffpunkt: {v6}\nIhre Buchung: {v7}",
     "operatorText": "{v1}\nRef.: {v2}\nAusflug: {v3}\nWann: {v4}\nGäste: {v5}\nName: {v6}\nTelefon: {v7}\nAbholung: {v8}"
+  },
+  "places": {
+    "gov": {
+      "redsea": "Rotes Meer",
+      "southsinai": "Südsinai",
+      "luxor": "Luxor",
+      "aswan": "Assuan",
+      "cairo": "Kairo",
+      "giza": "Gizeh",
+      "alexandria": "Alexandria",
+      "matrouh": "Matruh"
+    },
+    "city": {
+      "hurghada": "Hurghada",
+      "el-gouna": "El Gouna",
+      "makadi": "Makadi Bay",
+      "sahl-hasheesh": "Sahl Hasheesh",
+      "soma-bay": "Soma Bay",
+      "safaga": "Safaga",
+      "el-quseir": "El Quseir",
+      "marsa-alam": "Marsa Alam",
+      "sharm": "Sharm El-Sheikh",
+      "dahab": "Dahab",
+      "nuweiba": "Nuweiba",
+      "st-catherine": "Sankt Katharina",
+      "luxor": "Luxor",
+      "aswan": "Assuan",
+      "abu-simbel": "Abu Simbel",
+      "cairo": "Kairo",
+      "giza": "Gizeh",
+      "alexandria": "Alexandria",
+      "marsa-matrouh": "Marsa Matruh",
+      "siwa": "Siwa"
+    },
+    "pick": "Wo wohnen Sie?",
+    "pickSub": "Wir zeigen zuerst Ausflüge in Ihrer Stadt, dann die nächstgelegenen.",
+    "choose": "Stadt wählen",
+    "all": "Ganz Ägypten",
+    "egypt": "Ägypten",
+    "useLocation": "Meinen Standort verwenden",
+    "locating": "Standort wird ermittelt…",
+    "locFailed": "Standort nicht verfügbar. Bitte eine Stadt wählen.",
+    "in": "In {city}",
+    "near": "{km} km entfernt",
+    "far": "Tagesausflug · {km} km",
+    "nearYou": "In der Nähe von {city}",
+    "nearYouSub": "Ausflüge, die in {city} oder ganz in der Nähe starten.",
+    "change": "Ändern",
+    "search": "Stadt suchen…",
+    "tripsHere": "{n, plural, =0 {Noch keine Ausflüge} one {# Ausflug} other {# Ausflüge}}",
+    "noneNear": "In der Nähe von {city} starten noch keine Ausflüge. Die nächsten findest du in der Liste."
+  },
+  "search": {
+    "popular": "Beliebte Ausflüge",
+    "loading": "Ausflüge werden geladen…",
+    "none": "Noch nichts gefunden. Versuch ein anderes Wort oder eine Stadt.",
+    "all": "Alle Ergebnisse für „{q}“"
+  },
+  "planner": {
+    "tabsLabel": "So planen",
+    "tabAuto": "Plan es für mich",
+    "tabManual": "Ich wähle selbst",
+    "stepOf": "Schritt {n} von {of}",
+    "q": {
+      "where": "Wo übernachtest du?",
+      "when": "Wann, und wie viele seid ihr?",
+      "who": "Wer kommt mit?",
+      "likes": "Was magst du?",
+      "pace": "Wie voll sollen deine Tage sein?",
+      "budget": "Budget pro Person"
+    },
+    "adults": "Erwachsene",
+    "kids": "Kinder (unter 12)",
+    "likesHint": "Wähle so viele du willst.",
+    "groups": {
+      "couple": "Paar",
+      "family": "Familie mit Kindern",
+      "friends": "Freunde",
+      "solo": "Nur ich"
+    },
+    "likes": {
+      "sea": "Meer & Inseln",
+      "diving": "Tauchen & Schnorcheln",
+      "desert": "Wüste & Safari",
+      "history": "Tempel & Geschichte",
+      "souk": "Märkte & Essen",
+      "nile": "Der Nil",
+      "wellness": "Spa & Entspannung",
+      "water": "Wassersport",
+      "evening": "Abende & Shows",
+      "nature": "Berge & Sterne"
+    },
+    "paces": {
+      "relaxed": "Entspannt",
+      "balanced": "Ausgewogen",
+      "full": "Das Beste rausholen"
+    },
+    "paceHint": {
+      "relaxed": "Jeden zweiten Tag ein Ausflug, dazwischen Ruhe.",
+      "balanced": "Ein Ausflug pro Tag, ab und zu ein freier Tag.",
+      "full": "Bis zu zwei Ausflüge am Tag, wenn sie sich nicht überschneiden."
+    },
+    "budgets": {
+      "value": "Günstig",
+      "mid": "Mittel",
+      "any": "Ohne Limit"
+    },
+    "budgetHint": {
+      "value": "Etwa 35 € oder weniger",
+      "mid": "Etwa 75 € oder weniger",
+      "any": "Zeig mir das Beste, egal zu welchem Preis"
+    },
+    "back": "Zurück",
+    "next": "Weiter",
+    "make": "Meine {days} Tage planen",
+    "edit": "Antworten ändern",
+    "resultTitle": "{n, plural, =0 {Noch keine Ausflüge eingeplant} one {# Ausflug in {days} Tagen} other {# Ausflüge in {days} Tagen}}",
+    "free": "Freier Tag: ausruhen, schwimmen, selbst entdecken.",
+    "nothing": "Für diese Tage haben wir keine passenden freien Plätze gefunden. Versuch andere Daten, eine andere Stadt oder mehr Interessen.",
+    "alsoLike": "Das könnte dir auch gefallen",
+    "note": "Noch ist nichts gebucht. Plätze werden erst beim Buchen reserviert. Preise und Plätze können sich ändern.",
+    "why": {
+      "likes": "Du magst: {what}",
+      "inCity": "In {city}",
+      "near": "{km} km entfernt",
+      "dayTrip": "Tagesausflug · {km} km",
+      "family": "Gut für Kinder",
+      "couple": "Schön zu zweit",
+      "friends": "Spaß mit Freunden",
+      "budget": "Passt zum Budget",
+      "loved": "Gäste geben {r}"
+    }
   }
 }

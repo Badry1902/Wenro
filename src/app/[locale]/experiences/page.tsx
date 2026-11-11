@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
+import { withCoords } from "@/lib/data/coords";
 import type { ExperienceCard } from "@/lib/data/types";
 import { CATEGORIES } from "@/lib/catalog";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -16,7 +17,7 @@ export const revalidate = 300; // the list is cached; filters run in the browser
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale });
-  return { title: `${t("list.title")} · WENRO`, description: t("list.subtitle") };
+  return { title: `${t("list.title", { city: t("places.egypt") })} · WENRO`, description: t("list.subtitle") };
 }
 
 export default async function ExperiencesList({ params }: Props) {
@@ -25,7 +26,7 @@ export default async function ExperiencesList({ params }: Props) {
   const t = await getTranslations();
   let cards: ExperienceCard[] = [];
   try {
-    cards = await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon");
+    cards = await withCoords(await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon"));
   } catch (e) {
     console.error("experience_list failed", e);
   }
@@ -37,7 +38,7 @@ export default async function ExperiencesList({ params }: Props) {
         {/* Before the filters load (and for search engines): the full list */}
         <Suspense fallback={
           <>
-            <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{t("list.title")}</h1>
+            <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{t("list.title", { city: t("places.egypt") })}</h1>
             <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{cards.map((c) => <li key={c.id}><TripCard c={c} /></li>)}</ul>
           </>
         }>

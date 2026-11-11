@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { rpc } from "@/lib/data/rpc";
+import { withCoords } from "@/lib/data/coords";
 import type { ExperienceCard } from "@/lib/data/types";
 import { CATEGORIES } from "@/lib/catalog";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -22,7 +23,7 @@ export default async function Explore({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-  const cards = await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]);
+  const cards = await withCoords(await rpc<ExperienceCard[]>("experience_list", { p_locale: locale }, "anon").catch(() => [] as ExperienceCard[]));
   const cats = CATEGORIES.filter((c) => cards.some((x) => x.category === c && x.lat != null)).map((c) => ({ slug: c, name: t(`categories.${c}` as "categories.sea") }));
   return (
     <>

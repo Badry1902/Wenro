@@ -6,9 +6,12 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { IconCategory, IconClose } from "../Icons";
 import { AccountButton } from "./AccountButton";
 import { LanguageMenu, LanguageRow } from "../LanguageMenu";
+import { CityChip, CityPickerDialog } from "./CityPicker";
+import { SearchOverlay, openSearch } from "./SearchOverlay";
+import { IconSearch } from "../Icons";
 
 type Cat = { slug: string; name: string; blurb: string };
-type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string; explore: string; plan: string };
+type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string; explore: string; plan: string; search: string };
 
 
 /** Closes a popover on outside click and Escape. */
@@ -75,8 +78,14 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
       </nav>
       <div className="flex-1 md:hidden" />
 
+      <button type="button" onClick={openSearch} aria-label={labels.search} title={labels.search}
+        className="btn-press grid size-11 place-items-center rounded-full text-ink hover:bg-discovery-tint"><IconSearch size={20} /></button>
+      <div className="hidden lg:block"><CityChip /></div>
+      <div className="hidden sm:block lg:hidden"><CityChip compact /></div>
+      <CityPickerDialog />
+      <SearchOverlay />
       <div className="hidden sm:block"><LanguageMenu label={labels.language} /></div>
-      <div className="sm:hidden"><LanguageMenu label={labels.language} compact /></div>
+
 
       <button type="button" onClick={() => setSheet(true)} aria-label={labels.menu} aria-expanded={sheet}
         className="btn-press inline-flex size-11 items-center justify-center rounded-full border border-line md:hidden">
@@ -93,6 +102,7 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
             </div>
             <div className="flex flex-col gap-1 p-3">
               <AccountButton labels={account} className="mb-2 flex min-h-12 justify-center text-[16px]" />
+              <div className="mb-1 rounded-control border border-line"><CityChip /></div>
               <Link href="/experiences" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.allTrips}</Link>
               <Link href="/explore" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.explore}</Link>
               <Link href="/plan" className="flex min-h-12 items-center rounded-control px-3 font-bold hover:bg-discovery-tint">{labels.plan}</Link>

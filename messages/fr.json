@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "WENRO — Expériences locales à Hurghada",
-    "description": "Découvrez et réservez des excursions et expériences locales à Hurghada."
+    "title": "WENRO — Expériences locales dans toute l'Égypte",
+    "description": "Découvrez et réservez des excursions en Égypte : mer Rouge, Sinaï, Louxor, Assouan, Le Caire et plus."
   },
   "nav": {
     "explore": "Carte à explorer",
@@ -20,20 +20,20 @@
   "home": {
     "eyebrow": "Découvrir. Réserver. Explorer.",
     "title": "Trouvez votre prochaine expérience.",
-    "subtitle": "Mer, désert et culture autour de Hurghada — des prix clairs, une réservation simple.",
+    "subtitle": "Mer, désert et culture dans toute l'Égypte — prix clairs, réservation facile.",
     "cta": "Explorer les expériences",
-    "listTitle": "Expériences autour de Hurghada",
+    "listTitle": "Expériences dans toute l'Égypte",
     "from": "À partir de {price}",
     "empty": "Aucune expérience publiée pour le moment.",
     "more": "Plus",
     "demoTag": "Démo",
     "heroTitle": "Des expériences qui valent le voyage, au bord de la mer Rouge.",
     "searchButton": "Rechercher",
-    "topPicks": "Notre sélection autour d'Hurghada",
+    "topPicks": "Notre sélection dans toute l'Égypte",
     "browseCategories": "Explorer par catégorie",
     "seeAll": "Tout voir",
     "perPerson": "par personne",
-    "heroEyebrow": "Hurghada · Mer Rouge",
+    "heroEyebrow": "Égypte · mer Rouge, Sinaï et Nil",
     "heroSubtitle": "Récifs, dunes, temples et soirées paisibles — des prix clairs, des délais d’annulation gratuite et le paiement le jour même.",
     "searchLabel": "Que souhaitez-vous faire ?",
     "searchPlaceholder": "Snorkeling, quad, Louxor…",
@@ -47,7 +47,7 @@
     "why2Title": "Annulation gratuite",
     "why2Text": "Chaque excursion indique, avant la réservation, jusqu’à quand vous pouvez annuler gratuitement.",
     "why3Title": "Prestataires locaux",
-    "why3Text": "Les excursions sont assurées par des prestataires agréés basés à Hurghada.",
+    "why3Text": "Les excursions sont assurées par des prestataires locaux agréés.",
     "why4Title": "Prise en charge à l’hôtel",
     "why4Text": "Ajoutez un transfert depuis votre hôtel dans la même réservation.",
     "partnerTitle": "Vous organisez des excursions ou vous nous envoyez des clients ?",
@@ -92,7 +92,7 @@
     "edit": "Modifier",
     "total": "Total",
     "approx": "≈ {amount} · approximatif",
-    "hurghadaTime": "heure de Hurghada",
+    "hurghadaTime": "heure d'Égypte",
     "adults": "Adultes",
     "children": "Enfants",
     "infants": "Bébés",
@@ -126,12 +126,12 @@
     "cancellation": "Conditions d'annulation",
     "cancellationText": "Annulation gratuite jusqu'à {hours} heures avant le départ. Si l'excursion est annulée pour météo ou fermeture du port, une autre date vous est proposée sans frais.",
     "operatedBy": "Organisateur",
-    "operatorGeneric": "Un prestataire local agréé à Hurghada. Son nom et son téléphone apparaissent sur votre bon peu avant la sortie.",
+    "operatorGeneric": "Un prestataire local agréé. Son nom et son téléphone apparaissent sur votre bon peu avant l'excursion.",
     "photo": "Photos bientôt",
     "map": "Carte bientôt",
     "pending": "Détails à venir de l'organisateur.",
     "breadcrumb": "Fil d'Ariane",
-    "hurghada": "Hurghada"
+    "hurghada": "Égypte"
   },
   "widget": {
     "label": "Réserver cette expérience",
@@ -139,7 +139,7 @@
     "perAdult": "par adulte",
     "payIn": "paiement en {currency}",
     "date": "Date",
-    "departure": "Départ · heure de Hurghada",
+    "departure": "Départ · heure d'Égypte",
     "full": "Complet",
     "travelers": "Voyageurs",
     "ageFrom": "{min}+",
@@ -263,11 +263,11 @@
   "email": {
     "greeting": "Bonjour {name},",
     "greetingTeam": "Bonjour,",
-    "footer": "WENRO · expériences locales à Hurghada. Vous recevez cet e-mail suite à une réservation faite avec cette adresse.",
+    "footer": "WENRO · expériences locales en Égypte. Vous recevez cet e-mail suite à une réservation faite avec cette adresse.",
     "labels": {
       "experience": "Expérience",
       "when": "Quand",
-      "hurghadaTime": "heure de Hurghada",
+      "hurghadaTime": "heure d'Égypte",
       "guests": "Voyageurs",
       "where": "Prise en charge / rendez-vous",
       "pickupAt": "Prise en charge à {hotel}",
@@ -308,7 +308,7 @@
     },
     "reconfirm": {
       "subject": "Demain : merci de confirmer {title}",
-      "intro": "Votre sortie a lieu demain. Merci de confirmer votre venue avant 22 h (heure de Hurghada), sinon vos places seront libérées.",
+      "intro": "Votre sortie a lieu demain. Merci de confirmer votre venue avant 22 h (heure d'Égypte), sinon vos places seront libérées.",
       "button": "Je confirme ma venue"
     },
     "cancelled_by_guest": {
@@ -588,7 +588,7 @@
     "menu": "Menu de l’espace",
     "switch": "Changer d’espace",
     "pendingNotice": "Votre compte attend la validation de l’équipe WENRO. Vous pouvez explorer ; les réservations et les versements commencent une fois le compte validé.",
-    "timezoneNote": "Toutes les heures sont à l’heure de Hurghada (Africa/Cairo).",
+    "timezoneNote": "Toutes les heures sont à l'heure d'Égypte (Africa/Cairo).",
     "roles": {
       "owner": "Propriétaire",
       "manager": "Responsable",
@@ -1541,8 +1541,8 @@
     "wellness": "Hammam, massages et yoga sur la plage"
   },
   "list": {
-    "title": "Toutes les expériences",
-    "subtitle": "Excursions et activités autour de Hurghada",
+    "title": "Expériences à {city}",
+    "subtitle": "Excursions et activités dans toute l'Égypte",
     "results": "{n, plural, =0 {Aucune expérience} one {# expérience} other {# expériences}}",
     "filters": "Filtres",
     "category": "Catégorie",
@@ -1579,7 +1579,7 @@
     "saved": "Ajouté aux favoris"
   },
   "footer": {
-    "tagline": "Des expériences locales autour de Hurghada et de la mer Rouge, réservées en quelques minutes.",
+    "tagline": "Expériences locales dans toute l'Égypte — mer Rouge, Sinaï et Nil — réservées en quelques minutes.",
     "explore": "Explorer",
     "partners": "Partenaires",
     "operators": "Pour les prestataires",
@@ -1593,7 +1593,7 @@
     "demoNote": "Site de test : les excursions affichées sont des contenus de démonstration et les photos proviennent de banques d’images."
   },
   "explore": {
-    "title": "Explorez Hurghada sur la carte",
+    "title": "Explorer l'Égypte sur la carte",
     "sub": "Chaque excursion à son point de départ. Touchez un repère pour la voir.",
     "all": "Tout",
     "see": "Voir l'excursion",
@@ -1601,7 +1601,7 @@
   },
   "plan": {
     "title": "Planifier ma semaine",
-    "sub": "Choisissez des excursions et vos dates de vacances. Nous plaçons chaque excursion sur un jour avec des places libres, sans chevauchement, et vous réservez chacune en un geste.",
+    "sub": "Répondez à quelques questions et nous organisons vos journées, ou choisissez vous-même. Chaque excursion tombe un jour avec des places libres, et se réserve en un geste.",
     "from": "Premier jour",
     "to": "Dernier jour",
     "people": "Personnes",
@@ -1668,5 +1668,137 @@
     "atMeeting": "Au point de rendez-vous",
     "guestText": "{v1}\nBonjour {v2},\nExcursion : {v3}\nQuand : {v4}\nVoyageurs : {v5}\nRendez-vous : {v6}\nVotre réservation : {v7}",
     "operatorText": "{v1}\nRéf. : {v2}\nExcursion : {v3}\nQuand : {v4}\nVoyageurs : {v5}\nNom : {v6}\nTéléphone : {v7}\nPrise en charge : {v8}"
+  },
+  "places": {
+    "gov": {
+      "redsea": "Mer Rouge",
+      "southsinai": "Sud-Sinaï",
+      "luxor": "Louxor",
+      "aswan": "Assouan",
+      "cairo": "Le Caire",
+      "giza": "Gizeh",
+      "alexandria": "Alexandrie",
+      "matrouh": "Matrouh"
+    },
+    "city": {
+      "hurghada": "Hurghada",
+      "el-gouna": "El Gouna",
+      "makadi": "Makadi Bay",
+      "sahl-hasheesh": "Sahl Hasheesh",
+      "soma-bay": "Soma Bay",
+      "safaga": "Safaga",
+      "el-quseir": "El Quseir",
+      "marsa-alam": "Marsa Alam",
+      "sharm": "Charm el-Cheikh",
+      "dahab": "Dahab",
+      "nuweiba": "Nuweiba",
+      "st-catherine": "Sainte-Catherine",
+      "luxor": "Louxor",
+      "aswan": "Assouan",
+      "abu-simbel": "Abou Simbel",
+      "cairo": "Le Caire",
+      "giza": "Gizeh",
+      "alexandria": "Alexandrie",
+      "marsa-matrouh": "Marsa Matrouh",
+      "siwa": "Siwa"
+    },
+    "pick": "Où logez-vous ?",
+    "pickSub": "Nous montrons d'abord les excursions de votre ville, puis les plus proches.",
+    "choose": "Choisir la ville",
+    "all": "Toute l'Égypte",
+    "egypt": "Égypte",
+    "useLocation": "Utiliser ma position",
+    "locating": "Localisation…",
+    "locFailed": "Position introuvable. Choisissez plutôt une ville.",
+    "in": "À {city}",
+    "near": "À {km} km",
+    "far": "Journée · {km} km",
+    "nearYou": "Près de {city}",
+    "nearYouSub": "Excursions au départ de {city} ou à deux pas.",
+    "change": "Changer",
+    "search": "Rechercher une ville…",
+    "tripsHere": "{n, plural, =0 {Pas encore d'excursions} one {# excursion} other {# excursions}}",
+    "noneNear": "Aucune excursion ne part encore près de {city}. Voyez les plus proches dans la liste."
+  },
+  "search": {
+    "popular": "Excursions populaires",
+    "loading": "Chargement des excursions…",
+    "none": "Rien pour l'instant. Essayez un autre mot ou une ville.",
+    "all": "Tous les résultats pour « {q} »"
+  },
+  "planner": {
+    "tabsLabel": "Comment planifier",
+    "tabAuto": "Planifiez pour moi",
+    "tabManual": "Je choisis moi-même",
+    "stepOf": "Étape {n} sur {of}",
+    "q": {
+      "where": "Où logez-vous ?",
+      "when": "Quand, et combien êtes-vous ?",
+      "who": "Qui vient ?",
+      "likes": "Qu'aimez-vous ?",
+      "pace": "Des journées remplies comment ?",
+      "budget": "Budget par personne"
+    },
+    "adults": "Adultes",
+    "kids": "Enfants (moins de 12 ans)",
+    "likesHint": "Choisissez-en autant que vous voulez.",
+    "groups": {
+      "couple": "En couple",
+      "family": "Famille avec enfants",
+      "friends": "Entre amis",
+      "solo": "Seul(e)"
+    },
+    "likes": {
+      "sea": "Mer & îles",
+      "diving": "Plongée & snorkeling",
+      "desert": "Désert & safari",
+      "history": "Temples & histoire",
+      "souk": "Marchés & cuisine",
+      "nile": "Le Nil",
+      "wellness": "Spa & détente",
+      "water": "Sports nautiques",
+      "evening": "Soirées & spectacles",
+      "nature": "Montagnes & étoiles"
+    },
+    "paces": {
+      "relaxed": "Tranquille",
+      "balanced": "Équilibré",
+      "full": "En profiter au maximum"
+    },
+    "paceHint": {
+      "relaxed": "Une excursion un jour sur deux, du repos entre.",
+      "balanced": "Une excursion par jour, avec un jour libre de temps en temps.",
+      "full": "Jusqu'à deux excursions par jour si elles ne se chevauchent pas."
+    },
+    "budgets": {
+      "value": "Petit budget",
+      "mid": "Moyen",
+      "any": "Sans limite"
+    },
+    "budgetHint": {
+      "value": "Environ 35 € ou moins",
+      "mid": "Environ 75 € ou moins",
+      "any": "Le meilleur, peu importe le prix"
+    },
+    "back": "Retour",
+    "next": "Suivant",
+    "make": "Planifier mes {days} jours",
+    "edit": "Modifier les réponses",
+    "resultTitle": "{n, plural, =0 {Aucune excursion placée} one {# excursion sur {days} jours} other {# excursions sur {days} jours}}",
+    "free": "Jour libre : repos, baignade, découverte à votre rythme.",
+    "nothing": "Pas de places libres correspondantes à ces dates. Essayez d'autres dates, une autre ville ou plus de centres d'intérêt.",
+    "alsoLike": "Vous aimerez peut-être aussi",
+    "note": "Rien n'est encore réservé. Les places ne sont bloquées qu'à la réservation. Prix et places peuvent changer.",
+    "why": {
+      "likes": "Vous aimez : {what}",
+      "inCity": "À {city}",
+      "near": "À {km} km",
+      "dayTrip": "Excursion d'un jour · {km} km",
+      "family": "Idéal pour les enfants",
+      "couple": "Parfait à deux",
+      "friends": "Fun entre amis",
+      "budget": "Dans votre budget",
+      "loved": "Note des voyageurs {r}"
+    }
   }
 }

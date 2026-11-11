@@ -7,7 +7,8 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
 import { mediaSrc } from "@/lib/media";
 import { cardImages } from "@/lib/catalog";
-import { IconCar, IconCheck, IconClock, IconStar } from "../Icons";
+import { IconCar, IconCheck, IconClock, IconPin, IconStar } from "../Icons";
+import { distanceTo, nearestCity, nearness, type City } from "@/lib/places";
 import { WishButton } from "./WishButton";
 import { themeFor, patternStyle } from "@/lib/themes";
 import { ThemeBadge } from "../brand/ThemeArt";
@@ -16,7 +17,7 @@ import { ThemeBadge } from "../brand/ThemeArt";
  * Trip card. On hover (mouse) the photo slowly cycles through the trip's gallery with a cross-fade;
  * on touch screens the cover stays put. Dots show where you are.
  */
-export function TripCard({ c, size = "md", priority = false }: { c: ExperienceCard; size?: "sm" | "md"; priority?: boolean }) {
+export function TripCard({ c, size = "md", priority = false, city = null }: { c: ExperienceCard; size?: "sm" | "md"; priority?: boolean; city?: City | null }) {
   const t = useTranslations();
   const locale = useLocale();
   const imgs = cardImages(c).slice(0, 5);
@@ -38,6 +39,13 @@ export function TripCard({ c, size = "md", priority = false }: { c: ExperienceCa
   const demo = c.slug.startsWith("demo-");
   const w = size === "sm" ? 480 : 640;
   const theme = themeFor(c);
+  // where the trip starts: distance from the chosen city, or the city it starts in
+  const d = city ? distanceTo(city, c) : null;
+  const near = nearness(d);
+  const home = nearestCity(c.lat, c.lng);
+  const where = city && d != null
+    ? near === "in" ? t("places.in", { city: t(`places.city.${city.slug}` as "places.city.hurghada") }) : t(near === "near" ? "places.near" : "places.far", { km: Math.round(d) })
+    : home && home.km < 60 ? t(`places.city.${home.city.slug}` as "places.city.hurghada") : null;
 
   return (
     <article className="trip-card group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface"
@@ -63,6 +71,7 @@ export function TripCard({ c, size = "md", priority = false }: { c: ExperienceCa
         <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-semibold uppercase tracking-wide text-ink-muted">
           {c.category && <span className="text-teal-ink">{t(`categories.${c.category}` as "categories.sea")}</span>}
           {duration && <span className="inline-flex items-center gap-1 normal-case tracking-normal"><IconClock size={14} />{duration}</span>}
+          {where && <span className={`inline-flex items-center gap-1 normal-case tracking-normal ${near === "far" ? "" : "text-discovery"}`}><IconPin size={14} />{where}</span>}
         </span>
         <Link href={`/experiences/${c.slug}`} className="font-display text-[18px] font-extrabold leading-snug after:absolute after:inset-0 after:content-[''] group-hover:text-discovery line-clamp-2">
           {c.title}

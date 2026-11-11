@@ -9,7 +9,9 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
 import { mediaSrc } from "@/lib/media";
 import { cardImages } from "@/lib/catalog";
-import { IconCategory, IconClose, IconStar } from "../Icons";
+import { IconCategory, IconClose, IconPin, IconStar } from "../Icons";
+import { distanceTo } from "@/lib/places";
+import { openCityPicker, useCity } from "./CityPicker";
 
 /**
  * Explore map: every trip as a pin at its meeting point (or its area when the operator keeps the exact pin
@@ -25,10 +27,11 @@ export function ExploreMap({ cards, categories }: { cards: ExperienceCard[]; cat
   const [sel, setSel] = useState<ExperienceCard[] | null>(null);
   const placed = useMemo(() => cards.filter((c) => c.lat != null && c.lng != null && (!cat || c.category === cat)), [cards, cat]);
   const placedRef = useRef(placed);
+  const [city] = useCity();
 
   useEffect(() => {
     if (!box.current || map.current) return;
-    const m = L.map(box.current, { zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView([27.2, 33.8], 10);
+    const m = L.map(box.current, { zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView([26.8, 31.5], 6);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap" }).addTo(m);
     map.current = m; layer.current = L.layerGroup().addTo(m);
     m.on("zoomend", () => draw.current());
@@ -72,9 +75,15 @@ export function ExploreMap({ cards, categories }: { cards: ExperienceCard[]; cat
     const m = map.current;
     if (!m) return;
     setSel(null);
-    if (placed.length) m.fitBounds(L.latLngBounds(placed.map((c) => [Number(c.lat), Number(c.lng)] as L.LatLngTuple)), { padding: [40, 40], maxZoom: 13, animate: false });
+    // a chosen city: frame it and the trips within an easy ride; otherwise all of Egypt's trips
+    const around = city ? placed.filter((c) => (distanceTo(city, c) ?? 9999) <= 90) : placed;
+    const pts = around.map((c) => [Number(c.lat), Number(c.lng)] as L.LatLngTuple);
+    if (city) pts.push([city.lat, city.lng]);
+    if (pts.length > 1) m.fitBounds(L.latLngBounds(pts), { padding: [40, 40], maxZoom: 13, animate: false });
+    else if (pts.length === 1) m.setView(pts[0], 11, { animate: false });
+    else m.setView([26.8, 31.5], 6, { animate: false });
     draw.current();
-  }, [placed, locale]);
+  }, [placed, locale, city]);
 
   const chip = (on: boolean) => `btn-press inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3 text-small font-semibold ${on ? "border-discovery bg-discovery text-white" : "border-line bg-surface hover:border-discovery"}`;
   const one = sel?.length === 1 ? sel[0] : null;
@@ -83,6 +92,7 @@ export function ExploreMap({ cards, categories }: { cards: ExperienceCard[]; cat
   return (
     <div className="relative flex h-full flex-col">
       <div className="rail z-[500] flex gap-2 overflow-x-auto border-b border-line bg-surface px-4 py-2">
+        <button type="button" className={chip(false)} onClick={openCityPicker}><IconPin size={16} className="text-apricot" />{city ? t(`places.city.${city.slug}` as "places.city.hurghada") : t("places.egypt")}</button>
         <button type="button" className={chip(!cat)} onClick={() => setCat(null)}>{t("explore.all")} · {cards.filter((c) => c.lat != null).length}</button>
         {categories.map((c) => (
           <button key={c.slug} type="button" className={chip(cat === c.slug)} onClick={() => setCat(c.slug)}><IconCategory name={c.slug} size={16} />{c.name}</button>

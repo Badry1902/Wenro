@@ -29,7 +29,7 @@ export async function SiteHeader() {
             categories={cats}
             labels={{
               allTrips: t("nav.allTrips"), categories: t("nav.categories"), menu: t("nav.menu"), language: t("nav.language"),
-              close: t("gallery.close"), partners: t("nav.partners"), explore: t("nav.explore"), plan: t("nav.plan"),
+              close: t("gallery.close"), partners: t("nav.partners"), explore: t("nav.explore"), plan: t("nav.plan"), search: t("list.search"),
             }}
             account={{ signIn: t("nav.signIn"), dashboard: t("nav.dashboard") }}
           />
