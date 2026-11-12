@@ -22,6 +22,10 @@ export function ListFilter({ target, chips, labels, extra }: {
   const [second, setSecond] = useState<string | null>(null);
   const [shown, setShown] = useState<number | null>(null);
   const total = useMemo(() => chips.reduce((a, c) => a + c.count, 0), [chips]);
+  // After an action (e.g. approving the last pending partner) a chosen filter may have nothing left: show all again
+  const groupGone = !!group && !chips.some((c) => c.value === group && c.count > 0);
+  const secondGone = !!second && !!extra && !extra.chips.some((c) => c.value === second && c.count > 0);
+  useEffect(() => { if (groupGone) setGroup(null); if (secondGone) setSecond(null); }, [groupGone, secondGone]);
 
   useEffect(() => {
     const box = document.getElementById(target);
