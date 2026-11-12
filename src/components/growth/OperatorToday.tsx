@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { Pin, Stat, TaskList } from "../ui";
 
 export type OpToday = { requests: number; oldest_request_at: string | null; to_check_in: number; today_guests: number; past_unmarked: number;
   trips_without_departures: { id: string; title: string | null }[]; response_hours: number | null; decided_count: number };
@@ -16,31 +17,20 @@ export async function OperatorTodo({ d, base, manager }: { d: OpToday; base: str
   const h = d.response_hours == null ? null : Number(d.response_hours);
   const speed = h == null ? null : h <= 1 ? "fast" : h <= 6 ? "ok" : "slow";
   return (
-    <section aria-labelledby="todo-h" className="mb-6 grid gap-3 lg:grid-cols-[1.4fr_1fr]">
-      <div className="rounded-card border border-line p-4">
-        <h2 id="todo-h" className="mb-2 font-bold">{t("todo")}</h2>
-        {items.length === 0 ? <p className="text-small text-success">✓ {t("allDone")}</p> : (
-          <ul className="flex flex-col gap-2">
-            {items.map((i) => (
-              <li key={i.key}>
-                <Link href={i.href} className={`flex items-center justify-between gap-3 rounded-control p-3 font-semibold hover:opacity-90 ${i.warn ? "bg-apricot-tint" : "bg-discovery-tint"}`}>
-                  <span>{t(`items.${i.key}`, { n: i.n })}</span><span aria-hidden="true" className="rtl:-scale-x-100">→</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    <section aria-label={t("todo")} className="mb-6 grid items-start gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+      <TaskList title={t("todo")}>
+        {items.length === 0 ? <p className="px-4 py-3 text-[14px] text-ink-muted">{t("allDone")}</p> : items.map((i) => (
+          <Link key={i.key} href={i.href} className="flex min-h-12 items-center gap-3 px-4 py-2 transition-colors duration-150 hover:bg-[#F6F5F1]">
+            <span className="grid w-3 shrink-0 place-items-center">{i.warn && <Pin />}</span>
+            <span className="flex-1">{t(`items.${i.key}`, { n: i.n })}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" className="shrink-0 text-ink-muted/60 rtl:-scale-x-100"><path d="M9 6l6 6-6 6" /></svg>
+          </Link>
+        ))}
+      </TaskList>
       {manager && (
-        <div className="rounded-card border border-line p-4">
-          <h2 className="mb-1 font-bold">{t("responseTitle")}</h2>
-          {h == null ? <p className="text-small text-ink-muted">{t("responseNone")}</p> : (
-            <>
-              <p className={`text-h2 font-extrabold tabular-nums ${speed === "fast" ? "text-success" : speed === "ok" ? "text-discovery" : "text-warning"}`}>{t("hours", { n: h })}</p>
-              <p className="text-small">{t(`speed.${speed}`)}</p>
-              <p className="mt-1 text-[12px] text-ink-muted">{t("responseNote", { n: d.decided_count })}</p>
-            </>
-          )}
+        <div className="rounded-card border border-line bg-surface p-5">
+          <Stat label={t("responseTitle")} value={h == null ? "—" : t("hours", { n: h })}
+            note={h == null ? t("responseNone") : <><span className={speed === "fast" ? "text-success" : speed === "slow" ? "text-warning" : "text-ink"}>{t(`speed.${speed}`)}</span><span className="mt-1 block">{t("responseNote", { n: d.decided_count })}</span></>} />
         </div>
       )}
     </section>

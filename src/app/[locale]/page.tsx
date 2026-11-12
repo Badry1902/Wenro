@@ -82,7 +82,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           campaign={slogans ? { title: t("home.campaignTitle"), subtitle: t("home.campaignSubtitle"), button: t("home.campaignButton") } : undefined}
           categories={CATEGORIES.map((c) => ({ slug: c, name: catName(c) }))}
           labels={{
-            eyebrow: t("home.heroEyebrow"), title: t("home.heroTitle"), subtitle: t("home.heroSubtitle"), searchLabel: t("home.searchLabel"),
+            title: t("home.heroTitle"), subtitle: t("home.heroSubtitle"), searchLabel: t("home.searchLabel"),
             placeholder: t("home.searchPlaceholder"), category: t("home.searchCategory"), all: t("home.allCategories"), button: t("home.searchButton"),
           }}
         />

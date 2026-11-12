@@ -8,7 +8,7 @@ import { TripTable, type TripVisits } from "@/components/VisitsPanel";
 import { FirstSteps } from "@/components/growth/Steps";
 import { OperatorTodo, type OpToday } from "@/components/growth/OperatorToday";
 import type { TripQuality } from "@/lib/quality";
-import { Badge, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Badge, Empty, Flash, PageTitle, Pin, Stat, StatRow, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { QrScanner } from "@/components/QrScanner";
 import { cancelSlot, checkIn, checkInByCode, decideRequest, noShow } from "../../actions";
@@ -88,48 +88,46 @@ export default async function OperatorToday({ params, searchParams }: Props) {
       )}
       {todo && <OperatorTodo d={todo} base={back} manager={manager} />}
 
-      {/* The day at a glance, and the things operators do most */}
-      <div className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {[
-          { label: t("kDepartures"), value: slots.filter((x) => x.status !== "cancelled").length },
-          { label: t("kGuests"), value: bookings.filter((x) => x.status === "confirmed").reduce((n, x) => n + x.adults + x.children + x.infants, 0) },
-          { label: t("kPickups"), value: bookings.filter((x) => x.status === "confirmed" && x.transport).length },
-          { label: t("kRequests"), value: requests.length, warn: requests.length > 0 },
-        ].map((k) => (
-          <div key={k.label} className={`rounded-card border p-4 ${k.warn ? "border-apricot bg-apricot-tint" : "border-line"}`}>
-            <div className="text-small font-semibold text-ink-muted">{k.label}</div>
-            <div className="mt-1 text-[26px] font-extrabold leading-tight tabular-nums">{k.value}</div>
-          </div>
-        ))}
+      {/* The day at a glance */}
+      <div className="mb-6">
+        <StatRow>
+          <Stat label={t("kDepartures")} value={slots.filter((x) => x.status !== "cancelled").length} />
+          <Stat label={t("kGuests")} value={bookings.filter((x) => x.status === "confirmed").reduce((n, x) => n + x.adults + x.children + x.infants, 0)} />
+          <Stat label={t("kPickups")} value={bookings.filter((x) => x.status === "confirmed" && x.transport).length} />
+          <Stat label={t("kRequests")} value={requests.length} pin={requests.length > 0} />
+        </StatRow>
       </div>
-      {manager && (
-        <nav aria-label={t("quick")} className="mb-6 flex flex-wrap gap-2">
-          <Link href={`${back}/departures`} className={btn.quiet}>{t("qDepartures")}</Link>
-          <Link href={`${back}/experiences/new`} className={btn.quiet}>{t("qExperience")}</Link>
-          {["owner", "manager"].includes(ws.role) && <Link href={`${back}/money`} className={btn.quiet}>{t("qMoney")}</Link>}
-          {["owner", "manager"].includes(ws.role) && <Link href={`${back}/team`} className={btn.quiet}>{t("qTeam")}</Link>}
-        </nav>
-      )}
 
-      <section className="mb-8 flex flex-wrap items-end gap-3 rounded-card border border-line p-4">
-        <form action={checkInByCode} className="flex flex-wrap items-end gap-2">
-          {hidden}
-          <label className="flex flex-col gap-1 text-small font-bold">{t("scanLabel")}
-            <input id="qr-code" name="code" autoComplete="off" dir="ltr" placeholder={t("scanPlaceholder")} className={`${field} w-72 max-w-full`} />
-          </label>
-          <Submit className={btn.primary}>{t("checkIn")}</Submit>
-        </form>
-        <QrScanner label={t("scanCamera")} stopLabel={t("scanStop")} onCodeField="qr-code" />
+      {/* Check-in and the things operators do most, in one toolbar */}
+      <section className="mb-8 flex flex-wrap items-end justify-between gap-3 rounded-card border border-line bg-surface p-4">
+        <div className="flex flex-wrap items-end gap-2">
+          <form action={checkInByCode} className="flex flex-wrap items-end gap-2">
+            {hidden}
+            <label className="flex flex-col gap-1 text-[13px] font-medium text-ink-muted">{t("scanLabel")}
+              <input id="qr-code" name="code" autoComplete="off" dir="ltr" placeholder={t("scanPlaceholder")} className={`${field} w-72 max-w-full text-ink`} />
+            </label>
+            <Submit className={btn.primary}>{t("checkIn")}</Submit>
+          </form>
+          <QrScanner label={t("scanCamera")} stopLabel={t("scanStop")} onCodeField="qr-code" />
+        </div>
+        {manager && (
+          <nav aria-label={t("quick")} className="flex flex-wrap gap-1">
+            <Link href={`${back}/departures`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qDepartures")}</Link>
+            <Link href={`${back}/experiences/new`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qExperience")}</Link>
+            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/money`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qMoney")}</Link>}
+            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/team`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qTeam")}</Link>}
+          </nav>
+        )}
       </section>
 
       {requests.length > 0 && (
         <section id="requests" className="mb-8 scroll-mt-6">
-          <h2 className="mb-3 text-h3 font-bold">{t("requests", { n: requests.length })}</h2>
-          <ul className="flex flex-col gap-2">
+          <h2 className="mb-3 flex items-center gap-2 text-[18px] font-semibold"><Pin />{t("requests", { n: requests.length })}</h2>
+          <ul className="divide-y divide-line overflow-hidden rounded-card border border-line bg-surface">
             {requests.map((b) => (
-              <li key={b.booking_id} className="flex flex-wrap items-center justify-between gap-3 rounded-card border border-apricot bg-apricot-tint p-4">
+              <li key={b.booking_id} className="flex flex-wrap items-center justify-between gap-3 p-4">
                 <div>
-                  <div className="font-bold">{b.ref} · {format.dateTime(new Date(b.starts_at), { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>
+                  <div className="font-medium">{b.ref} · {format.dateTime(new Date(b.starts_at), { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</div>
                   <div className="text-small">{b.customer_name} · {t("people", { a: b.adults, c: b.children, i: b.infants })}</div>
                 </div>
                 {manager && (
@@ -145,47 +143,61 @@ export default async function OperatorToday({ params, searchParams }: Props) {
       )}
 
       {slots.length === 0 ? <Empty>{t("noDepartures")}</Empty> : (
-        <div id="run" className="flex scroll-mt-6 flex-col gap-8">
+        /* The day as a timeline: departures with guests open up, empty ones stay one quiet line */
+        <ol id="run" className="relative flex scroll-mt-6 flex-col gap-2 before:absolute before:inset-y-3 before:start-[84px] before:w-px before:bg-line max-sm:before:hidden">
           {slots.map((s) => {
             const list = bookings.filter((b) => b.starts_at === s.starts_at && b.experience_id === s.experience_id);
             const people = list.filter((b) => b.status === "confirmed").reduce((n, b) => n + b.adults + b.children + b.infants, 0);
+            const waiting = list.some((b) => b.status === "confirmed" && b.execution_status === "scheduled");
+            const weather = manager && s.status !== "cancelled" && !started(s.starts_at) && (
+              <details className="relative">
+                <summary className="inline-flex min-h-9 cursor-pointer list-none items-center rounded-[8px] px-2.5 text-[13px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink [&::-webkit-details-marker]:hidden">{t("weather")}</summary>
+                <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-[0_12px_32px_-12px_rgb(25_36_78/0.25)]">
+                  {hidden}<input type="hidden" name="slot" value={s.id} />
+                  <p className="text-[14px]">{t("weatherConfirm", { n: list.filter((b) => b.status === "confirmed" || b.status === "pending_request").length })}</p>
+                  <Submit className={btn.danger}>{t("weatherButton")}</Submit>
+                </form>
+              </details>
+            );
+            const time_ = <span dir="ltr" className="w-[68px] shrink-0 pt-0.5 font-mono text-[13px] tabular-nums text-ink-muted max-sm:w-auto">{time(s.starts_at)}</span>;
+            const dot = <span aria-hidden="true" className={`relative z-[1] mt-1.5 grid size-[11px] shrink-0 place-items-center rounded-full border max-sm:hidden ${list.length ? "border-apricot bg-apricot" : "border-[#C9CCD8] bg-ivory"}`} />;
+            if (list.length === 0) return (
+              <li key={s.id} className="flex items-start gap-3 sm:gap-4">
+                {time_}{dot}
+                <div className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-[12px] px-3 py-1.5">
+                  <span className="min-w-0"><span id={`s-${s.id}`} className="text-[15px] text-ink">{s.title}</span>
+                    <span className="ms-2 text-[13px] text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })}</span></span>
+                  <span className="flex items-center gap-2">{s.status !== "open" && <Badge value={s.status} />}{weather}</span>
+                </div>
+              </li>
+            );
             return (
-              <section key={s.id} aria-labelledby={`s-${s.id}`} className="rounded-card border border-line">
-                <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-[#F7F8FC] p-4">
-                  <div>
-                    <h2 id={`s-${s.id}`} className="text-h3 font-bold"><span dir="ltr">{time(s.starts_at)}</span> · {s.title}</h2>
-                    <div className="text-small text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })} · {t("guests", { n: people })}</div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Badge value={s.status} />
-                    {manager && s.status !== "cancelled" && !started(s.starts_at) && (
-                      <details className="relative">
-                        <summary className={`${btn.quiet} cursor-pointer list-none`}>{t("weather")}</summary>
-                        <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-lg">
-                          {hidden}<input type="hidden" name="slot" value={s.id} />
-                          <p className="text-[14px]">{t("weatherConfirm", { n: list.filter((b) => b.status === "confirmed" || b.status === "pending_request").length })}</p>
-                          <Submit className={btn.danger}>{t("weatherButton")}</Submit>
-                        </form>
-                      </details>
-                    )}
-                  </div>
-                </header>
-                {list.length === 0 ? <p className="p-4 text-ink-muted">{t("noGuests")}</p> : (
+              <li key={s.id} className="flex items-start gap-3 py-2 sm:gap-4">
+                {time_}{dot}
+                <section aria-labelledby={`s-${s.id}`} className="min-w-0 flex-1 overflow-hidden rounded-card border border-line bg-surface">
+                  <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
+                    <div>
+                      <h2 id={`s-${s.id}`} className="flex items-center gap-2 text-[17px] font-semibold">{waiting && <Pin />}{s.title}</h2>
+                      <div className="text-[13px] text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })} · {t("guests", { n: people })}</div>
+                    </div>
+                    <div className="flex items-center gap-2">{s.status !== "open" && <Badge value={s.status} />}{weather}</div>
+                  </header>
+                {(
                   <ul className="divide-y divide-line">
                     {list.map((b) => (
                       <li key={b.booking_id} className={`flex flex-wrap items-center justify-between gap-3 p-4 ${q.hl === b.booking_id ? "row-flash" : ""}`}>
                         <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 font-bold">
+                          <div className="flex flex-wrap items-center gap-2 font-medium">
                             {b.customer_name}<span className="text-small font-normal text-ink-muted" dir="ltr">{b.ref}</span>
                             <Badge value={b.execution_status === "scheduled" ? b.status : b.execution_status} />
-                            {b.reconfirm_status === "confirmed" && <span className="text-[12px] font-bold text-success">{t("reconfirmed")}</span>}
+                            {b.reconfirm_status === "confirmed" && <span className="text-[12px] font-medium text-success">{t("reconfirmed")}</span>}
                           </div>
                           <div className="text-[14px]">{t("people", { a: b.adults, c: b.children, i: b.infants })}
                             {b.transport ? <> · {t("pickupAt", { hotel: b.hotel ?? "" })}{b.room ? ` · ${t("room", { room: b.room })}` : ""}</> : <> · {t("meetingPoint")}</>}
                           </div>
                           <div className="text-small text-ink-muted">
                             {b.customer_phone
-                              ? <a href={`https://wa.me/${b.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(t("waText", { name: b.customer_name, operator: ws.name.replace(/^\[DEMO\]\s*/, ""), ref: b.ref, time: time(b.starts_at) }))}`} target="_blank" rel="noopener noreferrer" className="font-semibold text-discovery" dir="ltr">{b.customer_phone}</a>
+                              ? <a href={`https://wa.me/${b.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(t("waText", { name: b.customer_name, operator: ws.name.replace(/^\[DEMO\]\s*/, ""), ref: b.ref, time: time(b.starts_at) }))}`} target="_blank" rel="noopener noreferrer" className="font-medium text-discovery" dir="ltr">{b.customer_phone}</a>
                               : t("phoneHidden")}
                             {manager && b.paid_minor != null && <> · {t("collect", { amount: formatMoney({ minor: b.paid_minor, currency: b.currency }, locale) })}</>}
                           </div>
@@ -200,17 +212,21 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                     ))}
                   </ul>
                 )}
-              </section>
+                </section>
+              </li>
             );
           })}
-        </div>
+        </ol>
       )}
       <p className="mt-8 text-small text-ink-muted">{ta("timezoneNote")}</p>
-      {views.length > 0 && (
-        <section aria-labelledby="op-views" className="mt-10 rounded-card border border-line p-5">
-          <h2 id="op-views" className="mb-1 font-bold">{ta("visits.opTitle")}</h2>
-          <p className="mb-3 text-small text-ink-muted">{ta("visits.opSub")}</p>
-          <TripTable rows={views} />
+      {/* Only trips someone looked at or booked: a table of zeros tells nothing */}
+      {views.some((r) => r.views > 0 || r.bookings > 0) && (
+        <section aria-labelledby="op-views" className="mt-10 rounded-card border border-line bg-surface">
+          <div className="border-b border-line px-5 py-3">
+            <h2 id="op-views" className="text-[15px] font-semibold">{ta("visits.opTitle")}</h2>
+            <p className="text-[13px] text-ink-muted">{ta("visits.opSub")}</p>
+          </div>
+          <div className="px-3 py-2"><TripTable rows={views.filter((r) => r.views > 0 || r.bookings > 0).sort((a, b) => b.bookings - a.bookings || b.visitors - a.visitors)} /></div>
         </section>
       )}
     </>

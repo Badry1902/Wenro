@@ -8,7 +8,6 @@ import { rpc } from "@/lib/data/rpc";
 import { Suspense } from "react";
 import { Wordmark } from "./brand/Logo";
 import { LanguageMenu } from "./LanguageMenu";
-import { patternStyle, themeOfTheDay } from "@/lib/themes";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
 export const TYPE_STYLE: Record<Workspace["type"], { dot: string; pill: string; bar: string }> = {
@@ -45,20 +44,20 @@ export async function WorkspaceShell({
 
   const Switcher = ({ open }: { open?: boolean }) => (
     <details className="group/sw" open={open}>
-      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between rounded-control px-2 text-small font-semibold text-white/80 hover:bg-white/10 [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-9 cursor-pointer list-none items-center justify-between rounded-[8px] px-2.5 text-[14px] font-medium text-white/70 hover:bg-white/[0.05] [&::-webkit-details-marker]:hidden">
         {t("switch")} <span className="text-white/50">({others.length})</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="transition-transform group-open/sw:rotate-180"><path d="M6 9l6 6 6-6" /></svg>
       </summary>
       <div className="mt-1 flex flex-col gap-3 pb-2">
         {groups.map((g) => (
           <div key={g.type}>
-            <div className="mb-1 flex items-center gap-2 px-2 text-[11px] font-bold uppercase tracking-wider text-white/50">
+            <div className="mb-1 flex items-center gap-2 px-2 text-[12px] font-medium text-white/50">
               <span className={`size-2 rounded-full ${TYPE_STYLE[g.type].dot}`} />{t(`typeGroups.${g.type}`)}
             </div>
             <ul className="flex flex-col">
               {g.items.map((w) => (
                 <li key={w.org_id}>
-                  <Link href={homeOf(w)} className="block truncate rounded-control px-2 py-1.5 text-small text-white/85 hover:bg-white/10">{w.name}</Link>
+                  <Link href={homeOf(w)} className="block truncate rounded-[8px] px-2.5 py-1.5 text-[14px] text-white/75 hover:bg-white/[0.05] hover:text-white">{w.name}</Link>
                 </li>
               ))}
             </ul>
@@ -71,14 +70,13 @@ export async function WorkspaceShell({
   const SignOut = ({ className }: { className: string }) => (
     <form action={signOut} className={className}>
       <input type="hidden" name="locale" value={locale} />
-      <button className="min-h-11 text-small font-semibold text-white/80 underline-offset-4 hover:underline">{t("signin.signOut")}</button>
+      <button className="py-2 text-[14px] text-white/60 hover:text-white">{t("signin.signOut")}</button>
     </form>
   );
 
   return (
     <div className="flex min-h-dvh flex-col md:flex-row">
       <aside className="relative bg-ink text-white md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
-        <div className={`h-1 ${style.bar}`} aria-hidden="true" />
         <div className="relative flex items-center justify-between gap-3 px-4 py-3 md:block md:px-5 md:pt-6">
           <Link href="/" className="flex min-h-11 items-center gap-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
             <Wordmark tone="reverse" width={118} />
@@ -90,13 +88,14 @@ export async function WorkspaceShell({
             {unread > 0 && <span className="absolute end-1 top-1 grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-ink">{unread > 99 ? "99+" : unread}</span>}
           </Link>
           <div className="min-w-0 md:mb-5">
-            <span className={`inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-bold ${style.pill}`}>{t(`types.${current.type}`)}</span>
-            <div className="mt-1.5 truncate font-bold md:text-[17px]">{current.name}</div>
-            <div className="text-[12px] text-white/70">{t(`typeHints.${current.type}`)}</div>
+            <span className="inline-flex items-center gap-2 text-[12px] font-medium text-white/60">
+              <span className={`size-1.5 rounded-full ${style.dot}`} aria-hidden="true" />{t(`types.${current.type}`)}
+            </span>
+            <div className="mt-1 truncate text-[16px] font-semibold">{current.name}</div>
             <div className="mt-0.5 text-[12px] text-white/50">{t("youAre", { role: t(`roles.${current.role}`) })}</div>
           </div>
         </div>
-        <nav aria-label={t("menu")} className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-col">
+        <nav aria-label={t("menu")} className="flex gap-1 overflow-x-auto px-3 pb-3 md:flex-col md:gap-0.5">
           {nav.map((n) => <NavLink key={n.href} href={n.href} exact={n.exact}>{n.label}</NavLink>)}
         </nav>
         {others.length > 0 && (
@@ -106,15 +105,14 @@ export async function WorkspaceShell({
           </>
         )}
         <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
-        <div className="relative mt-auto hidden px-5 pb-6 pt-16 md:block">
-          <div className="pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,#000_70%)]" style={patternStyle(themeOfTheDay(), "midnight", 220)} aria-hidden="true" />
-          <div className="relative -ms-2.5 mb-1"><Suspense><LanguageMenu label={t("language")} tone="dark" align="start" up /></Suspense></div>
-          <Link href="/app/account" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("account.menu")}</Link>
-          <Link href="/" className="relative block min-h-11 py-2 text-small font-semibold text-white/80 hover:underline">{t("toSite")}</Link>
-          <SignOut className="relative" />
+        <div className="mt-auto hidden border-t border-white/[0.08] px-5 pb-5 pt-4 md:block">
+          <div className="-ms-2.5 mb-1"><Suspense><LanguageMenu label={t("language")} tone="dark" align="start" up /></Suspense></div>
+          <Link href="/app/account" className="block py-2 text-[14px] text-white/60 hover:text-white">{t("account.menu")}</Link>
+          <Link href="/" className="block py-2 text-[14px] text-white/60 hover:text-white">{t("toSite")}</Link>
+          <SignOut className="" />
         </div>
       </aside>
-      <main className="min-w-0 flex-1 bg-ivory px-4 py-6 md:px-10 md:py-8">
+      <main className="min-w-0 flex-1 bg-ivory px-4 py-6 md:px-8 md:py-8">
         {current.status === "pending" && (
           <p role="status" className="mb-6 rounded-card bg-warning-tint p-4 text-warning">{t("pendingNotice")}</p>
         )}

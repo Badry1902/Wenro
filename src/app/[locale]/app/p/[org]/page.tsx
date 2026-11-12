@@ -7,7 +7,7 @@ import type { ExperienceCard } from "@/lib/data/types";
 import { formatMoney } from "@/lib/money";
 import { siteUrl } from "@/lib/env";
 import { canManage, requireWorkspace } from "@/lib/workspaces";
-import { Badge, Card, Empty, Flash, PageTitle, btn, field } from "@/components/ui";
+import { Badge, Card, Empty, Flash, PageTitle, Stat, StatRow, btn, field } from "@/components/ui";
 import { Submit } from "@/components/Submit";
 import { CopyButton } from "@/components/CopyButton";
 import { QrDownload, ShareKit } from "@/components/ShareKit";
@@ -69,27 +69,21 @@ export default async function PartnerHome({ params, searchParams }: Props) {
       {stats && <PartnerGrowth s={stats} locale={locale} org={org} />}
 
       {/* At a glance */}
-      <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {[
-          { label: t("kpiVisits"), value: format.number(visits), hint: t("kpiVisitsHint") },
-          { label: t("kpiBookings"), value: format.number(booked), hint: t("kpiBookingsHint", { done }) },
-          { label: t("kpiConversion"), value: conversion == null ? "—" : `${format.number(conversion)}%`, hint: t("kpiConversionHint") },
-          { label: t("kpiReady"), value: currencies.length ? currencies.map((c) => m(s.totals[`${c}:payable`] ?? 0, c)).join(" · ") : "—", hint: t("kpiReadyHint") },
-        ].map((k) => (
-          <div key={k.label} className="rounded-card border border-line p-4">
-            <div className="text-small font-semibold text-ink-muted">{k.label}</div>
-            <div className="mt-1 text-[26px] font-extrabold leading-tight tabular-nums">{k.value}</div>
-            <div className="mt-1 text-small text-ink-muted">{k.hint}</div>
-          </div>
-        ))}
+      <div className="mb-8">
+        <StatRow>
+          <Stat label={t("kpiVisits")} value={format.number(visits)} note={t("kpiVisitsHint")} />
+          <Stat label={t("kpiBookings")} value={format.number(booked)} note={t("kpiBookingsHint", { done })} />
+          <Stat label={t("kpiConversion")} value={conversion == null ? "—" : `${format.number(conversion)}%`} note={t("kpiConversionHint")} />
+          <Stat label={t("kpiReady")} value={currencies.length ? currencies.map((c) => m(s.totals[`${c}:payable`] ?? 0, c)).join(" · ") : "—"} note={t("kpiReadyHint")} />
+        </StatRow>
       </div>
 
       {/* How earning works, in three steps */}
-      <ol className="mb-8 grid gap-3 md:grid-cols-3">
+      <ol className="mb-8 grid gap-x-6 gap-y-3 border-y border-line py-4 md:grid-cols-3">
         {(["how1", "how2", "how3"] as const).map((k, n) => (
-          <li key={k} className="flex gap-3 rounded-card bg-apricot-tint p-4">
-            <span className="grid size-8 shrink-0 place-items-center rounded-full bg-white font-extrabold text-ink">{n + 1}</span>
-            <span className="text-small">{t(`${k}${ws.type === "agency" ? "Agency" : ""}` as "how1")}</span>
+          <li key={k} className="flex gap-3 text-[14px] text-ink-muted">
+            <span className="font-mono text-[13px] tabular-nums text-ink">{String(n + 1).padStart(2, "0")}</span>
+            <span>{t(`${k}${ws.type === "agency" ? "Agency" : ""}` as "how1")}</span>
           </li>
         ))}
       </ol>
@@ -100,7 +94,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
             <>
               <p className="mb-3 text-small text-ink-muted">{t("linkHint")}</p>
               <form className="mb-3 flex flex-wrap items-end gap-2">
-                <label className="flex min-w-0 flex-1 flex-col gap-1 text-small font-bold">{t("linkTo")}
+                <label className="flex min-w-0 flex-1 flex-col gap-1 text-[13px] font-medium text-ink-muted">{t("linkTo")}
                   <select name="x" defaultValue={target?.slug ?? ""} className={field}>
                     <option value="">{t("homePage")}</option>
                     {experiences.map((e) => <option key={e.slug} value={e.slug}>{e.title}</option>)}
@@ -108,17 +102,17 @@ export default async function PartnerHome({ params, searchParams }: Props) {
                 </label>
                 <Submit className={btn.quiet}>{t("makeLink")}</Submit>
               </form>
-              <p dir="ltr" className="mb-3 select-all break-all rounded-control bg-[#F7F8FC] p-3 font-mono text-[14px]">{link}</p>
+              <p dir="ltr" className="mb-3 select-all break-all rounded-control border border-line bg-[#FAF9F6] p-3 font-mono text-[13px]">{link}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <CopyButton text={link!} label={t("copy")} done={t("copied")} />
-                <span className="text-small">{t("code")}: <b dir="ltr" className="tracking-wider">{code}</b></span>
+                <span className="text-[14px] text-ink-muted">{t("code")}: <span dir="ltr" className="font-mono text-ink">{code}</span></span>
               </div>
               <p className="mt-3 text-small text-ink-muted">{t("rules")}</p>
             </>
           )}
         </Card>
         {qr && (
-          <figure className="flex flex-col items-center gap-2 rounded-card border border-line p-4">
+          <figure className="flex flex-col items-center gap-2 rounded-card border border-line bg-surface p-4">
             <div className="h-44 w-44" aria-hidden="true" dangerouslySetInnerHTML={{ __html: qr }} />
             <figcaption className="max-w-44 text-center text-small text-ink-muted">{t("qrHint")}</figcaption>
             <QrDownload svg={qr} name={`wenro-${code}`} labels={{ png: t("qrPng"), svg: t("qrSvg") }} />
@@ -136,15 +130,12 @@ export default async function PartnerHome({ params, searchParams }: Props) {
         </Card>
       )}
 
-      <h2 className="mb-3 text-h3 font-bold">{t("earningsTitle")}</h2>
+      <h2 className="mb-3 text-[18px] font-semibold">{t("earningsTitle")}</h2>
       {currencies.length === 0 ? <Empty>{t("noEarnings")}</Empty> : currencies.map((c) => (
-        <div key={c} className="mb-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          {STAGES.map((st) => (
-            <div key={st} className="rounded-card border border-line p-4">
-              <div className="text-small font-semibold text-ink-muted">{t(`stage.${st}`)}</div>
-              <div className="text-h3 font-bold tabular-nums">{m(s.totals[`${c}:${st}`] ?? 0, c)}</div>
-            </div>
-          ))}
+        <div key={c} className="mb-3">
+          <StatRow>
+            {STAGES.map((st) => <Stat key={st} label={t(`stage.${st}`)} value={m(s.totals[`${c}:${st}`] ?? 0, c)} />)}
+          </StatRow>
         </div>
       ))}
       <p className="mb-8 text-small text-ink-muted">{t("stagesHint")}</p>
@@ -153,7 +144,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
         <Card title={t("clicksTitle")}>
           {s.codes.length === 0 ? <p className="text-ink-muted">—</p> : (
             <ul className="flex flex-col gap-1">
-              {s.codes.map((c) => <li key={c.code} className="flex justify-between gap-2"><span dir="ltr" className="font-semibold">{c.code}</span><span className="tabular-nums">{t("clicks", { n: c.clicks })}</span></li>)}
+              {s.codes.map((c) => <li key={c.code} className="flex justify-between gap-2"><span dir="ltr" className="font-mono">{c.code}</span><span className="tabular-nums">{t("clicks", { n: c.clicks })}</span></li>)}
             </ul>
           )}
           <p className="mt-2 text-small text-ink-muted">{t("clicksHint")}</p>
@@ -162,7 +153,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
           {canManage(ws) ? (
             <form action={setPayoutHandle} className="mb-4 flex flex-wrap items-end gap-2">
               <input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value={back} /><input type="hidden" name="org" value={org} />
-              <label className="flex min-w-0 flex-1 flex-col gap-1 text-small font-bold">{t("instapay")}
+              <label className="flex min-w-0 flex-1 flex-col gap-1 text-[13px] font-medium text-ink-muted">{t("instapay")}
                 <input name="handle" defaultValue={s.org.instapay ?? ""} maxLength={80} dir="ltr" placeholder="name@instapay" className={field} />
               </label>
               <Submit className={btn.quiet}>{t("save")}</Submit>
@@ -173,7 +164,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
               {s.payouts.map((p) => (
                 <li key={p.period_month + p.currency} className="flex flex-wrap items-center justify-between gap-2 py-2">
                   <span>{format.dateTime(new Date(`${p.period_month.slice(0, 10)}T12:00:00Z`), { month: "long", year: "numeric" })}</span>
-                  <span className="flex items-center gap-2 tabular-nums"><b>{m(p.amount_minor, p.currency)}</b><Badge value={p.status} /></span>
+                  <span className="flex items-center gap-2 tabular-nums"><span className="font-medium">{m(p.amount_minor, p.currency)}</span><Badge value={p.status} /></span>
                 </li>
               ))}
             </ul>

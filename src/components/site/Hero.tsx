@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { mediaSrc } from "@/lib/media";
 import { IconSearch } from "../Icons";
 
-type Labels = { eyebrow: string; title: string; subtitle: string; searchLabel: string; placeholder: string; category: string; all: string; button: string };
+type Labels = { title: string; subtitle: string; searchLabel: string; placeholder: string; category: string; all: string; button: string };
 /** Visitors arriving from an ad or partner link (?ref=…) see the campaign headline instead. */
 type Campaign = { title: string; subtitle: string; button: string };
 
@@ -37,14 +37,13 @@ export function Hero({ photos, categories, labels, campaign }: { photos: { src: 
 
       <div className="mx-auto flex min-h-[580px] max-w-7xl flex-col justify-end px-4 pb-16 pt-24 md:min-h-[640px] md:pb-24">
         <div className="hero-in max-w-3xl text-white">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1.5 text-small font-bold uppercase tracking-[0.18em] text-white backdrop-blur-sm"><span className="size-2 rounded-full bg-apricot" aria-hidden="true" />{labels.eyebrow}</p>
           <div className={campaign ? "campaign-hide" : undefined}>
-            <h1 className="mt-3 font-display text-[42px] font-black leading-[1.02] text-balance md:text-[68px] rtl:leading-[1.3]">{labels.title}</h1>
+            <h1 className="font-display text-[42px] font-black leading-[1.02] text-balance md:text-[68px] rtl:leading-[1.3]">{labels.title}</h1>
             <p className="mt-4 max-w-xl text-[17px] text-white/85 md:text-h3">{labels.subtitle}</p>
           </div>
           {campaign && (
             <div className="campaign-only">
-              <h1 className="mt-3 font-display text-[42px] font-black leading-[1.02] text-balance md:text-[64px]">{campaign.title}</h1>
+              <h1 className="font-display text-[42px] font-black leading-[1.02] text-balance md:text-[64px]">{campaign.title}</h1>
               <p className="mt-4 max-w-xl text-[17px] text-white/85 md:text-h3">{campaign.subtitle}</p>
             </div>
           )}

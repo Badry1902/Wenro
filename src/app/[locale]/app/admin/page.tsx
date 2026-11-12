@@ -3,7 +3,7 @@ import { rpc } from "@/lib/data/rpc";
 import { formatMoney } from "@/lib/money";
 import { dayKey } from "@/lib/pricing";
 import { requirePlatform } from "@/lib/workspaces";
-import { Flash, PageTitle, Task, btn } from "@/components/ui";
+import { Flash, PageTitle, Stat, StatRow, Task, TaskList, btn } from "@/components/ui";
 import { platformCan, type PlatformPerm } from "@/lib/permissions";
 import { SiteVisits, type Visits } from "@/components/VisitsPanel";
 import { Submit } from "@/components/Submit";
@@ -51,41 +51,48 @@ export default async function AdminOverview({ params, searchParams }: Props) {
           <Submit className={btn.primary}>{t("demoButton")}</Submit>
         </form>
       )}
+      {/* Decisions first: one list, what needs doing now carries the pin and comes to the top */}
+      <div className="mb-8 grid items-start gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <TaskList title={t("needsAction")}>
+          {[
+            can("bookings") && { k: "tu", n: o.tomorrow_unconfirmed, label: t("tomorrowUnconfirmed"), href: `${base}/bookings?d=${tomorrow}&r=sent` },
+            can("bookings") && { k: "pr", n: o.pending_requests, label: t("pendingRequests"), href: `${base}/bookings?s=pending_request&span=90` },
+            can("partnersAct") && { k: "po", n: o.pending_orgs, label: t("pendingOrgs"), href: `${base}/partners` },
+            can("experiences") && { k: "ir", n: o.experiences_in_review, label: t("inReview"), href: `${base}/experiences` },
+            can("reviews") && { k: "rv", n: pendingReviews, label: t("pendingReviews"), href: `${base}/reviews` },
+            can("messages") && { k: "fm", n: o.failed_messages, label: t("failedMessages"), href: `${base}/messages` },
+            can("finance") && { k: "pp", n: o.pending_payouts ?? 0, label: t("pendingPayouts"), href: `${base}/finance#payouts` },
+            can("finance") && { k: "os", n: o.open_statements ?? 0, label: t("openStatements"), href: `${base}/finance/operators` },
+          ].filter((x): x is { k: string; n: number; label: string; href: string } => !!x)
+            .sort((a, b) => Number(Number(b.n) > 0) - Number(Number(a.n) > 0))
+            .map((x) => <Task key={x.k} tone="warn" count={x.n} label={x.label} href={x.href} />)}
+        </TaskList>
+
+        {(can("bookings") || can("finance")) && (
+          <section aria-label={t("glance")} className="flex flex-col gap-4">
+            {can("finance") && (
+              <a href={`${base}/finance/operators`} className="group block rounded-card border border-line bg-surface p-5 transition-colors duration-150 hover:border-ink-muted/40">
+                <Stat size="lg" label={t("dueFromOperators")} value={money(o.open_statements_due)}
+                  note={<>{t("dueFromOperatorsHint")}{Object.keys(o.unsettled_due ?? {}).length > 0 && <span className="mt-1 block text-ink">{t("plusUnsettled", { amount: money(o.unsettled_due) })}</span>}</>} />
+                <span className="mt-4 inline-flex items-center gap-1 text-[14px] font-medium text-discovery">{t("seeTrips")}<span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-0.5 rtl:-scale-x-100">→</span></span>
+              </a>
+            )}
+            <StatRow cols={2}>
+              {can("bookings") && <a href={`${base}/bookings?d=${tomorrow}`} className="block"><Stat label={t("tomorrowBookings")} value={o.tomorrow_bookings} /></a>}
+              {can("finance") && <a href={`${base}/finance/operators#unsettled`} className="block"><Stat label={t("unsettled")} value={o.unsettled_executed ?? 0} /></a>}
+              {can("finance") && <a href={`${base}/finance/partners`} className="block"><Stat label={t("owedToPartners")} value={money(o.payable_commissions)} note={t("owedToPartnersHint")} /></a>}
+            </StatRow>
+          </section>
+        )}
+      </div>
+
       {visits && <SiteVisits v={visits} />}
-      <h2 className="mb-3 font-bold">{t("needsAction")}</h2>
-      <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {can("bookings") && <Task tone="warn" count={o.tomorrow_unconfirmed} label={t("tomorrowUnconfirmed")} href={`${base}/bookings?d=${tomorrow}&r=sent`} />}
-        {can("bookings") && <Task tone="warn" count={o.pending_requests} label={t("pendingRequests")} href={`${base}/bookings?s=pending_request&span=90`} />}
-        {can("partnersAct") && <Task tone="warn" count={o.pending_orgs} label={t("pendingOrgs")} href={`${base}/partners`} />}
-        {can("experiences") && <Task tone="warn" count={o.experiences_in_review} label={t("inReview")} href={`${base}/experiences`} />}
-        {can("reviews") && <Task tone="warn" count={pendingReviews} label={t("pendingReviews")} href={`${base}/reviews`} />}
-        {can("messages") && <Task tone="warn" count={o.failed_messages} label={t("failedMessages")} href={`${base}/messages`} />}
-        {can("finance") && <Task tone="warn" count={o.pending_payouts ?? 0} label={t("pendingPayouts")} href={`${base}/finance#payouts`} />}
-        {can("finance") && <Task tone="warn" count={o.open_statements ?? 0} label={t("openStatements")} href={`${base}/finance/operators`} />}
-      </div>
-      {(can("bookings") || can("finance")) && <h2 className="mb-3 font-bold">{t("glance")}</h2>}
-      <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {can("bookings") && <Task count={o.tomorrow_bookings} label={t("tomorrowBookings")} href={`${base}/bookings?d=${tomorrow}`} />}
-        {can("finance") && <Task count={o.unsettled_executed ?? 0} label={t("unsettled")} href={`${base}/finance/operators#unsettled`} />}
-      </div>
-      {can("finance") && (
-        <div className="grid gap-4 md:grid-cols-2">
-          <a href={`${base}/finance/operators`} className="group block rounded-card border border-line p-5 transition-colors hover:border-discovery hover:bg-discovery-tint">
-            <span className="flex items-center justify-between font-bold">{t("dueFromOperators")}<span aria-hidden="true" className="text-discovery transition-transform group-hover:translate-x-1 rtl:-scale-x-100">→</span></span>
-            <span className="mt-2 block text-h3 font-bold tabular-nums">{money(o.open_statements_due)}</span>
-            <span className="mt-1 block text-small text-ink-muted">{t("dueFromOperatorsHint")}</span>
-            {Object.keys(o.unsettled_due ?? {}).length > 0 && <span className="mt-2 block text-small font-semibold">{t("plusUnsettled", { amount: money(o.unsettled_due) })}</span>}
-            <span className="mt-3 block text-small font-bold text-discovery">{t("seeTrips")}</span>
-          </a>
-          <a href={`${base}/finance/partners`} className="group block rounded-card border border-line p-5 transition-colors hover:border-discovery hover:bg-discovery-tint">
-            <span className="flex items-center justify-between font-bold">{t("owedToPartners")}<span aria-hidden="true" className="text-discovery transition-transform group-hover:translate-x-1 rtl:-scale-x-100">→</span></span>
-            <span className="mt-2 block text-h3 font-bold tabular-nums">{money(o.payable_commissions)}</span>
-            <span className="mt-1 block text-small text-ink-muted">{t("owedToPartnersHint")}</span>
-            <span className="mt-3 block text-small font-bold text-discovery">{t("seeTrips")}</span>
-          </a>
-        </div>
+      {can("team") && (
+        <p className="mt-8 flex gap-2 border-t border-line pt-4 text-[13px] text-ink-muted">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" className="mt-0.5 shrink-0"><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8h.01" /></svg>
+          {t("automationNote")}
+        </p>
       )}
-      {can("team") && <p className="mt-8 rounded-card bg-warning-tint p-4 text-small text-warning">{t("automationNote")}</p>}
     </>
   );
 }

@@ -1235,7 +1235,7 @@
         "gold": "Or"
       },
       "toNext": "Encore {n, plural, one {# excursion réalisée} other {# excursions réalisées}} ce mois-ci pour atteindre {level}.",
-      "top": "Niveau maximum. Superbe mois !",
+      "top": "Niveau maximum. Superbe mois.",
       "levelNote": "Les niveaux comptent les excursions réalisées ce mois-ci et repartent de zéro chaque mois. Ils ne changent pas votre commission.",
       "badges": "Badges",
       "badge": {
@@ -1266,7 +1266,7 @@
       "paid": "Payé",
       "forecast": "Si toutes les excursions prévues ont lieu : {amount} ce mois-ci.",
       "forecastNote": "Gagné = excursions réalisées. À venir = excursions confirmées pas encore réalisées. Paiement mensuel via InstaPay.",
-      "tip": "{title} transforme le mieux vos visites en réservations. Partagez-la davantage !",
+      "tip": "{title} transforme le mieux vos visites en réservations. Partagez-la davantage.",
       "kitCta": "Obtenir textes et images de story",
       "bestTitle": "Vos meilleures excursions (90 jours)",
       "bestSub": "Visites via votre lien, réservations et commission par excursion.",
@@ -1309,7 +1309,7 @@
     },
     "today": {
       "todo": "À faire maintenant",
-      "allDone": "Rien en attente. Bonne journée !",
+      "allDone": "Rien en attente. Bonne journée.",
       "items": {
         "requests": "{n, plural, one {# demande attend} other {# demandes attendent}} votre réponse",
         "checkin": "{n, plural, one {# réservation} other {# réservations}} à enregistrer bientôt",

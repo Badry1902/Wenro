@@ -1159,7 +1159,7 @@
         "gold": "Gold"
       },
       "toNext": "{n, plural, one {# more trip} other {# more trips}} done this month to reach {level}.",
-      "top": "Top level. Amazing month!",
+      "top": "Top level. Amazing month.",
       "levelNote": "Levels count trips done this month and start again each month. They do not change your commission.",
       "badges": "Badges",
       "badge": {
@@ -1190,7 +1190,7 @@
       "paid": "Paid",
       "forecast": "If all upcoming trips take place: {amount} this month.",
       "forecastNote": "Earned = trips done. On the way = confirmed trips not done yet. Paid monthly via InstaPay.",
-      "tip": "{title} turns visits into bookings best for you. Share it more!",
+      "tip": "{title} turns visits into bookings best for you. Share it more.",
       "kitCta": "Get captions and story images",
       "bestTitle": "Your best trips (90 days)",
       "bestSub": "Visits through your link, bookings and commission per trip.",
@@ -1233,7 +1233,7 @@
     },
     "today": {
       "todo": "To do now",
-      "allDone": "Nothing waiting. Enjoy the day!",
+      "allDone": "Nothing waiting. Enjoy the day.",
       "items": {
         "requests": "{n, plural, one {# request} other {# requests}} waiting for your answer",
         "checkin": "{n, plural, one {# booking} other {# bookings}} to check in soon",

@@ -1235,7 +1235,7 @@
         "gold": "Gold"
       },
       "toNext": "Noch {n, plural, one {# durchgeführter Ausflug} other {# durchgeführte Ausflüge}} diesen Monat bis {level}.",
-      "top": "Höchstes Level. Starker Monat!",
+      "top": "Höchstes Level. Starker Monat.",
       "levelNote": "Levels zählen die diesen Monat durchgeführten Ausflüge und starten jeden Monat neu. Ihre Provision ändern sie nicht.",
       "badges": "Abzeichen",
       "badge": {
@@ -1266,7 +1266,7 @@
       "paid": "Ausgezahlt",
       "forecast": "Wenn alle kommenden Ausflüge stattfinden: {amount} diesen Monat.",
       "forecastNote": "Verdient = durchgeführte Ausflüge. Unterwegs = bestätigte, noch nicht durchgeführte Ausflüge. Auszahlung monatlich per InstaPay.",
-      "tip": "{title} macht aus Ihren Besuchen die meisten Buchungen. Teilen Sie ihn öfter!",
+      "tip": "{title} macht aus Ihren Besuchen die meisten Buchungen. Teilen Sie ihn öfter.",
       "kitCta": "Texte und Story-Bilder holen",
       "bestTitle": "Ihre besten Ausflüge (90 Tage)",
       "bestSub": "Besuche über Ihren Link, Buchungen und Provision pro Ausflug.",
@@ -1309,7 +1309,7 @@
     },
     "today": {
       "todo": "Jetzt zu tun",
-      "allDone": "Nichts offen. Schönen Tag!",
+      "allDone": "Nichts offen. Schönen Tag.",
       "items": {
         "requests": "{n, plural, one {# Anfrage wartet} other {# Anfragen warten}} auf Ihre Antwort",
         "checkin": "{n, plural, one {# Buchung} other {# Buchungen}} bald einchecken",
