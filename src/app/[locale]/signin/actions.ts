@@ -1,7 +1,9 @@
 "use server";
 
 import { cookies, headers } from "next/headers";
+import { redirect as nextRedirect } from "next/navigation";
 import { z } from "zod";
+import { localeSchema } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { DEV_USER_COOKIE, PASSWORD_HINT_COOKIE } from "@/lib/auth";
 import { dataMode, siteUrl } from "@/lib/env";
@@ -9,7 +11,7 @@ import { createUserClient } from "@/lib/supabase/server";
 import { allow, clientKey } from "@/lib/ratelimit";
 import { rpc } from "@/lib/data/rpc";
 
-const locales = z.enum(["en", "de", "ru", "fr", "ar"]);
+const locales = localeSchema;
 
 /**
  * The link in the email must come back to the same address the person signed in from: the browser keeps
@@ -92,6 +94,48 @@ export async function signInWithPassword(form: FormData) {
   }
   (await cookies()).set(PASSWORD_HINT_COOKIE, "1", { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 400, secure: true });
   redirect({ href: "/app", locale });
+}
+
+/** Google sign-in: Supabase sends the person to Google and back to /api/auth/callback. */
+export async function signInWithGoogle(form: FormData) {
+  const locale = locales.catch("en").parse(form.get("locale"));
+  if (dataMode() === "localpg") redirect({ href: "/signin?error=google", locale });
+  const who = await clientKey();
+  if (!(await allow(`google:${who}`, 20, 900))) redirect({ href: "/signin?error=rate", locale });
+  const supabase = await createUserClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: `${await returnOrigin()}/api/auth/callback?next=/${locale}/app`, queryParams: { prompt: "select_account" } },
+  });
+  if (error || !data?.url) {
+    console.error("signInWithOAuth google failed", error?.status, error?.message);
+    redirect({ href: "/signin?error=google", locale });
+  }
+  nextRedirect(data!.url as string);
+}
+
+/**
+ * Forgot password: email a reset link. The answer is the same whether or not the address has an
+ * account, so the form cannot be used to find out who is registered.
+ */
+export async function sendPasswordReset(form: FormData) {
+  const locale = locales.catch("en").parse(form.get("locale"));
+  const e = email.safeParse(form.get("email"));
+  if (!e.success) redirect({ href: "/signin?m=forgot&error=email", locale });
+  const address = e.data!;
+  const who = await clientKey();
+  if (!(await allow(`reset:${who}`, 5, 3600)) || !(await allow(`reset-mail:${address}`, 3, 3600))) {
+    redirect({ href: "/signin?m=forgot&error=rate", locale });
+  }
+  if (dataMode() !== "localpg") {
+    const supabase = await createUserClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(address, {
+      redirectTo: `${await returnOrigin()}/api/auth/callback?next=${encodeURIComponent(`/${locale}/app/account?reset=1`)}`,
+    });
+    if (error && error.status === 429) redirect({ href: "/signin?m=forgot&error=rate", locale });
+    if (error) console.error("resetPasswordForEmail failed", error.status, error.message);
+  }
+  redirect({ href: `/signin?m=forgot&sent=${encodeURIComponent(address)}`, locale });
 }
 
 /** Local developer mode only. Refuses to run against Supabase. */

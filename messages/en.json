@@ -460,7 +460,7 @@
       "identifier": "Username or email",
       "password": "Password",
       "signInButton": "Sign in",
-      "forgot": "Forgot your password or first time here? Sign in with an email code",
+      "forgot": "First time here? Sign in with a code by email",
       "codeSent": "We sent a 6-digit code to {email}. It works for about an hour.",
       "code": "Code from the email",
       "codeButton": "Sign in with the code",
@@ -471,7 +471,15 @@
       "codeIntro": "First time? Use the email your invitation was sent to. After signing in you choose a username and password.",
       "emailError": "Check the email address.",
       "codeError": "That code is wrong or has expired. Check the newest email, or send a new code.",
-      "credsError": "Wrong username or password. Try again, or sign in with an email code."
+      "credsError": "Wrong username or password. Try again, or sign in with an email code.",
+      "google": "Continue with Google",
+      "or": "or",
+      "googleError": "We couldn't sign you in with Google. Try again or use your email.",
+      "forgotPassword": "Forgot your password?",
+      "resetIntro": "Enter your email and we'll send you a link to choose a new password.",
+      "resetButton": "Send me a reset link",
+      "resetSent": "If an account exists for {email}, a reset link is on its way. Open it in this same browser.",
+      "backToSignIn": "Back to sign in"
     },
     "join": {
       "title": "Your workspaces",
@@ -1051,7 +1059,11 @@
       "save": "Save",
       "saveFirst": "Save and continue",
       "toDashboard": "Back to my dashboard",
-      "privacy": "Your password is stored securely by our sign-in provider and is never visible to WENRO."
+      "privacy": "Your password is stored securely by our sign-in provider and is never visible to WENRO.",
+      "resetTitle": "Choose a new password",
+      "resetSub": "Type your new password twice, then you'll go to your dashboard.",
+      "firstSubGoogle": "One last step: choose a username. A password is optional because you sign in with Google.",
+      "passwordGoogle": "Optional: add one if you also want to sign in with your username."
     },
     "reviews": {
       "title": "Guest reviews",

@@ -5,6 +5,7 @@ import { dispatchPushes } from "@/lib/push";
 
 import { cookies, headers } from "next/headers";
 import { z } from "zod";
+import { localeSchema } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { seal } from "@/lib/messaging/seal";
@@ -14,7 +15,7 @@ import { allow, clientKey } from "@/lib/ratelimit";
 export type PlaceBookingState = { error?: string } | undefined;
 
 const schema = z.object({
-  locale: z.enum(["en", "de", "ru", "fr", "ar"]),
+  locale: localeSchema,
   experience_id: z.guid(),
   slot_id: z.guid(),
   adults: z.coerce.number().int().min(1).max(20),

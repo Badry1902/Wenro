@@ -5,7 +5,7 @@ import { LogoLoop } from "@/components/brand/BrandMotion";
 import { cookies } from "next/headers";
 import { Link } from "@/i18n/navigation";
 import { PASSWORD_HINT_COOKIE } from "@/lib/auth";
-import { devSignIn, sendSignInCode, signInWithPassword, verifySignInCode } from "./actions";
+import { devSignIn, sendPasswordReset, sendSignInCode, signInWithGoogle, signInWithPassword, verifySignInCode } from "./actions";
 
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false } };
@@ -29,9 +29,9 @@ export default async function SignIn({ params, searchParams }: Props) {
   const { sent, error, m } = await searchParams;
   const t = await getTranslations("app.signin");
   // Password first for people who used one on this browser before; email code otherwise (first sign-in)
-  const mode = m === "password" || m === "code" ? m : (await cookies()).get(PASSWORD_HINT_COOKIE) ? "password" : "code";
+  const mode = m === "password" || m === "code" || m === "forgot" ? m : (await cookies()).get(PASSWORD_HINT_COOKIE) ? "password" : "code";
   const errText: Record<string, string> = {
-    link: t("linkError"), rate: t("rateError"), send: t("sendError"), email: t("emailError"), code: t("codeError"), creds: t("credsError"),
+    link: t("linkError"), rate: t("rateError"), send: t("sendError"), email: t("emailError"), code: t("codeError"), creds: t("credsError"), google: t("googleError"),
   };
   const field = "min-h-12 rounded-control border border-[#8A90A6] bg-white px-3.5";
   const primary = "btn-press min-h-12 rounded-control bg-discovery font-bold text-white hover:bg-discovery-hover";
@@ -61,16 +61,40 @@ export default async function SignIn({ params, searchParams }: Props) {
         {/* Real sign-in (on a developer machine it is shown for layout checks only) */}
         {(
           <>
+            <form action={signInWithGoogle}>
+              <input type="hidden" name="locale" value={locale} />
+              <button className="btn-press flex min-h-12 w-full items-center justify-center gap-2 rounded-control border border-[#8A90A6] bg-white font-bold text-ink hover:border-ink">
+                {t("google")}
+              </button>
+            </form>
+            <p className="flex items-center gap-3 text-small text-ink-muted before:h-px before:flex-1 before:bg-line after:h-px after:flex-1 after:bg-line">{t("or")}</p>
+
             <nav className="grid grid-cols-2 gap-1 rounded-full bg-[#EEF0F6] p-1" aria-label={t("how")}>
               {(["code", "password"] as const).map((k) => (
-                <Link key={k} href={{ pathname: "/signin", query: { m: k } }} aria-current={mode === k ? "page" : undefined}
-                  className={`min-h-11 content-center rounded-full text-center text-small font-bold ${mode === k ? "bg-white text-ink shadow-sm" : "text-ink-muted"}`}>
+                <Link key={k} href={{ pathname: "/signin", query: { m: k } }} aria-current={mode === k || (k === "password" && mode === "forgot") ? "page" : undefined}
+                  className={`min-h-11 content-center rounded-full text-center text-small font-bold ${mode === k || (k === "password" && mode === "forgot") ? "bg-white text-ink shadow-sm" : "text-ink-muted"}`}>
                   {k === "code" ? t("tabCode") : t("tabPassword")}
                 </Link>
               ))}
             </nav>
 
-            {mode === "password" ? (
+            {mode === "forgot" ? (
+              sent ? (
+                <>
+                  <p role="status" className="rounded-card bg-success-tint p-4 font-semibold text-success">{t("resetSent", { email: sent })}</p>
+                  <Link href={{ pathname: "/signin", query: { m: "password" } }} className="text-center text-small font-semibold text-discovery hover:underline">{t("backToSignIn")}</Link>
+                </>
+              ) : (
+                <form action={sendPasswordReset} className="flex flex-col gap-3">
+                  <input type="hidden" name="locale" value={locale} />
+                  <p className="text-ink-muted">{t("resetIntro")}</p>
+                  <label htmlFor="reset-email" className="text-small font-bold">{t("email")}</label>
+                  <input id="reset-email" name="email" type="email" required autoComplete="email" dir="ltr" className={field} />
+                  <button className={primary}>{t("resetButton")}</button>
+                  <Link href={{ pathname: "/signin", query: { m: "password" } }} className="text-center text-small font-semibold text-ink-muted hover:underline">{t("backToSignIn")}</Link>
+                </form>
+              )
+            ) : mode === "password" ? (
               <form action={signInWithPassword} className="flex flex-col gap-3">
                 <input type="hidden" name="locale" value={locale} />
                 <label htmlFor="identifier" className="text-small font-bold">{t("identifier")}</label>
@@ -78,7 +102,8 @@ export default async function SignIn({ params, searchParams }: Props) {
                 <label htmlFor="password" className="text-small font-bold">{t("password")}</label>
                 <input id="password" name="password" type="password" required autoComplete="current-password" dir="ltr" className={field} />
                 <button className={primary}>{t("signInButton")}</button>
-                <Link href={{ pathname: "/signin", query: { m: "code" } }} className="text-center text-small font-semibold text-discovery hover:underline">{t("forgot")}</Link>
+                <Link href={{ pathname: "/signin", query: { m: "forgot" } }} className="text-center text-small font-semibold text-discovery hover:underline">{t("forgotPassword")}</Link>
+                <Link href={{ pathname: "/signin", query: { m: "code" } }} className="text-center text-small text-ink-muted hover:underline">{t("forgot")}</Link>
               </form>
             ) : sent ? (
               <>

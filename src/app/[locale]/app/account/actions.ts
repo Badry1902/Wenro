@@ -2,13 +2,14 @@
 
 import { cookies } from "next/headers";
 import { z } from "zod";
+import { localeSchema } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { dataMode } from "@/lib/env";
-import { PASSWORD_HINT_COOKIE } from "@/lib/auth";
+import { PASSWORD_HINT_COOKIE, usesGoogle } from "@/lib/auth";
 import { createUserClient } from "@/lib/supabase/server";
 
-const locales = z.enum(["en", "de", "ru", "fr", "ar"]);
+const locales = localeSchema;
 type Account = { email: string | null; username: string | null; password_set: boolean };
 
 /**
@@ -31,7 +32,9 @@ export async function saveAccount(form: FormData) {
     catch (e) { back(e instanceof RpcError ? e.code : "unexpected_error"); }
   } else if (!username && !me!.username) back("invalid_username");
 
-  if (password || !me!.password_set) {
+  const reset = form.get("reset") === "1";
+  if (reset && !password) back("password_short");
+  if (password || (!me!.password_set && !(await usesGoogle()))) {
     if (password.length < 10) back("password_short");
     if (password.length > 72) back("password_long");
     if (password !== confirm) back("password_mismatch");
@@ -47,5 +50,5 @@ export async function saveAccount(form: FormData) {
     await rpc("mark_password_set", {}, "user");
     (await cookies()).set(PASSWORD_HINT_COOKIE, "1", { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 400, secure: true });
   }
-  redirect({ href: first ? "/app" : "/app/account?ok=account_saved", locale });
+  redirect({ href: first || reset ? "/app" : "/app/account?ok=account_saved", locale });
 }

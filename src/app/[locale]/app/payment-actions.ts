@@ -2,6 +2,7 @@
 
 import { after } from "next/server";
 import { z } from "zod";
+import { formLocale } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { dispatchPushes } from "@/lib/push";
@@ -12,7 +13,7 @@ import { allow, clientKey } from "@/lib/ratelimit";
  * Operator → WENRO payments, and WENRO's payment methods. Every call runs as the signed-in person;
  * the database decides who may do what (operators: owner/manager; review and methods: WENRO owner/finance).
  */
-const locale = z.enum(["en", "de", "ru", "fr", "ar"]).catch("en");
+const locale = formLocale;
 const id = z.guid();
 
 /** Operator: report a payment for one or more open statements, with the receipt. */

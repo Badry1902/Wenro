@@ -1,11 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createUserClient } from "@/lib/supabase/server";
 
-// The sign-in email links here. We swap the one-time code for a session, then continue.
+// The sign-in email, the password-reset email and Google sign-in come back here. We swap the one-time code for a session, then continue.
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   const next = req.nextUrl.searchParams.get("next") ?? "/en/app";
-  const safeNext = /^\/(en|de|ru|fr|ar)\/app(\/|$)/.test(next) ? next : "/en/app";
+  const safeNext = /^\/(en|de|ru|fr|ar)\/app(\/[A-Za-z0-9/_-]*)?(\?[A-Za-z0-9=&_-]*)?$/.test(next) ? next : "/en/app";
   if (code) {
     const supabase = await createUserClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);

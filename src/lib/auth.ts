@@ -24,9 +24,11 @@ export const currentUserId = cache(async (): Promise<string | null> => {
   return typeof sub === "string" ? sub : null;
 });
 
-export async function currentUserEmail(): Promise<string | null> {
-  if (dataMode() === "localpg") return null;
+/** True when this person can sign in with Google (so a password is optional for them). */
+export const usesGoogle = cache(async (): Promise<boolean> => {
+  if (dataMode() === "localpg") return false;
   const supabase = await createUserClient();
-  const { data } = await supabase.auth.getUser();
-  return data.user?.email ?? null;
-}
+  const { data } = await supabase.auth.getClaims();
+  const meta = (data?.claims as { app_metadata?: { provider?: string; providers?: string[] } } | undefined)?.app_metadata;
+  return meta?.provider === "google" || !!meta?.providers?.includes("google");
+});

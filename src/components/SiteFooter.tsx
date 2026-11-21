@@ -42,24 +42,24 @@ export async function SiteFooter() {
 
         <nav aria-label={t("footer.explore")} className={col}>
           <p className={head}>{t("footer.explore")}</p>
-          <Link href="/experiences" className={link}>{t("nav.allTrips")}</Link>
+          <Link prefetch={false} href="/experiences" className={link}>{t("nav.allTrips")}</Link>
           {CATEGORIES.map((c) => (
-            <Link key={c} href={{ pathname: "/experiences", query: { cat: c } }} className={link}>{t(`categories.${c}` as "categories.sea")}</Link>
+            <Link prefetch={false} key={c} href={{ pathname: "/experiences", query: { cat: c } }} className={link}>{t(`categories.${c}` as "categories.sea")}</Link>
           ))}
         </nav>
 
         <nav aria-label={t("footer.partners")} className={col}>
           <p className={head}>{t("footer.partners")}</p>
-          <Link href="/signin" className={link}>{t("footer.operators")}</Link>
-          <Link href="/signin" className={link}>{t("footer.agencies")}</Link>
-          <Link href="/signin" className={link}>{t("footer.creators")}</Link>
-          <Link href="/app" className={link}>{t("nav.dashboard")}</Link>
+          <Link prefetch={false} href="/signin" className={link}>{t("footer.operators")}</Link>
+          <Link prefetch={false} href="/signin" className={link}>{t("footer.agencies")}</Link>
+          <Link prefetch={false} href="/signin" className={link}>{t("footer.creators")}</Link>
+          <Link prefetch={false} href="/app" className={link}>{t("nav.dashboard")}</Link>
         </nav>
 
         <nav aria-label={t("nav.language")} className={col}>
           <p className={head}>{t("nav.language")}</p>
           {routing.locales.map((l) => (
-            <Link key={l} href="/" locale={l} lang={l} className={`${link} inline-flex items-center gap-2`}><Flag locale={l} size={20} />{LANG[l]}</Link>
+            <Link prefetch={false} key={l} href="/" locale={l} lang={l} className={`${link} inline-flex items-center gap-2`}><Flag locale={l} size={20} />{LANG[l]}</Link>
           ))}
         </nav>
       </div>

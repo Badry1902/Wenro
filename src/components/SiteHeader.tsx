@@ -20,7 +20,7 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-surface/90 backdrop-blur-md print:static print:hidden">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4">
-        <Link href="/" aria-label="WENRO" className="flex min-h-11 shrink-0 items-center">
+        <Link prefetch={false} href="/" aria-label="WENRO" className="flex min-h-11 shrink-0 items-center">
           <Wordmark width={128} priority />
         </Link>
 
@@ -35,7 +35,7 @@ export async function SiteHeader() {
           />
         </Suspense>
 
-        <Link href="/wishlist" aria-label={t("wishlist.title")} title={t("wishlist.title")}
+        <Link prefetch={false} href="/wishlist" aria-label={t("wishlist.title")} title={t("wishlist.title")}
           className="btn-press relative grid size-11 shrink-0 place-items-center rounded-full hover:bg-discovery-tint">
           <IconHeart size={21} /><WishCount />
         </Link>

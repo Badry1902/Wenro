@@ -369,7 +369,7 @@
       "identifier": "Benutzername oder E-Mail",
       "password": "Passwort",
       "signInButton": "Anmelden",
-      "forgot": "Passwort vergessen oder zum ersten Mal hier? Mit E-Mail-Code anmelden",
+      "forgot": "Zum ersten Mal hier? Mit einem Code per E-Mail anmelden",
       "codeSent": "Wir haben einen 6-stelligen Code an {email} gesendet. Er gilt etwa eine Stunde.",
       "code": "Code aus der E-Mail",
       "codeButton": "Mit Code anmelden",
@@ -388,7 +388,15 @@
       "sendError": "Wir konnten den Link nicht senden. Prüfen Sie die Adresse und versuchen Sie es erneut.",
       "linkError": "Dieser Link ist abgelaufen oder wurde bereits verwendet. Fordern Sie einen neuen an.",
       "devTitle": "Entwicklermodus: als Testperson anmelden",
-      "signOut": "Abmelden"
+      "signOut": "Abmelden",
+      "google": "Mit Google fortfahren",
+      "or": "oder",
+      "googleError": "Die Anmeldung mit Google hat nicht geklappt. Versuche es erneut oder nutze deine E-Mail.",
+      "forgotPassword": "Passwort vergessen?",
+      "resetIntro": "Gib deine E-Mail ein, und wir schicken dir einen Link für ein neues Passwort.",
+      "resetButton": "Link zum Zurücksetzen senden",
+      "resetSent": "Wenn es ein Konto für {email} gibt, ist ein Link unterwegs. Öffne ihn in diesem Browser.",
+      "backToSignIn": "Zurück zur Anmeldung"
     },
     "types": {
       "platform": "WENRO-Verwaltung",
@@ -589,7 +597,11 @@
       "save": "Speichern",
       "saveFirst": "Speichern und weiter",
       "toDashboard": "Zurück zum Dashboard",
-      "privacy": "Ihr Passwort wird sicher beim Anmeldedienst gespeichert und ist für WENRO nie sichtbar."
+      "privacy": "Ihr Passwort wird sicher beim Anmeldedienst gespeichert und ist für WENRO nie sichtbar.",
+      "resetTitle": "Neues Passwort wählen",
+      "resetSub": "Gib das neue Passwort zweimal ein, danach geht es zu deinem Dashboard.",
+      "firstSubGoogle": "Letzter Schritt: Wähle einen Benutzernamen. Ein Passwort ist optional, weil du dich mit Google anmeldest.",
+      "passwordGoogle": "Optional: wenn du dich auch mit Benutzernamen anmelden willst."
     },
     "menu": "Arbeitsbereich-Menü",
     "switch": "Arbeitsbereich wechseln",

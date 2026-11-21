@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { localeSchema, formLocale } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { MAX_PHOTO_BYTES, deletePhoto, sniffImage, storePhoto } from "@/lib/storage";
@@ -8,7 +9,7 @@ import { ALLOWED_FORMATS, MAX_IMAGE_BYTES, MAX_VIDEO_BYTES, cloudinaryConfig, si
 
 export type SaveState = { error?: string } | undefined;
 
-const locale = z.enum(["en", "de", "ru", "fr", "ar"]).catch("en");
+const locale = formLocale;
 // Where the editor lives: /app/o/<org>/experiences or /app/admin/experiences
 const base = z.string().regex(/^\/app\/(o\/[0-9a-f-]{36}|admin)\/experiences$/);
 const guid = z.guid();
@@ -24,15 +25,15 @@ const payloadSchema = z.object({
   cancellation_policy_id: guid.nullable(),
   private_available: z.boolean(),
   private_max_group: z.number().int().min(1).max(100).nullable(),
-  translations: z.partialRecord(z.enum(["en", "de", "ru", "fr", "ar"]), z.record(z.string(), text)),
+  translations: z.partialRecord(localeSchema, z.record(z.string(), text)),
   prices: z.partialRecord(z.enum(["adult", "child", "infant", "private_group"]), z.object({
     net_minor: money, age_min: z.number().int().min(0).max(99).nullable().optional(),
     age_max: z.number().int().min(0).max(99).nullable().optional(), max_group: z.number().int().min(1).max(100).nullable().optional(),
   }).passthrough()),
   extras: z.array(z.object({ id: guid.nullable(), net_minor: money, per: z.enum(["person", "booking"]), names: z.record(z.string(), z.string().max(80)) })).max(20),
   transport: z.array(z.object({ zone_id: guid, net_minor: money, per: z.enum(["vehicle", "person"]), vehicle_capacity: z.number().int().min(1).max(60).nullable() })).max(20),
-  touched: z.array(z.enum(["en", "de", "ru", "fr", "ar"])).optional(),
-  machine: z.array(z.enum(["en", "de", "ru", "fr", "ar"])).optional(),
+  touched: z.array(localeSchema).optional(),
+  machine: z.array(localeSchema).optional(),
 });
 
 const LANGS = ["en", "ar", "de", "ru", "fr"] as const;

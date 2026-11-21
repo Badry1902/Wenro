@@ -4,6 +4,7 @@ import { after } from "next/server";
 import { dispatchPushes } from "@/lib/push";
 
 import { z } from "zod";
+import { formLocale } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";
 import { allow, clientKey } from "@/lib/ratelimit";
@@ -13,7 +14,7 @@ import { allow, clientKey } from "@/lib/ratelimit";
  * the database checks the role, so a forged form cannot do more than the person may.
  * After the call we go back to the page with ?ok=<action> or ?err=<code> for the banner.
  */
-const locale = z.enum(["en", "de", "ru", "fr", "ar"]).catch("en");
+const locale = formLocale;
 const back = z.string().regex(/^\/app(\/[A-Za-z0-9_-]+)*$/).catch("/app");
 const id = z.guid();
 

@@ -369,7 +369,7 @@
       "identifier": "Identifiant ou e-mail",
       "password": "Mot de passe",
       "signInButton": "Se connecter",
-      "forgot": "Mot de passe oublié ou première fois ? Connectez-vous avec un code par e-mail",
+      "forgot": "Première visite ? Connectez-vous avec un code par e-mail",
       "codeSent": "Nous avons envoyé un code à 6 chiffres à {email}. Il est valable environ une heure.",
       "code": "Code reçu par e-mail",
       "codeButton": "Se connecter avec le code",
@@ -388,7 +388,15 @@
       "sendError": "Impossible d’envoyer le lien. Vérifiez l’adresse et réessayez.",
       "linkError": "Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.",
       "devTitle": "Mode développeur : se connecter en tant que personne test",
-      "signOut": "Se déconnecter"
+      "signOut": "Se déconnecter",
+      "google": "Continuer avec Google",
+      "or": "ou",
+      "googleError": "La connexion avec Google a échoué. Réessayez ou utilisez votre e-mail.",
+      "forgotPassword": "Mot de passe oublié ?",
+      "resetIntro": "Saisissez votre e-mail et nous vous enverrons un lien pour choisir un nouveau mot de passe.",
+      "resetButton": "Envoyer le lien",
+      "resetSent": "Si un compte existe pour {email}, un lien est en route. Ouvrez-le dans ce même navigateur.",
+      "backToSignIn": "Retour à la connexion"
     },
     "types": {
       "platform": "Administration WENRO",
@@ -589,7 +597,11 @@
       "save": "Enregistrer",
       "saveFirst": "Enregistrer et continuer",
       "toDashboard": "Retour au tableau de bord",
-      "privacy": "Votre mot de passe est stocké de façon sécurisée par notre service de connexion ; WENRO ne le voit jamais."
+      "privacy": "Votre mot de passe est stocké de façon sécurisée par notre service de connexion ; WENRO ne le voit jamais.",
+      "resetTitle": "Nouveau mot de passe",
+      "resetSub": "Saisissez le nouveau mot de passe deux fois, puis vous accéderez au tableau de bord.",
+      "firstSubGoogle": "Dernière étape : choisissez un nom d'utilisateur. Le mot de passe est facultatif car vous vous connectez avec Google.",
+      "passwordGoogle": "Facultatif : si vous voulez aussi vous connecter avec votre nom d'utilisateur."
     },
     "menu": "Menu de l’espace",
     "switch": "Changer d’espace",
