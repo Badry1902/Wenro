@@ -31,22 +31,22 @@ export async function PartnerGrowth({ s, locale, org }: { s: PartnerStats; local
   const best = [...s.trips].filter((x) => Number(x.clicks) >= 5).sort((a, b) => Number(b.bookings) / Number(b.clicks) - Number(a.bookings) / Number(a.clicks))[0];
 
   return (
-    <div className="mb-8 grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+    <div className="mb-8 grid grid-cols-1 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
       {/* The figure that matters to a marketer: what this month earns */}
-      <section aria-labelledby="earn-h" className="rounded-card border border-line bg-surface p-5 lg:order-2">
+      <section aria-labelledby="earn-h" className="min-w-0 rounded-card border border-line bg-surface p-5 lg:order-2">
         <h2 id="earn-h" className="font-sans text-[13px] font-normal text-ink-muted">{t("earnTitle")}</h2>
-        <p className="mt-1 text-[40px] font-medium leading-none tabular-nums">{m(Number(s.earned_minor) + Number(s.pending_minor))}</p>
+        <p className="mt-1 text-[34px] font-medium leading-none tabular-nums sm:text-[40px]">{m(Number(s.earned_minor) + Number(s.pending_minor))}</p>
         <p className="mt-2 text-[13px] text-ink-muted">{t("forecast", { amount: m(Number(s.earned_minor) + Number(s.pending_minor)) })}</p>
         <dl className="mt-5 grid grid-cols-3 gap-px overflow-hidden rounded-[12px] border border-line bg-line">
           {([["earned", s.earned_minor], ["coming", s.pending_minor], ["paid", s.paid_minor]] as const).map(([k, v]) => (
-            <div key={k} className="bg-surface px-3 py-3"><dt className="text-[12px] text-ink-muted">{t(k)}</dt><dd className="mt-0.5 text-[17px] font-medium tabular-nums">{m(v)}</dd></div>
+            <div key={k} className="min-w-0 bg-surface px-2.5 py-3 sm:px-3"><dt className="text-[12px] text-ink-muted">{t(k)}</dt><dd className="mt-0.5 text-[15px] font-medium tabular-nums sm:text-[17px]">{m(v)}</dd></div>
           ))}
         </dl>
         <p className="mt-2 text-[12px] text-ink-muted">{t("forecastNote")}</p>
         {best && <p className="mt-4 flex gap-2 border-t border-line pt-4 text-[14px]"><Pin className="mt-1" />{t("tip", { title: best.title ?? best.slug })}</p>}
         <Link href={`/app/p/${org}/kit`} className="btn-press mt-4 inline-flex min-h-11 items-center rounded-control bg-discovery px-4 text-[14px] font-semibold text-white transition-colors duration-150 hover:bg-discovery-hover">{t("kitCta")}</Link>
       </section>
-      <section aria-labelledby="lvl-h" className="rounded-card border border-line bg-surface p-5 lg:order-1">
+      <section aria-labelledby="lvl-h" className="min-w-0 rounded-card border border-line bg-surface p-5 lg:order-1">
         <h2 id="lvl-h" className="font-sans text-[13px] font-normal text-ink-muted">{t("levelTitle")}</h2>
         <p className="mt-1 text-[24px] font-medium">{t(`levels.${level.key}`)}</p>
         <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#ECEBE6]"><div className="h-full rounded-full bg-discovery" style={{ width: `${pct}%` }} /></div>

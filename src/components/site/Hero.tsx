@@ -5,6 +5,9 @@ import { useLocale } from "next-intl";
 import { mediaSrc } from "@/lib/media";
 import { IconSearch } from "../Icons";
 
+// Phones get a taller, smaller crop (~100 KB instead of ~400 KB); big screens keep the wide photo.
+const heroSrcSet = (src: string) => [[750, 900], [1280, 800], [2000, 1100]].map(([w, h]) => `${mediaSrc(src, { w, h })} ${w}w`).join(", ");
+
 type Labels = { title: string; subtitle: string; searchLabel: string; placeholder: string; category: string; all: string; button: string };
 /** Visitors arriving from an ad or partner link (?ref=…) see the campaign headline instead. */
 type Campaign = { title: string; subtitle: string; button: string };
@@ -28,7 +31,7 @@ export function Hero({ photos, categories, labels, campaign }: { photos: { src: 
         {photos.map((p, k) => (
           <div key={p.src} className={`hero-slide absolute inset-0 ${k === i ? "is-on" : ""}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {(k === i || k === (i + 1) % photos.length) && <img src={mediaSrc(p.src, { w: 2000, h: 1100 })} alt="" className="h-full w-full object-cover" loading={k === 0 ? "eager" : "lazy"} fetchPriority={k === 0 ? "high" : "auto"} />}
+            {(k === i || k === (i + 1) % photos.length) && <img src={mediaSrc(p.src, { w: 2000, h: 1100 })} srcSet={heroSrcSet(p.src)} sizes="100vw" alt="" className="h-full w-full object-cover" loading={k === 0 ? "eager" : "lazy"} fetchPriority={k === 0 ? "high" : "auto"} />}
           </div>
         ))}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(25_36_78/0.6)_0%,rgb(25_36_78/0.2)_42%,rgb(25_36_78/0.82)_100%)]" />

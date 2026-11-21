@@ -150,9 +150,9 @@ export default async function OperatorToday({ params, searchParams }: Props) {
             const people = list.filter((b) => b.status === "confirmed").reduce((n, b) => n + b.adults + b.children + b.infants, 0);
             const waiting = list.some((b) => b.status === "confirmed" && b.execution_status === "scheduled");
             const weather = manager && s.status !== "cancelled" && !started(s.starts_at) && (
-              <details className="relative">
+              <details className="sm:relative">
                 <summary className="inline-flex min-h-9 cursor-pointer list-none items-center rounded-[8px] px-2.5 text-[13px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink [&::-webkit-details-marker]:hidden">{t("weather")}</summary>
-                <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-[0_12px_32px_-12px_rgb(25_36_78/0.25)]">
+                <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 max-sm:inset-x-0 max-sm:w-auto flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-[0_12px_32px_-12px_rgb(25_36_78/0.25)]">
                   {hidden}<input type="hidden" name="slot" value={s.id} />
                   <p className="text-[14px]">{t("weatherConfirm", { n: list.filter((b) => b.status === "confirmed" || b.status === "pending_request").length })}</p>
                   <Submit className={btn.danger}>{t("weatherButton")}</Submit>
@@ -164,9 +164,9 @@ export default async function OperatorToday({ params, searchParams }: Props) {
             if (list.length === 0) return (
               <li key={s.id} className="flex items-start gap-3 sm:gap-4">
                 {time_}{dot}
-                <div className="flex min-w-0 flex-1 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-[12px] px-3 py-1.5">
-                  <span className="min-w-0"><span id={`s-${s.id}`} className="text-[15px] text-ink">{s.title}</span>
-                    <span className="ms-2 text-[13px] text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })}</span></span>
+                <div className="relative flex min-w-0 flex-1 flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-[12px] px-3 py-1.5">
+                  <span className="min-w-0"><bdi id={`s-${s.id}`} className="text-[15px] text-ink">{s.title}</bdi>
+                    <span className="ms-2 inline-block text-[13px] text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })}</span></span>
                   <span className="flex items-center gap-2">{s.status !== "open" && <Badge value={s.status} />}{weather}</span>
                 </div>
               </li>
@@ -175,9 +175,9 @@ export default async function OperatorToday({ params, searchParams }: Props) {
               <li key={s.id} className="flex items-start gap-3 py-2 sm:gap-4">
                 {time_}{dot}
                 <section aria-labelledby={`s-${s.id}`} className="min-w-0 flex-1 overflow-hidden rounded-card border border-line bg-surface">
-                  <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
+                  <header className="relative flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
                     <div>
-                      <h2 id={`s-${s.id}`} className="flex items-center gap-2 text-[17px] font-semibold">{waiting && <Pin />}{s.title}</h2>
+                      <h2 id={`s-${s.id}`} className="flex items-center gap-2 text-[17px] font-semibold">{waiting && <Pin />}<bdi>{s.title}</bdi></h2>
                       <div className="text-[13px] text-ink-muted">{t("seats", { booked: s.booked, capacity: s.capacity })} · {t("guests", { n: people })}</div>
                     </div>
                     <div className="flex items-center gap-2">{s.status !== "open" && <Badge value={s.status} />}{weather}</div>
