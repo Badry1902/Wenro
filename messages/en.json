@@ -479,7 +479,8 @@
       "resetIntro": "Enter your email and we'll send you a link to choose a new password.",
       "resetButton": "Send me a reset link",
       "resetSent": "If an account exists for {email}, a reset link is on its way. Open it in this same browser.",
-      "backToSignIn": "Back to sign in"
+      "backToSignIn": "Back to sign in",
+      "legal": "By signing in you agree to the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>."
     },
     "join": {
       "title": "Your workspaces",
@@ -1576,7 +1577,9 @@
     "cancel": "Free cancellation window on every trip",
     "pickup": "Hotel pickup on most trips",
     "rights": "© {year} WENRO. All rights reserved.",
-    "demoNote": "Test site: the trips shown are demo content and the photos are stock images."
+    "demoNote": "Test site: the trips shown are demo content and the photos are stock images.",
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "share": {
     "label": "Share",

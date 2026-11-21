@@ -65,7 +65,11 @@ export async function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-small text-white/60 md:flex-row md:items-center md:justify-between">
-          <span>{t("footer.rights", { year })}</span>
+          <span className="flex flex-wrap gap-x-4 gap-y-1">
+            <span>{t("footer.rights", { year })}</span>
+            <Link prefetch={false} href="/privacy" className="hover:text-white hover:underline">{t("footer.privacy")}</Link>
+            <Link prefetch={false} href="/terms" className="hover:text-white hover:underline">{t("footer.terms")}</Link>
+          </span>
           <span>{t("footer.demoNote")}</span>
         </div>
       </div>

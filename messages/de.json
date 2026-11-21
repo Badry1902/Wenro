@@ -396,7 +396,8 @@
       "resetIntro": "Gib deine E-Mail ein, und wir schicken dir einen Link für ein neues Passwort.",
       "resetButton": "Link zum Zurücksetzen senden",
       "resetSent": "Wenn es ein Konto für {email} gibt, ist ein Link unterwegs. Öffne ihn in diesem Browser.",
-      "backToSignIn": "Zurück zur Anmeldung"
+      "backToSignIn": "Zurück zur Anmeldung",
+      "legal": "Mit der Anmeldung stimmst du den <terms>Nutzungsbedingungen</terms> und der <privacy>Datenschutzerklärung</privacy> zu."
     },
     "types": {
       "platform": "WENRO-Verwaltung",
@@ -1623,7 +1624,9 @@
     "cancel": "Kostenlose Stornierungsfrist bei jedem Ausflug",
     "pickup": "Abholung vom Hotel bei den meisten Ausflügen",
     "rights": "© {year} WENRO. Alle Rechte vorbehalten.",
-    "demoNote": "Testseite: Die gezeigten Ausflüge sind Demo-Inhalte und die Fotos Stockbilder."
+    "demoNote": "Testseite: Die gezeigten Ausflüge sind Demo-Inhalte und die Fotos Stockbilder.",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen"
   },
   "explore": {
     "title": "Ägypten auf der Karte entdecken",

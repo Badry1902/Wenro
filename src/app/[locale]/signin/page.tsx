@@ -134,6 +134,12 @@ export default async function SignIn({ params, searchParams }: Props) {
             )}
           </>
         )}
+        <p className="text-center text-small text-ink-muted">
+          {t.rich("legal", {
+            terms: (c) => <Link prefetch={false} href="/terms" className="font-semibold underline">{c}</Link>,
+            privacy: (c) => <Link prefetch={false} href="/privacy" className="font-semibold underline">{c}</Link>,
+          })}
+        </p>
       </main>
     </>
   );

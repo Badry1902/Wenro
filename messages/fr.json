@@ -396,7 +396,8 @@
       "resetIntro": "Saisissez votre e-mail et nous vous enverrons un lien pour choisir un nouveau mot de passe.",
       "resetButton": "Envoyer le lien",
       "resetSent": "Si un compte existe pour {email}, un lien est en route. Ouvrez-le dans ce même navigateur.",
-      "backToSignIn": "Retour à la connexion"
+      "backToSignIn": "Retour à la connexion",
+      "legal": "En vous connectant, vous acceptez les <terms>conditions d'utilisation</terms> et la <privacy>politique de confidentialité</privacy>."
     },
     "types": {
       "platform": "Administration WENRO",
@@ -1623,7 +1624,9 @@
     "cancel": "Délai d’annulation gratuite sur chaque excursion",
     "pickup": "Prise en charge à l’hôtel pour la plupart des excursions",
     "rights": "© {year} WENRO. Tous droits réservés.",
-    "demoNote": "Site de test : les excursions affichées sont des contenus de démonstration et les photos proviennent de banques d’images."
+    "demoNote": "Site de test : les excursions affichées sont des contenus de démonstration et les photos proviennent de banques d’images.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions"
   },
   "explore": {
     "title": "Explorer l'Égypte sur la carte",
