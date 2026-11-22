@@ -37,10 +37,10 @@ export default async function MessagePreview({ params }: { params: Promise<{ loc
       <div className="mb-4 flex flex-wrap items-center gap-2 text-small">
         <Badge value={m.status} /> <span>{t.has(`kinds.${m.kind}`) ? t(`kinds.${m.kind}`) : m.kind}</span> · <span>{readerLocale.toUpperCase()}</span>
       </div>
-      <iframe title={r.subject} srcDoc={r.html} sandbox="" className="h-[720px] w-full max-w-2xl rounded-card border border-line bg-white" />
+      <iframe title={r.subject} srcDoc={r.html} sandbox="" className="h-[720px] w-full max-w-2xl rounded-card border border-line bg-paper" />
       <details className="mt-4 max-w-2xl">
         <summary className="cursor-pointer font-semibold">{t("plainText")}</summary>
-        <pre dir={r.dir} className="mt-2 whitespace-pre-wrap rounded-card bg-[#F7F8FC] p-4 text-[14px]">{r.text}</pre>
+        <pre dir={r.dir} className="mt-2 whitespace-pre-wrap rounded-card bg-muted p-4 text-[14px]">{r.text}</pre>
       </details>
     </>
   );

@@ -79,11 +79,11 @@ export function BookingWidget({ page }: { page: ExperiencePage }) {
         <div className="flex items-center gap-3">
           <button type="button" aria-label={t("widget.fewer", { label })} disabled={v <= min}
             onClick={() => setSel({ ...sel, [key]: v - 1 })}
-            className="btn-press h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">−</button>
+            className="btn-press h-11 w-11 rounded-control border border-field bg-surface text-lg disabled:opacity-40">−</button>
           <span aria-live="polite" className="min-w-5 text-center font-bold"><span key={v} className="value-tick">{v}</span></span>
           <button type="button" aria-label={t("widget.more", { label })} disabled={v >= max}
             onClick={() => setSel({ ...sel, [key]: v + 1 })}
-            className="btn-press h-11 w-11 rounded-control border border-[#8A90A6] bg-surface text-lg disabled:opacity-40">+</button>
+            className="btn-press h-11 w-11 rounded-control border border-field bg-surface text-lg disabled:opacity-40">+</button>
         </div>
       </div>
     );
@@ -119,14 +119,14 @@ export function BookingWidget({ page }: { page: ExperiencePage }) {
       )}
 
       <fieldset className="flex min-w-0 flex-col gap-2">
-        <legend className="mb-2 flex items-center gap-2 text-small font-bold"><IconCalendar size={18} className="text-discovery" />{t("widget.date")}</legend>
+        <legend className="mb-2 flex items-center gap-2 text-small font-bold"><IconCalendar size={18} className="text-link" />{t("widget.date")}</legend>
         <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
           {days.map(([k, slots]) => {
             const d = new Date(slots[0].starts_at);
             const active = k === day;
             return (
               <button key={k} type="button" aria-pressed={active} onClick={() => pickDay(k)}
-                className={`tab-chip btn-press flex min-h-16 min-w-16 flex-col items-center justify-center rounded-control border px-2 ${active ? "border-discovery bg-discovery text-white" : "border-[#C9CDDA] bg-surface"}`}>
+                className={`tab-chip btn-press flex min-h-16 min-w-16 flex-col items-center justify-center rounded-control border px-2 ${active ? "border-discovery bg-discovery text-white" : "border-faint bg-surface"}`}>
                 <span className="text-[12px]">{format.dateTime(d, { weekday: "short" })}</span>
                 <span className="font-bold">{format.dateTime(d, { day: "numeric" })}</span>
                 <span className="text-[12px]">{format.dateTime(d, { month: "short" })}</span>
@@ -144,7 +144,7 @@ export function BookingWidget({ page }: { page: ExperiencePage }) {
             const active = s.id === slotId;
             return (
               <button key={s.id} type="button" disabled={full} aria-pressed={active} onClick={() => setSlotId(s.id)}
-                className={`tab-chip btn-press min-h-11 rounded-control border px-4 font-semibold ${active ? "border-discovery bg-discovery text-white" : full ? "border-line bg-[#F3F4F8] text-[#6B7189] line-through" : "border-[#C9CDDA] bg-surface"}`}>
+                className={`tab-chip btn-press min-h-11 rounded-control border px-4 font-semibold ${active ? "border-discovery bg-discovery text-white" : full ? "border-line bg-muted text-ink-muted line-through" : "border-faint bg-surface"}`}>
                 {format.dateTime(new Date(s.starts_at), { hour: "2-digit", minute: "2-digit" })}{full ? ` · ${t("widget.full")}` : ""}
               </button>
             );
@@ -170,7 +170,7 @@ export function BookingWidget({ page }: { page: ExperiencePage }) {
             <div className="reveal-in flex flex-col gap-2">
               <label htmlFor="hotel" className="text-small text-ink-muted">{t("widget.yourHotel")}</label>
               <select id="hotel" value={sel.hotelId ?? ""} onChange={(e) => setSel({ ...sel, hotelId: e.target.value || null })}
-                className="min-h-11 rounded-control border border-[#8A90A6] bg-surface px-3">
+                className="min-h-11 rounded-control border border-field bg-surface px-3">
                 <option value="">{t("widget.chooseHotel")}</option>
                 {[...new Set(page.hotels.map((h) => h.zone))].map((zone) => (
                   <optgroup key={zone} label={zone}>
@@ -234,7 +234,7 @@ export function BookingWidget({ page }: { page: ExperiencePage }) {
 
       <div className="flex flex-col gap-2 text-[14px]">
         {page.policy && <div className="flex gap-2"><IconCheck size={20} className="shrink-0 text-success" />{t("widget.freeCancel", { hours: page.policy.free_cancel_hours })}</div>}
-        <div className="flex gap-2"><IconCash size={20} className="shrink-0 text-discovery" />{t("widget.cash")}</div>
+        <div className="flex gap-2"><IconCash size={20} className="shrink-0 text-link" />{t("widget.cash")}</div>
       </div>
     </section>
   );

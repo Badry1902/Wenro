@@ -31,6 +31,14 @@
   --color-warning-tint: #fff3d6;
   --color-critical: #b42318;
   --color-critical-tint: #fdecea;
+  /* Fixed colours that never change with the theme */
+  --color-night: #19244e;            /* Midnight surfaces (footer, hero, sidebar, scrims), dark in both themes */
+  --color-paper: #ffffff;            /* white that must stay white: QR codes, email previews, logos on photos */
+  /* Neutrals that used to be hard-coded */
+  --color-link: #253c96;             /* text links (lighter than Cobalt in dark mode) */
+  --color-field: #8a90a6;            /* input borders (3:1 against the page) */
+  --color-faint: #c9cdda;            /* quiet borders and placeholders */
+  --color-muted: #f3f4f8;            /* quiet panels, inactive tabs */
 
   --font-display: "Nunito Variable", "Baloo Bhaijaan 2 Variable", "Manrope Variable", system-ui, sans-serif;
   --font-sans: "Manrope Variable", "IBM Plex Sans Arabic", system-ui, sans-serif;
@@ -51,10 +59,64 @@
   --radius-image: 24px;
 }
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 html {
-  background: #ffffff; /* owner's choice (Nov 2026): white page background; Sand is used for bands */
+  background: var(--color-surface); /* owner's choice (Nov 2026): white page background; Sand is used for bands */
   color: var(--color-ink);
+  color-scheme: light;
 }
+
+/* ---------------------------------------------------------------------------
+ * Dark mode (opt-in from the header switch; light stays the default). Only the token values change, so every
+ * screen follows. Midnight surfaces (bg-night) stay dark, Persimmon stays Persimmon (with Midnight text on it).
+ * Contrast checked: body text 13:1, muted text 7:1, links 6:1, white on Cobalt buttons 5:1.
+ * Printing always uses the light colours.
+ * ------------------------------------------------------------------------ */
+@media screen {
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --color-discovery: #4a66dc;
+    --color-discovery-hover: #5672e8;
+    --color-discovery-pressed: #3f58c4;
+    --color-discovery-tint: #1d2858;
+    --color-link: #93a6ff;
+    --color-apricot-hover: #ff7d42;
+    --color-apricot-tint: #3a2419;
+    --color-aqua: #173a40;
+    --color-aqua-tint: #12282f;
+    --color-teal-ink: #84d3d1;
+    --color-ivory: #151d3b;
+    --color-sand-deep: #1b2446;
+    --color-ink: #e8ebf5;
+    --color-ink-muted: #a3abc6;
+    --color-line: #29335a;
+    --color-surface: #0f1630;
+    --color-success: #5fd39b;
+    --color-success-tint: #10291f;
+    --color-warning: #f2bd5a;
+    --color-warning-tint: #2e2411;
+    --color-critical: #ff7a6e;
+    --color-critical-tint: #3a1715;
+    --color-field: #5d678e;
+    --color-faint: #3a4468;
+    --color-muted: #1a2344;
+  }
+  /* Light reef tiles would glare on a dark page: use the Midnight tile instead */
+  [data-theme="dark"] :is(.reef-colour, .reef-aqua) { background-color: var(--color-ivory); background-image: url("/brand/coast/patterns/reef-midnight.webp"); }
+  [data-theme="dark"] [style*="--pat-d"] { background-color: var(--color-night) !important; background-image: var(--pat-d) !important; }
+  [data-theme="dark"] .skeleton { background-image: linear-gradient(90deg, #18213f 0%, #222c50 40%, #18213f 80%); }
+  [data-theme="dark"] img.logo-light { display: none; }
+  [data-theme="dark"] img.logo-dark { display: block; }
+  /* Photos and maps stay true; only big decorative illustrations are dimmed a little */
+  [data-theme="dark"] .motif { opacity: 0.55; }
+  [data-theme="dark"] .leaflet-tile-pane { filter: brightness(0.82) contrast(1.05) saturate(0.9); }
+  [data-theme="dark"] .map-pin-area { background: var(--color-surface); }
+}
+img.logo-dark { display: none; }
+
+/* Theme switch: colours cross-fade once, never on first paint */
+html.theme-fade, html.theme-fade * { transition: background-color 220ms ease, border-color 220ms ease, color 160ms ease !important; }
 
 body {
   font-family: var(--font-sans);
@@ -197,7 +259,7 @@ html[dir="rtl"] body {
 @keyframes scan { from { transform: translateY(0); } to { transform: translateY(calc(var(--scan-h, 300px) - 2px)); } }
 
 /* Loading placeholders while a page is fetched */
-.skeleton { background: linear-gradient(90deg, #efece4 0%, #f8f5ee 40%, #efece4 80%); background-size: 200% 100%; animation: shimmer 1400ms linear infinite; border-radius: 10px; }
+.skeleton { background-image: linear-gradient(90deg, #efece4 0%, #f8f5ee 40%, #efece4 80%); background-size: 200% 100%; animation: shimmer 1400ms linear infinite; border-radius: 10px; }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -339,9 +401,9 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 .map-pin { position: absolute; transform: translate(-50%, -100%); white-space: nowrap; background: var(--color-discovery); color: #fff;
   font: 700 12px/1 var(--font-sans, system-ui); padding: 6px 9px; border-radius: 999px; border: 2px solid #fff;
   box-shadow: 0 6px 14px -6px rgb(25 36 78 / 0.6); cursor: pointer; transition: transform .15s ease; }
-.map-pin:hover { transform: translate(-50%, -100%) scale(1.08); background: var(--color-apricot); color: var(--color-ink); }
+.map-pin:hover { transform: translate(-50%, -100%) scale(1.08); background: var(--color-apricot); color: var(--color-night); }
 .map-pin-area { background: #fff; color: var(--color-discovery); border-style: dashed; border-color: var(--color-discovery); }
-.map-pin-group { background: var(--color-ink); color: #fff; padding-inline: 12px; }
+.map-pin-group { background: var(--color-night); color: #fff; padding-inline: 12px; }
 .map-pin-group b { font-weight: 800; }
 .leaflet-container { font-family: inherit; }
 
@@ -359,3 +421,11 @@ input[type="range"].brand-range { accent-color: var(--color-discovery); }
 .campaign-only { display: none; }
 html[data-campaign] .campaign-only { display: revert; }
 html[data-campaign] .campaign-hide { display: none; }
+
+/* Show/hide password: the eye button sits inside the field */
+.pw-field input::-ms-reveal { display: none; }
+
+/* Pop-up announcements: a calm entrance, never covering the whole phone screen */
+.promo-in { animation: promo-in 320ms var(--ease-out) both; }
+@keyframes promo-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } }
+@media (prefers-reduced-motion: reduce) { .promo-in { animation: fade-only 200ms ease both; } }

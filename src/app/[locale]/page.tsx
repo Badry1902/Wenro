@@ -62,7 +62,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         {sub && <p className="mt-2 text-ink-muted">{sub}</p>}
       </div>
       {href && (
-        <Link href={href} className="group inline-flex min-h-11 shrink-0 items-center gap-1 font-bold text-discovery">
+        <Link href={href} className="group inline-flex min-h-11 shrink-0 items-center gap-1 font-bold text-link">
           {t("home.seeAll")}<IconChevron size={18} className="transition-transform duration-200 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
         </Link>
       )}
@@ -101,8 +101,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       <Link href={{ pathname: "/experiences", query: { cat: g.c } }} className="cat-tile group relative block aspect-[3/4] overflow-hidden rounded-card" style={patternStyle(CATEGORY_THEME[g.c] ?? "reef", "midnight", 220)}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         {img && <img src={mediaSrc(img, { w: 420, h: 560 })} alt="" loading="lazy" className="cat-tile-img h-full w-full object-cover opacity-90" />}
-                        <span className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
-                        <span className="absolute start-3 top-3 grid size-10 place-items-center rounded-full bg-white/90 text-ink backdrop-blur transition-colors group-hover:bg-apricot">
+                        <span className="absolute inset-0 bg-gradient-to-t from-night/85 via-night/10 to-transparent" />
+                        <span className="absolute start-3 top-3 grid size-10 place-items-center rounded-full bg-surface/90 text-ink backdrop-blur transition-colors group-hover:bg-apricot group-hover:text-night">
                           <IconCategory name={g.c} size={20} />
                         </span>
                         <span className="absolute inset-x-3 bottom-3 text-white">
@@ -147,16 +147,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <span className="relative inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-small font-bold uppercase tracking-wider">{t("home.exploreEyebrow")}</span>
               <span className="relative mt-3 block max-w-sm font-display text-[26px] font-extrabold leading-tight md:text-[30px]">{t("home.exploreTitle")}</span>
               <span className="relative mt-2 block max-w-xs text-white/90">{t("home.exploreText")}</span>
-              <span className="btn-press relative mt-5 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-5 font-bold text-discovery">{t("home.exploreCta")}<IconChevron size={18} className="rtl:rotate-180" /></span>
+              <span className="btn-press relative mt-5 inline-flex min-h-11 items-center gap-1 rounded-full bg-surface px-5 font-bold text-link">{t("home.exploreCta")}<IconChevron size={18} className="rtl:rotate-180" /></span>
             </Link>
             <Link href="/plan" style={patternStyle("nile", "aqua", 300)} className="card-lift group relative min-h-[240px] overflow-hidden rounded-[28px] p-6 text-ink md:p-8">
               <span className="absolute inset-0 bg-[linear-gradient(90deg,var(--color-aqua)_45%,rgb(196_231_229/0.3))] rtl:bg-[linear-gradient(270deg,var(--color-aqua)_45%,rgb(196_231_229/0.3))]" aria-hidden="true" />
               <MotifImg name="dromedary" tone="persimmon" size={110} className="motif-drift -bottom-1 end-6 md:end-10" />
               <MotifImg name="felucca" tone="cobalt" size={64} className="motif-drift-slow end-36 top-6 max-md:hidden" />
-              <span className="relative inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-small font-bold uppercase tracking-wider text-teal-ink">{t("home.planEyebrow")}</span>
+              <span className="relative inline-flex items-center gap-2 rounded-full bg-surface/70 px-3 py-1 text-small font-bold uppercase tracking-wider text-teal-ink">{t("home.planEyebrow")}</span>
               <span className="relative mt-3 block max-w-sm font-display text-[26px] font-extrabold leading-tight md:text-[30px]">{t("home.planTitle")}</span>
               <span className="relative mt-2 block max-w-xs text-ink/85">{t("home.planText")}</span>
-              <span className="btn-press relative mt-5 inline-flex min-h-11 items-center gap-1 rounded-full bg-ink px-5 font-bold text-white">{t("home.planCta")}<IconChevron size={18} className="rtl:rotate-180" /></span>
+              <span className="btn-press relative mt-5 inline-flex min-h-11 items-center gap-1 rounded-full bg-night px-5 font-bold text-surface">{t("home.planCta")}<IconChevron size={18} className="rtl:rotate-180" /></span>
             </Link>
           </Reveal>
 
@@ -177,13 +177,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               {collections.map(({ th, n }) => {
                 const inner = (
                   <>
-                    <span className="relative block aspect-[16/10] overflow-hidden bg-ink" aria-hidden="true">
+                    <span className="relative block aspect-[16/10] overflow-hidden bg-night" aria-hidden="true">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={mediaSrc(THEME_PHOTO[th], { w: 720, h: 450 })} alt="" loading="lazy" className="card-img h-full w-full object-cover" />
-                      <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent" />
+                      <span className="absolute inset-0 bg-gradient-to-t from-night/55 via-transparent to-transparent" />
                       {/* the collection's own print as a ribbon along the bottom edge */}
                       <span className="absolute inset-x-0 bottom-0 h-4" style={patternStyle(th, "feature", 160)} />
-                      <span className="absolute -bottom-0 start-5 grid size-16 translate-y-1/2 place-items-center rounded-2xl bg-white shadow-[0_10px_24px_-12px_rgb(25_36_78/0.5)]">
+                      <span className="absolute -bottom-0 start-5 grid size-16 translate-y-1/2 place-items-center rounded-2xl bg-surface shadow-[0_10px_24px_-12px_rgb(25_36_78/0.5)]">
                         <ThemeMotif theme={th} size={40} />
                       </span>
                     </span>
@@ -193,7 +193,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       <span className="mt-auto flex items-center justify-between pt-3 text-small font-bold">
                         {n > 0 ? <>
                           <span className="text-teal-ink">{t("themes.tripsCount", { n })}</span>
-                          <span className="inline-flex items-center gap-1 text-discovery">{t("themes.see")}<IconChevron size={16} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" /></span>
+                          <span className="inline-flex items-center gap-1 text-link">{t("themes.see")}<IconChevron size={16} className="transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" /></span>
                         </> : <span className="rounded-full bg-apricot-tint px-2.5 py-0.5 text-ink">{t("themes.soon")}</span>}
                       </span>
                     </span>
@@ -218,8 +218,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <h2 className="text-[28px] font-extrabold md:text-[34px]">{t("home.whyTitle")}</h2>
             <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {([[IconCash, "why1"], [IconCheck, "why2"], [IconShield, "why3"], [IconCar, "why4"]] as const).map(([Icon, k]) => (
-                <li key={k} className="flex flex-col gap-2 rounded-card bg-white p-5 shadow-[0_12px_30px_-20px_rgb(25_36_78/0.35)]">
-                  <span className={`grid size-12 place-items-center rounded-2xl ${["bg-apricot-tint text-apricot-hover", "bg-aqua-tint text-teal-ink", "bg-discovery-tint text-discovery", "bg-apricot-tint text-apricot-hover"][["why1", "why2", "why3", "why4"].indexOf(k)]}`}><Icon size={24} /></span>
+                <li key={k} className="flex flex-col gap-2 rounded-card bg-surface p-5 shadow-[0_12px_30px_-20px_rgb(25_36_78/0.35)]">
+                  <span className={`grid size-12 place-items-center rounded-2xl ${["bg-apricot-tint text-apricot-hover", "bg-aqua-tint text-teal-ink", "bg-discovery-tint text-link", "bg-apricot-tint text-apricot-hover"][["why1", "why2", "why3", "why4"].indexOf(k)]}`}><Icon size={24} /></span>
                   <span className="mt-1 text-h3 font-bold">{t(`home.${k}Title` as "home.why1Title")}</span>
                   <span className="text-ink-muted">{t(`home.${k}Text` as "home.why1Text")}</span>
                 </li>
@@ -239,13 +239,13 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           ))}
 
           <Reveal as="section" style={patternStyle("souk", "midnight", 300)} className="relative mt-20 overflow-hidden rounded-[32px] px-6 py-12 text-white md:px-14 md:py-16">
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,var(--color-ink)_35%,transparent)] rtl:bg-[linear-gradient(270deg,var(--color-ink)_35%,transparent)]" aria-hidden="true" />
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,var(--color-night)_35%,transparent)] rtl:bg-[linear-gradient(270deg,var(--color-night)_35%,transparent)]" aria-hidden="true" />
             <div className="relative flex flex-col items-start gap-5 md:flex-row md:items-center md:justify-between">
               <div className="max-w-2xl">
                 <h2 className="text-[28px] font-extrabold md:text-[36px]">{t("home.partnerTitle")}</h2>
                 <p className="mt-2 text-white/85">{t("home.partnerText")}</p>
               </div>
-              <Link href="/signin" className="btn-press inline-flex min-h-12 shrink-0 items-center rounded-full bg-apricot px-7 font-extrabold text-ink hover:bg-apricot-hover">{t("home.partnerCta")}</Link>
+              <Link href="/signin" className="btn-press inline-flex min-h-12 shrink-0 items-center rounded-full bg-apricot px-7 font-extrabold text-night hover:bg-apricot-hover">{t("home.partnerCta")}</Link>
             </div>
           </Reveal>
         </div>

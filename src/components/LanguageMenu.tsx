@@ -68,7 +68,7 @@ export function LanguageMenu({ label, tone = "light", align = "end", compact = f
         <div role="menu" className={`popover-panel absolute z-50 w-52 rounded-card border border-line bg-surface p-1.5 text-ink shadow-[0_20px_50px_-20px_rgb(25_36_78/0.4)] ${align === "end" ? "end-0" : "start-0"} ${up ? "bottom-full mb-2" : "top-full mt-2"}`}>
           {routing.locales.map((l) => (
             <Link key={l} role="menuitem" href={{ pathname, query }} locale={l} lang={l} aria-current={l === locale ? "true" : undefined}
-              className={`flex min-h-11 items-center gap-3 rounded-control px-2.5 text-[15px] ${l === locale ? "bg-discovery-tint font-bold text-discovery" : "hover:bg-discovery-tint"}`}>
+              className={`flex min-h-11 items-center gap-3 rounded-control px-2.5 text-[15px] ${l === locale ? "bg-discovery-tint font-bold text-link" : "hover:bg-discovery-tint"}`}>
               <Flag locale={l} size={26} />
               <span className="flex-1">{LANG_NAME[l]}</span>
               {l === locale && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M5 12l5 5L19 7" /></svg>}
@@ -91,7 +91,7 @@ export function LanguageRow({ tone = "light" }: { tone?: "light" | "dark" }) {
       {routing.locales.map((l) => (
         <Link key={l} href={{ pathname, query }} locale={l} lang={l} aria-current={l === locale ? "true" : undefined}
           className={`inline-flex min-h-11 items-center gap-2 rounded-full border ps-1.5 pe-3.5 text-small font-bold ${l === locale
-            ? (tone === "dark" ? "border-white bg-white text-ink" : "border-discovery bg-discovery text-white")
+            ? (tone === "dark" ? "border-white bg-surface text-ink" : "border-discovery bg-discovery text-white")
             : (tone === "dark" ? "border-white/25 text-white/90 hover:border-white" : "border-line hover:border-discovery")}`}>
           <Flag locale={l} size={26} />{LANG_NAME[l]}
         </Link>

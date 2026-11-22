@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { z } from "zod";
 import { localeSchema } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { rpc, RpcError } from "@/lib/data/rpc";

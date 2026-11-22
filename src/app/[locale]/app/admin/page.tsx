@@ -74,7 +74,7 @@ export default async function AdminOverview({ params, searchParams }: Props) {
               <a href={`${base}/finance/operators`} className="group block rounded-card border border-line bg-surface p-5 transition-colors duration-150 hover:border-ink-muted/40">
                 <Stat size="lg" label={t("dueFromOperators")} value={money(o.open_statements_due)}
                   note={<>{t("dueFromOperatorsHint")}{Object.keys(o.unsettled_due ?? {}).length > 0 && <span className="mt-1 block text-ink">{t("plusUnsettled", { amount: money(o.unsettled_due) })}</span>}</>} />
-                <span className="mt-4 inline-flex items-center gap-1 text-[14px] font-medium text-discovery">{t("seeTrips")}<span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-0.5 rtl:-scale-x-100">→</span></span>
+                <span className="mt-4 inline-flex items-center gap-1 text-[14px] font-medium text-link">{t("seeTrips")}<span aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-0.5 rtl:-scale-x-100">→</span></span>
               </a>
             )}
             <StatRow cols={2}>

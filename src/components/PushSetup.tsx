@@ -60,7 +60,7 @@ export function PushSetup({ dark = false }: { dark?: boolean }) {
 
   const btn = dark
     ? "btn-press min-h-11 w-full rounded-control border border-white/25 px-3 text-start text-small font-semibold text-white/90 hover:bg-white/10"
-    : "btn-press min-h-11 rounded-control border border-line px-4 text-small font-bold hover:border-discovery hover:text-discovery";
+    : "btn-press min-h-11 rounded-control border border-line px-4 text-small font-bold hover:border-discovery hover:text-link";
   const note = dark ? "px-1 text-[12px] text-white/60" : "text-small text-ink-muted";
 
   return (

@@ -116,6 +116,9 @@ export async function markPayoutPaid(form: FormData) {
 }
 
 // ---- partners ----
+export async function setOrgContact(form: FormData) {
+  await run(form, "contact_saved", "set_org_contact", { p_org: id.parse(v(form, "org")), p_phone: v(form, "phone").slice(0, 30), p_email: v(form, "email").slice(0, 200) });
+}
 export async function setPayoutHandle(form: FormData) {
   await run(form, "handle_saved", "set_payout_handle", { p_org: id.parse(v(form, "org")), p_handle: v(form, "handle").slice(0, 80) });
 }

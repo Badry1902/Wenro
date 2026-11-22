@@ -107,7 +107,11 @@
     "loading": "Chargement…",
     "notFoundTitle": "Cette page n'existe pas",
     "notFoundText": "Le lien est peut-être ancien ou mal saisi. Les sorties vous attendent toujours.",
-    "notFoundCta": "Voir les sorties"
+    "notFoundCta": "Voir les sorties",
+    "themeDark": "Mode sombre",
+    "themeLight": "Mode clair",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe"
   },
   "experience": {
     "hours": "{n, plural, one {# heure} other {# heures}}",
@@ -463,7 +467,11 @@
         "already_reviewed": "Ce paiement a déjà été vérifié.",
         "statement_not_found": "Ce relevé n'est plus ouvert.",
         "invalid_input": "Vérifiez les informations et réessayez.",
-        "not_found": "Introuvable."
+        "not_found": "Introuvable.",
+        "invalid_phone": "Indiquez le numéro WhatsApp avec l'indicatif du pays, ex. +20 10 1234 5678",
+        "title_required": "Écrivez un titre dans au moins une langue.",
+        "invalid_link": "Le lien doit être une page du site (commençant par /) ou commencer par https://",
+        "invalid_date": "La date de fin doit être après le début."
       },
       "ok": {
         "review_published": "Avis publié.",
@@ -513,7 +521,13 @@
         "payment_approved": "Paiement validé ; les relevés sont marqués payés.",
         "payment_rejected": "Paiement refusé ; le prestataire a été informé du motif.",
         "method_saved": "Moyen de paiement enregistré.",
-        "place_saved": "Ville et lieu enregistrés."
+        "place_saved": "Ville et lieu enregistrés.",
+        "contact_saved": "Coordonnées enregistrées.",
+        "popup_saved": "Pop-up enregistré.",
+        "popup_active": "Pop-up activé.",
+        "popup_paused": "Pop-up en pause.",
+        "popup_archived": "Pop-up archivé.",
+        "popup_draft": "Le pop-up est de nouveau un brouillon."
       }
     },
     "dep": {
@@ -687,7 +701,8 @@
       "team": "Équipe",
       "coupons": "Codes de réduction",
       "reviews": "Avis",
-      "kit": "Kit de contenu"
+      "kit": "Kit de contenu",
+      "popups": "Pop-ups"
     },
     "op": {
       "todayTitle": "Feuille de route",
@@ -1496,6 +1511,14 @@
       "fromMeeting": "À {km} km du point de rendez-vous",
       "clearActivity": "Retirer l'épingle du lieu",
       "save": "Enregistrer la ville et le lieu"
+    },
+    "contact": {
+      "title": "Coordonnées",
+      "sub": "Ce numéro WhatsApp reçoit un message pour chaque nouvelle réservation ou demande. Les voyageurs ne le voient que 24 heures avant l'excursion.",
+      "phone": "Numéro WhatsApp",
+      "phoneHint": "Avec l'indicatif du pays, ex. +20 10 1234 5678",
+      "email": "E-mail des réservations",
+      "save": "Enregistrer"
     }
   },
   "share": {
@@ -1841,5 +1864,9 @@
     "longTrips": "Inclure les longues excursions",
     "longTripsHint": "Des excursions loin de votre ville, comme Louxor ou Le Caire depuis la mer Rouge. Souvent 10 à 18 heures, départ tôt.",
     "longTripsOn": "Avec longues excursions"
+  },
+  "popup": {
+    "close": "Fermer",
+    "sponsored": "Annonce"
   }
 }

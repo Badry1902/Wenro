@@ -93,9 +93,9 @@ export default async function AdminFinance({ params, searchParams }: Props) {
       <nav className="rail -mx-1 mb-6 flex gap-1 overflow-x-auto border-b border-line px-1" aria-label={t("title")}>
         {TABS.map((k) => (
           <Link key={k} href={k === "overview" ? "/app/admin/finance" : `/app/admin/finance?tab=${k}`} aria-current={k === tab ? "page" : undefined}
-            className={`-mb-px inline-flex min-h-11 shrink-0 items-center gap-1.5 border-b-2 px-3 text-[15px] font-semibold ${k === tab ? "border-discovery text-discovery" : "border-transparent text-ink-muted hover:text-ink"}`}>
+            className={`-mb-px inline-flex min-h-11 shrink-0 items-center gap-1.5 border-b-2 px-3 text-[15px] font-semibold ${k === tab ? "border-discovery text-link" : "border-transparent text-ink-muted hover:text-ink"}`}>
             {t(`tabs.${k}`)}
-            {k === "review" && dash.review_count > 0 && <span className="grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-ink">{dash.review_count}</span>}
+            {k === "review" && dash.review_count > 0 && <span className="grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-night">{dash.review_count}</span>}
           </Link>
         ))}
       </nav>
@@ -164,7 +164,7 @@ export default async function AdminFinance({ params, searchParams }: Props) {
                       <td className={`${td} tabular-nums`}>{o.open_statements ? <>{m(o.open_minor, o.currency)} <span className="text-ink-muted">· {o.open_statements}</span></> : "—"}</td>
                       <td className={`${td} font-bold tabular-nums`}>{m(o.owe, o.currency)}</td>
                       <td className={td}>{o.last_received ? d(o.last_received) : <span className="text-ink-muted">{t("never")}</span>}</td>
-                      <td className={td}><Link href="/app/admin/finance/operators" className="font-semibold text-discovery hover:underline">{t("details")}</Link></td>
+                      <td className={td}><Link href="/app/admin/finance/operators" className="font-semibold text-link hover:underline">{t("details")}</Link></td>
                     </tr>
                   ))}
                 </tbody>
@@ -238,8 +238,8 @@ export default async function AdminFinance({ params, searchParams }: Props) {
                   {p.proof_kind === "image"
                     // eslint-disable-next-line @next/next/no-img-element
                     ? <img src={`/api/proof/${p.id}`} alt={t("receipt")} className="h-full w-full object-contain" loading="lazy" />
-                    : <span className="font-bold text-discovery">PDF</span>}
-                  <span className="absolute inset-x-0 bottom-0 bg-ink/70 py-1 text-center text-small font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100">{t("openReceipt")}</span>
+                    : <span className="font-bold text-link">PDF</span>}
+                  <span className="absolute inset-x-0 bottom-0 bg-night/70 py-1 text-center text-small font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100">{t("openReceipt")}</span>
                 </a>
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2"><b className="text-h3">{m(p.amount_minor, p.currency)}</b><Badge value={p.status === "submitted" ? "in_review" : p.status === "approved" ? "received" : "declined"} /></div>

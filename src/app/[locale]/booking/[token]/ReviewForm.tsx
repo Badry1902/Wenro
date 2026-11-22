@@ -25,14 +25,14 @@ export function ReviewForm({ token, labels }: { token: string; labels: Labels })
           {[1, 2, 3, 4, 5].map((n) => (
             <label key={n} className="btn-press cursor-pointer rounded-full p-1 focus-within:ring-2 focus-within:ring-discovery" onPointerEnter={() => setHover(n)}>
               <input type="radio" name="rating" value={n} required className="sr-only" onChange={() => setValue(n)} aria-label={labels.stars[n - 1]} />
-              <IconStar size={34} filled={n <= shown} className={n <= shown ? "text-apricot drop-shadow-sm" : "text-[#C9CDDA]"} />
+              <IconStar size={34} filled={n <= shown} className={n <= shown ? "text-apricot drop-shadow-sm" : "text-faint"} />
             </label>
           ))}
         </div>
         <span className="mt-1 block min-h-5 text-small font-semibold" aria-live="polite">{shown ? labels.stars[shown - 1] : ""}</span>
       </fieldset>
       <label className="flex flex-col gap-1 text-small font-bold">{labels.body}
-        <textarea name="body" maxLength={1500} rows={4} className="rounded-control border border-[#8A90A6] bg-white p-3 font-normal" />
+        <textarea name="body" maxLength={1500} rows={4} className="rounded-control border border-field bg-surface p-3 font-normal" />
         <span className="font-normal text-ink-muted">{labels.bodyHint}</span>
       </label>
       {state && "error" in state && <p role="alert" className="font-semibold text-critical">{labels.errors[state.error] ?? labels.errors.unexpected_error}</p>}

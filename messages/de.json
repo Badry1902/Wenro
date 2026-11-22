@@ -107,7 +107,11 @@
     "loading": "Wird geladen…",
     "notFoundTitle": "Diese Seite gibt es nicht",
     "notFoundText": "Der Link ist vielleicht alt oder falsch geschrieben. Die Touren warten trotzdem auf Sie.",
-    "notFoundCta": "Touren ansehen"
+    "notFoundCta": "Touren ansehen",
+    "themeDark": "Dunkelmodus",
+    "themeLight": "Heller Modus",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen"
   },
   "experience": {
     "hours": "{n, plural, one {# Stunde} other {# Stunden}}",
@@ -463,7 +467,11 @@
         "already_reviewed": "Diese Zahlung wurde bereits geprüft.",
         "statement_not_found": "Diese Abrechnung ist nicht mehr offen.",
         "invalid_input": "Bitte Angaben prüfen und erneut versuchen.",
-        "not_found": "Nicht gefunden."
+        "not_found": "Nicht gefunden.",
+        "invalid_phone": "Bitte die WhatsApp-Nummer mit Ländervorwahl eingeben, z. B. +20 10 1234 5678",
+        "title_required": "Bitte mindestens in einer Sprache einen Titel eingeben.",
+        "invalid_link": "Der Link muss eine Seite der Website sein (beginnt mit /) oder mit https:// beginnen.",
+        "invalid_date": "Das Enddatum muss nach dem Start liegen."
       },
       "ok": {
         "review_published": "Bewertung veröffentlicht.",
@@ -513,7 +521,13 @@
         "payment_approved": "Zahlung bestätigt; die Abrechnungen sind als bezahlt markiert.",
         "payment_rejected": "Zahlung abgelehnt; der Anbieter wurde informiert.",
         "method_saved": "Zahlungsweg gespeichert.",
-        "place_saved": "Stadt und Ort gespeichert."
+        "place_saved": "Stadt und Ort gespeichert.",
+        "contact_saved": "Kontaktdaten gespeichert.",
+        "popup_saved": "Pop-up gespeichert.",
+        "popup_active": "Pop-up aktiviert.",
+        "popup_paused": "Pop-up pausiert.",
+        "popup_archived": "Pop-up archiviert.",
+        "popup_draft": "Pop-up ist wieder ein Entwurf."
       }
     },
     "dep": {
@@ -687,7 +701,8 @@
       "team": "Team",
       "coupons": "Rabattcodes",
       "reviews": "Bewertungen",
-      "kit": "Content-Kit"
+      "kit": "Content-Kit",
+      "popups": "Pop-ups"
     },
     "op": {
       "todayTitle": "Tagesplan",
@@ -1496,6 +1511,14 @@
       "fromMeeting": "{km} km vom Treffpunkt",
       "clearActivity": "Pin des Aktivitätsorts entfernen",
       "save": "Stadt und Ort speichern"
+    },
+    "contact": {
+      "title": "Kontaktdaten",
+      "sub": "Diese WhatsApp-Nummer erhält eine Nachricht zu jeder neuen Buchung oder Buchungsanfrage. Gäste sehen sie erst 24 Stunden vor der Tour.",
+      "phone": "WhatsApp-Nummer",
+      "phoneHint": "Mit Ländervorwahl, z. B. +20 10 1234 5678",
+      "email": "E-Mail für Buchungen",
+      "save": "Speichern"
     }
   },
   "share": {
@@ -1841,5 +1864,9 @@
     "longTrips": "Lange Tagesausflüge einbeziehen",
     "longTripsHint": "Ausflüge weit weg von deiner Stadt, z. B. Luxor oder Kairo vom Roten Meer. Meist 10–18 Stunden mit früher Abholung.",
     "longTripsOn": "Mit langen Tagesausflügen"
+  },
+  "popup": {
+    "close": "Schließen",
+    "sponsored": "Anzeige"
   }
 }

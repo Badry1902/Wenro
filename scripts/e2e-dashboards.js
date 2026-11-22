@@ -91,7 +91,7 @@ const check = (name, ok) => { results.push([ok ? 'ok' : 'NOT OK', name]); consol
   check('staff sees no money', !/Collect .*in cash/.test(staffView) && !st.url().includes('experiences'));
   check('staff has no Experiences menu', (await st.getByRole('link', { name: 'Experiences' }).count()) === 0);
   await op.goto(`${B}/en/app`);
-  const row = op.locator('li', { hasText: ref });
+  const row = op.locator('li', { hasText: ref }).last(); // today's trips also appear in the run-sheet timeline
   check('owner sees cash to collect', (await row.innerText()).includes('in cash'));
   await row.getByRole('button', { name: 'Check in' }).click();
   await op.waitForURL(/ok=checked_in/);

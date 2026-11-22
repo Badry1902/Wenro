@@ -108,17 +108,17 @@ export default async function ExperiencePageView({ params }: Params) {
       {/* The trip's collection design: a printed band above the page (no text on the pattern) */}
       <div className="relative h-16 md:h-24" style={patternStyle(theme, "feature", 260)}>
         <div className="mx-auto flex h-full max-w-7xl items-end px-4">
-          <Link href={{ pathname: "/experiences", query: { theme } }} className="btn-press translate-y-1/2 rounded-full ring-4 ring-white">
+          <Link href={{ pathname: "/experiences", query: { theme } }} className="btn-press translate-y-1/2 rounded-full ring-4 ring-surface">
             <ThemeBadge theme={theme} label={t("themes.partOf", { name: t(`themes.${theme}.name`) })} showLabel size={24} />
           </Link>
         </div>
       </div>
       <main className="mx-auto max-w-7xl px-4 pb-16 pt-8">
         <nav aria-label={t("experience.breadcrumb")} className="flex flex-wrap items-center gap-1 text-small text-ink-muted">
-          <Link href="/" className="hover:text-discovery">{t("nav.home")}</Link>
+          <Link href="/" className="hover:text-link">{t("nav.home")}</Link>
           <IconChevron size={14} />
-          <Link href="/experiences" className="hover:text-discovery">{where}</Link>
-          {page.category && (<><IconChevron size={14} /><Link href={{ pathname: "/experiences", query: { cat: page.category } }} className="hover:text-discovery">{catName}</Link></>)}
+          <Link href="/experiences" className="hover:text-link">{where}</Link>
+          {page.category && (<><IconChevron size={14} /><Link href={{ pathname: "/experiences", query: { cat: page.category } }} className="hover:text-link">{catName}</Link></>)}
         </nav>
         <div className="mt-3 flex items-start justify-between gap-4">
           <div>
@@ -132,15 +132,15 @@ export default async function ExperiencePageView({ params }: Params) {
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-ink-muted">
-          {page.category && <span className="inline-flex items-center gap-1.5"><IconCategory name={page.category} size={18} className="text-discovery" />{catName}</span>}
-          {hours && <span className="inline-flex items-center gap-1.5"><IconClock size={18} className="text-discovery" />{Number.isInteger(hours) ? t("experience.hours", { n: hours }) : t("experience.minutes", { n: page.duration_minutes! })}</span>}
-          {hasTransfer && <span className="inline-flex items-center gap-1.5"><IconCar size={18} className="text-discovery" />{t("experience.hotelPickup")}</span>}
-          <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-discovery" />{where}</span>
+          {page.category && <span className="inline-flex items-center gap-1.5"><IconCategory name={page.category} size={18} className="text-link" />{catName}</span>}
+          {hours && <span className="inline-flex items-center gap-1.5"><IconClock size={18} className="text-link" />{Number.isInteger(hours) ? t("experience.hours", { n: hours }) : t("experience.minutes", { n: page.duration_minutes! })}</span>}
+          {hasTransfer && <span className="inline-flex items-center gap-1.5"><IconCar size={18} className="text-link" />{t("experience.hotelPickup")}</span>}
+          <span className="inline-flex items-center gap-1.5"><IconPin size={18} className="text-link" />{where}</span>
           {reviews.count > 0 ? (
             <a href="#reviews-list" className="inline-flex items-center gap-1.5 font-semibold text-ink hover:underline">
               <Stars value={Number(reviews.average)} /> {Number(reviews.average).toFixed(1)} <span className="font-normal text-ink-muted">({t("reviews.count", { n: reviews.count })})</span>
             </a>
-          ) : <span className="rounded-full bg-discovery-tint px-3 py-0.5 text-small font-semibold text-discovery">{t("experience.newNoReviews")}</span>}
+          ) : <span className="rounded-full bg-discovery-tint px-3 py-0.5 text-small font-semibold text-link">{t("experience.newNoReviews")}</span>}
         </div>
 
         <div className="mt-6">
@@ -155,7 +155,7 @@ export default async function ExperiencePageView({ params }: Params) {
             </li>
           )}
           <li className="flex items-start gap-3 rounded-card bg-discovery-tint p-4">
-            <IconClock size={22} className="mt-0.5 shrink-0 text-discovery" />
+            <IconClock size={22} className="mt-0.5 shrink-0 text-link" />
             <span className="font-bold">{page.booking_mode === "instant" ? t("experience.instant") : t("experience.onRequest")}</span>
           </li>
           <li className="flex items-start gap-3 rounded-card bg-apricot-tint p-4">
@@ -241,7 +241,7 @@ export default async function ExperiencePageView({ params }: Params) {
                             {img && <img src={mediaSrc(img, { w: 160, h: 160 })} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />}
                           </span>
                           <span className="min-w-0 flex-1">
-                            <span className="line-clamp-2 font-bold leading-snug group-hover:text-discovery">{c.title}</span>
+                            <span className="line-clamp-2 font-bold leading-snug group-hover:text-link">{c.title}</span>
                             {c.from_minor != null && (
                               <span className="mt-1 block text-small text-ink-muted">{t("home.from", { price: formatMoney({ minor: c.from_minor, currency: c.currency }, locale) })}</span>
                             )}

@@ -115,14 +115,14 @@ export default async function BookingPage({ params, searchParams }: Props) {
 
         <section aria-label={t("voucher.label")} className={`${fresh ? "ticket-in " : ""}mt-4 overflow-hidden rounded-card border border-line bg-surface`}>
           <div className="relative h-14 print:hidden" style={patternStyle(theme, "feature", 220)} aria-hidden="true">
-            <ThemeBadge theme={theme} label="" className="absolute -bottom-4 end-4 z-10 ring-4 ring-white" size={26} />
+            <ThemeBadge theme={theme} label="" className="absolute -bottom-4 end-4 z-10 ring-4 ring-surface" size={26} />
           </div>
           <div className="flex items-center justify-between bg-discovery px-4 py-3 text-white">
             <span className="font-bold uppercase tracking-wide">{t("voucher.label")}</span>
             <span className="font-bold" dir="ltr">{b.ref}</span>
           </div>
           {qr && (
-            <div className="flex items-center gap-4 border-b border-dashed border-[#C9CDDA] p-4">
+            <div className="flex items-center gap-4 border-b border-dashed border-faint p-4">
               <div role="img" aria-label={t("voucher.qr")} className="h-28 w-28 shrink-0 [&_svg]:h-full [&_svg]:w-full" dangerouslySetInnerHTML={{ __html: qr }} />
               <div className="flex flex-col gap-1 text-[14px]">
                 <span className="font-bold">{t("voucher.showAtPickup")}</span>
@@ -144,7 +144,7 @@ export default async function BookingPage({ params, searchParams }: Props) {
               {b.operator ? (
                 <>
                   <dd className="font-bold">{b.operator}</dd>
-                  {b.operator_phone && <dd><a href={`tel:${b.operator_phone.replace(/[^+\d]/g, "")}`} dir="ltr" className="font-semibold text-discovery hover:underline">{b.operator_phone}</a></dd>}
+                  {b.operator_phone && <dd><a href={`tel:${b.operator_phone.replace(/[^+\d]/g, "")}`} dir="ltr" className="font-semibold text-link hover:underline">{b.operator_phone}</a></dd>}
                 </>
               ) : (
                 <dd><span className="font-bold">{t("voucher.operatorLater")}</span>

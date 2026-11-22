@@ -13,3 +13,13 @@
 - Only client-side namespaces reach the browser (`clientMessages` in `src/app/[locale]/layout.tsx`); server-only texts go under `app`, `email`, `voucher`, `whatsapp`.
 - Header and footer links use `prefetch={false}`.
 - Every list RPC has a server-side cap or a date window; every foreign key has an index (migration).
+
+## Rules added Nov 2026
+- **Dark mode**: never hard-code colours. Use the tokens (`bg-surface`, `text-ink`, `bg-muted`, `border-field`, `text-link`…);
+  `bg-night` / `bg-paper` are the only fixed ones (Midnight surfaces, white that must stay white: QR codes).
+  Text on Persimmon (`bg-apricot`) is `text-night`. Selected chips use `bg-ink text-surface` (they flip with the theme).
+- **Pop-up layers** (menus, sheets, dialogs, lightbox) use `useOverlay(open, close)`: Escape, the phone's Back gesture
+  and scroll lock in one place. Small `<details>` pop-overs get `data-popover` (Escape + outside click).
+- **Sessions** end when the browser closes and after 12 h idle (`src/lib/session.ts`, middleware). Any new Supabase
+  client must pass cookies through `sessionOnly()`.
+- **Site pop-ups** (`site_popups`) only on browsing pages (`pageKey()` in `components/site/Promo.tsx`), at most one per visit.

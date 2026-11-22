@@ -23,7 +23,7 @@ export function CalendarButton({ label, title, start, location, reference, url }
   };
   return (
     <button type="button" onClick={save}
-      className="btn-press flex min-h-12 items-center justify-center gap-2 rounded-control border border-line bg-surface font-bold hover:border-discovery hover:text-discovery">
+      className="btn-press flex min-h-12 items-center justify-center gap-2 rounded-control border border-line bg-surface font-bold hover:border-discovery hover:text-link">
       <IconCalendar size={18} />{label}
     </button>
   );

@@ -102,7 +102,7 @@ export default async function PartnerHome({ params, searchParams }: Props) {
                 </label>
                 <Submit className={btn.quiet}>{t("makeLink")}</Submit>
               </form>
-              <p dir="ltr" className="mb-3 select-all break-all rounded-control border border-line bg-[#FAF9F6] p-3 font-mono text-[13px]">{link}</p>
+              <p dir="ltr" className="mb-3 select-all break-all rounded-control border border-line bg-ivory p-3 font-mono text-[13px]">{link}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <CopyButton text={link!} label={t("copy")} done={t("copied")} />
                 <span className="text-[14px] text-ink-muted">{t("code")}: <span dir="ltr" className="font-mono text-ink">{code}</span></span>

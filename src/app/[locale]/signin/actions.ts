@@ -6,6 +6,7 @@ import { z } from "zod";
 import { localeSchema } from "@/lib/locale";
 import { redirect } from "@/i18n/navigation";
 import { DEV_USER_COOKIE, PASSWORD_HINT_COOKIE } from "@/lib/auth";
+import { SEEN_COOKIE, seenCookie } from "@/lib/session";
 import { dataMode, siteUrl } from "@/lib/env";
 import { createUserClient } from "@/lib/supabase/server";
 import { allow, clientKey } from "@/lib/ratelimit";
@@ -143,7 +144,10 @@ export async function devSignIn(form: FormData) {
   if (dataMode() !== "localpg") throw new Error("dev sign-in is disabled");
   const locale = locales.catch("en").parse(form.get("locale"));
   const uid = z.string().regex(/^[0-9a-f-]{36}$/).parse(form.get("uid"));
-  (await cookies()).set(DEV_USER_COOKIE, uid, { httpOnly: true, sameSite: "lax", path: "/" });
+  const jar = await cookies();
+  jar.set(DEV_USER_COOKIE, uid, { httpOnly: true, sameSite: "lax", path: "/" });
+  const seen = seenCookie(false);
+  jar.set(seen.name, seen.value, seen.options);
   redirect({ href: "/app", locale });
 }
 
@@ -155,5 +159,6 @@ export async function signOut(form: FormData) {
     const supabase = await createUserClient();
     await supabase.auth.signOut();
   }
+  (await cookies()).delete(SEEN_COOKIE);
   redirect({ href: "/signin", locale });
 }

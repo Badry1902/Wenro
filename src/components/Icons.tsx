@@ -21,9 +21,6 @@ export const IconClose = ({ size, className }: P) => (
 export const IconClock = ({ size, className }: P) => (
   <svg {...base(size)} className={className}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
 );
-export const IconSea = ({ size, className }: P) => (
-  <svg {...base(size)} className={className}><path d="M3 10c3-3 6 3 9 0s6 3 9 0M3 15c3-3 6 3 9 0s6 3 9 0" /></svg>
-);
 export const IconCar = ({ size, className }: P) => (
   <svg {...base(size)} className={className}><path d="M3 16V8h12l4 4v4" /><circle cx="7" cy="17" r="2" /><circle cx="16" cy="17" r="2" /></svg>
 );

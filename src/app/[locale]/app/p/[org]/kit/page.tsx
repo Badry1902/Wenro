@@ -65,7 +65,7 @@ export default async function Kit({ params, searchParams }: { params: Promise<{ 
               {img && <img src={mediaSrc(img, { w: 160, h: 160 })} alt="" className="size-20 shrink-0 rounded-[12px] object-cover" loading="lazy" />}
               <div className="min-w-0"><b className="line-clamp-2">{c.title}</b><span className="text-small text-ink-muted">{price}</span></div>
             </div>
-            <p dir={lang === "ar" ? "rtl" : "ltr"} className="whitespace-pre-line rounded-control bg-[#F3F4F8] p-3 text-small">{caption}</p>
+            <p dir={lang === "ar" ? "rtl" : "ltr"} className="whitespace-pre-line rounded-control bg-muted p-3 text-small">{caption}</p>
             <div className="flex flex-wrap items-start gap-2">
               <CopyButton text={caption} label={t("copyCaption")} done={t("copied")} />
               <CopyButton text={link} label={t("copyLink")} done={t("copied")} />

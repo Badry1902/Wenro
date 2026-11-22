@@ -43,7 +43,7 @@ export default async function Notifications({ params }: { params: Promise<{ loca
       <main className="mx-auto max-w-2xl px-4 py-10">
         <div className="mb-6 flex items-end justify-between gap-3">
           <div><h1 className="text-h2 font-bold">{t("title")}</h1><p className="text-ink-muted">{t("sub")}</p></div>
-          <Link href="/app" className="text-small font-semibold text-discovery hover:underline">{t("toDashboard")}</Link>
+          <Link href="/app" className="text-small font-semibold text-link hover:underline">{t("toDashboard")}</Link>
         </div>
         <div className="mb-6 rounded-card bg-discovery-tint p-4"><p className="mb-2 text-small font-semibold">{t("pushHint")}</p><PushSetup /></div>
         {items.length === 0 ? <Empty>{t("none")}</Empty> : (

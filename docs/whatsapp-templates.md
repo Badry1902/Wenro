@@ -8,6 +8,24 @@ WENRO sends trip details on WhatsApp through the official **WhatsApp Business Cl
 Business-started WhatsApp messages must use **templates approved by Meta**. Until the keys below are set,
 nothing is sent: each message is written to the server log and marked "logged" on the Messages page.
 
+## 0. Quick start with Meta's free test number (temporary)
+Good for trying the flow with a few known numbers before WENRO's own business number is connected.
+1. developers.facebook.com → **My Apps → Create app → Business** → add the **WhatsApp** product.
+2. WhatsApp → **API Setup**: Meta gives a **test phone number** and its **Phone number ID**.
+   Under **To**, add the numbers that should receive messages (yours, and a test operator's), up to 5;
+   each gets a code on WhatsApp to confirm.
+3. Create the two templates below (WhatsApp Manager → Message templates, category **Utility**) on the
+   test account; approval usually takes minutes.
+4. Make a permanent token (Business settings → System users → Add → Generate token, app = this app,
+   permissions `whatsapp_business_messaging` + `whatsapp_business_management`). The 24-hour token on the
+   API Setup page also works for a first try.
+5. Vercel → Environment Variables: `WHATSAPP_TOKEN` (Sensitive), `WHATSAPP_PHONE_NUMBER_ID`,
+   `WHATSAPP_ALLOWED_TO` = the verified numbers, comma separated (e.g. `2010xxxxxxxx`). Redeploy.
+6. To receive operator messages yourself: put your number as the WhatsApp number of a test operator
+   (operator dashboard → Team → Contact details), then book one of its trips.
+Messages to numbers outside `WHATSAPP_ALLOWED_TO` are marked "skipped" on the Messages page (no retries).
+Later: add WENRO's own number to the same app, swap `WHATSAPP_PHONE_NUMBER_ID`, and empty `WHATSAPP_ALLOWED_TO`.
+
 ## 1. Meta account (once)
 1. Create a Meta Business account and a WhatsApp Business app at developers.facebook.com.
 2. Add and verify WENRO's business phone number.

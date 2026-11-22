@@ -103,7 +103,7 @@ export default async function OperatorMoney({ params, searchParams }: { params: 
                 const trips = u?.trips ?? 0;
                 return [trips > 0 || open === 0 ? t("toWenroHint", { n: trips }) : null, open > 0 ? tp("inStatements", { n: open }) : null].filter(Boolean).join(" · ");
               })()}</div>
-              <a href="#pay" className="mt-1 inline-block text-small font-bold text-discovery hover:underline">{tp("payLink")}</a></div>
+              <a href="#pay" className="mt-1 inline-block text-small font-bold text-link hover:underline">{tp("payLink")}</a></div>
           </div>
         );
       })}

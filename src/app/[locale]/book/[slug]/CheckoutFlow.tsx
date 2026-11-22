@@ -55,7 +55,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
     sel.infants ? t("common.infantsCount", { n: sel.infants }) : null,
   ].filter(Boolean).join(" · ");
 
-  const field = "min-h-12 rounded-control border border-[#8A90A6] bg-surface px-3.5 text-[16px]";
+  const field = "min-h-12 rounded-control border border-field bg-surface px-3.5 text-[16px]";
   const input = `${field} w-full`;
   const bad = "border-2 border-critical";
 
@@ -70,10 +70,10 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
         <h1 className="text-h3 font-bold">{step === 2 ? t("booking.detailsTitle") : t("booking.reviewTitle")}</h1>
       </div>
       <Steps current={step} />
-      {agency && <p role="status" className="mt-3 rounded-card bg-discovery-tint p-3 text-small font-semibold text-discovery">{t("booking.agencyBanner", { name: agency.name })}</p>}
+      {agency && <p role="status" className="mt-3 rounded-card bg-discovery-tint p-3 text-small font-semibold text-link">{t("booking.agencyBanner", { name: agency.name })}</p>}
 
       <div className="mt-4 flex items-center gap-3 rounded-card border border-line bg-surface p-3.5">
-        <div className="h-14 w-14 shrink-0 rounded-[12px] bg-[#CBD3F7]" aria-hidden="true" />
+        <div className="h-14 w-14 shrink-0 rounded-[12px] bg-discovery-tint" aria-hidden="true" />
         <div className="min-w-0">
           <div className="font-bold">{page.title}</div>
           <div className="text-small text-ink-muted">{when} · {travelers}</div>
@@ -153,7 +153,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
             <div>{when} <span className="text-ink-muted">· {t("common.hurghadaTime")}</span></div>
             <div className="flex justify-between gap-3">
               <span>{sel.transport && hotel ? t("booking.pickup", { hotel: hotel.name }) : t("booking.noPickup")}</span>
-              <button type="button" onClick={() => setStep(2)} className="text-small font-semibold text-discovery">{t("common.edit")}</button>
+              <button type="button" onClick={() => setStep(2)} className="text-small font-semibold text-link">{t("common.edit")}</button>
             </div>
           </section>
 
@@ -187,7 +187,7 @@ export function CheckoutFlow({ page, slot, sel, totals, display, rate, backHref,
 
           <section className="flex flex-col gap-1 rounded-card border border-line bg-surface p-4">
             <div className="text-[12px] font-semibold uppercase tracking-wider text-ink-muted">{t("booking.yourDetails")}</div>
-            <div className="flex justify-between gap-3"><span>{f.name}</span><button type="button" onClick={() => setStep(2)} className="text-small font-semibold text-discovery">{t("common.edit")}</button></div>
+            <div className="flex justify-between gap-3"><span>{f.name}</span><button type="button" onClick={() => setStep(2)} className="text-small font-semibold text-link">{t("common.edit")}</button></div>
             <div className="text-[14px] text-ink-muted" dir="ltr">{f.email} · {f.code} {f.phone}</div>
           </section>
 

@@ -12,6 +12,9 @@ import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 import { routing, isRtl } from "@/i18n/routing";
 import { VisitBeacon } from "@/components/site/VisitBeacon";
+import { THEME_INIT } from "@/components/ThemeToggle";
+import { KeyboardHelpers } from "@/components/KeyboardHelpers";
+import { PopupHost } from "@/components/site/Promo";
 import "../globals.css";
 
 // Coast Club type: rounded Nunito (Latin, Cyrillic) and Baloo Bhaijaan 2 (Arabic) for headings, echoing the
@@ -70,12 +73,17 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={isRtl(locale) ? "rtl" : "ltr"}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Dark mode before the first paint (the visitor's own choice; light is the default) */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
       <body>
         {preview && (
-          <p role="note" className="bg-ink px-4 py-2 text-center text-small font-semibold text-white print:hidden">{t("previewBanner")}</p>
+          <p role="note" className="bg-night px-4 py-2 text-center text-small font-semibold text-white print:hidden">{t("previewBanner")}</p>
         )}
-        <NextIntlClientProvider messages={messages}>{children}<VisitBeacon /></NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>{children}<VisitBeacon /><KeyboardHelpers /><PopupHost /></NextIntlClientProvider>
       </body>
     </html>
   );

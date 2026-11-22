@@ -112,10 +112,10 @@ export default async function OperatorToday({ params, searchParams }: Props) {
         </div>
         {manager && (
           <nav aria-label={t("quick")} className="flex flex-wrap gap-1">
-            <Link href={`${back}/departures`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qDepartures")}</Link>
-            <Link href={`${back}/experiences/new`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qExperience")}</Link>
-            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/money`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qMoney")}</Link>}
-            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/team`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink">{t("qTeam")}</Link>}
+            <Link href={`${back}/departures`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-ivory hover:text-ink">{t("qDepartures")}</Link>
+            <Link href={`${back}/experiences/new`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-ivory hover:text-ink">{t("qExperience")}</Link>
+            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/money`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-ivory hover:text-ink">{t("qMoney")}</Link>}
+            {["owner", "manager"].includes(ws.role) && <Link href={`${back}/team`} className="inline-flex min-h-10 items-center rounded-[8px] px-3 text-[14px] font-medium text-ink-muted transition-colors duration-150 hover:bg-ivory hover:text-ink">{t("qTeam")}</Link>}
           </nav>
         )}
       </section>
@@ -150,8 +150,8 @@ export default async function OperatorToday({ params, searchParams }: Props) {
             const people = list.filter((b) => b.status === "confirmed").reduce((n, b) => n + b.adults + b.children + b.infants, 0);
             const waiting = list.some((b) => b.status === "confirmed" && b.execution_status === "scheduled");
             const weather = manager && s.status !== "cancelled" && !started(s.starts_at) && (
-              <details className="sm:relative">
-                <summary className="inline-flex min-h-9 cursor-pointer list-none items-center rounded-[8px] px-2.5 text-[13px] font-medium text-ink-muted transition-colors duration-150 hover:bg-[#F6F5F1] hover:text-ink [&::-webkit-details-marker]:hidden">{t("weather")}</summary>
+              <details data-popover className="sm:relative">
+                <summary className="inline-flex min-h-9 cursor-pointer list-none items-center rounded-[8px] px-2.5 text-[13px] font-medium text-ink-muted transition-colors duration-150 hover:bg-ivory hover:text-ink [&::-webkit-details-marker]:hidden">{t("weather")}</summary>
                 <form action={cancelSlot} className="popover-panel absolute end-0 z-10 mt-2 flex w-72 max-sm:inset-x-0 max-sm:w-auto flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-[0_12px_32px_-12px_rgb(25_36_78/0.25)]">
                   {hidden}<input type="hidden" name="slot" value={s.id} />
                   <p className="text-[14px]">{t("weatherConfirm", { n: list.filter((b) => b.status === "confirmed" || b.status === "pending_request").length })}</p>
@@ -160,7 +160,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
               </details>
             );
             const time_ = <span dir="ltr" className="w-[68px] shrink-0 pt-0.5 font-mono text-[13px] tabular-nums text-ink-muted max-sm:w-auto">{time(s.starts_at)}</span>;
-            const dot = <span aria-hidden="true" className={`relative z-[1] mt-1.5 grid size-[11px] shrink-0 place-items-center rounded-full border max-sm:hidden ${list.length ? "border-apricot bg-apricot" : "border-[#C9CCD8] bg-ivory"}`} />;
+            const dot = <span aria-hidden="true" className={`relative z-[1] mt-1.5 grid size-[11px] shrink-0 place-items-center rounded-full border max-sm:hidden ${list.length ? "border-apricot bg-apricot" : "border-faint bg-ivory"}`} />;
             if (list.length === 0) return (
               <li key={s.id} className="flex items-start gap-3 sm:gap-4">
                 {time_}{dot}
@@ -197,7 +197,7 @@ export default async function OperatorToday({ params, searchParams }: Props) {
                           </div>
                           <div className="text-small text-ink-muted">
                             {b.customer_phone
-                              ? <a href={`https://wa.me/${b.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(t("waText", { name: b.customer_name, operator: ws.name.replace(/^\[DEMO\]\s*/, ""), ref: b.ref, time: time(b.starts_at) }))}`} target="_blank" rel="noopener noreferrer" className="font-medium text-discovery" dir="ltr">{b.customer_phone}</a>
+                              ? <a href={`https://wa.me/${b.customer_phone.replace(/\D/g, "")}?text=${encodeURIComponent(t("waText", { name: b.customer_name, operator: ws.name.replace(/^\[DEMO\]\s*/, ""), ref: b.ref, time: time(b.starts_at) }))}`} target="_blank" rel="noopener noreferrer" className="font-medium text-link" dir="ltr">{b.customer_phone}</a>
                               : t("phoneHidden")}
                             {manager && b.paid_minor != null && <> · {t("collect", { amount: formatMoney({ minor: b.paid_minor, currency: b.currency }, locale) })}</>}
                           </div>

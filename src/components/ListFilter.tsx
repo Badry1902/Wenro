@@ -42,11 +42,11 @@ export function ListFilter({ target, chips, labels, extra }: {
     setShown(n);
   }, [q, group, second, target, extra]);
 
-  const chip = (on: boolean) => `btn-press inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-small font-bold ${on ? "border-ink bg-ink text-white" : "border-line bg-surface hover:border-ink"}`;
+  const chip = (on: boolean) => `btn-press inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-small font-bold ${on ? "border-ink bg-ink text-surface" : "border-line bg-surface hover:border-ink"}`;
   return (
     <div className="mb-5 flex flex-col gap-3">
       <label className="flex min-h-12 w-full items-center gap-2 rounded-full border border-line bg-surface px-4 focus-within:border-discovery md:max-w-md">
-        <IconSearch size={20} className="text-discovery" />
+        <IconSearch size={20} className="text-link" />
         <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={labels.search} aria-label={labels.search}
           className="min-w-0 flex-1 bg-transparent outline-none" />
         {q && <button type="button" onClick={() => setQ("")} aria-label={labels.clear} className="grid size-8 place-items-center rounded-full hover:bg-discovery-tint"><IconClose size={16} /></button>}

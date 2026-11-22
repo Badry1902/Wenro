@@ -105,7 +105,7 @@ export default async function AdminBookings({ params, searchParams }: Props) {
                 </a>
               )}
               {(r.status === "confirmed" || r.status === "pending_request") && r.execution_status === "scheduled" && (
-                <details className="relative">
+                <details data-popover className="relative">
                   <summary className={`${btn.quiet} cursor-pointer list-none text-small`}>{t("cancel")}</summary>
                   <form action={adminCancelBooking} className="popover-panel absolute start-0 z-10 mt-2 flex w-72 flex-col gap-2 rounded-card border border-line bg-surface p-4 shadow-lg">
                     <input type="hidden" name="locale" value={locale} /><input type="hidden" name="back" value="/app/admin/bookings" />

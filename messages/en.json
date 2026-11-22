@@ -125,7 +125,11 @@
     "loading": "Loading…",
     "notFoundTitle": "This page isn't here",
     "notFoundText": "The link may be old or mistyped. The trips are still waiting for you.",
-    "notFoundCta": "Browse trips"
+    "notFoundCta": "Browse trips",
+    "themeDark": "Dark mode",
+    "themeLight": "Light mode",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "experience": {
     "hours": "{n, plural, one {# hour} other {# hours}}",
@@ -381,7 +385,13 @@
         "payment_approved": "Payment approved; the statements are marked paid.",
         "payment_rejected": "Payment rejected; the operator was told why.",
         "method_saved": "Payment method saved.",
-        "place_saved": "City and place saved."
+        "place_saved": "City and place saved.",
+        "popup_saved": "Pop-up saved.",
+        "popup_active": "Pop-up activated.",
+        "popup_paused": "Pop-up paused.",
+        "popup_archived": "Pop-up archived.",
+        "popup_draft": "Pop-up is a draft again.",
+        "contact_saved": "Contact details saved."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -440,7 +450,11 @@
         "already_reviewed": "This payment was already checked.",
         "statement_not_found": "That statement is not open any more.",
         "invalid_input": "Please check the details and try again.",
-        "not_found": "Not found."
+        "not_found": "Not found.",
+        "title_required": "Write a title in at least one language.",
+        "invalid_link": "The link must be a page on the site (starting with /) or start with https://",
+        "invalid_phone": "Write the WhatsApp number with the country code, e.g. +20 10 1234 5678",
+        "invalid_date": "The end date must be after the start."
       }
     },
     "signin": {
@@ -523,7 +537,8 @@
       "team": "Team",
       "coupons": "Discount codes",
       "reviews": "Reviews",
-      "kit": "Content kit"
+      "kit": "Content kit",
+      "popups": "Pop-ups"
     },
     "op": {
       "todayTitle": "Run sheet",
@@ -1420,6 +1435,124 @@
       "fromMeeting": "{km} km from the meeting point",
       "clearActivity": "Remove the activity pin",
       "save": "Save city and place"
+    },
+    "popups": {
+      "title": "Pop-ups and ads",
+      "sub": "Announcements and offers shown to visitors on the browsing pages only, without getting in the way of booking.",
+      "new": "New pop-up",
+      "edit": "Edit pop-up",
+      "none": "No pop-ups yet. Create the first one and keep it as a draft until it is reviewed.",
+      "rulesTitle": "Rules that protect the visitor",
+      "rules": {
+        "r1": "Never shown during booking or payment, on sign-in, in dashboards or on the legal pages.",
+        "r2": "One pop-up per visit at most, after a few seconds or once the visitor scrolls.",
+        "r3": "Once closed it does not come back (following the frequency you choose).",
+        "r4": "On phones it never covers the whole screen; it always has a clear close button, and Esc and Back close it.",
+        "r5": "Statistics are anonymous: only views, clicks and closes, nothing about people."
+      },
+      "status": {
+        "draft": "Draft",
+        "active": "Active",
+        "paused": "Paused",
+        "archived": "Archived"
+      },
+      "liveNow": "Live now",
+      "scheduled": "Scheduled",
+      "ended": "Ended",
+      "stats": "Last 30 days: {views} views · {clicks} clicks · {closes} closes",
+      "ctr": "Click rate {pct}%",
+      "activate": "Activate",
+      "pause": "Pause",
+      "archive": "Archive",
+      "editBtn": "Edit",
+      "archiveConfirm": "Archiving is final: the pop-up disappears from the site and cannot be activated again.",
+      "sections": {
+        "content": "Content",
+        "look": "Look",
+        "where": "Where and for whom",
+        "when": "When it appears",
+        "schedule": "Dates",
+        "preview": "Preview"
+      },
+      "name": "Internal name",
+      "nameHint": "For the team only; visitors never see it.",
+      "lang": {
+        "ar": "العربية",
+        "en": "English",
+        "de": "Deutsch",
+        "ru": "Русский",
+        "fr": "Français"
+      },
+      "contentHint": "Write at least the title in one language. Languages left empty show the English text, then the Arabic one.",
+      "fTitle": "Title",
+      "fBody": "Text",
+      "fCta": "Button text",
+      "link": "Link",
+      "linkHint": "A page on the site such as /experiences?cat=sea, or an outside link starting with https:// (marked as an ad and opened in a new tab).",
+      "image": "Image (optional)",
+      "imageHint": "JPG, PNG or WebP, up to 4 MB. A picture twice as wide as it is tall works best.",
+      "removeImage": "Remove the image",
+      "layout": {
+        "card": "Small card",
+        "modal": "Centred window",
+        "bar": "Bottom bar"
+      },
+      "layoutHint": {
+        "card": "In a corner; visitors keep browsing. The calmest choice, right for most offers.",
+        "modal": "Centred on computers, a bottom sheet on phones. Only for important announcements.",
+        "bar": "A slim strip at the bottom. Good for short notices."
+      },
+      "pages": "Pages",
+      "page": {
+        "home": "Home",
+        "catalog": "All experiences",
+        "experience": "Trip page",
+        "explore": "Explore map",
+        "plan": "Plan your week",
+        "wishlist": "Wishlist"
+      },
+      "languages": "Languages",
+      "allLanguages": "All languages",
+      "device": "Devices",
+      "deviceOpt": {
+        "all": "All",
+        "mobile": "Phones only",
+        "desktop": "Computers only"
+      },
+      "delay": "Appears after (seconds)",
+      "scroll": "And after the visitor scrolls",
+      "scrollVal": "{n}% of the page",
+      "scrollNone": "No condition",
+      "frequency": "If closed, show again",
+      "freq": {
+        "once": "Never",
+        "weekly": "After a week",
+        "daily": "After a day",
+        "session": "On the next visit"
+      },
+      "startsAt": "From",
+      "endsAt": "Until",
+      "scheduleHint": "Egypt time. Leave empty to keep it running until you pause it.",
+      "priority": "Priority",
+      "priorityHint": "When several pop-ups could show, the highest goes first.",
+      "showAgain": "Show it again to people who closed it before",
+      "saveDraft": "Save as draft",
+      "savePublish": "Save and activate",
+      "save": "Save",
+      "cancel": "Back to the list",
+      "previewMobile": "Phone",
+      "previewDesktop": "Computer",
+      "previewLang": "Preview language",
+      "previewEmpty": "Write a title to see the preview.",
+      "chars": "{n}/{max}"
+    },
+    "contact": {
+      "title": "Contact details",
+      "sub": "This WhatsApp number gets a message for every new booking or booking request. Guests only see it 24 hours before the trip.",
+      "phone": "WhatsApp number",
+      "phoneHint": "With the country code, e.g. +20 10 1234 5678",
+      "email": "Bookings email",
+      "save": "Save"
     }
   },
   "email": {
@@ -1860,5 +1993,9 @@
     "longTrips": "Include long day trips",
     "longTripsHint": "Trips that go far from your city, like Luxor or Cairo from the Red Sea. Usually 10–18 hours with early pickup.",
     "longTripsOn": "With long day trips"
+  },
+  "popup": {
+    "close": "Close",
+    "sponsored": "Ad"
   }
 }

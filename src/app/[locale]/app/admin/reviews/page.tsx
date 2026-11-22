@@ -45,7 +45,7 @@ export default async function AdminReviews({ params, searchParams }: Props) {
                 <span className="text-small text-ink-muted">{format.dateTime(new Date(r.created_at), { day: "numeric", month: "short", year: "numeric" })}</span>
               </div>
               <div className="text-small text-ink-muted">
-                <Link href={`/experiences/${r.slug}`} className="font-semibold text-discovery hover:underline">{r.title}</Link> · {r.operator} · <span dir="ltr">{r.ref}</span> · {t("tripOn", { date: format.dateTime(new Date(r.trip_date), { day: "numeric", month: "short" }) })}
+                <Link href={`/experiences/${r.slug}`} className="font-semibold text-link hover:underline">{r.title}</Link> · {r.operator} · <span dir="ltr">{r.ref}</span> · {t("tripOn", { date: format.dateTime(new Date(r.trip_date), { day: "numeric", month: "short" }) })}
               </div>
               {r.body ? <p className="whitespace-pre-line" lang={r.locale}>{r.body}</p> : <p className="text-small italic text-ink-muted">{t("noText")}</p>}
               <div className="flex flex-wrap gap-2">
