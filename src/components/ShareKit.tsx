@@ -16,11 +16,11 @@ export function ShareKit({ items, labels }: { items: Item[]; labels: Labels }) {
     const u = encodeURIComponent(it.url), m = encodeURIComponent(text);
     return net === "wa" ? `https://wa.me/?text=${m}%0A${u}` : net === "tg" ? `https://t.me/share/url?url=${u}&text=${m}` : `https://www.facebook.com/sharer/sharer.php?u=${u}`;
   };
-  const chip = "btn-press inline-flex min-h-11 items-center gap-1.5 rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-discovery";
+  const chip = "btn-press inline-flex min-h-11 items-center gap-1.5 rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-link";
   return (
     <div>
       <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={labels.search} aria-label={labels.search}
-        className="mb-3 min-h-11 w-full rounded-control border border-[#8A90A6] px-3" />
+        className="mb-3 min-h-11 w-full rounded-control border border-field px-3" />
       {list.length === 0 ? <p className="text-ink-muted">{labels.none}</p> : (
         <ul className="divide-y divide-line">
           {(all || q ? list : list.slice(0, 6)).map((it) => (
@@ -37,7 +37,7 @@ export function ShareKit({ items, labels }: { items: Item[]; labels: Labels }) {
         </ul>
       )}
       {!all && !q && list.length > 6 && (
-        <button type="button" onClick={() => setAll(true)} className="btn-press mt-2 min-h-11 w-full rounded-control border border-line font-bold hover:border-discovery hover:text-discovery">
+        <button type="button" onClick={() => setAll(true)} className="btn-press mt-2 min-h-11 w-full rounded-control border border-line font-bold hover:border-discovery hover:text-link">
           {labels.more.replace("{n}", String(list.length - 6))}
         </button>
       )}
@@ -60,7 +60,7 @@ export function QrDownload({ svg, name, labels }: { svg: string; name: string; l
     };
     img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   };
-  const b = "btn-press min-h-10 rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-discovery";
+  const b = "btn-press min-h-10 rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-link";
   return (
     <div className="flex gap-2">
       <button type="button" className={b} onClick={png}>{labels.png}</button>

@@ -19,7 +19,7 @@ const PATHS: Record<PayMethod["kind"], string> = {
   link: "M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1",
 };
 const MethodIcon = ({ kind }: { kind: PayMethod["kind"] }) => (
-  <span className={`grid size-10 shrink-0 place-items-center rounded-xl ${kind === "instapay" ? "bg-apricot text-ink" : "bg-discovery-tint text-discovery"}`} aria-hidden="true">
+  <span className={`grid size-10 shrink-0 place-items-center rounded-xl ${kind === "instapay" ? "bg-apricot text-night" : "bg-discovery-tint text-link"}`} aria-hidden="true">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d={PATHS[kind]} /></svg>
   </span>
 );
@@ -52,7 +52,7 @@ export function PayDues({ org, locale, statements: real, unsettled = [], methods
           {currencies.length > 1 && (
             <div className="mb-3 flex gap-2">{currencies.map((c) => (
               <button key={c} type="button" onClick={() => { setCur(c); setPicked(open.filter((s) => s.currency === c).map((s) => s.id)); }}
-                className={`min-h-10 rounded-full border px-4 text-small font-bold ${c === cur ? "border-ink bg-ink text-white" : "border-line"}`}>{c}</button>
+                className={`min-h-10 rounded-full border px-4 text-small font-bold ${c === cur ? "border-ink bg-ink text-surface" : "border-line"}`}>{c}</button>
             ))}</div>
           )}
           <ul className="flex flex-col divide-y divide-line">
@@ -70,7 +70,7 @@ export function PayDues({ org, locale, statements: real, unsettled = [], methods
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3">
             <span>{labels.total}: <b className="text-h3 tabular-nums">{m(total)}</b></span>
             <button type="button" disabled={!picked.length} onClick={() => setStep(2)}
-              className="btn-press inline-flex min-h-12 items-center rounded-control bg-apricot px-6 font-extrabold text-ink hover:bg-apricot-hover disabled:opacity-50">{labels.payNow}</button>
+              className="btn-press inline-flex min-h-12 items-center rounded-control bg-apricot px-6 font-extrabold text-night hover:bg-apricot-hover disabled:opacity-50">{labels.payNow}</button>
           </div>
         </div>
       )}
@@ -86,7 +86,7 @@ export function PayDues({ org, locale, statements: real, unsettled = [], methods
                   className={`flex min-h-14 items-center gap-3 rounded-card border-2 p-3 text-start ${method === x.id ? "border-discovery bg-discovery-tint" : "border-line"}`}>
                   <MethodIcon kind={x.kind} />
                   <span className="font-bold">{x.label}</span>
-                  {x.kind === "instapay" && <span className="ms-auto rounded-full bg-apricot px-2 py-0.5 text-[11px] font-extrabold text-ink">★</span>}
+                  {x.kind === "instapay" && <span className="ms-auto rounded-full bg-apricot px-2 py-0.5 text-[11px] font-extrabold text-night">★</span>}
                 </button>
               ))}
             </div>
@@ -124,15 +124,15 @@ export function PayDues({ org, locale, statements: real, unsettled = [], methods
           <p className="font-bold">{labels.confirmTitle} · {chosen.label} · <span className="tabular-nums">{m(total)}</span></p>
           <p className="text-small text-ink-muted">{labels.confirmHint}</p>
           <label className="flex flex-col gap-1 text-small font-bold">{labels.proof}
-            <input type="file" name="proof" required accept="image/jpeg,image/png,image/webp,application/pdf" className="rounded-control border border-dashed border-ink-muted p-3 font-normal file:me-3 file:rounded-control file:border-0 file:bg-discovery-tint file:px-3 file:py-2 file:font-bold file:text-discovery" />
+            <input type="file" name="proof" required accept="image/jpeg,image/png,image/webp,application/pdf" className="rounded-control border border-dashed border-ink-muted p-3 font-normal file:me-3 file:rounded-control file:border-0 file:bg-discovery-tint file:px-3 file:py-2 file:font-bold file:text-link" />
             <span className="font-normal text-ink-muted">{labels.proofHint}</span>
           </label>
           <label className="flex flex-col gap-1 text-small font-bold">{labels.reference}
-            <input name="reference" maxLength={80} dir="ltr" className="min-h-11 rounded-control border border-[#8A90A6] px-3 font-normal" />
+            <input name="reference" maxLength={80} dir="ltr" className="min-h-11 rounded-control border border-field px-3 font-normal" />
             <span className="font-normal text-ink-muted">{labels.referenceHint}</span>
           </label>
           <label className="flex flex-col gap-1 text-small font-bold">{labels.note}
-            <textarea name="note" maxLength={500} rows={2} className="rounded-control border border-[#8A90A6] p-3 font-normal" />
+            <textarea name="note" maxLength={500} rows={2} className="rounded-control border border-field p-3 font-normal" />
           </label>
           <div className="flex flex-wrap justify-between gap-2">
             <button type="button" onClick={() => setStep(2)} className="min-h-11 px-2 font-semibold text-ink-muted hover:underline">{labels.back}</button>

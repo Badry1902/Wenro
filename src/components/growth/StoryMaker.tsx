@@ -66,7 +66,7 @@ export function StoryMaker({ photo, theme, title, price, qrSvg, code, cta, rtl, 
     const file = new File([blob], `${fileName}.png`, { type: "image/png" });
     if (navigator.canShare?.({ files: [file] })) await navigator.share({ files: [file] }).catch(() => {});
   };
-  const b = "btn-press inline-flex min-h-10 items-center rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-discovery";
+  const b = "btn-press inline-flex min-h-10 items-center rounded-control border border-line px-3 text-small font-bold hover:border-discovery hover:text-link";
   return (
     <div className="flex flex-col gap-2">
       {!url ? <button type="button" onClick={make} disabled={busy} className={b}>{busy ? labels.making : labels.make}</button> : (

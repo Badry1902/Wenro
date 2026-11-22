@@ -10,7 +10,7 @@ export function AccountButton({ labels, className = "" }: { labels: { signIn: st
     <Link
       href={signedIn ? "/app" : "/signin"}
       className={`btn-press min-h-11 shrink-0 items-center gap-2 rounded-full px-4 text-small font-bold ${
-        signedIn ? "bg-discovery text-white hover:bg-discovery-hover" : "border border-line text-ink hover:border-discovery hover:text-discovery"
+        signedIn ? "bg-discovery text-white hover:bg-discovery-hover" : "border border-line text-ink hover:border-discovery hover:text-link"
       } ${className}`}
     >
       {signedIn ? <IconGrid size={18} /> : <IconUser size={18} />}

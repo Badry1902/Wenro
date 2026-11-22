@@ -83,7 +83,7 @@ export function MediaUpload({ experienceId, labels }: { experienceId: string; la
             onChange={(e) => pick(e.target.files?.[0] ?? null)} />
         </label>
         <label className="flex min-w-48 flex-1 flex-col gap-1.5 text-small font-bold">{labels.alt}
-          <input value={alt} onChange={(e) => setAlt(e.target.value)} maxLength={200} disabled={busy} className="min-h-11 rounded-control border border-[#8A90A6] px-3" />
+          <input value={alt} onChange={(e) => setAlt(e.target.value)} maxLength={200} disabled={busy} className="min-h-11 rounded-control border border-field px-3" />
         </label>
         <button type="button" onClick={upload} disabled={!file || busy} aria-busy={busy}
           className="btn-press inline-flex min-h-11 items-center gap-2 rounded-control bg-discovery px-4 font-bold text-white disabled:opacity-60">

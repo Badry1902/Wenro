@@ -31,6 +31,17 @@ export function waNumber(raw: string | null | undefined) {
   return d.length >= 8 && d.length <= 15 ? d : null;
 }
 
+/**
+ * Test phase (Meta's free test number): WhatsApp only delivers to up to 5 numbers verified in the Meta app.
+ * WHATSAPP_ALLOWED_TO="201xxxxxxxxx,4917xxxxxxx" sends only to those numbers and marks the rest "skipped"
+ * instead of failing and retrying. Leave it empty once a real business number is connected.
+ */
+export function waAllowed(to: string) {
+  const list = (process.env.WHATSAPP_ALLOWED_TO ?? "").split(",").map((s) => s.trim()).filter(Boolean)
+    .map((v) => waNumber(/^(\+|0)/.test(v) ? v : `+${v}`)).filter(Boolean);
+  return list.length === 0 || list.includes(to);
+}
+
 const TZ = "Africa/Cairo";
 const LANGS = () => (process.env.WHATSAPP_TEMPLATE_LANGS ?? "ar,en").split(",").map((s) => s.trim()).filter(Boolean);
 

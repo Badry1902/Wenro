@@ -14,9 +14,9 @@ export function Steps({ current }: { current: 1 | 2 | 3 | 4 }) {
           <li
             key={label}
             aria-current={active ? "step" : undefined}
-            className={`flex flex-col gap-1.5 ${done ? "text-success" : active ? "text-discovery" : "text-ink-muted"}`}
+            className={`flex flex-col gap-1.5 ${done ? "text-success" : active ? "text-link" : "text-ink-muted"}`}
           >
-            <span aria-hidden="true" className={`step-bar h-1 rounded bg-line ${done ? "text-success" : "text-discovery"}`}
+            <span aria-hidden="true" className={`step-bar h-1 rounded bg-line ${done ? "text-success" : "text-link"}`}
               style={{ "--fill": done || active ? 1 : 0 } as React.CSSProperties} />
             {label}
           </li>

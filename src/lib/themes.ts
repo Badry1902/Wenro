@@ -34,9 +34,12 @@ export const motifUrl = (name: string, tone: MotifTone) => `/brand/coast/motifs/
 
 /** Inline style for a tiled pattern surface (320 CSS px per tile = compact print, 480 = generous). */
 export function patternStyle(t: Theme, v: PatternVariant, size = 320): CSSProperties {
+  const light = v === "colour" || v === "aqua" || (v === "feature" && !THEME[t].dark);
   return {
     backgroundColor: v === "overlay" ? undefined : v === "feature" ? THEME[t].base : v === "midnight" ? "#19244E" : v === "cobalt" ? "#253C96" : v === "aqua" ? "#C4E7E5" : "#FBF8F2",
     backgroundImage: `url("${patternUrl(t, v)}")`, backgroundSize: `${size}px ${size}px`, backgroundRepeat: "repeat",
+    // Dark mode swaps light tiles for the Midnight tile of the same collection (globals.css)
+    ...(light ? { ["--pat-d" as string]: `url("${patternUrl(t, "midnight")}")` } : {}),
   };
 }
 
@@ -76,6 +79,3 @@ export const THEME_PHOTO: Record<Theme, string> = {
   souk: "https://images.unsplash.com/photo-1574936293035-134adffbeb6f",     // lit lanterns in a souk at night
   nile: "https://images.unsplash.com/photo-1684100096410-fd39cdff91a3",     // felucca sail backlit on the river
 };
-
-/** A different collection print each day for brand surfaces (footer, sidebars), so no one place dominates. */
-export const themeOfTheDay = (offset = 0) => THEMES[(Math.floor(Date.now() / 86_400_000) + offset) % THEMES.length];

@@ -67,7 +67,7 @@ export function PlanWeek({ cards }: { cards: ExperienceCard[] }) {
 
   const fmtDay = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" });
   const fmtTime = (iso: string) => new Date(iso).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Cairo" });
-  const field = "min-h-11 rounded-control border border-[#8A90A6] bg-white px-3";
+  const field = "min-h-11 rounded-control border border-field bg-surface px-3";
   const toggle = (id: string) => setChosen((c) => (c.includes(id) ? c.filter((x) => x !== id) : c.length >= 12 ? c : [...c, id]));
   const nights = Math.max(0, Math.round((Date.parse(to) - Date.parse(from)) / 864e5) + 1);
 

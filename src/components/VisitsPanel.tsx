@@ -34,7 +34,7 @@ export async function SiteVisits({ v }: { v: Visits }) {
           {v.days.map((d, i) => (
             <div key={d.day} className="flex flex-1 flex-col items-center gap-1.5">
               <span className="font-mono text-[11px] tabular-nums text-ink-muted">{d.visitors}</span>
-              <span className={`w-full max-w-12 rounded-t-[4px] ${i === v.days.length - 1 ? "bg-discovery" : "bg-[#D9DCE6]"}`} style={{ height: `${Math.max(2, (d.visitors / max) * 72)}px` }} />
+              <span className={`w-full max-w-12 rounded-t-[4px] ${i === v.days.length - 1 ? "bg-discovery" : "bg-faint"}`} style={{ height: `${Math.max(2, (d.visitors / max) * 72)}px` }} />
               <span className="text-[12px] text-ink-muted">{format.dateTime(new Date(`${d.day}T12:00:00Z`), { weekday: "short" })}</span>
             </div>
           ))}
@@ -57,7 +57,7 @@ export async function TripTable({ rows }: { rows: TripVisits }) {
         <tbody>
           {rows.map((r) => (
             <tr key={r.slug} className="border-b border-line last:border-0">
-              <td className="p-2"><Link href={`/experiences/${r.slug}`} className="hover:text-discovery">{r.title ?? r.slug}</Link></td>
+              <td className="p-2"><Link href={`/experiences/${r.slug}`} className="hover:text-link">{r.title ?? r.slug}</Link></td>
               <td className="p-2 text-end tabular-nums">{r.visitors}</td><td className="p-2 text-end tabular-nums">{r.views}</td>
               <td className="p-2 text-end font-medium tabular-nums">{r.bookings}</td>
             </tr>

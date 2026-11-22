@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { afterOverlayHistory, useOverlay } from "../useOverlay";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { isCategory } from "@/lib/catalog";
@@ -47,12 +48,11 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
     if (q) u.searchParams.set("q", q); else u.searchParams.delete("q");
     if (cats.length === 1) u.searchParams.set("cat", cats[0]); else u.searchParams.delete("cat");
     if (theme) u.searchParams.set("theme", theme); else u.searchParams.delete("theme");
-    history.replaceState(history.state, "", u);
-  }, [q, cats, theme]);
-  useEffect(() => {
-    document.documentElement.style.overflow = sheet ? "hidden" : "";
-    return () => { document.documentElement.style.overflow = ""; };
-  }, [sheet]);
+    // while the filter sheet is open the address is written once it closes (its Back entry is removed first)
+    if (sheet) return;
+    afterOverlayHistory(() => history.replaceState(history.state, "", u));
+  }, [q, cats, theme, sheet]);
+  useOverlay(sheet, () => setSheet(false));
 
   const results = useMemo(() => {
     const ranked = q.trim() ? search(index, q) : null;
@@ -114,7 +114,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
         <fieldset>
           <legend className="mb-2 flex w-full justify-between font-bold">
             {t("list.maxPrice")}
-            <span className="font-semibold text-discovery">{max >= ceil ? t("list.any") : formatMoney({ minor: max, currency: cards[0]?.currency ?? "EUR" }, locale)}</span>
+            <span className="font-semibold text-link">{max >= ceil ? t("list.any") : formatMoney({ minor: max, currency: cards[0]?.currency ?? "EUR" }, locale)}</span>
           </legend>
           <input type="range" className="brand-range w-full" min={1000} max={ceil} step={500} value={max} onChange={(e) => setMax(Number(e.target.value))} aria-label={t("list.maxPrice")} />
         </fieldset>
@@ -127,7 +127,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
           <input type="checkbox" className={box} checked={pickup} onChange={(e) => setPickup(e.target.checked)} />{t("list.pickupOnly")}
         </label>
       </div>
-      {active > 0 && <button type="button" onClick={clear} className="btn-press min-h-11 rounded-full border border-line font-bold hover:border-discovery hover:text-discovery">{t("list.clear")}</button>}
+      {active > 0 && <button type="button" onClick={clear} className="btn-press min-h-11 rounded-full border border-line font-bold hover:border-discovery hover:text-link">{t("list.clear")}</button>}
     </div>
   );
 
@@ -143,12 +143,12 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
             <h1 className="text-[30px] font-extrabold leading-tight md:text-[40px]">{theme ? t(`themes.${theme}.name`) : t("list.title", { city: cityName })}</h1>
             <p className="mt-1 text-ink-muted">{theme ? t(`themes.${theme}.blurb`) : city ? t("places.nearYouSub", { city: cityName }) : t("list.subtitle")}</p>
             <button type="button" onClick={openCityPicker} className="mt-2 inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-small font-bold hover:border-discovery">
-              <IconPin size={16} className="text-apricot" />{cityName} · <span className="text-discovery">{t("places.change")}</span>
+              <IconPin size={16} className="text-apricot" />{cityName} · <span className="text-link">{t("places.change")}</span>
             </button>
           </div>
         </div>
         <label className="flex min-h-12 w-full items-center gap-2 rounded-full border border-line bg-surface px-4 focus-within:border-discovery md:w-96">
-          <IconSearch size={20} className="text-discovery" />
+          <IconSearch size={20} className="text-link" />
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("home.searchPlaceholder")} aria-label={t("list.search")}
             className="min-w-0 flex-1 bg-transparent outline-none" />
           {q && <button type="button" onClick={() => setQ("")} aria-label={t("list.clear")} className="grid size-8 place-items-center rounded-full hover:bg-discovery-tint"><IconClose size={16} /></button>}
@@ -159,11 +159,11 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
       {THEMES.filter((th) => themeCount[th] > 0).length > 1 && (
         <div role="group" aria-label={t("themes.label")} className="rail -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1">
           <button type="button" aria-pressed={!theme} onClick={() => setTheme(null)}
-            className={`btn-press inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-small font-bold ${!theme ? "border-ink bg-ink text-white" : "border-line bg-surface hover:border-ink"}`}>{t("themes.all")}</button>
+            className={`btn-press inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 text-small font-bold ${!theme ? "border-ink bg-ink text-surface" : "border-line bg-surface hover:border-ink"}`}>{t("themes.all")}</button>
           {THEMES.filter((th) => themeCount[th] > 0).map((th) => (
             <button key={th} type="button" aria-pressed={theme === th} onClick={() => setTheme(theme === th ? null : th)}
-              className={`btn-press inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border ps-1.5 pe-4 text-small font-bold ${theme === th ? "border-ink bg-ink text-white" : "border-line bg-surface hover:border-ink"}`}>
-              <span className="grid size-8 place-items-center rounded-full bg-white"><ThemeMotif theme={th} size={22} /></span>
+              className={`btn-press inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border ps-1.5 pe-4 text-small font-bold ${theme === th ? "border-ink bg-ink text-surface" : "border-line bg-surface hover:border-ink"}`}>
+              <span className="grid size-8 place-items-center rounded-full bg-surface"><ThemeMotif theme={th} size={22} /></span>
               {t(`themes.${th}.name`)}
             </button>
           ))}
@@ -173,14 +173,14 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
       {/* quick category chips */}
       <div className="rail -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1">
         <button type="button" onClick={() => setCats([])} aria-pressed={cats.length === 0}
-          className={`chip-link btn-press inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 font-semibold ${cats.length === 0 ? "border-ink bg-ink text-white" : "border-line bg-surface"}`}>
+          className={`chip-link btn-press inline-flex min-h-11 shrink-0 items-center rounded-full border px-4 font-semibold ${cats.length === 0 ? "border-ink bg-ink text-surface" : "border-line bg-surface"}`}>
           {t("home.allCategories")}
         </button>
         {categories.map((c) => {
           const on = cats.length === 1 && cats[0] === c.slug;
           return (
             <button key={c.slug} type="button" onClick={() => setCats(on ? [] : [c.slug])} aria-pressed={on}
-              className={`chip-link btn-press inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-4 font-semibold ${on ? "border-ink bg-ink text-white" : "border-line bg-surface"}`}>
+              className={`chip-link btn-press inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border px-4 font-semibold ${on ? "border-ink bg-ink text-surface" : "border-line bg-surface"}`}>
               <IconCategory name={c.slug} size={18} />{c.name}
             </button>
           );
@@ -229,7 +229,7 @@ export function CatalogBrowser({ cards, categories }: { cards: ExperienceCard[];
 
       {sheet && (
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label={t("list.filters")}>
-          <button type="button" aria-label={t("gallery.close")} className="sheet-scrim absolute inset-0 bg-ink/40" onClick={() => setSheet(false)} />
+          <button type="button" aria-label={t("gallery.close")} className="sheet-scrim absolute inset-0 bg-night/40" onClick={() => setSheet(false)} />
           <div className="sheet-panel absolute inset-y-0 end-0 flex w-[min(92vw,400px)] flex-col bg-surface">
             <div className="flex items-center justify-between border-b border-line p-4">
               <span className="text-h3 font-bold">{t("list.filters")}</span>

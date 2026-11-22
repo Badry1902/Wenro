@@ -2,6 +2,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getWorkspaces, homeOf, type Workspace } from "@/lib/workspaces";
 import { signOut } from "@/app/[locale]/signin/actions";
+import { ThemeToggle } from "./ThemeToggle";
+import { BackButton } from "./BackButton";
 import { NavLink } from "./NavLink";
 import { PushSetup } from "./PushSetup";
 import { rpc } from "@/lib/data/rpc";
@@ -11,10 +13,10 @@ import { LanguageMenu } from "./LanguageMenu";
 
 /** One colour per kind of workspace, so it is always clear whose dashboard you are in. */
 export const TYPE_STYLE: Record<Workspace["type"], { dot: string; pill: string; bar: string }> = {
-  platform: { dot: "bg-white", pill: "bg-white text-ink", bar: "bg-discovery" },
+  platform: { dot: "bg-paper", pill: "bg-surface text-ink", bar: "bg-discovery" },
   operator: { dot: "bg-aqua", pill: "bg-aqua text-ink", bar: "bg-aqua" },
   agency: { dot: "bg-[#3fbf86]", pill: "bg-success text-white", bar: "bg-success" },
-  marketer: { dot: "bg-apricot", pill: "bg-apricot text-ink", bar: "bg-apricot" },
+  marketer: { dot: "bg-apricot", pill: "bg-apricot text-night", bar: "bg-apricot" },
 };
 const ORDER: Workspace["type"][] = ["platform", "operator", "agency", "marketer"];
 
@@ -76,16 +78,17 @@ export async function WorkspaceShell({
 
   return (
     <div className="flex min-h-dvh flex-col md:flex-row">
-      <aside className="relative bg-ink text-white md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
+      <aside className="relative bg-night text-white dark:border-e dark:border-line dark:bg-[#0b1126] md:sticky md:top-0 md:flex md:h-dvh md:w-72 md:shrink-0 md:flex-col md:overflow-y-auto print:hidden">
         <div className="relative flex items-center justify-between gap-3 px-4 py-3 md:block md:px-5 md:pt-6">
           <Link href="/" className="flex min-h-11 items-center gap-2 md:mb-6 md:me-14" aria-label={t("toSite")}>
             <Wordmark tone="reverse" width={118} />
           </Link>
           <div className="order-last md:hidden"><Suspense><LanguageMenu label={t("language")} tone="dark" compact /></Suspense></div>
+          <ThemeToggle tone="dark" className="order-last md:hidden" />
           <Link href="/app/notifications" aria-label={t("notify.bell", { n: unread })} title={t("notify.bell", { n: unread })}
             className="relative order-last grid size-11 shrink-0 place-items-center rounded-full text-white/90 hover:bg-white/10 md:absolute md:end-4 md:top-7">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M6 8a6 6 0 1112 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 004 0" /></svg>
-            {unread > 0 && <span className="absolute end-1 top-1 grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-ink">{unread > 99 ? "99+" : unread}</span>}
+            {unread > 0 && <span className="absolute end-1 top-1 grid min-w-5 place-items-center rounded-full bg-apricot px-1 text-[11px] font-bold leading-5 text-night">{unread > 99 ? "99+" : unread}</span>}
           </Link>
           <div className="min-w-0 md:mb-5">
             <span className="inline-flex items-center gap-2 text-[12px] font-medium text-white/60">
@@ -106,13 +109,14 @@ export async function WorkspaceShell({
         )}
         <div className="hidden px-3 pt-4 md:block"><PushSetup dark /></div>
         <div className="mt-auto hidden border-t border-white/[0.08] px-5 pb-5 pt-4 md:block">
-          <div className="-ms-2.5 mb-1"><Suspense><LanguageMenu label={t("language")} tone="dark" align="start" up /></Suspense></div>
+          <div className="-ms-2.5 mb-1 flex items-center gap-1"><Suspense><LanguageMenu label={t("language")} tone="dark" align="start" up /></Suspense><ThemeToggle tone="dark" /></div>
           <Link href="/app/account" className="block py-2 text-[14px] text-white/60 hover:text-white">{t("account.menu")}</Link>
           <Link href="/" className="block py-2 text-[14px] text-white/60 hover:text-white">{t("toSite")}</Link>
           <SignOut className="" />
         </div>
       </aside>
       <main className="min-w-0 flex-1 bg-ivory px-4 py-6 md:px-8 md:py-8">
+        <BackButton scope="workspace" className="-ms-2 -mt-2 mb-2 print:hidden" />
         {current.status === "pending" && (
           <p role="status" className="mb-6 rounded-card bg-warning-tint p-4 text-warning">{t("pendingNotice")}</p>
         )}

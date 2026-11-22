@@ -31,7 +31,7 @@ export function PhotoUpload({ labels }: { labels: { choose: string; alt: string;
           }} />
       </label>
       <label className="flex min-w-48 flex-1 flex-col gap-1.5 text-small font-bold">{labels.alt}
-        <input name="alt" maxLength={200} className="min-h-11 rounded-control border border-[#8A90A6] px-3" />
+        <input name="alt" maxLength={200} className="min-h-11 rounded-control border border-field px-3" />
       </label>
       <Submit label={labels.upload} pending={labels.uploading} disabled={tooBig} />
       <p className={`w-full text-small ${tooBig ? "font-semibold text-critical" : "text-ink-muted"}`}>{tooBig ? labels.tooBig : labels.hint}</p>

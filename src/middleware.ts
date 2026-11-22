@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { createServerClient } from "@supabase/ssr";
 import { routing } from "./i18n/routing";
+import { IDLE_LIMIT_S, SEEN_COOKIE, SEEN_REFRESH_S, isAuthCookie, nowS, seenCookie, sessionOnly } from "./lib/session";
 
 const intl = createMiddleware(routing);
 
@@ -22,7 +23,24 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(to);
   }
 
+  // Idle sign-out: a session unused for 12 hours, or whose browser was closed, starts again as a guest.
+  const secure = req.nextUrl.protocol === "https:";
+  const authCookies = req.cookies.getAll().filter((c) => isAuthCookie(c.name));
+  const seen = Number(req.cookies.get(SEEN_COOKIE)?.value) || 0;
+  if (authCookies.length && (!seen || nowS() - seen > IDLE_LIMIT_S)) {
+    // Send the same address again without the sign-in cookies, so this request is already a guest's
+    const out = NextResponse.redirect(req.nextUrl, req.method === "GET" || req.method === "HEAD" ? 307 : 303);
+    for (const c of authCookies) out.cookies.set(c.name, "", { path: "/", maxAge: 0 });
+    out.cookies.set(SEEN_COOKIE, "", { path: "/", maxAge: 0 });
+    out.headers.set("Cache-Control", "private, no-store");
+    return out;
+  }
+
   const res = intl(req);
+  if (authCookies.length && nowS() - seen > SEEN_REFRESH_S) {
+    const c = seenCookie(secure);
+    res.cookies.set(c.name, c.value, c.options);
+  }
 
   const ref = req.nextUrl.searchParams.get("ref");
   if (ref && REF.test(ref)) {
@@ -42,7 +60,7 @@ export default async function middleware(req: NextRequest) {
     const supabase = createServerClient(url, key, {
       cookies: {
         getAll: () => req.cookies.getAll(),
-        setAll: (toSet) => toSet.forEach(({ name, value, options }) => res.cookies.set(name, value, options)),
+        setAll: (toSet) => toSet.forEach(({ name, value, options }) => res.cookies.set(name, value, sessionOnly(value, options))),
       },
     });
     await supabase.auth.getClaims();

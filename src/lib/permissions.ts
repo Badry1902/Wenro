@@ -24,6 +24,8 @@ const PLATFORM = {
   coupons: ["owner", "ops", "finance"],
   /** admin_messages; retry_message, run jobs */
   messages: ["owner", "ops", "support"],
+  /** site pop-ups (admin_popups, save_popup, set_popup_status) */
+  popups: ["owner", "ops", "content"],
   /** team page, demo data */
   team: ["owner"],
 } as const satisfies Record<string, readonly Role[]>;

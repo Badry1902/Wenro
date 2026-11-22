@@ -7,7 +7,7 @@ import { formatMoney } from "@/lib/money";
 import { saveExperience, type SaveState } from "@/app/[locale]/app/editor-actions";
 import { LOCALES, TEXT_FIELDS, type EditorData, type EditorOptions, type Loc, type TextField } from "./types";
 
-const input = "min-h-11 w-full rounded-control border border-[#8A90A6] bg-surface px-3";
+const input = "min-h-11 w-full rounded-control border border-field bg-surface px-3";
 const toMajor = (minor: number | null | undefined) => (minor == null ? "" : String(minor / 100));
 const toMinor = (major: string) => {
   const n = Number.parseFloat(major.replace(",", "."));
@@ -231,7 +231,7 @@ export function ExperienceEditor({ initial, options, back, base }: { initial: Ed
             </div>
           </div>
         ))}
-        <button type="button" className="btn-press min-h-11 self-start rounded-control border border-discovery px-4 font-bold text-discovery"
+        <button type="button" className="btn-press min-h-11 self-start rounded-control border border-discovery px-4 font-bold text-link"
           onClick={() => setD({ ...d, extras: [...d.extras, { id: null, net_minor: 0, per: "person", names: {} }] })}>+ {t("addExtra")}</button>
       </section>
 

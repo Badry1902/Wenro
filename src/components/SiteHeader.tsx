@@ -7,6 +7,7 @@ import { AccountButton } from "./site/AccountButton";
 import { WishCount } from "./site/Recent";
 import { IconHeart } from "./Icons";
 import { Wordmark } from "./brand/Logo";
+import { BackButton } from "./BackButton";
 
 /**
  * Site header: logo, catalogue links, language and the account button. Signed-in people see a
@@ -20,6 +21,7 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-surface/90 backdrop-blur-md print:static print:hidden">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4">
+        <BackButton className="-ms-2 -me-2" />
         <Link prefetch={false} href="/" aria-label="WENRO" className="flex min-h-11 shrink-0 items-center">
           <Wordmark width={128} priority />
         </Link>

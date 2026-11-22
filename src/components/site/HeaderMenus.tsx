@@ -9,6 +9,8 @@ import { LanguageMenu, LanguageRow } from "../LanguageMenu";
 import { CityChip, CityPickerDialog } from "./CityPicker";
 import { SearchOverlay, openSearch } from "./SearchOverlay";
 import { IconSearch } from "../Icons";
+import { ThemeToggle } from "../ThemeToggle";
+import { useOverlay } from "../useOverlay";
 
 type Cat = { slug: string; name: string; blurb: string };
 type Labels = { allTrips: string; categories: string; menu: string; language: string; close: string; partners: string; explore: string; plan: string; search: string };
@@ -37,23 +39,20 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
 
   // Close menus after navigating
   useEffect(() => { setCats(false); setSheet(false); }, [pathname, search]);
-  // Lock page scroll behind the phone menu
-  useEffect(() => {
-    document.documentElement.style.overflow = sheet ? "hidden" : "";
-    return () => { document.documentElement.style.overflow = ""; };
-  }, [sheet]);
+  // Phone menu: Escape, the phone's Back gesture and a locked page behind it
+  useOverlay(sheet, () => setSheet(false));
 
   return (
     <>
       <nav className="ms-4 hidden flex-1 items-center gap-1 md:flex" aria-label={labels.menu}>
-        <Link prefetch={false} href="/experiences" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">
+        <Link prefetch={false} href="/experiences" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-link">
           {labels.allTrips}
         </Link>
-        <Link prefetch={false} href="/explore" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">{labels.explore}</Link>
-        <Link prefetch={false} href="/plan" className="nav-link hidden min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery lg:inline-flex">{labels.plan}</Link>
+        <Link prefetch={false} href="/explore" className="nav-link inline-flex min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-link">{labels.explore}</Link>
+        <Link prefetch={false} href="/plan" className="nav-link hidden min-h-11 items-center rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-link lg:inline-flex">{labels.plan}</Link>
         <div ref={catRef} className="relative">
           <button type="button" aria-expanded={cats} onClick={() => setCats((v) => !v)}
-            className="nav-link inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-discovery">
+            className="nav-link inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-[15px] font-semibold text-ink hover:bg-discovery-tint hover:text-link">
             {labels.categories}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"
               className={`transition-transform duration-200 ${cats ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
@@ -85,6 +84,7 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
       <CityPickerDialog />
       <SearchOverlay />
       <div className="hidden sm:block"><LanguageMenu label={labels.language} /></div>
+      <ThemeToggle className="hidden sm:grid" />
 
 
       <button type="button" onClick={() => setSheet(true)} aria-label={labels.menu} aria-expanded={sheet}
@@ -94,7 +94,7 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
 
       {sheet && (
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label={labels.menu}>
-          <button type="button" aria-label={labels.close} className="sheet-scrim absolute inset-0 bg-ink/40" onClick={() => setSheet(false)} />
+          <button type="button" aria-label={labels.close} className="sheet-scrim absolute inset-0 bg-night/40" onClick={() => setSheet(false)} />
           <div className="sheet-panel absolute inset-y-0 end-0 flex w-[min(88vw,380px)] flex-col overflow-y-auto bg-surface">
             <div className="flex items-center justify-between border-b border-line p-4">
               <span className="font-bold">{labels.menu}</span>
@@ -114,6 +114,7 @@ export function HeaderMenus({ categories, labels, account }: { categories: Cat[]
               ))}
               <p className="mt-3 px-3 text-small font-bold uppercase tracking-wider text-ink-muted">{labels.language}</p>
               <div className="px-3"><LanguageRow /></div>
+              <div className="mt-3 border-t border-line pt-2"><ThemeToggle variant="row" /></div>
             </div>
           </div>
         </div>

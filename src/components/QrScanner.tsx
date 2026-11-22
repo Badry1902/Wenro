@@ -45,7 +45,7 @@ export function QrScanner({ label, stopLabel, onCodeField }: { label: string; st
   return (
     <div className="flex flex-col gap-2">
       <button type="button" onClick={() => setOn(!on)}
-        className="btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-ink px-4 font-bold text-white">
+        className="btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-night px-4 font-bold text-surface">
         {on ? stopLabel : label}
       </button>
       {on && (

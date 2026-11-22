@@ -5,7 +5,7 @@ import { IconCheck, IconStar } from "../Icons";
 export function Stars({ value, size = 16 }: { value: number; size?: number }) {
   return (
     <span className="inline-flex text-apricot" aria-hidden="true">
-      {[1, 2, 3, 4, 5].map((n) => <IconStar key={n} size={size} filled={n <= Math.round(value)} className={n <= Math.round(value) ? "" : "text-[#D5D8E2]"} />)}
+      {[1, 2, 3, 4, 5].map((n) => <IconStar key={n} size={size} filled={n <= Math.round(value)} className={n <= Math.round(value) ? "" : "text-faint"} />)}
     </span>
   );
 }
@@ -41,7 +41,7 @@ export async function ReviewsSection({ data, id = "reviews" }: { data: ReviewSum
             return (
               <li key={s} className="flex items-center gap-2 text-small">
                 <span className="w-3 tabular-nums">{s}</span><IconStar size={13} className="text-apricot" />
-                <span className="h-2 flex-1 overflow-hidden rounded-full bg-white"><span className="block h-full rounded-full bg-apricot" style={{ width: `${(n / data.count) * 100}%` }} /></span>
+                <span className="h-2 flex-1 overflow-hidden rounded-full bg-surface"><span className="block h-full rounded-full bg-apricot" style={{ width: `${(n / data.count) * 100}%` }} /></span>
                 <span className="w-6 text-end tabular-nums text-ink-muted">{n}</span>
               </li>
             );
@@ -53,7 +53,7 @@ export async function ReviewsSection({ data, id = "reviews" }: { data: ReviewSum
           <li key={r.id} className="flex flex-col gap-2 rounded-card border border-line p-4">
             <div className="flex items-center justify-between gap-2">
               <span className="flex items-center gap-2">
-                <span className="grid size-9 place-items-center rounded-full bg-discovery-tint font-bold text-discovery" aria-hidden="true">{r.author.slice(0, 1).toUpperCase()}</span>
+                <span className="grid size-9 place-items-center rounded-full bg-discovery-tint font-bold text-link" aria-hidden="true">{r.author.slice(0, 1).toUpperCase()}</span>
                 <span><b className="block leading-tight">{r.author}</b>
                   <span className="text-[12px] text-ink-muted">{t("travelled", { date: format.dateTime(new Date(r.trip_date), { month: "long", year: "numeric" }) })}</span></span>
               </span>

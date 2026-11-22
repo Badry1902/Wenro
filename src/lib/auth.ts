@@ -2,10 +2,11 @@ import "server-only";
 import { cache } from "react";
 import { cookies } from "next/headers";
 import { dataMode } from "@/lib/env";
+import { DEV_USER_COOKIE } from "@/lib/session";
 import { createUserClient } from "@/lib/supabase/server";
 
 /** Local developer mode only: pretend to be one of the demo users (no passwords, no email). */
-export const DEV_USER_COOKIE = "wenro_dev_uid";
+export { DEV_USER_COOKIE } from "@/lib/session";
 /** Remembers on this browser that the person signs in with a password, so that form opens first. */
 export const PASSWORD_HINT_COOKIE = "wenro_pw";
 

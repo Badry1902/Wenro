@@ -74,7 +74,9 @@ export function LogoLoop({ width = 200, className = "" }: { width?: number; clas
   return (
     <span className={`logo-float inline-flex flex-col items-center ${className}`} style={{ width }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/brand/coast/wordmark-primary-480.png" alt="WENRO" width={width} height={Math.round(width * 89 / 480)} className="logo-bob" decoding="async" />
+      <img src="/brand/coast/wordmark-primary-480.png" alt="WENRO" width={width} height={Math.round(width * 89 / 480)} className="logo-bob logo-light" decoding="async" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/coast/wordmark-reverse-480.png" alt="" width={width} height={Math.round(width * 89 / 480)} className="logo-bob logo-dark" decoding="async" />
       <svg className="logo-wave mt-2" width={width} height="12" viewBox={`0 0 ${width} 12`} aria-hidden="true" preserveAspectRatio="none">
         <defs>
           <pattern id="wenro-wave" width="40" height="12" patternUnits="userSpaceOnUse">

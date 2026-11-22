@@ -45,6 +45,9 @@ const ALLOWED = new Set([
   "plan_slots", "partner_stats", "operator_trip_quality", "operator_today", "save_push_subscription", "delete_push_subscription",
   "pending_pushes", "drop_push_endpoint", "set_translation_flags", "add_machine_translations", "experiences_missing_locales", "my_notifications", "unread_notifications",
   "mark_notifications_read", "record_visit", "admin_visits", "operator_visits",
+  // site pop-ups and operator contact details
+  "active_popups", "popup_event", "admin_popups", "save_popup", "set_popup_status", "set_popup_image",
+  "org_contact", "set_org_contact",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

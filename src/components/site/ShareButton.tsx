@@ -17,7 +17,7 @@ export function ShareButton({ title }: { title: string }) {
   };
   return (
     <button type="button" onClick={share} aria-label={t("label")} title={t("label")}
-      className="btn-press inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-small font-bold hover:border-discovery hover:text-discovery">
+      className="btn-press inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-surface px-3 text-small font-bold hover:border-discovery hover:text-link">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 002 2h10a2 2 0 002-2v-6" /></svg>
       <span aria-live="polite" className="hidden sm:inline">{done ? t("copied") : t("label")}</span>
     </button>

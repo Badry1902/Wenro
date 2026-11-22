@@ -106,7 +106,7 @@ export function ExploreMap({ cards, categories }: { cards: ExperienceCard[]; cat
             <img src={mediaSrc(img, { w: 240, h: 240 })} alt="" className="size-24 shrink-0 rounded-[12px] object-cover" />
           )}
           <div className="flex min-w-0 flex-1 flex-col gap-1">
-            <Link href={`/experiences/${one.slug}`} className="line-clamp-2 font-bold leading-snug hover:text-discovery">{one.title}</Link>
+            <Link href={`/experiences/${one.slug}`} className="line-clamp-2 font-bold leading-snug hover:text-link">{one.title}</Link>
             {one.reviews ? <span className="inline-flex items-center gap-1 text-small"><IconStar size={14} className="text-apricot" /><b>{Number(one.rating).toFixed(1)}</b> ({one.reviews})</span> : null}
             {one.from_minor != null && <span className="text-small text-ink-muted">{t("widget.from")} <b className="text-ink">{formatMoney({ minor: one.from_minor, currency: one.currency }, locale)}</b></span>}
             {one.exact === false && <span className="text-[12px] text-ink-muted">{t("map.areaNote")}</span>}

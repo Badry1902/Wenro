@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useOverlay } from "../useOverlay";
 import { useTranslations } from "next-intl";
 import { mediaSrc, videoPoster } from "@/lib/media";
 import { VideoTile } from "../VideoTile";
@@ -56,14 +57,14 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
   useEffect(() => {
     if (!box) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setBox(false);
       if (e.key === "ArrowRight") go(i + (document.dir === "rtl" ? -1 : 1));
       if (e.key === "ArrowLeft") go(i + (document.dir === "rtl" ? 1 : -1));
     };
     document.addEventListener("keydown", onKey);
-    document.documentElement.style.overflow = "hidden";
-    return () => { document.removeEventListener("keydown", onKey); document.documentElement.style.overflow = ""; };
+    return () => document.removeEventListener("keydown", onKey);
   }, [box, i, go]);
+  // Escape, the phone's Back gesture, locked page behind
+  useOverlay(box, () => setBox(false));
 
   // swipe
   const start = useRef<number | null>(null);
@@ -118,12 +119,12 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
         {items.map((it, k) => {
           const pos = posOf(k);
           return (
-            <div key={it.src} data-pos={pos} className="cf-slide absolute inset-y-0 start-1/2 overflow-hidden rounded-image bg-ink shadow-[0_30px_60px_-30px_rgb(18_24_48/0.55)]"
+            <div key={it.src} data-pos={pos} className="cf-slide absolute inset-y-0 start-1/2 overflow-hidden rounded-image bg-night shadow-[0_30px_60px_-30px_rgb(18_24_48/0.55)]"
               aria-hidden={k !== i} role="group" aria-roledescription="slide" aria-label={t("photoN", { n: k + 1, total: n })}
               onClick={pos === -1 || pos === 1 ? () => user(k) : undefined}>
               {/* the photo in front, the two beside it and the next ones are loaded */}
               {Math.abs(pos) <= 2 ? slide(it, k, false) : null}
-              <span className="cf-shade pointer-events-none absolute inset-0 bg-ink" />
+              <span className="cf-shade pointer-events-none absolute inset-0 bg-night" />
             </div>
           );
         })}
@@ -134,11 +135,11 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
           {n > 1 && (
             <>
               <button type="button" onClick={() => user(i - 1)} aria-label={t("prev")}
-                className="btn-press pointer-events-auto absolute start-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-md backdrop-blur">
+                className="btn-press pointer-events-auto absolute start-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur">
                 <IconChevron size={20} className="-scale-x-100" />
               </button>
               <button type="button" onClick={() => user(i + 1)} aria-label={t("next")}
-                className="btn-press pointer-events-auto absolute end-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-ink shadow-md backdrop-blur">
+                className="btn-press pointer-events-auto absolute end-3 top-1/2 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-surface/90 text-ink shadow-md backdrop-blur">
                 <IconChevron size={20} />
               </button>
             </>
@@ -158,7 +159,7 @@ export function Gallery({ items, placeholder }: { items: Item[]; placeholder: st
             )}
             <span className="rounded-full bg-black/35 px-2.5 py-1 text-small font-bold tabular-nums backdrop-blur" aria-live="polite">{i + 1} / {n}</span>
             <button type="button" onClick={() => setBox(true)} aria-label={t("showAll", { n })}
-              className="btn-press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-white px-3 text-small font-bold text-ink hover:bg-discovery-tint">
+              className="btn-press inline-flex min-h-9 items-center gap-1.5 rounded-full bg-surface px-3 text-small font-bold text-ink hover:bg-discovery-tint">
               <IconExpand size={16} /><span className="hidden sm:inline">{t("showAll", { n })}</span>
             </button>
           </div>

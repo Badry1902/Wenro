@@ -65,7 +65,7 @@ export function TripCard({ c, size = "md", priority = false, city = null }: { c:
             className={`card-photo absolute inset-0 h-full w-full object-cover ${n === i ? "is-on" : ""}`} />
         ))}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
-        {demo && <span className="absolute start-3 top-3 rounded-full bg-ink/80 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur">{t("home.demoTag")}</span>}
+        {demo && <span className="absolute start-3 top-3 rounded-full bg-night/80 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur">{t("home.demoTag")}</span>}
         <WishButton id={c.id} className="absolute end-3 top-3 z-10" />
         <ThemeBadge theme={theme} label={t(`themes.${theme}.name`)} className="absolute bottom-2 start-2.5 z-[1]" size={20} />
         {imgs.length > 1 && (
@@ -78,9 +78,9 @@ export function TripCard({ c, size = "md", priority = false, city = null }: { c:
         <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-semibold uppercase tracking-wide text-ink-muted">
           {c.category && <span className="text-teal-ink">{t(`categories.${c.category}` as "categories.sea")}</span>}
           {duration && <span className="inline-flex items-center gap-1 normal-case tracking-normal"><IconClock size={14} />{duration}</span>}
-          {where && <span className={`inline-flex items-center gap-1 normal-case tracking-normal ${near === "far" ? "" : "text-discovery"}`}><IconPin size={14} />{where}</span>}
+          {where && <span className={`inline-flex items-center gap-1 normal-case tracking-normal ${near === "far" ? "" : "text-link"}`}><IconPin size={14} />{where}</span>}
         </span>
-        <Link href={`/experiences/${c.slug}`} className="font-display text-[18px] font-extrabold leading-snug after:absolute after:inset-0 after:content-[''] group-hover:text-discovery line-clamp-2">
+        <Link href={`/experiences/${c.slug}`} className="font-display text-[18px] font-extrabold leading-snug after:absolute after:inset-0 after:content-[''] group-hover:text-link line-clamp-2">
           {c.title}
         </Link>
         {c.reviews ? (

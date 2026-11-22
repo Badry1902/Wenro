@@ -49,7 +49,7 @@ export async function PartnerGrowth({ s, locale, org }: { s: PartnerStats; local
       <section aria-labelledby="lvl-h" className="min-w-0 rounded-card border border-line bg-surface p-5 lg:order-1">
         <h2 id="lvl-h" className="font-sans text-[13px] font-normal text-ink-muted">{t("levelTitle")}</h2>
         <p className="mt-1 text-[24px] font-medium">{t(`levels.${level.key}`)}</p>
-        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-[#ECEBE6]"><div className="h-full rounded-full bg-discovery" style={{ width: `${pct}%` }} /></div>
+        <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-line"><div className="h-full rounded-full bg-discovery" style={{ width: `${pct}%` }} /></div>
         <p className="mt-2 text-[14px]">{next ? t("toNext", { n: next.min - n, level: t(`levels.${next.key}`) }) : t("top")}</p>
         <p className="mt-1 text-[12px] text-ink-muted">{t("levelNote")}</p>
         <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2" aria-label={t("badges")}>

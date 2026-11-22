@@ -2,6 +2,7 @@
 
 import { createPortal } from "react-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { markOverlayNavigation, useOverlay } from "../useOverlay";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import type { ExperienceCard } from "@/lib/data/types";
@@ -33,7 +34,11 @@ export function SearchOverlay() {
 
   useEffect(() => {
     const o = () => { setOpen(true); setQ(""); };
-    const k = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") { e.preventDefault(); o(); } };
+    // Ctrl/⌘ K or "/" (outside text fields) opens search, like most sites
+    const k = (e: KeyboardEvent) => {
+      const typing = (e.target as HTMLElement | null)?.closest?.("input, textarea, select, [contenteditable]");
+      if (((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") || (e.key === "/" && !typing && !e.metaKey && !e.ctrlKey && !e.altKey)) { e.preventDefault(); o(); }
+    };
     window.addEventListener("wenro:search-open", o);
     document.addEventListener("keydown", k);
     return () => { window.removeEventListener("wenro:search-open", o); document.removeEventListener("keydown", k); };
@@ -44,11 +49,8 @@ export function SearchOverlay() {
       loaded.current = locale;
       fetch(`/api/search-index?locale=${locale}`).then((r) => r.json()).then((x) => setCards(Array.isArray(x) ? x : [])).catch(() => setCards([]));
     }
-    document.documentElement.style.overflow = "hidden";
-    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("keydown", k);
-    return () => { document.documentElement.style.overflow = ""; document.removeEventListener("keydown", k); };
   }, [open, locale]);
+  useOverlay(open, () => setOpen(false));
 
   const index = useMemo(() => indexCards(cards ?? [], (c) => `${c.category ? t(`categories.${c.category}` as "categories.sea") : ""} ${t(`themes.${themeFor(c)}.name`)}`), [cards, t]);
   const trips = useMemo(() => {
@@ -66,17 +68,17 @@ export function SearchOverlay() {
   const themes = n ? THEMES.filter((th) => norm(t(`themes.${th}.name`)).includes(n)).slice(0, 3) : [];
   const cities = n ? CITIES.filter((c) => c.slug === asked?.slug || norm(t(`places.city.${c.slug}` as "places.city.hurghada")).includes(n)).slice(0, 4) : [];
 
-  const go = () => { setOpen(false); router.push({ pathname: "/experiences", query: q.trim() ? { q: q.trim() } : {} }); };
+  const go = () => { markOverlayNavigation(); setOpen(false); router.push({ pathname: "/experiences", query: q.trim() ? { q: q.trim() } : {} }); };
   if (!open) return null;
   const row = "flex min-h-12 items-center gap-3 rounded-control px-3 py-2 hover:bg-discovery-tint focus-visible:bg-discovery-tint";
 
   // portal: the sticky header blurs its backdrop, which would trap a fixed overlay inside it
   return createPortal(
     <div className="fixed inset-0 z-[70] flex items-start justify-center sm:p-6 sm:pt-[10vh]" role="dialog" aria-modal="true" aria-label={t("list.search")}>
-      <button type="button" aria-label={t("gallery.close")} className="sheet-scrim absolute inset-0 bg-ink/45" onClick={() => setOpen(false)} />
+      <button type="button" aria-label={t("gallery.close")} className="sheet-scrim absolute inset-0 bg-night/45" onClick={() => setOpen(false)} />
       <div className="pop-in relative flex h-full w-full max-w-2xl flex-col overflow-hidden bg-surface shadow-2xl sm:h-auto sm:max-h-[78vh] sm:rounded-[24px]">
         <form onSubmit={(e) => { e.preventDefault(); go(); }} className="flex items-center gap-2 border-b border-line p-3">
-          <IconSearch size={22} className="ms-2 shrink-0 text-discovery" />
+          <IconSearch size={22} className="ms-2 shrink-0 text-link" />
           <input autoFocus type="text" enterKeyHint="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("home.searchPlaceholder")} aria-label={t("list.search")}
             className="min-h-12 min-w-0 flex-1 bg-transparent text-[18px] outline-none" />
           <button type="button" onClick={() => setOpen(false)} aria-label={t("gallery.close")} className="btn-press grid size-11 shrink-0 place-items-center rounded-full hover:bg-discovery-tint"><IconClose size={20} /></button>

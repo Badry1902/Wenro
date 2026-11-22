@@ -29,7 +29,7 @@ export function WishButton({ id, className = "", variant = "photo" }: { id: stri
   };
   return (
     <button type="button" onClick={toggle} aria-pressed={on} aria-label={on ? t("saved") : t("save")} title={on ? t("saved") : t("save")}
-      className={`btn-press grid size-10 place-items-center rounded-full ${variant === "photo" ? "bg-white/90 shadow-sm backdrop-blur" : "border border-line bg-surface"} ${on ? "text-[#e0464f]" : "text-ink"} ${className}`}>
+      className={`btn-press grid size-10 place-items-center rounded-full ${variant === "photo" ? "bg-surface/90 shadow-sm backdrop-blur" : "border border-line bg-surface"} ${on ? "text-[#e0464f]" : "text-ink"} ${className}`}>
       <IconHeart key={pop} size={20} filled={on} className={pop ? "heart-pop" : ""} />
     </button>
   );

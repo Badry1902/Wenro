@@ -22,12 +22,12 @@ export async function SiteFooter() {
       <svg className="-mb-px block h-6 w-full text-ink md:h-10" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true">
         <path d="M0 18c120 16 240 16 360 0s240-16 360 0 240 16 360 0 240-16 360 0v22H0z" fill="currentColor" />
       </svg>
-      <div className="bg-ink">
+      <div className="bg-night">
       {/* Reef band: pattern kept above the reading area */}
       {/* All six collections side by side: reef, desert, mountains, ancient Egypt, souk, Nile */}
       <div className="relative grid h-28 grid-cols-3 overflow-hidden md:h-32 md:grid-cols-6" aria-hidden="true">
         {THEMES.map((th, i) => <div key={th} className={i > 2 ? "max-md:hidden" : undefined} style={patternStyle(th, "midnight", 220)} />)}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-night" />
       </div>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-4 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="flex flex-col gap-4">

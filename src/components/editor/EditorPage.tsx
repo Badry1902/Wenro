@@ -61,12 +61,12 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
                 <li key={m.id} className="overflow-hidden rounded-card border border-line">
                   <div className="relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={m.kind === "video" ? (videoPoster(m.path, { w: 480, h: 360 }) ?? "") : mediaSrc(m.path, { w: 480, h: 360 })} alt={m.alt ?? ""} className="aspect-[4/3] w-full bg-ink object-cover" />
-                    {m.kind === "video" && <span className="absolute start-2 top-2 rounded-full bg-ink/85 px-2 py-0.5 text-[11px] font-bold text-white">▶ {t("video")}</span>}
+                    <img src={m.kind === "video" ? (videoPoster(m.path, { w: 480, h: 360 }) ?? "") : mediaSrc(m.path, { w: 480, h: 360 })} alt={m.alt ?? ""} className="aspect-[4/3] w-full bg-night object-cover" />
+                    {m.kind === "video" && <span className="absolute start-2 top-2 rounded-full bg-night/85 px-2 py-0.5 text-[11px] font-bold text-white">▶ {t("video")}</span>}
                   </div>
                   <div className="flex flex-wrap items-center justify-between gap-2 p-2">
                     {i === 0 ? <span className="text-small font-bold text-success">{t("cover")}</span> : (
-                      <form action={makeCover}>{hidden}<input type="hidden" name="media" value={m.id} /><button className="btn-press min-h-9 rounded-control px-2 text-small font-semibold text-discovery">{t("makeCover")}</button></form>
+                      <form action={makeCover}>{hidden}<input type="hidden" name="media" value={m.id} /><button className="btn-press min-h-9 rounded-control px-2 text-small font-semibold text-link">{t("makeCover")}</button></form>
                     )}
                     <form action={removePhoto}>{hidden}<input type="hidden" name="media" value={m.id} /><button className="btn-press min-h-9 rounded-control px-2 text-small font-semibold text-critical">{t("remove")}</button></form>
                   </div>
@@ -187,7 +187,7 @@ export async function EditorPage({ locale, base, id, operatorId, ok, err }: {
                   <label key={th || "auto"} className="group cursor-pointer overflow-hidden rounded-card border-2 border-line bg-surface has-[:checked]:border-discovery has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-discovery">
                     <input type="radio" name="theme" value={th} defaultChecked={(chosenTheme ?? "") === th} className="sr-only" />
                     <span className="relative block h-20" style={patternStyle(shown, "feature", 200)} aria-hidden="true">
-                      <span className="absolute bottom-2 start-2 grid size-10 place-items-center rounded-xl bg-white"><ThemeMotif theme={shown} size={26} /></span>
+                      <span className="absolute bottom-2 start-2 grid size-10 place-items-center rounded-xl bg-surface"><ThemeMotif theme={shown} size={26} /></span>
                     </span>
                     <span className="flex items-center justify-between gap-2 p-3 text-small font-bold">
                       {th ? tt(`themes.${th}.name`) : tt("app.editorTheme.auto", { name: tt(`themes.${autoTheme}.name`) })}

@@ -43,7 +43,7 @@ export function Task({ count, label, href, tone = "default" }: { count: number |
       {href && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" className="shrink-0 text-ink-muted/60 rtl:-scale-x-100"><path d="M9 6l6 6-6 6" /></svg>}
     </span>
   );
-  return href ? <a href={href} className="block transition-colors duration-150 hover:bg-[#F6F5F1]">{inner}</a> : inner;
+  return href ? <a href={href} className="block transition-colors duration-150 hover:bg-ivory">{inner}</a> : inner;
 }
 
 /** A panel of Task rows. */
@@ -80,19 +80,19 @@ export function StatRow({ children, cols = 4 }: { children: React.ReactNode; col
 const tones: Record<string, string> = {
   confirmed: "bg-success-tint text-success", executed: "bg-success-tint text-success", active: "bg-success-tint text-success",
   published: "bg-success-tint text-success", received: "bg-success-tint text-success", paid: "bg-success-tint text-success",
-  open: "bg-discovery-tint text-discovery",
+  open: "bg-discovery-tint text-link",
   pending_request: "bg-warning-tint text-warning", pending: "bg-warning-tint text-warning", in_review: "bg-warning-tint text-warning",
-  sent: "bg-success-tint text-success", draft: "bg-[#F3F4F8] text-ink-muted", closed: "bg-[#F3F4F8] text-ink-muted",
+  sent: "bg-success-tint text-success", draft: "bg-muted text-ink-muted", closed: "bg-muted text-ink-muted",
   cancelled: "bg-critical-tint text-critical", expired: "bg-critical-tint text-critical", declined: "bg-critical-tint text-critical",
   no_show: "bg-critical-tint text-critical", suspended: "bg-critical-tint text-critical", not_operated: "bg-critical-tint text-critical",
-  hidden: "bg-[#F3F4F8] text-ink-muted", archived: "bg-[#F3F4F8] text-ink-muted", scheduled: "bg-[#F3F4F8] text-ink-muted",
-  queued: "bg-discovery-tint text-discovery", sending: "bg-discovery-tint text-discovery", logged: "bg-warning-tint text-warning",
-  failed: "bg-critical-tint text-critical", skipped: "bg-[#F3F4F8] text-ink-muted",
+  hidden: "bg-muted text-ink-muted", archived: "bg-muted text-ink-muted", scheduled: "bg-muted text-ink-muted",
+  queued: "bg-discovery-tint text-link", sending: "bg-discovery-tint text-link", logged: "bg-warning-tint text-warning",
+  failed: "bg-critical-tint text-critical", skipped: "bg-muted text-ink-muted",
 };
 
 export async function Badge({ value }: { value: string }) {
   const t = await getTranslations("app.status");
-  return <span className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 text-[12px] font-medium ${tones[value] ?? "bg-[#F3F4F8] text-ink"}`}>{t.has(value) ? t(value) : value}</span>;
+  return <span className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 text-[12px] font-medium ${tones[value] ?? "bg-muted text-ink"}`}>{t.has(value) ? t(value) : value}</span>;
 }
 
 export function Empty({ children }: { children: React.ReactNode }) {
@@ -111,8 +111,8 @@ export async function Flash({ ok, err }: { ok?: string; err?: string }) {
 
 export const btn = {
   primary: "btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-discovery px-4 font-semibold text-white transition-colors duration-150 hover:bg-discovery-hover",
-  secondary: "btn-press inline-flex min-h-11 items-center justify-center rounded-control border border-discovery bg-surface px-4 font-semibold text-discovery transition-colors duration-150 hover:bg-discovery-tint",
+  secondary: "btn-press inline-flex min-h-11 items-center justify-center rounded-control border border-discovery bg-surface px-4 font-semibold text-link transition-colors duration-150 hover:bg-discovery-tint",
   danger: "btn-press inline-flex min-h-11 items-center justify-center rounded-control bg-critical px-4 font-semibold text-white",
   quiet: "btn-press inline-flex min-h-11 items-center justify-center rounded-control border border-line bg-surface px-4 font-medium text-ink transition-colors duration-150 hover:border-ink-muted",
 };
-export const field = "min-h-11 rounded-control border border-[#8A90A6] bg-surface px-3";
+export const field = "min-h-11 rounded-control border border-field bg-surface px-3";

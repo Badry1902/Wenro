@@ -26,7 +26,7 @@ export function Hero({ photos, categories, labels, campaign }: { photos: { src: 
   }, [photos.length]);
 
   return (
-    <section className="relative isolate overflow-hidden bg-ink">
+    <section className="relative isolate overflow-hidden bg-night">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         {photos.map((p, k) => (
           <div key={p.src} className={`hero-slide absolute inset-0 ${k === i ? "is-on" : ""}`}>
@@ -53,7 +53,7 @@ export function Hero({ photos, categories, labels, campaign }: { photos: { src: 
         </div>
 
         <form action={`/${locale}/experiences`} method="get" role="search"
-          className="hero-in mt-8 grid gap-2 rounded-[24px] bg-white p-2 shadow-[0_30px_60px_-25px_rgb(0_0_0/0.6)] ring-4 ring-white/15 [animation-delay:120ms] md:grid-cols-[1fr_240px_auto] md:rounded-full">
+          className="hero-in mt-8 grid gap-2 rounded-[24px] bg-surface p-2 shadow-[0_30px_60px_-25px_rgb(0_0_0/0.6)] ring-4 ring-white/15 [animation-delay:120ms] md:grid-cols-[1fr_240px_auto] md:rounded-full">
           <label className="flex min-h-14 items-center gap-3 rounded-full px-4 focus-within:bg-discovery-tint">
             <IconSearch size={22} className="shrink-0 text-apricot" />
             <span className="flex min-w-0 flex-1 flex-col">
@@ -70,7 +70,7 @@ export function Hero({ photos, categories, labels, campaign }: { photos: { src: 
               </select>
             </span>
           </label>
-          <button type="submit" className="btn-press inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-apricot px-8 text-[16px] font-extrabold text-ink hover:bg-apricot-hover">
+          <button type="submit" className="btn-press inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-apricot px-8 text-[16px] font-extrabold text-night hover:bg-apricot-hover">
             <IconSearch size={20} />
             {campaign ? <><span className="campaign-hide">{labels.button}</span><span className="campaign-only">{campaign.button}</span></> : labels.button}
           </button>

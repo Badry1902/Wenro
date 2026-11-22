@@ -10,7 +10,7 @@ import { PlanWeek } from "./PlanWeek";
 export function PlanTabs({ cards }: { cards: ExperienceCard[] }) {
   const t = useTranslations("planner");
   const [tab, setTab] = useState<"auto" | "manual">("auto");
-  const tabCls = (on: boolean) => `btn-press inline-flex min-h-11 items-center rounded-full px-5 font-bold ${on ? "bg-ink text-white" : "text-ink hover:bg-discovery-tint"}`;
+  const tabCls = (on: boolean) => `btn-press inline-flex min-h-11 items-center rounded-full px-5 font-bold ${on ? "bg-ink text-surface" : "text-ink hover:bg-discovery-tint"}`;
   return (
     <>
       <div role="tablist" aria-label={t("tabsLabel")} className="mb-6 inline-flex gap-1 rounded-full border border-line bg-surface p-1">

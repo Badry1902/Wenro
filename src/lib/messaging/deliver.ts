@@ -4,7 +4,7 @@ import { siteUrl } from "@/lib/env";
 import { renderMessage, staffLocale, type AlertPayload, type BookingContext, type InvitePayload, type MessageKind } from "./render";
 import { sendEmail } from "./send";
 import { unseal } from "./seal";
-import { buildWhatsApp, sendWhatsApp, waNumber, type WaContext } from "./whatsapp";
+import { buildWhatsApp, sendWhatsApp, waAllowed, waNumber, type WaContext } from "./whatsapp";
 
 type Claimed = {
   id: string; kind: MessageKind; recipient: "guest" | "operator" | "platform" | "invitee"; channel?: "email" | "whatsapp"; locale: string;
@@ -29,6 +29,7 @@ export async function deliverDue(limit = 50) {
         const who = m.recipient === "operator" ? "operator" : "guest";
         const to = waNumber(who === "guest" ? b?.customer.phone : (b as WaContext | null)?.operator_phone);
         if (!b || !to) { status = "skipped"; error = "no WhatsApp number"; }
+        else if (!waAllowed(to)) { status = "skipped"; error = "not on the WhatsApp test list"; }
         else {
           const token = unseal(b.sealed_link);
           const msg = await buildWhatsApp(m.kind, who, b as WaContext, who === "guest" ? m.locale : "ar", who === "guest" && token ? manageLink(m.locale, token) : null);

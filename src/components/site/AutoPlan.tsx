@@ -140,8 +140,8 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
   };
 
   const steps = ["where", "when", "who", "likes", "pace", "budget"] as const;
-  const chip = (on: boolean) => `btn-press inline-flex min-h-12 items-center gap-2 rounded-control border-2 px-4 text-start font-bold ${on ? "border-discovery bg-discovery-tint text-discovery" : "border-line bg-surface hover:border-discovery"}`;
-  const field = "min-h-11 rounded-control border border-[#8A90A6] bg-white px-3";
+  const chip = (on: boolean) => `btn-press inline-flex min-h-12 items-center gap-2 rounded-control border-2 px-4 text-start font-bold ${on ? "border-discovery bg-discovery-tint text-link" : "border-line bg-surface hover:border-discovery"}`;
+  const field = "min-h-11 rounded-control border border-field bg-surface px-3";
   const fmtDay = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" });
   const fmtTime = (iso: string) => new Date(iso).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Cairo" });
   const count = plan ? Object.values(plan.days).reduce((a, x) => a + x.length, 0) : 0;
@@ -173,7 +173,7 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
                           <Link href={`/experiences/${card.slug}`} className="block font-bold hover:underline">{trip.title ?? card.title}</Link>
                           <span className="inline-flex items-center gap-1 text-small"><IconClock size={14} />{fmtTime(slot.starts_at)} · {t("plan.seats", { n: slot.seats_left })}
                             {card.from_minor != null && <> · {formatMoney({ minor: card.from_minor, currency: card.currency }, locale)}</>}</span>
-                          {why.length > 0 && <span className="mt-1 flex flex-wrap gap-1">{why.map((w) => <span key={w} className="rounded-full bg-white/80 px-2 py-0.5 text-[12px] font-semibold">{w}</span>)}</span>}
+                          {why.length > 0 && <span className="mt-1 flex flex-wrap gap-1">{why.map((w) => <span key={w} className="rounded-full bg-surface/80 px-2 py-0.5 text-[12px] font-semibold">{w}</span>)}</span>}
                         </span>
                         <Link href={{ pathname: `/book/${card.slug}`, query: { s: slot.id, a: String(adults), ...(kids ? { c: String(kids) } : {}) } }}
                           className="btn-press inline-flex min-h-11 items-center rounded-control bg-discovery px-4 text-small font-bold text-white">{t("plan.book")}</Link>
@@ -269,7 +269,7 @@ export function AutoPlan({ cards }: { cards: ExperienceCard[] }) {
         {step > 0 ? <button type="button" onClick={() => setStep(step - 1)} className="min-h-11 px-2 font-semibold text-ink-muted hover:underline">{p("back")}</button> : <span />}
         {step < steps.length - 1
           ? <button type="button" onClick={() => setStep(step + 1)} className="btn-press inline-flex min-h-12 items-center rounded-control bg-discovery px-6 font-bold text-white hover:bg-discovery-hover">{p("next")}</button>
-          : <button type="button" onClick={make} disabled={busy} className="btn-press inline-flex min-h-12 items-center gap-2 rounded-control bg-apricot px-6 font-extrabold text-ink hover:bg-apricot-hover disabled:opacity-60">
+          : <button type="button" onClick={make} disabled={busy} className="btn-press inline-flex min-h-12 items-center gap-2 rounded-control bg-apricot px-6 font-extrabold text-night hover:bg-apricot-hover disabled:opacity-60">
               {busy ? <IconCalendar size={20} /> : <IconSpark size={20} />}{busy ? t("plan.planning") : p("make", { days: nights })}
             </button>}
       </div>

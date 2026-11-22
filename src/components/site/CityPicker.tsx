@@ -2,6 +2,7 @@
 
 import { createPortal } from "react-dom";
 import { useEffect, useMemo, useState } from "react";
+import { useOverlay } from "../useOverlay";
 import { useTranslations } from "next-intl";
 import { CITIES, CITY_EVENT, CITY_KEY, GOVERNORATES, cityBySlug, nearestCity, type City } from "@/lib/places";
 import { IconClose, IconPin, IconSearch } from "../Icons";
@@ -55,13 +56,7 @@ export function CityPickerDialog({ counts }: { counts?: Record<string, number> }
     window.addEventListener("wenro:city-open", o);
     return () => window.removeEventListener("wenro:city-open", o);
   }, []);
-  useEffect(() => {
-    if (!open) return;
-    document.documentElement.style.overflow = "hidden";
-    const k = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("keydown", k);
-    return () => { document.documentElement.style.overflow = ""; document.removeEventListener("keydown", k); };
-  }, [open]);
+  useOverlay(open, () => setOpen(false));
   const name = (c: City) => t(`city.${c.slug}` as "city.hurghada");
   const groups = useMemo(() => GOVERNORATES.map((g) => ({ g, cities: CITIES.filter((c) => c.gov === g && (!q || `${name(c)} ${c.slug} ${t(`gov.${g}` as "gov.redsea")}`.toLowerCase().includes(q.toLowerCase()))) })).filter((x) => x.cities.length),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,7 +72,7 @@ export function CityPickerDialog({ counts }: { counts?: Record<string, number> }
   // portal: the sticky header blurs its backdrop, which would trap a fixed overlay inside it
   return createPortal(
     <div className="fixed inset-0 z-[70] grid place-items-end sm:place-items-center" role="dialog" aria-modal="true" aria-label={t("pick")}>
-      <button type="button" aria-label={t("change")} className="sheet-scrim absolute inset-0 bg-ink/45" onClick={() => setOpen(false)} />
+      <button type="button" aria-label={t("change")} className="sheet-scrim absolute inset-0 bg-night/45" onClick={() => setOpen(false)} />
       <div className="pop-in relative flex max-h-[88dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-[28px] bg-surface shadow-2xl sm:rounded-[28px]">
         <div className="flex items-start justify-between gap-3 border-b border-line p-5">
           <div><h2 className="text-h2 font-extrabold">{t("pick")}</h2><p className="text-small text-ink-muted">{t("pickSub")}</p></div>
@@ -85,7 +80,7 @@ export function CityPickerDialog({ counts }: { counts?: Record<string, number> }
         </div>
         <div className="flex flex-wrap gap-2 border-b border-line p-4">
           <label className="flex min-h-11 flex-1 items-center gap-2 rounded-full border border-line px-4 focus-within:border-discovery">
-            <IconSearch size={18} className="text-discovery" />
+            <IconSearch size={18} className="text-link" />
             <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("search")} className="min-w-0 flex-1 bg-transparent outline-none" />
           </label>
           <button type="button" onClick={locate} className="btn-press inline-flex min-h-11 items-center gap-2 rounded-full bg-discovery px-4 text-small font-bold text-white">
@@ -95,7 +90,7 @@ export function CityPickerDialog({ counts }: { counts?: Record<string, number> }
         </div>
         <div className="overflow-y-auto p-4">
           <button type="button" onClick={() => pick(null)} aria-pressed={!city}
-            className={`mb-4 inline-flex min-h-11 items-center rounded-full border px-4 font-bold ${!city ? "border-ink bg-ink text-white" : "border-line hover:border-ink"}`}>{t("all")}</button>
+            className={`mb-4 inline-flex min-h-11 items-center rounded-full border px-4 font-bold ${!city ? "border-ink bg-ink text-surface" : "border-line hover:border-ink"}`}>{t("all")}</button>
           {groups.map(({ g, cities }) => (
             <section key={g} className="mb-4">
               <h3 className="mb-2 text-small font-bold uppercase tracking-wider text-ink-muted">{t(`gov.${g}` as "gov.redsea")}</h3>
