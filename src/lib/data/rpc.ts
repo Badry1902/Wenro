@@ -48,6 +48,8 @@ const ALLOWED = new Set([
   // site pop-ups and operator contact details
   "active_popups", "popup_event", "admin_popups", "save_popup", "set_popup_status", "set_popup_image",
   "org_contact", "set_org_contact",
+  // traveller survey
+  "submit_survey", "admin_survey", "delete_survey_response",
 ]);
 
 const TABLE_FUNCTIONS = new Set(["operator_bookings", "partner_bookings", "unconfirmed_for_tomorrow"]);

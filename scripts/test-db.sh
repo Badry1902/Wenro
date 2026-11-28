@@ -22,4 +22,5 @@ psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/90_trip_theme
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/95_payments_whatsapp_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/97_trip_places_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/98_popups_contact_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
+psql -v ON_ERROR_STOP=1 -q -o /dev/null -d "$DB" -f supabase/tests/99_survey_test.sql 2>&1 | sed 's/^psql:[^ ]* NOTICE:  /  /'
 bash supabase/tests/20_concurrency_test.sh "$DB"

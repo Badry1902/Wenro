@@ -391,7 +391,8 @@
         "popup_paused": "Pop-up paused.",
         "popup_archived": "Pop-up archived.",
         "popup_draft": "Pop-up is a draft again.",
-        "contact_saved": "Contact details saved."
+        "contact_saved": "Contact details saved.",
+        "survey_deleted": "Answer deleted."
       },
       "err": {
         "unexpected_error": "Something went wrong. Please try again.",
@@ -538,7 +539,8 @@
       "coupons": "Discount codes",
       "reviews": "Reviews",
       "kit": "Content kit",
-      "popups": "Pop-ups"
+      "popups": "Pop-ups",
+      "survey": "Traveller survey"
     },
     "op": {
       "todayTitle": "Run sheet",
@@ -1553,6 +1555,27 @@
       "phoneHint": "With the country code, e.g. +20 10 1234 5678",
       "email": "Bookings email",
       "save": "Save"
+    },
+    "survey": {
+      "title": "Traveller survey",
+      "sub": "What experienced travellers who haven't used WENRO expect when they book tours. Answers are anonymous unless someone left contact details.",
+      "shareTitle": "Survey link",
+      "shareHint": "Send this link on WhatsApp or print it as a QR code. Change ?src= to see where answers came from (for example ?src=instagram).",
+      "copy": "Copy link",
+      "copied": "Copied",
+      "total": "Answers",
+      "thisWeek": "Last 7 days",
+      "contacts": "Open to a follow-up",
+      "none": "No answers yet. Share the link above to start.",
+      "small": "Only {n} answers so far: treat these numbers as early signals, not conclusions.",
+      "answeredBy": "{n} answered",
+      "multi": "more than one choice allowed, so percentages add up to more than 100",
+      "otherAnswers": "{n} written-in answers",
+      "scaleNote": "Average from 1 (doesn't matter) to 5 (a must)",
+      "contactsTitle": "People open to a follow-up chat",
+      "contactsHint": "They ticked the consent box. Contact them only about this survey, and delete the entry if someone asks.",
+      "delete": "Delete",
+      "questionsCount": "{n} questions"
     }
   },
   "email": {

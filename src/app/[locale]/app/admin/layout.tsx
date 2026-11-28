@@ -19,6 +19,7 @@ export default async function AdminLayout({ children, params }: { children: Reac
     { href: "/app/admin/reviews", label: t("reviews"), perm: "reviews" },
     { href: "/app/admin/coupons", label: t("coupons"), perm: "coupons" },
     { href: "/app/admin/popups", label: t("popups"), perm: "popups" },
+    { href: "/app/admin/survey", label: t("survey"), perm: "survey" },
     { href: "/app/admin/messages", label: t("messages"), perm: "messages" },
     { href: "/app/admin/team", label: t("team"), perm: "team" },
   ];

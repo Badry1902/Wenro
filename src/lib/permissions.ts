@@ -26,6 +26,8 @@ const PLATFORM = {
   messages: ["owner", "ops", "support"],
   /** site pop-ups (admin_popups, save_popup, set_popup_status) */
   popups: ["owner", "ops", "content"],
+  /** traveller survey results (admin_survey); deleting an answer is owner/ops in the database */
+  survey: ["owner", "ops", "content"],
   /** team page, demo data */
   team: ["owner"],
 } as const satisfies Record<string, readonly Role[]>;

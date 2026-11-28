@@ -527,7 +527,8 @@
         "popup_active": "Pop-up aktiviert.",
         "popup_paused": "Pop-up pausiert.",
         "popup_archived": "Pop-up archiviert.",
-        "popup_draft": "Pop-up ist wieder ein Entwurf."
+        "popup_draft": "Pop-up ist wieder ein Entwurf.",
+        "survey_deleted": "Answer deleted."
       }
     },
     "dep": {
@@ -702,7 +703,8 @@
       "coupons": "Rabattcodes",
       "reviews": "Bewertungen",
       "kit": "Content-Kit",
-      "popups": "Pop-ups"
+      "popups": "Pop-ups",
+      "survey": "Reisenden-Umfrage"
     },
     "op": {
       "todayTitle": "Tagesplan",
@@ -1519,6 +1521,27 @@
       "phoneHint": "Mit Ländervorwahl, z. B. +20 10 1234 5678",
       "email": "E-Mail für Buchungen",
       "save": "Speichern"
+    },
+    "survey": {
+      "title": "Reisenden-Umfrage",
+      "sub": "What experienced travellers who haven't used WENRO expect when they book tours. Answers are anonymous unless someone left contact details.",
+      "shareTitle": "Survey link",
+      "shareHint": "Send this link on WhatsApp or print it as a QR code. Change ?src= to see where answers came from (for example ?src=instagram).",
+      "copy": "Link kopieren",
+      "copied": "Kopiert",
+      "total": "Answers",
+      "thisWeek": "Last 7 days",
+      "contacts": "Open to a follow-up",
+      "none": "No answers yet. Share the link above to start.",
+      "small": "Only {n} answers so far: treat these numbers as early signals, not conclusions.",
+      "answeredBy": "{n} answered",
+      "multi": "more than one choice allowed, so percentages add up to more than 100",
+      "otherAnswers": "{n} written-in answers",
+      "scaleNote": "Average from 1 (doesn't matter) to 5 (a must)",
+      "contactsTitle": "People open to a follow-up chat",
+      "contactsHint": "They ticked the consent box. Contact them only about this survey, and delete the entry if someone asks.",
+      "delete": "Löschen",
+      "questionsCount": "{n} questions"
     }
   },
   "share": {

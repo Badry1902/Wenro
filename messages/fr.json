@@ -527,7 +527,8 @@
         "popup_active": "Pop-up activé.",
         "popup_paused": "Pop-up en pause.",
         "popup_archived": "Pop-up archivé.",
-        "popup_draft": "Le pop-up est de nouveau un brouillon."
+        "popup_draft": "Le pop-up est de nouveau un brouillon.",
+        "survey_deleted": "Answer deleted."
       }
     },
     "dep": {
@@ -702,7 +703,8 @@
       "coupons": "Codes de réduction",
       "reviews": "Avis",
       "kit": "Kit de contenu",
-      "popups": "Pop-ups"
+      "popups": "Pop-ups",
+      "survey": "Enquête voyageurs"
     },
     "op": {
       "todayTitle": "Feuille de route",
@@ -1519,6 +1521,27 @@
       "phoneHint": "Avec l'indicatif du pays, ex. +20 10 1234 5678",
       "email": "E-mail des réservations",
       "save": "Enregistrer"
+    },
+    "survey": {
+      "title": "Enquête voyageurs",
+      "sub": "What experienced travellers who haven't used WENRO expect when they book tours. Answers are anonymous unless someone left contact details.",
+      "shareTitle": "Survey link",
+      "shareHint": "Send this link on WhatsApp or print it as a QR code. Change ?src= to see where answers came from (for example ?src=instagram).",
+      "copy": "Copier le lien",
+      "copied": "Copié",
+      "total": "Answers",
+      "thisWeek": "Last 7 days",
+      "contacts": "Open to a follow-up",
+      "none": "No answers yet. Share the link above to start.",
+      "small": "Only {n} answers so far: treat these numbers as early signals, not conclusions.",
+      "answeredBy": "{n} answered",
+      "multi": "more than one choice allowed, so percentages add up to more than 100",
+      "otherAnswers": "{n} written-in answers",
+      "scaleNote": "Average from 1 (doesn't matter) to 5 (a must)",
+      "contactsTitle": "People open to a follow-up chat",
+      "contactsHint": "They ticked the consent box. Contact them only about this survey, and delete the entry if someone asks.",
+      "delete": "Supprimer",
+      "questionsCount": "{n} questions"
     }
   },
   "share": {
